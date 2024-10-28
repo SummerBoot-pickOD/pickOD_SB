@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>너와 나의 여행 일지 작성</title>
+    <link rel="stylesheet" href="../../css/main/header.css">
+    <link rel="stylesheet" href="../../css/main/footer.css">
+    <link rel="stylesheet" href="../../css/journal/journalCreate.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.js?v=1.0" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+    crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="../../js/journal/journalCreate.js"></script>
+</head>
+<body>
+    <div id="header"></div>
+    <main>
+        <form class="title-container" method="get">
+            <input class="title" type="text" placeholder="제목을 입력하세요."onfocus="this.placeholder=''" onblur="this.placeholder='제목을 입력하세요.'">
+        </form>
+        <div class="container-display">
+            <div class="profile-container">
+                <div class="profile">
+                    <div class="photo">
+
+                    </div>
+                    <div class="user-name-container">
+                        <div class="user-name">
+                            신현식
+                        </div>
+                    </div>
+                </div>
+                <form class="explain-container" method="get">
+                    <input class="explain" type="text" placeholder="간략한 설명을 작성해주세요."onfocus="this.placeholder=''" onblur="this.placeholder='간략한 설명을 작성해주세요.'">
+                </form>
+            </div>
+            <div class="tag-container">
+                <div class="tag-container-schedule">
+                    <img src="../../img/journal/footprint_pink.png" alt="">
+                    <div class="schedule-container">
+                        <div class="schedule">
+                            일정
+                        </div>
+                        <div class="date-picker">
+                            <label for="start-date"></label>
+                            <input type="text" id="start-date" placeholder="시작일" readonly>
+                        </div>
+                        <div class="date-picker">
+                            <label for="end-date"></label>
+                            <input type="text" id="end-date" placeholder="종료일" readonly>
+                        </div>
+                    </div>
+                </div>
+                <div class="tag-container-schedule">
+                    <img src="../../img/journal/footprint_pink.png" alt="">
+                    <div class="tag-select-container">
+                        <div class="schedule-tag">
+                            태그
+                        </div>
+                        <select class="tag-select" size="">
+                            <option disabled hidden selected>선택하세요.</option>
+                            <option value="alone">#혼자서</option>
+                            <option value="friends">#친구와 함께</option>
+                            <option value="lovers">#연인과 함께</option>
+                            <option value="family">#가족과 함께</option>
+                            <option value="sunset">#노을</option>
+                            <option value="outdoor">#실외 활동</option>
+                            <option value="indoor">#실내 활동</option>
+                        </select>
+                        
+                        <select class="tag-select" size="">
+                            <option disabled hidden selected>선택하세요.</option>
+                            <option value="alone">#혼자서</option>
+                            <option value="friends">#친구와 함께</option>
+                            <option value="lovers">#연인과 함께</option>
+                            <option value="family">#가족과 함께</option>
+                            <option value="sunset">#노을</option>
+                            <option value="outdoor">#실외 활동</option>
+                            <option value="indoor">#실내 활동</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="tag-container-schedule">
+                    <img src="../../img/journal/footprint_pink.png" alt="">
+                    <div class="thema-container">
+                        <div class="schedule-thema">
+                            테마
+                        </div>
+                        <select class="thema-select" size="">
+                            <option disabled hidden selected>선택하세요.</option>
+                            <option value="healing">#힐링</option>
+                            <option value="blackWhite">#흑백요리사</option>
+                            <option value="delicious">#맛집 탐방</option>
+                            <option value="hotel">#호캉스</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="dayContainer" class="Day-container">
+            <button class="Day-button" type="button">DAY 1</button>
+            <button id="addDayButton" class="Day-plus-button" type="button">+</button>
+        </div>
+        
+        <div id="createContainer" class="create-container">
+            <div class="create-box">
+                <div class="maps-API">지도입니당</div>
+                <div class="add-location">
+                    <div id="locationWrapper" class="location-wrapper">
+                        <input class="add-location-text" type="text" placeholder="장소를 입력해주세요." onfocus="this.placeholder=''" onblur="this.placeholder='장소를 입력해주세요.'">
+                        <button id="addLocationButton" class="add-location-button" type="button">+</button>
+                    </div>
+                </div>
+                <div class="summernote-container">
+                    <div class="summernote">썸머노트 적용</div>
+                </div>
+            </div>
+        </div>
+        <div class="create-button-container">
+            <button class="delete-button" type="button">삭 제</button>
+            <button class="load-button" type="button">저 장</button>
+            <button class="upload-button" type="button">등 록</button>
+        </div>
+    </main>
+    <div id="footer"></div>
+</body>
+</html>

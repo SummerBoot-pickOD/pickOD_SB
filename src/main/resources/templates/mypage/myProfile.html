@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>내프로필수정</title>
+  <link rel="stylesheet" href="../../css/mypage/myProfile.css">
+  <script defer src="../../js/mypage/myProfile.js"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+  crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="../../css/main/header.css">
+  <link rel="stylesheet" href="../../css/main/footer.css">
+</head>
+<body>
+  <form action="">
+    <header>
+      <div id='header'></div>
+    </header>
+    <main>
+      <section>
+        <div class="myprofile-title">
+          <div class="name-box">
+            <a href="./myPage.html"><div class="title-mypage">마이페이지&nbsp>&nbsp</div></a>
+            <div class="title-myprofile">프로필사진변경</div>
+          </div>
+        </div>
+      </section>
+      <section>
+        <div class="profile-containerbox">
+          <div class="profile-picturebox" >
+            <img src="../../img/mypage/기본사람사진.png" id="preview" alt="default">
+          </div>
+          <div class="picture-uploadbox">
+            <div class="upload-local">
+              <div class="upload-img"><img src="../../img/mypage/로컬사진.png" alt="로컬에서불러오기"></div>
+              <div class="img-content">라이브러리에서 불러오기</div>
+            </div>
+            <div class="upload-basic">
+              <div class="basic-img"><img src="../../img/mypage/기본사진.png" alt="기본제공사진"></div>
+              <div class="img-content">기본제공사진 불러오기</div>
+            </div>
+            <div class="delete-img">
+              <div class="delete-img"><img src="../../img/mypage/삭제사진.png" alt="삭제사진"></div>
+              <div class="img-content">현재사진 삭제하기</div>
+            </div>
+          </div>
+          <input type="file" id="fileInput" accept="image/*">
+        </div>
+      </section>
+      <section class="basic-img-containerbox">
+        <div class="basic-img-title">기본제공사진불러오기</div>
+        <div class="basic-img-box">
+          <div><img src="../../img/mypage/더미사진.png" alt=""></div>
+          <div><img src="../../img/mypage/나무사진.png" alt=""></div>
+          <div><img src="../../img/mypage/더미사진.png" alt=""></div>
+          <div><img src="../../img/mypage/더미사진.png" alt=""></div>
+          <div><img src="../../img/mypage/더미사진.png" alt=""></div>
+          <div><img src="../../img/mypage/더미사진.png" alt=""></div>
+          <div><img src="../../img/mypage/더미사진.png" alt=""></div>
+          <div><img src="../../img/mypage/더미사진.png" alt=""></div>
+          <div><img src="../../img/mypage/더미사진.png" alt=""></div>
+        </div>          
+      </section>
+    </main>
+    <footer>
+      <div id='footer'></div>
+    </footer>
+  </form>
+</body>
+</html>

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>너와 나의 여행 일지</title>
+    <link rel="stylesheet" href="../../css/journal/journalDetail.css">
+    <link rel="stylesheet" href="../../css/main/header.css">
+    <link rel="stylesheet" href="../../css/main/footer.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+    crossorigin="anonymous"></script>
+</head>
+<body>
+    <div id="header"></div>
+    <div id="report"></div>
+    <main>
+        <div class="title-containerbox">
+            수도권 힐링 여행
+        </div>
+        <div class="placeIcon"> <!-- 신고, 찜 -->
+            <div>
+                <img class="reportimg" src="../../img/place/placeDetail/report.png" alt="">
+                <img class="saveimg" src="../../img/main/unsaved.png" alt="">
+            </div>
+        </div>
+        <div class="container-display">
+            <div class="profile-container">
+                <div class="profile">
+                    <div class="photo"></div>
+                    <div class="user-name-container">
+                        <div class="user-name">
+                            신현식
+                        </div>
+                        <button class="message-button">
+                            <a href="#">
+                              <img src="../../img/message/쪽지함.png" alt="이미지 버튼" />
+                            </a>
+                          </button>
+                    </div>
+                </div>
+                <div class="explain-container">
+                    간략한 설명이 들어가는 곳
+                    간략한 설명이 들어가는 곳
+                    간략한 설명이 들어가는 곳
+                    간략한 설명이 들어가는 곳
+                    간략한 설명이 들어가는 곳
+                    간략한 설명이 들어가는 곳
+                    간략한 설명이 들어가는 곳
+                </div>
+            </div>
+            <div class="tag-container">
+                <div class="tag-container-schedule">
+                    <img class="footprint" src="../../img/journal/footprint_pink.png" alt="">
+                    <div class="schedule-container">
+                        <div class="schedule">
+                            일정
+                        </div>
+                        <div class="schedule-content">
+                            당일여행
+                        </div>
+                    </div>
+                </div>
+                <div class="tag-container-schedule">
+                    <img class="footprint" src="../../img/journal/footprint_pink.png" alt="">
+                    <div class="tag-select-container">
+                        <div class="schedule-tag">
+                            태그
+                        </div>
+                        <div class="schedule-tag-content">
+                            #친구와 함께
+                        </div>
+                    </div>
+                </div>
+                <div class="tag-container-schedule">
+                    <img class="footprint" src="../../img/journal/footprint_pink.png" alt="">
+                    <div class="thema-container">
+                        <div class="schedule-thema">
+                            테마
+                        </div>
+                        <div class="schedule-thema-content">
+                            힐링
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="Day-container">
+            <div class="Day">
+                DAY1
+            </div>
+        </div>
+        <div class="detail-container">
+            <div class="detail-box">
+                <div class="maps-API">지도입니당</div>
+                <div class="location">
+                    <div class="location-text">경기도미술관</div>
+                    <div class="location-text">노적봉공원</div>
+                    <div class="location-text">성호공원</div>    
+                </div>
+                <div class="detail-content-container">
+                    <div class="detail-photo">
+                        <img class="arrow left-arrow" src="../../img/journal/왼쪽 화살표.png" alt="">
+                        <img class="main-photo" src="../../img/journal/하단 큰 이미지.png" alt="">
+                        <img class="arrow right-arrow" src="../../img/journal/오른쪽 화살표.png" alt="">
+                    </div>
+                    <div class="detail-text">
+                        친구랑 같이 당일 수도권 여행 어쩌구 저쩌구 가려다가 미술관 가보기로 했어요. 
+        기타 등등 뭐 했는지에 대한 내용들이 주절주절 들어갈거에요. 기타 등등 뭐 했는지에 대한 내용들이 주절주절 들어갈거에요.
+        기타 등등 뭐 했는지에 대한 내용들이 주절주절 들어갈거에요.기타 등등 뭐 했는지에 대한 내용들이 주절주절 들어갈거에요.
+        기타 등등 뭐 했는지에 대한 내용들이 주절주절 들어갈거에요.기타 등등 뭐 했는지에 대한 내용들이 주절주절 들어갈거에요.
+        기타 등등 뭐 했는지에 대한 내용들이 주절주절 들어갈거에요.기타 등등 뭐 했는지에 대한 내용들이 주절주절 들어갈거에요.
+        기타 등등 뭐 했는지에 대한 내용들이 주절주절 들어갈거에요.
+        기타 등등 뭐 했는지에 대한 내용들이 주절주절 들어갈거에요.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        </div>
+        <div id = "reply-container">
+            <div class="name-box">
+                발자국 톡(댓글 이름 자리)
+            </div>
+            <section id = "reply-write">
+                <input type="text" name="" id="" placeholder="댓글을 남겨보세요.(100자 이내)" maxlength="100">
+                <div id = "submit-reply">
+                <button type="button">등&nbsp;&nbsp;록</button>
+                </div>
+            </section>
+            <ul id = "reply">
+                <li class = "written">
+                <div class="reply-image"><img src="../../img/place/sample_place.png" alt="프사"></div>
+                <div class="reply-content">
+                    <div class = "content">댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용</div>
+                    <div class = "user"><span id = "nick">김카디</span>&nbsp;&nbsp;<span id = "date">24.10.16</span></div>
+                    <div class = "likes"><img src="../../img/journal/footprint.png" alt="좋아요"><span>35</span></div>
+                </div>
+                <div class="reply-buttons">
+                    <img src="../../img/message/쪽지함휴지통.png" alt="삭제">
+                    <img class="reportimg" src="../../img/message/report.png" alt="신고">
+                </div>
+                </li>
+                <li class = "written">
+                <div class="reply-image"><img src="../../img/place/sample_place.png" alt="프사"></div>
+                <div class="reply-content">
+                    <div class = "content">댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용</div>
+                    <div class = "user"><span id = "nick">김카디</span>&nbsp;&nbsp;<span id = "date">24.10.16</span></div>
+                    <div class = "likes"><img src="../../img/journal/footprint.png" alt="좋아요"><span>35</span></div>
+                </div>
+                <div class="reply-buttons">
+                    <img src="../../img/message/쪽지함휴지통.png" alt="삭제">
+                    <img class="reportimg" src="../../img/message/report.png" alt="신고">
+                </div>
+                </li>
+                <li class = "written">
+                <div class="reply-image"><img src="../../img/place/sample_place.png" alt="프사"></div>
+                <div class="reply-content">
+                    <div class = "content">댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용</div>
+                    <div class = "user"><span id = "nick">김카디</span>&nbsp;&nbsp;<span id = "date">24.10.16</span></div>
+                    <div class = "likes"><img src="../../img/journal/footprint.png" alt="좋아요"><span>35</span></div>
+                </div>
+                <div class="reply-buttons">
+                    <img src="../../img/message/쪽지함휴지통.png" alt="삭제">
+                    <img class="reportimg" src="../../img/message/report.png" alt="신고">
+                </div>
+                </li>
+                <li class = "written">
+                <div class="reply-image"><img src="../../img/place/sample_place.png" alt="프사"></div>
+                <div class="reply-content">
+                    <div class = "content">댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용</div>
+                    <div class = "user"><span id = "nick">김카디</span>&nbsp;&nbsp;<span id = "date">24.10.16</span></div>
+                    <div class = "likes"><img src="../../img/journal/footprint.png" alt="좋아요"><span>35</span></div>
+                </div>
+                <div class="reply-buttons">
+                    <img src="../../img/message/쪽지함휴지통.png" alt="삭제">
+                    <img class="reportimg" src="../../img/message/report.png" alt="신고">
+                </div>
+                </li>
+                <li class = "written">
+                <div class="reply-image"><img src="../../img/place/sample_place.png" alt="프사"></div>
+                <div class="reply-content">
+                    <div class = "content">댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용</div>
+                    <div class = "user"><span id = "nick">김카디</span>&nbsp;&nbsp;<span id = "date">24.10.16</span></div>
+                    <div class = "likes"><img src="../../img/journal/footprint.png" alt="좋아요">35</div>
+                </div>
+                <div class="reply-buttons">
+                    <img src="../../img/message/쪽지함휴지통.png" alt="삭제">
+                    <img class="reportimg" src="../../img/message/report.png" alt="신고">
+                </div>
+                </li>
+            </ul>
+            <button type="button" id = "reply-more">더 보기</button>
+            <script src="../../js/journal/journalDetail.js"></script>
+    </main>
+    <div id="reply"></div>
+    <div id="footer"></div>
+</body>
+</html>

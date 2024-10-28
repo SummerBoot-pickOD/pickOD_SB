@@ -1,0 +1,74 @@
+/*쪽지열기*/
+.sentmsg-container {
+  position: fixed;  /* 화면에 고정 */
+  top: 50%;  /* 화면 상단에서 50% */
+  left: 35%;  /* 화면 좌측에서 25% */
+  transform: translate(-50%, -50%);  /* 정확한 중앙을 맞추기 위한 변환 */
+  z-index: 1000;  /* 다른 요소 위에 표시 */
+  width: 440px;  /* 원하는 너비 */
+  height: 410px;  /* 원하는 높이 */
+  background-color: white;  /* 배경색 */
+  border: 1px solid black;  /* 테두리 */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  /* 그림자 효과 */
+  padding: 25px;
+  border-radius: 10px;  /* 모서리를 둥글게 */
+}
+
+
+.nonmodal-container span{
+  font-size: 20px;
+}
+
+.nonmodal-box{
+  display: flex;
+  flex-direction: column;
+  padding:25px;
+}
+
+.nonmodal-top{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 27px;
+  margin: 0 0 20px 0;
+}
+
+.btn-close-sentmail{
+  width: 30px;
+  height: 30px;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.nonmodal-bottom{
+  display: flex;
+  justify-content: space-between;
+}
+
+.nonmodal-textarea{
+  height: 250px;
+  margin-bottom: 10px;
+  border: 1px solid #D9D9D9;
+  border-radius: 7px;
+  resize: none;
+  width: 100%;
+  /* border:none; */
+}
+
+.nonmodal-textarea:focus{
+  outline: none;
+}
+
+.btn-delete{
+  display: flex;
+  align-items: center;
+
+}
+
+.delete-msg{
+  border-radius: 10px;
+  background-color: #D9D9D9;
+  padding: 5px;
+  margin: 5px;
+  cursor: pointer;
+}

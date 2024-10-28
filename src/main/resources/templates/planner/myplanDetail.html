@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>내여행짜기상세페이지</title>
+  <link rel="stylesheet" href="../../css/planner/myplanDetail.css">
+  <script defer src="../../js/planner/myplanDetail.js"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+  crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="../../css/main/header.css">
+  <link rel="stylesheet" href="../../css/main/footer.css">
+</head>
+<body>
+  <div id="header"></div>
+  <main>
+    <div class="name-box">
+      나의여행짜기
+    </div>
+    <div class="myplan-title">
+      서울나들이
+    </div>
+    <div id="displayDateRange">
+      <div>2024-10-17~2024-10-18</div>
+    </div>
+
+    <!-- 더미세부플랜컨테이너 -->
+    <div class="dayplan-container">
+      <div class="day-box"><span class="daynum">Day1</span><span class="datenum">10/17</span></div>
+      <div class="dayspot-container">
+        <div class="day-spot">
+          <div class="order-num">1</div>
+          <div class="order-spot">경복궁</div>
+        </div>
+        <div class="day-spot">
+          <div class="order-num">2</div>
+          <div class="order-spot">창경궁</div>
+        </div>
+        <div class="memo-space">
+          <div class="space-area"></div>
+          <div class="memo-area">여긴 근처에 맛집이 많아</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="dayplan-container">
+      <div class="day-box"><span class="daynum">Day2</span><span class="datenum">10/18</span></div>
+      <div class="dayspot-container">
+        <div class="day-spot">
+          <div class="order-num">3</div>
+          <div class="order-spot">경희루</div>
+        </div>
+        <div class="day-spot">
+          <div class="order-num">4</div>
+          <div class="order-spot">인사동</div>
+        </div>
+        <div class="day-spot">
+          <div class="order-num">5</div>
+          <div class="order-spot">삼청동</div>
+        </div>
+        <div class="day-spot">
+          <div class="order-num">6</div>
+          <div class="order-spot">방콕</div>
+        </div>
+        <div class="memo-space">
+          <div class="space-area"></div>
+          <div class="memo-area">날씨 좋은날 맥주 한잔하기좋아</div>
+        </div>
+      </div>
+    </div>
+    
+
+    <div class="button-group">
+      <button type="button" class="delete-btn">삭제</button>
+      <button type="button" class="fix-btn">편집</button>
+  </div>
+  </main>
+  <div id="footer"></div>
+</body>
+</html>

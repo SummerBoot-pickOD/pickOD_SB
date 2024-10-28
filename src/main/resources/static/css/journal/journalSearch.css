@@ -1,0 +1,218 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+
+main{
+    margin: 110px 300px;
+    
+}
+
+h2{
+    font-size: 28px;
+    border-bottom: 1px solid #D9D9D9;
+}
+/* 검색창 */
+.search-box-container{
+    margin: 30px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    
+}
+
+.search-box{
+    height: 30px;
+    width: 40%;
+    background-color: white;
+    border-radius: 20px;
+    padding: 10px;
+    border: 1px solid #E29A9A;
+}
+
+.search-text{
+    border: none;
+    background-color: none;
+    outline: none;
+    float: left;
+    padding: 0;
+    color: #797979;
+    font-size: 20px;
+    line-height: 30px;
+    width: 50%;
+    margin: 0 20px;
+}
+
+.search-btn{
+    color: black;
+    float: right;
+    width: 40px;
+    height: 100%;
+    border-radius: 50%;
+    background-color: white;
+    border: none;
+    font-size: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.search-btn:hover{
+    cursor : pointer;
+}
+
+/* 지역 필터 */
+.total_area_wrap{
+    display: flex;
+    flex-direction: column;
+    margin: 10px 80px 70px 80px;
+  }
+  
+  .total_area_btn{
+    width: 45px;
+    height: 20px;
+    border:0;
+    cursor: pointer; 
+    background:gainsboro;
+    margin-left: 5px;
+    border-radius:5px 5px 0px 0px;
+  
+  }
+  
+  .tag_area{
+    display: flex;
+    background-color: #FEF2F2;
+    padding: 15px 15px 15px 25px;
+    height: 200px;
+    border-radius: 10px;
+    align-items:flex-start;
+  }
+  
+  
+  
+  .tag_area_seoul{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    height: 100%;
+    margin-right: 40px;
+   }
+   
+  .tag_area_geonggi{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    height: 100%;
+  }  
+  
+  .tag_area button{
+    border: 0;
+    cursor: pointer;
+    background: #FEF2F2;
+    margin: 5px 10px;
+  }
+  
+  .tag_area li button{
+    border: 1px  solid #FEF2F2 ;
+    border-radius: 5px;
+    font-size: 12px;
+  }
+
+/* 컨텐츠 메뉴 */
+.content-menu{
+    display: flex;
+    width: 100%;
+    height: 60px;
+    border-bottom: 1px solid #D9D9D9;
+}
+
+.content-total{
+    width: 75%;
+    font-size: 20px;
+    margin-left: 15px;
+    margin-top: 20px;
+    font-weight: bold;
+    
+}
+
+.content-latest, .content-pick, .content-chosen, .wall{
+    font-size: 17px;
+    padding-top: 20px;
+    padding-right: 15px;
+    margin-left: auto;
+    justify-content: left;
+    position: relative;
+}
+
+.wall{
+    margin-top: 7px;
+}
+
+.content-latest, .content-pick, .content-chosen{
+    background: none;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    font-weight: normal
+}
+
+.bold {
+    font-weight: bold; /* 클릭된 버튼에 적용할 bold 스타일 */
+}
+
+.container {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.posts {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.post-container {
+    margin: 10% auto;
+    width: 90%;
+    height: 86%;
+    background-color: #FFF9FF;
+    display: flex;
+    flex-direction: column; /* 세로 방향으로 정렬 */
+    align-items: center;
+    justify-content: space-between; /* 위쪽 이미지, 아래쪽 제목 */
+    overflow: hidden;
+    padding-top: 25px;
+    padding-bottom: 10px; /* 하단 마진을 위한 패딩 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.post-image {
+    width: 80%;
+    height: 75%;
+}
+
+.post-title {
+    margin-top: 10px; /* 제목과 이미지 사이의 마진 */
+    text-align: center; /* 제목 중앙 정렬 */
+    font-size: 16px; /* 제목 크기 설정 */
+    font-weight: bold;
+    width: 100%; /* 제목이 컨테이너 크기에 맞게 차지 */
+    padding: 10px 0; /* 제목과 하단 사이 간격 조정 */
+    box-sizing: border-box;
+}
+.pagination {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.pagination button {
+    margin: 0 5px;
+    border: none;
+    background-color: white;
+    color: black;
+    cursor: pointer;
+}
+
+.pagination button:disabled {
+    font-weight: bold;
+}

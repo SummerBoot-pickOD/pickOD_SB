@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Replies Management</title>
+  <link rel="stylesheet" href="../../css/admin/admReplies.css">
+  <link rel="stylesheet" href="../../css/admin/admHeader.css">
+  <link rel="stylesheet" href="../../css/main/footer.css">
+  <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+  <script defer src="../../js/admin/admReplies.js"></script>
+</head>
+
+<body>
+  <form action="#" method="">
+    <div id="header"></div>
+    <main>
+      <div class="comments">
+        <h1 class="cmt-mgmt">댓글 관리</h1>
+        <div class="comments-container">
+          <!-- js로 맞는 데이터 불러오기 -->
+          <span class="cmt-of">
+            <!-- 댓글 페이지로 넘어오기 전에 어떤건지 받아오기 -->
+            &#91;<span id="category">여행 발자국</span> &gt;
+            <span id="post-title">2박 3일 힐링 대부도 나들이</span>&#93;
+          </span>
+          <div class="search">
+            <select id="condition">
+              <option value="" disabled selected>조건을 선택하세요</option>
+              <option value="name" class="search-option">성명</option>
+              <option value="nick" class="search-option">닉네임</option>
+              <option value="report" class="search-option">신고 여부</option>
+            </select>
+            <input type="text" placeholder="검색어를 입력하세요." />
+            <button type="button" class="search-button">검색</button>
+          </div>
+
+
+          <table class="all-comments">
+            <tr class="table-head">
+              <th>아이디</th>
+              <th>성명</th>
+              <th>닉네임</th>
+              <th>댓글 내용</th>
+              <th>신고 여부</th>
+              <th>상세보기</th>
+            </tr>
+
+
+            <!-- 내용은 js로 불러올것. 일단 어떻게 뜰지 예시 -->
+            <tr>
+              <td class="userID">pickpickkim@gmail.com</td>
+              <td class="userName">김픽미</td>
+              <td class="nickName">pickme1234</td>
+              <td class="content">오 엄청난 여행인걸요. 저도 꼭 따라해봐야겠어요. 앞으로도 즐거운 여행 하세요.</td>
+              <td class="report">N</td>
+              <td class="last-col"><button type="button" class="detail-button">상세보기</button></td>
+            </tr>
+            <tr>
+              <td class="userID">pickpickkim@gmail.com</td>
+              <td class="userName">김픽미</td>
+              <td class="nickName">pickme1234</td>
+              <td class="content">오 엄청난 여행인걸요. 저도 꼭 따라해봐야겠어요. 앞으로도 즐거운 여행 하세요.</td>
+              <td class="report">N</td>
+              <td class="last-col"><button type="button" class="detail-button">상세보기</button></td>
+            </tr>
+            <tr>
+              <td class="userID">pickpickkim@gmail.com</td>
+              <td class="userName">김픽미</td>
+              <td class="nickName">pickme1234</td>
+              <td class="content">오 엄청난 여행인걸요. 저도 꼭 따라해봐야겠어요. 앞으로도 즐거운 여행 하세요.</td>
+              <td class="report">N</td>
+              <td class="last-col"><button type="button" class="detail-button">상세보기</button></td>
+            </tr>
+            <tr>
+              <td class="userID">pickpickkim@gmail.com</td>
+              <td class="userName">김픽미</td>
+              <td class="nickName">pickme1234</td>
+              <td class="content">오 엄청난 여행인걸요. 저도 꼭 따라해봐야겠어요. 앞으로도 즐거운 여행 하세요.</td>
+              <td class="report">N</td>
+              <td class="last-col"><button type="button" class="detail-button">상세보기</button></td>
+            </tr>
+            <tr>
+              <td class="userID">pickpickkim@gmail.com</td>
+              <td class="userName">김픽미</td>
+              <td class="nickName">pickme1234</td>
+              <td class="content">
+                오 엄청난 여행인걸요. 저도 꼭 따라해봐야겠어요. 앞으로도 즐거운 여행 하세요.
+              </td>
+              <td class="report">N</td>
+              <td class="last-col">
+                <button type="button" class="detail-button">상세보기</button>
+              </td>
+            </tr>
+            <tr>
+              <td class="userID">pickpickkim@gmail.com</td>
+              <td class="userName">김픽미</td>
+              <td class="nickName">pickme1234</td>
+              <td class="content">오 엄청난 여행인걸요. 저도 꼭 따라해봐야겠어요. 앞으로도 즐거운 여행 하세요.</td>
+              <td class="report">N</td>
+              <td class="last-col"><button type="button" class="detail-button">상세보기</button></td>
+            </tr>
+            <tr>
+              <td class="userID">pickpickkim@gmail.com</td>
+              <td class="userName">김픽미</td>
+              <td class="nickName">pickme1234</td>
+              <td class="content">오 엄청난 여행인걸요. 저도 꼭 따라해봐야겠어요. 앞으로도 즐거운 여행 하세요.</td>
+              <td class="report">N</td>
+              <td class="last-col"><button type="button" class="detail-button">상세보기</button></td>
+            </tr>
+            <tr>
+              <td class="userID">pickpickkim@gmail.com</td>
+              <td class="userName">김픽미</td>
+              <td class="nickName">pickme1234</td>
+              <td class="content">오 엄청난 여행인걸요. 저도 꼭 따라해봐야겠어요. 앞으로도 즐거운 여행 하세요.</td>
+              <td class="report">N</td>
+              <td class="last-col"><button type="button" class="detail-button">상세보기</button></td>
+            </tr>
+            <tr>
+              <td class="userID">pickpickkim@gmail.com</td>
+              <td class="userName">김픽미</td>
+              <td class="nickName">pickme1234</td>
+              <td class="content">오 엄청난 여행인걸요. 저도 꼭 따라해봐야겠어요. 앞으로도 즐거운 여행 하세요.</td>
+              <td class="report">N</td>
+              <td class="last-col"><button type="button" class="detail-button">상세보기</button></td>
+            </tr>
+            <tr>
+              <td class="userID">pickpickkim@gmail.com</td>
+              <td class="userName">김픽미</td>
+              <td class="nickName">pickme1234</td>
+              <td class="content">오 엄청난 여행인걸요. 저도 꼭 따라해봐야겠어요. 앞으로도 즐거운 여행 하세요.</td>
+              <td class="report">N</td>
+              <td class="last-col"><button type="button" class="detail-button">상세보기</button></td>
+            </tr>
+            <tr>
+              <td colspan="6" class="last-row"></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <section>
+        <form action="#" method="get">
+          <!-- comment details non-modal -->
+          <div class="nonmodal-container">
+            <div class="nonmodal-content">
+              <span class="close-btn">&times;</span>
+              <h2 class="modal-title">댓글 상세보기</h2>
+              <table class="cmt-detail">
+                <tr>
+                  <th class="items">항목</th>
+                  <th class="info">정보</th>
+                </tr>
+                <tr>
+                  <td>아이디</td>
+                  <!-- 따오는거 -->
+                  <td class="userID">yujeanchoi123@gmail.com</td>
+                </tr>
+                <tr>
+                  <td>성명</td>
+                  <!-- 따오는거 -->
+                  <td class="userName">최유진</td>
+                </tr>
+                <tr>
+                  <td>닉네임</td>
+                  <!-- 따오는거 -->
+                  <td class="nickName">yujean1234</td>
+                </tr>
+                <tr>
+                  <td>발자국 제목</td>
+                  <!-- 따오는거 -->
+                  <!-- 이 경우, content-cell 을 사용해서 getElementByID로 if써서 overflow확인해서 다른 스타일 주기 -->
+                  <td class="post-title" id="content-cell">2박 3일 대부도 나들이2박 3일 대부도 나들이</td>
+                </tr>
+                <tr>
+                  <td>작성일시</td>
+                  <!-- 따오는거 -->
+                  <td class="date">2024.10.14 00:00</td>
+                </tr>
+                <tr>
+                  <td>신고 여부</td>
+                  <!-- 따오는거 -->
+                  <td class="reported">Y</td>
+                </tr>
+              </table>
+
+              <table class="cmt-detail">
+                <tr>
+                  <th>댓글 내용</th>
+                </tr>
+                <!-- 따오는거 -->
+                <tr>
+                  <td class="cmt-content">
+                    작성된 댓글 내용이 여기 뜨게 하기 -> 댓글 내용 확인을 위해서
+                  </td>
+                </tr>
+              </table>
+              <div class="buttons-container">
+                <a href="../../html/admin/admJournalDetails.html">
+                  <button class="to-journal" type="button">발자국 바로가기</button>
+                </a>
+                <!-- 제재 부여 바로 가능한지 아니면 신고 페이지로 넘겨야하는지 결정 -->
+                <button class="suspension" type="button">제재 부여</button>
+                <button class="delete" type="button">댓글 삭제</button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </section>
+    </main>
+    <div id="footer"></div>
+  </form>
+</body>
+
+
+</html>

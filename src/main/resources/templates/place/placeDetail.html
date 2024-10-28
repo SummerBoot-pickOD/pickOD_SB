@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>메인페이지</title>
+  <link rel="stylesheet" href="../../css/place/placeDetail.css">
+  <link rel="stylesheet" href="../../css/main/header.css">
+  <link rel="stylesheet" href="../../css/main/footer.css">
+  <script src="../../js/place/placeDetail.js"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+  <script src="../../js/main/main.js"></script>
+</head>
+
+<body>
+  <div id='header'></div>
+  <div id="report"></div>
+  <main>
+    <div class="mainImg">
+      <button id="prevBtn"><img src="../../img/place/placeDetail/prevBtn.png" alt=""></button>
+      <img id='slider' src="../../img/place/placeDetail/samplePlace.jpg" alt="대표이미지">
+      <button id="nextBtn"><img src="../../img/place/placeDetail/nextBtn.png" alt=""></button>
+    </div>
+    <h2 class="placeDetail">[서울] 경복궁</h2>
+    <span>서울 종로구 사직로 161 경복궁</span>
+
+    <!-- 조회수 신고 찜 -->
+    <div class="placeIcon">
+      <div class="count-wrap">
+        <img class="countimg" src="../../img/place/placeDetail/count.png" alt="">
+        <p>2.2k</p>
+      </div>
+      <div>
+        <img class="reportimg" src="../../img/place/placeDetail/report.png" alt="">
+        <img class="saveimg" src="../../img/main/unsaved.png" alt="">
+      </div>
+    </div>
+
+    <!-- 네브바 -->
+    <div class="placeDetail-nav" id="placeDetailNav">
+      <ul>
+        <li><a href="#detailSection">상세정보</a></li>
+        <li><a href="#relatedPlacesSection">관련장소</a></li>
+        <li><a href="#reply-container">발자국 톡</a></li>
+      </ul>
+    </div>
+
+    <!-- 상세정보 -->
+    <section id="detailSection">
+      <div class="nav-title">상세정보</div>
+      <article>
+        <div class="section1-info">경복궁은 대전 서구의 공원이다. 소풍 명소로도 알려져 있다. 역과도 가까워 버스로 갈아탈 필요가 없다. 그늘도 잘 되어있어 여름에 쉬기에 좋다. 4월 하순부터는 이팝나무가 탐스럽게 피어있어 흰 눈이 피어있는 듯 하얗다. 휴식과 산책을 즐길 수 있는 잔디광장을 중심으로 소나무 숲, 생태숲, 참나무 숲, 무궁화 동산 등이 잘 조성되어 있어 가족 나들이를 즐기기에 좋다</div>
+        <div class="section1-guide">
+          <h3>이용안내</h3>
+          <div class="section1-guide-box">
+            <div class="section1-guide-txt">
+              <span>문의시간 :9:00~12:00</span>
+              <span>홈페이지 : https://</span>
+              <span>이용요금 : 인당 2만원</span>
+            </div>
+            <div class="section1-guide-txt">
+              <span>이용요금 : 인당 2만원</span>
+              <span>휴일 : 매주 일요일</span>
+              <span>휴일 : 매주 일요일</span>
+            </div>
+            
+          </div>
+        </div>
+        <div class="section1-location">
+          <div class="section1-location-title">
+            <img src="../../img/place/placeDetail/locationIcon.png" alt="">
+            <h3>위치</h3>
+          </div>
+          <img class="locationImg" src="../../img/place/placeDetail/location.png" alt="">
+        </div>
+      </article>
+    </section>
+
+    <!-- 관련장소 -->
+    <section id="relatedPlacesSection">
+      <div class="nav-title">관련장소</div>
+      <article>
+        <ul class="relatedPlace">
+          <li>덕수궁</li>
+          <li>창덕궁</li>
+          <li>창경궁</li>
+        </ul>
+      </article>
+    </section>
+
+
+    <!-- 발자국톡 댓글 -->
+    <div id = "reply-container">
+      <div class="name-box">
+          발자국 톡
+      </div>
+      <section id = "reply-write">
+          <input type="text" name="" id="" placeholder="댓글을 남겨보세요.(100자 이내)" maxlength="100">
+          <div id = "submit-reply">
+          <button type="button">등&nbsp;&nbsp;록</button>
+          </div>
+      </section>
+      <ul id = "reply">
+          <li class = "written">
+          <div class="reply-image"><img src="../../img/place/sample_place.png" alt="프사"></div>
+          <div class="reply-content">
+              <div class = "content">댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용</div>
+              <div class = "user"><span id = "nick">김카디</span>&nbsp;&nbsp;<span id = "date">24.10.16</span></div>
+              <div class = "likes"><img src="../../img/journal/footprint.png" alt="좋아요"><span>35</span></div>
+          </div>
+          <div class="reply-buttons">
+              <img src="../../img/message/쪽지함휴지통.png" alt="삭제">
+              <img class="reportimg" src="../../img/message/report.png" alt="신고">
+          </div>
+          </li>
+          <li class = "written">
+          <div class="reply-image"><img src="../../img/place/sample_place.png" alt="프사"></div>
+          <div class="reply-content">
+              <div class = "content">댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용</div>
+              <div class = "user"><span id = "nick">김카디</span>&nbsp;&nbsp;<span id = "date">24.10.16</span></div>
+              <div class = "likes"><img src="../../img/journal/footprint.png" alt="좋아요"><span>35</span></div>
+          </div>
+          <div class="reply-buttons">
+              <img src="../../img/message/쪽지함휴지통.png" alt="삭제">
+              <img class="reportimg" src="../../img/message/report.png" alt="신고">
+          </div>
+          </li>
+          <li class = "written">
+          <div class="reply-image"><img src="../../img/place/sample_place.png" alt="프사"></div>
+          <div class="reply-content">
+              <div class = "content">댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용</div>
+              <div class = "user"><span id = "nick">김카디</span>&nbsp;&nbsp;<span id = "date">24.10.16</span></div>
+              <div class = "likes"><img src="../../img/journal/footprint.png" alt="좋아요"><span>35</span></div>
+          </div>
+          <div class="reply-buttons">
+              <img src="../../img/message/쪽지함휴지통.png" alt="삭제">
+              <img class="reportimg" src="../../img/message/report.png" alt="신고">
+          </div>
+          </li>
+          <li class = "written">
+          <div class="reply-image"><img src="../../img/place/sample_place.png" alt="프사"></div>
+          <div class="reply-content">
+              <div class = "content">댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용</div>
+              <div class = "user"><span id = "nick">김카디</span>&nbsp;&nbsp;<span id = "date">24.10.16</span></div>
+              <div class = "likes"><img src="../../img/journal/footprint.png" alt="좋아요"><span>35</span></div>
+          </div>
+          <div class="reply-buttons">
+              <img src="../../img/message/쪽지함휴지통.png" alt="삭제">
+              <img class="reportimg" src="../../img/message/report.png" alt="신고">
+          </div>
+          </li>
+          <li class = "written">
+          <div class="reply-image"><img src="../../img/place/sample_place.png" alt="프사"></div>
+          <div class="reply-content">
+              <div class = "content">댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용댓글 내용</div>
+              <div class = "user"><span id = "nick">김카디</span>&nbsp;&nbsp;<span id = "date">24.10.16</span></div>
+              <div class = "likes"><img src="../../img/journal/footprint.png" alt="좋아요">35</div>
+          </div>
+          <div class="reply-buttons">
+              <img src="../../img/message/쪽지함휴지통.png" alt="삭제">
+              <img class="reportimg" src="../../img/message/report.png" alt="신고">
+          </div>
+          </li>
+      </ul>
+      <button type="button" id = "reply-more">더 보기</button>
+    </div>
+  </main>
+  
+  <div id="footer"></div>
+  
+
+</body>
+
+</html>

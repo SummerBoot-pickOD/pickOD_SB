@@ -1,0 +1,108 @@
+/*공간지정*/
+*{
+  margin: 0;
+  padding: 0;
+}
+ 
+/* main{
+  margin: 110px 300px 0px 300px;
+} */
+
+main {
+  margin: 110px auto 0;
+  padding: 0 20px;
+  max-width: 1320px; /* 페이지의 최대 너비를 설정 */
+  width: 100%;
+}
+
+/* @media (max-width: 768px) {
+  main {
+    margin: 50px auto;
+    padding: 0 10px;
+  }
+} */
+
+.mybest-container {
+  width: 100%;
+  max-width: 1320px;
+  height: auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  place-items: center;
+}
+
+.mybest-title{
+  font-size: 36px;
+}
+
+.name-box{
+  height: 50px;
+  font-size: 28px;
+  margin: 110px 0 40px 0;
+  display: flex;
+  align-items: center;
+  width: 1320px;
+  border-bottom: 2px solid #D9D9D9;
+}
+
+.name-box a{
+  text-decoration: none;
+  color:black;
+}
+
+.title-mybest{
+  font-weight: bold;
+}
+
+.mybest-list{
+  height: 465px;
+  width: 380px;
+  background-color: #fef8ff;
+  box-shadow: 0px 4px 4px #00000040;
+}
+
+.mybest-imgbox{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.mybest-img{
+  height: 300px;
+  width: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* .mybest-img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+} */
+
+.mybest-box{
+  display: flex;
+  align-items: center;
+  height: 100px;
+}
+
+.mybest-content{
+  height: 80px;
+  width: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  font-family:'Dancing Script', cursive;
+  font-weight: bold;
+}
+
+.mybest-name{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  font-size: 20px;
+}

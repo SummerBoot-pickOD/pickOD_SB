@@ -1,0 +1,147 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+
+main{
+  margin:110px 300px;
+  /* background-color: blanchedalmond; */
+}
+
+.festival{
+  border-bottom: 1px solid #D9D9D9;
+  font-size: 28px;
+}
+
+.search{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.search form{
+  margin: 25px 0px;
+  position: relative;
+  width: 370px;
+  height: 35px;
+}
+
+input{
+  padding-left: 15px;
+  border-radius: 15px;
+  width: 100%;
+  height:100%;
+  border: 1px solid #F68791 ;
+}
+
+.search button{
+  position: absolute;
+  top: 4px;
+  bottom: 5px;
+  right: 5px;
+  width: 26px;
+  height: 26px;
+  border: 0;
+  background:transparent url("../../img/festival/searchIcon.png") center center / 26px scroll no-repeat;
+  cursor: pointer;
+}
+
+.total_area_wrap{
+  display: flex;
+  flex-direction: column;
+  margin: 10px 80px 70px 80px;
+}
+
+.total_area_btn{
+  width: 45px;
+  height: 20px;
+  border:0;
+  cursor: pointer; 
+  background:gainsboro;
+  margin-left: 5px;
+  border-radius:5px 5px 0px 0px;
+
+}
+
+.tag_area{
+  display: flex;
+  background-color: #FEF2F2;
+  padding: 15px 15px 15px 25px;
+  height: 200px;
+  border-radius: 10px;
+  align-items:flex-start;
+  justify-content: space-around;
+}
+
+
+
+.tag_area_seoul{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  height: 100%;
+  margin-right: 40px;
+ }
+ 
+.tag_area_geonggi{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  height: 100%;
+}  
+
+.tag_area button{
+  border: 0;
+  cursor: pointer;
+  background: #FEF2F2;
+  margin: 5px 10px;
+}
+
+.tag_area li button{
+  border: 1px  solid #FEF2F2 ;
+  border-radius: 5px;
+  font-size: 12px;
+}
+
+
+.festival-list{
+  display: grid;
+  gap: 25px;
+  grid-template-columns: repeat(3, 1fr);
+  place-items: center;
+  margin-top: 50px;
+}
+
+.festival-info a{
+  color: black;
+  text-decoration: none;
+}
+
+.festival-info span{
+  font-size: 12px;
+}
+
+.festival-img{
+  width: 280px;
+}
+
+.festival-img img{
+  width:100%;
+  height: 195px;
+  border-radius: 10px;
+}
+
+
+.festival-list li{
+  padding: 25px 0 25px 0;
+  width: 280px;
+} 
+ 
+.festival-info{
+  display: flex;
+  flex-direction: column;
+  margin-top: 4px;
+}
+
+.festival-info a{
+  margin-bottom: 2px;
+}

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="stylesheet" href="../../css/report/reportSend.css">
+  <script defer src="../../js/report/reportSend.js"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+    crossorigin="anonymous"></script>
+</head>
+<body>
+  <div class="modal-container">
+    <div id="report-modal">
+      <section id="report-modal-top">
+        <span>신고하기</span><span id="modal-exit">&times;</span>
+      </section>
+      <form action="">
+        <section id="report-modal-mid">
+          <div>
+            신고 사유 선택
+          </div>
+          <div>
+            <label for="">
+              <select name="report-reason" id="reason">
+                <option disabled selected>신고 사유를 선택해주세요.</option>
+                <option value="1">욕설 또는 타인 비방</option>
+                <option value="2">희롱, 괴롭힘 또는 노골적인 폭력</option>
+                <option value="3">저작권 위반</option>
+                <option value="4">기타</option>
+                <option value="5">정보 오류</option>
+              </select>
+            </label>
+          </div>
+          <textarea id="report-detail-text" placeholder="자세한 상황을 설명해주세요."></textarea>
+        </section>
+        <section id="report-modal-tail">
+          <button type="button">신고하기</button>
+        </section>
+      </form>
+    </div>
+  </div>
+</body>

@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Management System</title>
+  <link rel="stylesheet" href="../../css/admin/admUserManagement.css">
+  <link rel="stylesheet" href="../../css/admin/admHeader.css">
+  <link rel="stylesheet" href="../../css/main/footer.css">
+  <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+  <script defer src="../../js/admin/admUserManagement.js"></script>
+</head>
+
+<body>
+  <div id="header"></div>
+  <main>
+    <h1>회원관리</h1>
+    <div class="container">
+      <div class="search">
+        <select id="condition">
+          <option value="" disabled selected>조건을 선택하세요</option>
+          <!-- <option class="search-option" value="name">성명</option> -->
+          <option class="search-option" value="nick">닉네임</option>
+          <option class="search-option" value="sus">제재</option>
+        </select>
+        <input type="text" placeholder="검색어를 입력하세요." />
+        <!-- <label for="status">상태:</label> -->
+        <label><input type="radio" name="status" value="total" checked> 전체</label>
+        <label><input type="radio" name="status" value="normal" checked> 정상</label>
+        <label><input type="radio" name="status" value="suspended"> 제재</label>
+        <label><input type="radio" name="status" value="withdrawn"> 탈퇴</label>
+        <button type="button" class="search-button">검색</button>
+      </div>
+
+      <table>
+        <tr class="table-head">
+          <th>아이디</th>
+          <!-- <th>성명</th> -->
+          <th>닉네임</th>
+          <th>여행 발자국</th>
+          <th>내 여행 짜기</th>
+          <th>제재 횟수</th>
+          <th>상세보기</th>
+        </tr>
+
+        <tr>
+          <td>pickpickkim@gmail.com</td>
+          <!-- <td>김픽미</td> -->
+          <td>pickme1234</td>
+          <td>3</td>
+          <td>2</td>
+          <td>1</td>
+          <td class="last-col"><button class="user-detail" type="button">상세보기</button></td>
+        </tr>
+        <tr>
+          <td>pickpickkim@gmail.com</td>
+          <!-- <td>김픽미</td> -->
+          <td>pickme1234</td>
+          <td>3</td>
+          <td>2</td>
+          <td>1</td>
+          <td class="last-col"><button class="user-detail" type="button">상세보기</button></td>
+        </tr>
+        <tr>
+          <td>pickpickkim@gmail.com</td>
+          <!-- <td>김픽미</td> -->
+          <td>pickme1234</td>
+          <td>3</td>
+          <td>2</td>
+          <td>1</td>
+          <td class="last-col"><button class="user-detail" type="button">상세보기</button></td>
+        </tr>
+        <tr>
+          <td>pickpickkim@gmail.com</td>
+          <!-- <td>김픽미</td> -->
+          <td>pickme1234</td>
+          <td>3</td>
+          <td>2</td>
+          <td>1</td>
+          <td class="last-col"><button class="user-detail" type="button">상세보기</button></td>
+        </tr>
+        <tr>
+          <td>pickpickkim@gmail.com</td>
+          <!-- <td>김픽미</td> -->
+          <td>pickme1234</td>
+          <td>3</td>
+          <td>2</td>
+          <td>1</td>
+          <td class="last-col"><button class="user-detail" type="button">상세보기</button></td>
+        </tr>
+        <tr>
+          <td>pickpickkim@gmail.com</td>
+          <!-- <td>김픽미</td> -->
+          <td>pickme1234</td>
+          <td>3</td>
+          <td>2</td>
+          <td>1</td>
+          <td class="last-col"><button class="user-detail" type="button">상세보기</button></td>
+        </tr>
+        <tr>
+          <td>pickpickkim@gmail.com</td>
+          <!-- <td>김픽미</td> -->
+          <td>pickme1234</td>
+          <td>3</td>
+          <td>2</td>
+          <td>1</td>
+          <td class="last-col"><button class="user-detail" type="button">상세보기</button></td>
+        </tr>
+        <tr>
+          <td>pickpickkim@gmail.com</td>
+          <!-- <td>김픽미</td> -->
+          <td>pickme1234</td>
+          <td>3</td>
+          <td>2</td>
+          <td>1</td>
+          <td class="last-col"><button class="user-detail" type="button">상세보기</button></td>
+        </tr>
+        <tr>
+          <td>pickpickkim@gmail.com</td>
+          <!-- <td>김픽미</td> -->
+          <td>pickme1234</td>
+          <td>3</td>
+          <td>2</td>
+          <td>1</td>
+          <td class="last-col"><button class="user-detail" type="button">상세보기</button></td>
+        </tr>
+        <tr>
+          <td>pickpickkim@gmail.com</td>
+          <!-- <td>김픽미</td> -->
+          <td>pickme1234</td>
+          <td>3</td>
+          <td>2</td>
+          <td>1</td>
+          <td class="last-col"><button class="user-detail" type=" button">상세보기</button></td>
+        </tr>
+        <tr>
+          <td colspan="7" class="last-row"></td>
+        </tr>
+      </table>
+    </div>
+    <section>
+      <form action="#" method="">
+        <!-- user detail non-modal -->
+        <div class="nonmodal-container">
+          <div class="nonmodal-content">
+            <div class="close">
+              <span class="close-btn">&times;</span>
+            </div>
+            <h2 class="modal-title">회원 상세 정보</h2>
+            <table class="user-info">
+              <tr>
+                <th class="items">항목</th>
+                <th class="info">정보</th>
+              </tr>
+              <tr>
+                <td>아이디</td>
+                <!-- 따오는거 -->
+                <td class="userID">yujeanchoi123@gmail.com</td>
+              </tr>
+              <!-- <tr>
+                <td>성명</td> -->
+              <!-- 따오는거 -->
+              <!-- <td class="userName">최유진</td> -->
+              <!-- </tr> -->
+              <tr>
+                <td>닉네임</td>
+                <!-- 따오는거 -->
+                <td class="nickName">yujean1234</td>
+              </tr>
+              <tr>
+                <td>거주지</td>
+                <!-- 따오는거 null일 수도 있음 -->
+                <td class="userAddress"></td>
+              </tr>
+              <tr>
+                <td>나이</td>
+                <!-- 따오는거 -->
+                <td class="userAge">20</td>
+              </tr>
+              <tr>
+                <td>생년월일</td>
+                <!-- 따오는거 -->
+                <td class="userBday">2003.01.01</td>
+              </tr>
+              <tr>
+                <td>성별</td>
+                <!-- 따오는거 -->
+                <td class="userGender">F</td>
+              </tr>
+              <tr>
+                <td>작성 발자국 수</td>
+                <!-- 따오는거 -->
+                <td class="journalCount">5</td>
+              </tr>
+              <tr>
+                <td>여행 짜기 수</td>
+                <!-- 따오는거 -->
+                <td class="plannerCount">3</td>
+              </tr>
+            </table>
+
+            <table class="user-info">
+              <tr>
+                <th>제재 횟수</th>
+                <th>제재 여부</th>
+                <th>제재 기간</th>
+              </tr>
+              <!-- 따오는거 -->
+              <tr>
+                <td class="sus-count">3</td>
+                <td class="sus-status">Y</td>
+                <td class="sus-period">20&#40;일&#41;</td>
+              </tr>
+            </table>
+
+            <div class="buttons-container">
+              <div class="buttons">
+                <button class="suspend" type="button">제재 부여</button>
+                <a href="#">
+                  <!-- 쪽지 보내기 모달로 링크됨 -->
+                  <button class="message" type="button">쪽지 보내기</button>
+                </a>
+                <!-- 회원 탈퇴 로직 구상-->
+                <button class="withdrawal" type="button">회원 탈퇴</button>
+              </div>
+            </div>
+            <!-- <div class="mypage-container">
+              <a href="#">
+                <button class="mypage" type="button">마이페이지</button>
+              </a>
+            </div> -->
+          </div>
+      </form>
+    </section>
+
+    <!-- 쪽지 보내기 모달 -->
+    <section>
+      <form action="#" method="">
+        <!-- <div class="nonmodal-container">
+          <div class="nonmodal-content">
+
+            <h2 class="modal-title">회원 상세 정보</h2>
+ -->
+
+        <div class="sendmsg-container">
+          <div class="sendmsg-content">
+            <div class="close">
+              <span class="message-close">&times;</span>
+            </div>
+            <h2 class="modal-title">쪽지 보내기</h2>
+            <div class="nonmodal-top">
+              <div class="detail-to">
+                <span>To.</span>
+                <span class="recipient"></span>
+              </div>
+            </div>
+            <!-- <div class="nonmodal-textarea"> -->
+
+            <textarea id="textarea" placeholder="쪽지를입력하세요"></textarea>
+
+            <!-- </div> -->
+            <div class="nonmodal-bottom">
+              <button class="send-msg" type="submit">쪽지 보내기</button>
+            </div>
+          </div>
+        </div>
+        </div>
+      </form>
+    </section>
+  </main>
+  <div id='footer'></div>
+</body>
+
+</html>

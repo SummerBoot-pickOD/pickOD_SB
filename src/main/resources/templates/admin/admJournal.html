@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Travel Journal Management</title>
+  <link rel="stylesheet" href="../../css/admin/admJournal.css">
+  <link rel="stylesheet" href="../../css/admin/admHeader.css">
+  <link rel="stylesheet" href="../../css/main/footer.css">
+  <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+  <script defer src="../../js/admin/admJournal.js"></script>
+</head>
+
+<body>
+  <div id="header"></div>
+  <main>
+    <div class="posts">
+      <h1 class="journal-mgmt">여행 발자국 관리</h1>
+      <div class="container">
+        <div class="search">
+          <select id="condition">
+            <option value="" disabled selected>조건을 선택하세요</option>
+            <option class="search-option" value="name">성명</option>
+            <option class="search-option" value="nick">닉네임</option>
+            <option class="search-option" value="title">제목</option>
+            <option class="search-option" value="report">신고 여부</option>
+          </select>
+          <input type="text" placeholder="검색어를 입력하세요." />
+          <label><input type="radio" name="status" value="total" checked> 전체</label>
+          <label><input type="radio" name="status" value="normal" checked> 정상등록</label>
+          <label><input type="radio" name="status" value="temp"> 임시저장</label>
+          <button type="button" class="search-button">검색</button>
+        </div>
+
+        <table class="journal-list">
+          <tr class="table-head">
+            <th>아이디</th>
+            <th>성명</th>
+            <th>닉네임</th>
+            <th>여행 발자국</th>
+            <th>찜하기 수</th>
+            <th>신고 여부</th>
+            <th>댓글</th>
+            <th>바로가기</th>
+          </tr>
+
+          <tr>
+            <td>pickpickkim@gmail.com</td>
+            <td>남궁미미</td>
+            <td>pickme1234</td>
+            <td class="jnl-title">2박 3일 대부도 나들이</td>
+            <td>50</td>
+            <td>N</td>
+            <td><button class="to-comments" type="button">댓글보기</button></td>
+            <td><button class="to-journal" type="button">바로가기</button></td>
+          </tr>
+          <tr>
+            <td>pickpickkim@gmail.com</td>
+            <td>김픽미</td>
+            <td>pickme1234</td>
+            <td class="jnl-title">친구들과 2박 3일 힐링 대부도 나들이</td>
+            <td>50</td>
+            <td>N</td>
+            <td><button class="to-comments" type="button">댓글보기</button></td>
+            <td><button class="to-journal" type="button">바로가기</button></td>
+          </tr>
+          <tr>
+            <td>pickpickkim@gmail.com</td>
+            <td>김픽미</td>
+            <td>pickme1234</td>
+            <td class="jnl-title">당일치기로 빠르게 다녀온 추억 여행</td>
+            <td>50</td>
+            <td>N</td>
+            <td><button class="to-comments" type="button">댓글보기</button></td>
+            <td><button class="to-journal" type="button">바로가기</button></td>
+          </tr>
+          <tr>
+            <td>pickpickkim@gmail.com</td>
+            <td>김픽미</td>
+            <td>pickme1234</td>
+            <td class="jnl-title">2박 3일 힐링 대부도 나들이</td>
+            <td>50</td>
+            <td>N</td>
+            <td><button class="to-comments" type="button">댓글보기</button></td>
+            <td><button class="to-journal" type="button">바로가기</button></td>
+          </tr>
+          <tr>
+            <td>pickpickkim@gmail.com</td>
+            <td>김픽미</td>
+            <td>pickme1234</td>
+            <td class="jnl-title">2박 3일 힐링 대부도 나들이</td>
+            <td>50</td>
+            <td>N</td>
+            <td><button class="to-comments" type="button">댓글보기</button></td>
+            <td><button class="to-journal" type="button">바로가기</button></td>
+          </tr>
+          <tr>
+            <td>pickpickkim@gmail.com</td>
+            <td>김픽미</td>
+            <td>pickme1234</td>
+            <td class="jnl-title">2박 3일 힐링 대부도 나들이</td>
+            <td>50</td>
+            <td>N</td>
+            <td><button class="to-comments" type="button">댓글보기</button></td>
+            <td><button class="to-journal" type="button">바로가기</button></td>
+          <tr>
+            <td>pickpickkim@gmail.com</td>
+            <td>김픽미</td>
+            <td>pickme1234</td>
+            <td class="jnl-title">2박 3일 힐링 대부도 나들이</td>
+            <td>50</td>
+            <td>N</td>
+            <td><button class="to-comments" type="button">댓글보기</button></td>
+            <td><button class="to-journal" type="button">바로가기</button></td>
+          </tr>
+          <tr>
+            <td>pickpickkim@gmail.com</td>
+            <td>김픽미</td>
+            <td>pickme1234</td>
+            <td class="jnl-title">2박 3일 힐링 대부도 나들이</td>
+            <td>50</td>
+            <td>N</td>
+            <td><button class="to-comments" type="button">댓글보기</button></td>
+            <td><button class="to-journal" type="button">바로가기</button></td>
+          </tr>
+          <tr>
+            <td>pickpickkim@gmail.com</td>
+            <td>김픽미</td>
+            <td>pickme1234</td>
+            <td class="jnl-title">2박 3일 힐링 대부도 나들이</td>
+            <td>50</td>
+            <td>N</td>
+            <td><button class="to-comments" type="button">댓글보기</button></td>
+            <td><button class="to-journal" type="button">바로가기</button></td>
+          </tr>
+          <tr>
+            <td>pickpickkim@gmail.com</td>
+            <td>김픽미</td>
+            <td>pickme1234</td>
+            <td class="jnl-title">2박 3일 힐링 대부도 나들이</td>
+            <td>50</td>
+            <td>N</td>
+            <td><button class="to-comments" type="button">댓글보기</button></td>
+            <td><button class="to-journal" type="button">바로가기</button></td>
+          </tr>
+          <tr>
+            <td>pickpickkim@gmail.com</td>
+            <td>김픽미</td>
+            <td>pickme1234</td>
+            <td class="jnl-title">2박 3일 힐링 대부도 나들이</td>
+            <td>50</td>
+            <td>N</td>
+            <td><button class="to-comments" type="button">댓글보기</button></td>
+            <td><button class="to-journal" type="button">바로가기</button></td>
+          </tr>
+          <tr>
+            <td>pickpickkim@gmail.com</td>
+            <td>김픽미</td>
+            <td>pickme1234</td>
+            <td class="jnl-title">2박 3일 힐링 대부도 나들이</td>
+            <td>50</td>
+            <td>N</td>
+            <td><button class="to-comments" type="button">댓글보기</button></td>
+            <td><button class="to-journal" type="button">바로가기</button></td>
+          </tr>
+          <tr>
+            <td>pickpickkim@gmail.com</td>
+            <td>김픽미</td>
+            <td>pickme1234</td>
+            <td class="jnl-title">2박 3일 힐링 대부도 나들이</td>
+            <td>50</td>
+            <td>N</td>
+            <td><button class="to-comments" type="button">댓글보기</button></td>
+            <td><button class="to-journal" type="button">바로가기</button></td>
+          </tr>
+          <tr>
+            <td>pickpickkim@gmail.com</td>
+            <td>김픽미</td>
+            <td>pickme1234</td>
+            <td class="jnl-title">2박 3일 힐링 대부도 나들이</td>
+            <td>50</td>
+            <td>N</td>
+            <td><button class="to-comments" type="button">댓글보기</button></td>
+            <td><button class="to-journal" type="button">바로가기</button></td>
+          </tr>
+          <tr>
+            <td>pickpickkim@gmail.com</td>
+            <td>김픽미</td>
+            <td>pickme1234</td>
+            <td class="jnl-title">2박 3일 힐링 대부도 나들이</td>
+            <td>50</td>
+            <td>N</td>
+            <td><button class="to-comments" type="button">댓글보기</button></td>
+            <td><button class="to-journal" type="button">바로가기</button></td>
+          </tr>
+          <tr>
+            <td colspan="7" class="last-row"></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </main>
+  <div id='footer'></div>
+</body>
+
+</html>

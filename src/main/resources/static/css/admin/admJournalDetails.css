@@ -1,0 +1,384 @@
+/* 현식님 여행발자국 상세 배껴온 부분 시작 */
+main {
+  /* 마진만 110px 로 수정 */
+  margin: 110px 300px;
+
+}
+
+.title-containerbox {
+  margin: auto;
+  text-align: center;
+  width: 100%;
+  font-size: 40px;
+}
+
+.count-wrap {
+  display: flex;
+}
+
+.countimg {
+  width: 25px;
+  height: 20px;
+  margin-right: 3px;
+}
+
+/* 관리자용 신고 여부 알 수 있는 버튼 추가 */
+.report {
+  display: flex;
+  justify-content: right;
+  margin-top: 40px;
+}
+
+#report-icon {
+  width: 30px;
+  height: 30px;
+  margin-bottom: 5px;
+  margin-right: 3px;
+}
+
+.report-icon:hover {
+  cursor: pointer;
+}
+
+/* 관리자용 신고 여부 알 수 있는 버튼 추가 스타일 끝 */
+
+.container-display {
+  margin: 0 0 150px 0;
+  display: flex;
+}
+
+.profile-container {
+  width: 324px;
+  height: 380px;
+  border: 1px solid #CCCCCC;
+  border-radius: 20px;
+  margin-right: 32px;
+}
+
+.profile {
+  margin: auto;
+  width: 287px;
+  height: 145px;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  border-bottom: 1px solid #CCCCCC;
+}
+
+.user-name-container {
+  padding: 60px 25px 0 50px;
+  height: 103px;
+  width: 80px;
+  position: relative;
+  /* 상대 위치 설정 */
+}
+
+.photo {
+  margin: 25px 0 0 0;
+  width: 103px;
+  height: 103px;
+  background-color: beige;
+}
+
+.user-name {
+  font-size: 26px;
+}
+
+.message-button {
+  background: none;
+  /* 기본 배경 제거 */
+  border: none;
+  /* 기본 테두리 제거 */
+  cursor: pointer;
+  /* 커서 변경 */
+  position: absolute;
+  /* 절대 위치 설정 */
+  top: 8px;
+  /* 상단에 위치 */
+  right: -8px;
+  /* 오른쪽에 위치 */
+}
+
+.message-button img {
+  width: 30px;
+  /* 버튼 이미지 너비 */
+  height: 25px;
+  /* 버튼 이미지 높이 */
+}
+
+.nonmodal-container {
+  display: none;
+  /* 기본적으로 숨김 */
+}
+
+.explain-container {
+  width: 324px;
+  text-align: center;
+
+}
+
+.explain {
+  width: 100%;
+  height: 218px;
+  border: none;
+  background-color: none;
+  outline: none;
+  text-align: center;
+
+}
+
+.tag-container {
+  width: 100%;
+  height: 380px;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+
+}
+
+.tag-container-schedule {
+  display: flex;
+
+}
+
+.footprint {
+  padding: 30px;
+  width: 76px;
+  height: 65px;
+}
+
+.schedule-container,
+.tag-select-container,
+.thema-container {
+  margin: 20px;
+}
+
+.schedule,
+.schedule-tag,
+.schedule-thema {
+  font-size: 15px;
+  color: #A1A1A1;
+  margin: 12px 0 5px;
+}
+
+.schedule-content,
+.schedule-tag-content,
+.schedule-thema-content {
+  font-size: 30px;
+}
+
+.Day-container {
+  margin: -65px 0;
+}
+
+.Day {
+  background-color: #FEF2F2;
+  width: 70px;
+  height: 40px;
+  border-radius: 10px;
+  padding-top: 10px;
+  margin-right: 10px;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* 관리자용 버튼들이 너무 아래로 내려가서 margin-top으로 수정 */
+.detail-container {
+  margin-top: 60px;
+  width: 100%;
+  height: 100%;
+  background-color: #FEF2F2;
+}
+
+.detail-box {
+  padding: 50px 0 50px 0;
+}
+
+.maps-API {
+  width: 90%;
+  height: 500px;
+  background-color: #888;
+  margin: auto;
+
+}
+
+.location {
+  width: 100%;
+  margin: 30px;
+  display: flex;
+  text-align: center;
+  justify-content: space-around;
+
+
+}
+
+.location-text {
+  width: 15%;
+  height: 40px;
+  padding-top: 10px;
+  text-align: center;
+  justify-content: center;
+  background-color: #567FF2;
+  margin: 0 0 0 -50px;
+  border: none;
+  color: white;
+  font-size: 20px;
+}
+
+.detail-content-container {
+  margin: auto;
+  width: 90%;
+  height: 1000px;
+  background-color: white;
+  position: relative;
+  /* 자식 요소의 절대 위치를 설정할 수 있도록 relative 적용 */
+}
+
+.detail-photo {
+  padding: 30px;
+  position: relative;
+  /* 화살표의 위치를 설정할 수 있도록 relative 적용 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.main-photo {
+  width: 100%;
+  /* 메인 이미지의 크기를 적절히 설정 */
+  height: auto;
+}
+
+.arrow {
+  position: absolute;
+  /* 화살표를 절대 위치로 배치 */
+  top: 50%;
+  /* 수직 중앙에 위치 */
+  transform: translateY(-50%);
+  /* 정확히 중앙에 오도록 수직으로 조정 */
+  width: 50px;
+  /* 화살표 크기 */
+  height: auto;
+  cursor: pointer;
+}
+
+.left-arrow {
+  left: 0;
+}
+
+.right-arrow {
+  right: 0;
+}
+
+.detail-text {
+  padding: 20px 35px;
+}
+
+/* 현식님 여행발자국 상세 배껴온 부분 끝 */
+
+/* 관리자 버튼 추가 */
+
+.adm-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: right;
+}
+
+.delete,
+.to-comment {
+  cursor: pointer;
+  color: white;
+  background-color: #845AC6;
+  padding: 5px 10px;
+  font-size: 15px;
+  border-radius: 2px;
+  border: none;
+  margin: 10px;
+}
+
+/* 쪽지 보내기 모달 */
+.sendmsg-container {
+  display: none;
+  position: fixed;
+  width: 20%;
+  margin: 50px auto;
+  border-radius: 10px;
+  border: 1px solid #E9E9E9;
+  padding: 10px 30px 10px 30px;
+  z-index: 1000;
+  top: 10%;
+  left: 40%;
+  background-color: white;
+  height: 496px;
+  overflow: scroll;
+}
+
+.sendmsg-content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+
+.close {
+  text-align: right;
+}
+
+.message-close {
+  display: inline;
+  font-size: 25px;
+  cursor: pointer;
+}
+
+
+.nonmodal-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px 0 20px 0;
+}
+
+
+.modal-title {
+  display: block;
+  font-size: 20px;
+}
+
+.nonmodal-textarea {
+  height: 70%;
+  margin-bottom: 10px;
+  width: 100%;
+  resize: none;
+}
+
+
+#textarea {
+  padding: 10px;
+  height: 91%;
+  resize: none;
+  border: 1px solid #D9D9D9;
+  border-radius: 7px;
+  overflow: scroll;
+  box-sizing: border-box;
+}
+
+.nonmodal-bottom {
+  display: flex;
+  justify-content: center;
+}
+
+.btn-send {
+  display: flex;
+  position: relative;
+  align-items: center;
+}
+
+.send-msg {
+  padding: 5px 10px;
+  margin: 15px;
+  border: none;
+  background-color: #A1A1A1;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}

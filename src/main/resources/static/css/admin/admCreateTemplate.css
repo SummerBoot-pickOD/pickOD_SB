@@ -1,0 +1,278 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+main {
+  margin: 110px 300px;
+}
+
+h1 {
+  font-size: 28px;
+}
+
+.for-cont {
+  border: 0;
+  height: 1px;
+  background-color: #D9D9D9;
+}
+
+.temp-container {
+  text-align: center;
+  width: 100%;
+}
+
+#temp-title {
+  border: none;
+  text-align: center;
+  font-size: 28px;
+  margin: 30px;
+}
+
+#temp-title:focus {
+  outline: none;
+  border: none;
+}
+
+
+/* ======================================= */
+.template-intro {
+  margin: 0 auto;
+  width: 80%;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+}
+
+.schedule-container,
+.tag-container,
+.theme-container,
+.journal-container {
+  margin: 15px;
+  display: flex;
+  align-items: center;
+}
+
+.img-container {
+  aspect-ratio: 1/1;
+  margin-right: 2%;
+  display: flex;
+  align-items: center;
+}
+
+.footprint {
+  width: 100%;
+  height: 85%;
+  max-width: 50px;
+  max-height: 50px;
+}
+
+.selection-container {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  justify-content: center;
+}
+
+.category {
+  font-size: 17px;
+  color: #A1A1A1;
+  margin-bottom: 5px;
+}
+
+#schedule-input,
+#tag-input,
+#theme-input,
+#journal-input {
+  border: 1px solid #D9D9D9;
+  font-size: 15px;
+  padding: 3px;
+}
+
+/* 데이, 장소 태그 */
+.day-tabs {
+  margin-top: 20px;
+  font-size: 18px;
+}
+
+#place-tabs {
+  display: flex;
+  justify-content: space-evenly;
+  background-color: #FEF2F2;
+  border-bottom: solid 1px #A1A1A1;
+}
+
+.days,
+.add-day,
+.places,
+.add-place {
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.days {
+  font-size: 18px;
+  color: #ffffff;
+  background-color: #a1a1a1;
+  /* margin-right: 5px; */
+}
+
+.places {
+  font-size: 15px;
+  color: #A1A1A1;
+  background-color: #FEF2F2;
+}
+
+.days.active,
+.places.active {
+  border: none;
+  background-color: #FEF2F2;
+  color: black;
+}
+
+.add-day {
+  color: #a1a1a1;
+  font-size: 25px;
+  background-color: white;
+  padding: 0 10px;
+}
+
+.add-place {
+  color: #A1A1A1;
+  background-color: #FEF2F2;
+  padding: 10px;
+  border: none;
+  font-size: 25px;
+}
+
+/* 내용 부분 */
+.content-container {
+  background-color: #FEF2F2;
+}
+
+.place-title {
+  display: flex;
+  font-size: 20px;
+  font-weight: bold;
+  color: navy;
+  align-items: center;
+  justify-content: center;
+  padding-top: 20px;
+}
+
+.place-title:hover {
+  cursor: pointer;
+}
+
+.location-descr {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+#place-info {
+  width: 86%;
+  height: 300px;
+  resize: none;
+  margin: 30px 10px;
+}
+
+.location-imgs {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.upload-container {
+  background-color: #D9D9D9;
+  padding: 5%;
+  border-radius: 5%;
+  margin: 0px 10px 30px 10px;
+}
+
+.upload-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+.gallery {
+  width: 50px;
+  height: 50px;
+}
+
+.txt-addimg {
+  font-size: 15px;
+  padding-top: 15px;
+}
+
+.map-container,
+.rec-container {
+  background-color: #FEF2F2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.map-title,
+.related-area {
+  font-size: 20px;
+}
+
+#map {
+  display: flex;
+  width: 90%;
+  background-color: #A1A1A1;
+  height: 200px;
+  align-items: center;
+  justify-content: center;
+}
+
+.rec-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 90%;
+  background-color: white;
+  padding: 10px;
+  border: 1px solid #D9D9D9;
+  border-radius: 10px;
+}
+
+.rel-locations {
+  padding-top: 10px;
+  display: flex;
+  width: 90%;
+  justify-content: space-evenly;
+}
+
+#rel-loc1,
+#rel-loc2,
+#rel-loc3 {
+  border: 1px solid #D9D9D9;
+  padding: 3px;
+  text-align: center;
+  border-radius: 2px;
+}
+
+.adm-buttons {
+  padding: 10px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.save,
+.publish {
+  cursor: pointer;
+  color: white;
+  background-color: #845AC6;
+  padding: 5px 10px;
+  font-size: 15px;
+  border-radius: 2px;
+  border: none;
+  margin-left: 10px;
+}

@@ -1,0 +1,157 @@
+main{
+    margin: 110px 300px;
+    
+}
+
+.page-name{
+    font-size: 28px;
+    font-weight: bold;
+    border-bottom: 1px solid #D9D9D9;
+    margin-bottom: 100px;
+}
+
+.search-box-container{
+    margin-top: 30px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    
+}
+
+.search-box{
+    height: 30px;
+    width: 40%;
+    background-color: white;
+    border-radius: 20px;
+    padding: 10px;
+    border: 1px solid #E29A9A;
+}
+
+.search-text{
+    border: none;
+    background-color: none;
+    outline: none;
+    float: left;
+    padding: 0;
+    color: #797979;
+    font-size: 20px;
+    line-height: 30px;
+    width: 80%;
+    margin: 0 20px;
+}
+
+.search-btn{
+    color: black;
+    float: right;
+    width: 40px;
+    height: 100%;
+    border-radius: 50%;
+    background-color: white;
+    border: none;
+    font-size: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.search-btn:hover{
+    cursor : pointer;
+}
+
+.best-footprint-container{
+    margin: 100px 0;
+    width: 100%;
+    height: 100%;
+}
+
+.best-footprint{
+    display: flex;
+    margin: 30px;
+
+}
+
+.best-month{
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.best-footprint-contents-container{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    background-color: #FEF2F2;
+    border-radius: 20px;
+}
+
+.best-footprint-contents{
+    padding: 2%;
+    width: 30%;
+    min-width: 50px;
+    height: 60%;
+}
+
+.best-contents-title{
+    padding: 5px;
+    font-size: 20px;
+    text-align: center;
+
+}
+
+
+.template-menu{
+    display: flex;
+    margin: auto;
+    width: 100%;
+    height: 60px;
+    border-bottom: 1px solid #D9D9D9;
+}
+
+.content-total{
+    width: 90%;
+    font-size: 20px;
+    margin-left: 15px;
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+.wall {
+    display: inline-block; /* 줄바꿈 방지 */
+    margin: 15px 10px;  /* 좌우 여백 조정 */
+    font-size: 20px;
+}
+
+.content-reference, .content-pick{
+    width: auto;  /* 버튼 너비 자동 조정 */
+    padding: 10px 10px;  /* 버튼 내부 패딩 설정 */
+    text-align: center;  /* 텍스트 중앙 정렬 */
+    display: inline-block;  /* 인라인 요소로 설정 */
+    box-sizing: border-box;  /* 패딩을 포함한 크기 계산 */
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+button {
+    font-weight: normal; /* 기본적으로 일반 텍스트 */
+}
+
+.bold {
+    font-weight: bold; /* 클릭된 버튼에 적용할 bold 스타일 */
+}
+
+.template-container{
+    width: 100%;
+    padding: 30px 0;
+    margin: 30px 0 60px 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3개의 열로 배치 */
+    gap: 30px; /* 아이템 간의 간격 */
+    row-gap: 100px;
+    text-align: center;
+}
+
+.template-contents img{
+    margin: auto;
+    width: 80%;
+}

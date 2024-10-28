@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Login</title>
+  <link rel="stylesheet" href="../../css/admin/admLogin.css">
+  <link rel="stylesheet" href="../../css/admin/admHeader.css">
+  <link rel="stylesheet" href="../../css/main/footer.css">
+  <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+  <script defer src="../../js/admin/admLogin.js"></script>
+</head>
+
+<body>
+  <div id="header"></div>
+  <main>
+    <div class="container">
+      <div>
+        <img class="back" src="../../img/admin/backArrow.png">
+      </div>
+      <img class="pickOD-logo" src="../../img/main/logo.png">
+      <h2>관리자 로그인</h2>
+      <form action="" method="">
+        <input type="text" class="id" placeholder="아이디" required>
+        <input type="password" class="pw" placeholder="비밀번호" required>
+        <div id="invalid-login"></div>
+        <button id="login-button" type="button">로그인</button>
+      </form>
+      <a href="./admSelectCert.html" id="forgot-password" class="login-service">비밀번호 찾기</a>
+    </div>
+  </main>
+  <div id="footer"></div>
+</body>
+
+</html>
