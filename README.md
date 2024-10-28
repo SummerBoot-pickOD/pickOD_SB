@@ -1,2 +1,2 @@
-# pickOD_springboot
+# pickOD_SB
 springboot프로젝트
