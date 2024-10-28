@@ -1,0 +1,168 @@
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>템플릿 작성 페이지</title>
+  <link rel="stylesheet" href="../../css/admin/admCreateTemplate.css">
+  <link rel="stylesheet" href="../../css/admin/admHeader.css">
+  <link rel="stylesheet" href="../../css/main/footer.css">
+  <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+  <script defer src="../../js/admin/admCreateTemplate.js"></script>
+</head>
+
+<body>
+  <div id="header"></div>
+  <main>
+    <h1>템플릿 작성하기</h1>
+    <hr>
+    <form action="" method="">
+      <div class="temp-container">
+        <input id="temp-title" type="text" placeholder="템플릿 제목">
+      </div>
+    </form>
+
+    <!-- 일정, 태그, 테마 설정 -->
+    <hr class="for-cont">
+    <div class="template-intro">
+      <div class="schedule-container">
+        <div class="img-container">
+          <img class="footprint" src="../../img/journal/footprint_pink.png" alt="">
+        </div>
+        <div class="selection-container">
+          <div class="category">
+            일정
+          </div>
+          <div class="schedule">
+            <select id="schedule-input">
+              <option value="" disabled selected>일정 선택</option>
+              <option class="select-option" value="day-trip">당일 여행</option>
+              <option class="select-option" value="one">1박 2일</option>
+              <option class="select-option" value="two">2박 3일</option>
+              <option class="select-option" value="three">3박 4일</option>
+              <option class="select-option" value="four">4받 5일</option>
+              <option class="select-option" value="five">5박 6일</option>
+              <option class="select-option" value="etc">일주일 이상</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="tag-container">
+        <div class="img-container">
+          <img class="footprint" src="../../img/journal/footprint_pink.png" alt="">
+        </div>
+        <div class="selection-container">
+          <div class="category">
+            태그
+          </div>
+          <div class="tag">
+            <input id="tag-input" type="text" placeholder="#태그 입력">
+          </div>
+        </div>
+      </div>
+      <div class="theme-container">
+        <div class="img-container">
+          <img class="footprint" src="../../img/journal/footprint_pink.png" alt="">
+        </div>
+        <div class="selection-container">
+          <div class="category">
+            테마
+          </div>
+          <div class="theme">
+            <input id="theme-input" type="text" placeholder="#테마 입력">
+          </div>
+        </div>
+      </div>
+      <div class="journal-container">
+        <div class="img-container">
+          <img class="footprint" src="../../img/journal/footprint_pink.png" alt="">
+        </div>
+        <div class="selection-container">
+          <div class="category">
+            참고 여행 발자국
+          </div>
+          <div class="journal">
+            <!-- 이거 누르면 여행기 선택 모달 넣어야함 -->
+            <input id="journal-input" type="text" placeholder="#참고 여행기 입력">
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr class="for-cont">
+    <!-- day, location tab -->
+
+
+
+    <!-- 내가 작성 -->
+    <div class="day-tabs">
+      <!-- day-tab -> class="days"로 변경 -->
+      <button class="days active" onclick="switchDay(1)">DAY 1</button>
+      <button class="add-day" onclick="addDay()">&#43;</button>
+    </div>
+    <div id="place-tabs">
+      <!-- loaction tab -> place class="locations"로 변경 -->
+      <button class="places active" onclick="switchLocation(1, 1)">장소1</button>
+      <button class="places" onclick="switchLocation(1, 2)">장소2</button>
+      <button class="places" onclick="switchLocation(1, 3)">장소3</button>
+    </div>
+
+    <div class="content-container">
+      <div class->
+        <div class="place-title">장소 이름 불러오기</div>
+        <!-- 클릭 시 장소 추가 모달 불러오기 하단에 코드 추가, js 코드 추가-->
+      </div>
+      <div class="location-descr">
+        <!-- id="location-info" 로 변경 -->
+        <textarea id="place-info" placeholder="장소에 대한 설명을 입력하시오
+        *** 썸머노트 추가 해야함"></textarea>
+      </div>
+      <div class="location-imgs">
+        <div class="upload-container">
+          <input type="file" id="img-input1" accept="image/*" style="display: none;" />
+          <label for="img-input1" class="upload-label">
+            <img class="gallery" src="../../img/admin/gallery.png" alt="갤러리 아이콘" class="icon" />
+            <div class="txt-addimg">클릭하여 사진 추가</div>
+          </label>
+        </div>
+        <div class="upload-container">
+          <input type="file" id="img-input2" accept="image/*" style="display: none;" />
+          <label for="img-input2" class="upload-label">
+            <img class="gallery" src="../../img/admin/gallery.png" alt="갤러리 아이콘" class="icon" />
+            <div class="txt-addimg">클릭하여 사진 추가</div>
+          </label>
+        </div>
+
+        <div class="upload-container">
+          <input type="file" id="img-input3" accept="image/*" style="display: none;" />
+          <label for="img-input3" class="upload-label">
+            <img class="gallery" src="../../img/admin/gallery.png" alt="갤러리 아이콘" class="icon" />
+            <div class="txt-addimg">클릭하여 사진 추가</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 지도 API 로 마커찍기 -->
+    <div class="map-container">
+      <h2 class="map-title">지도를 클릭하여 장소를 마킹해주세요.</h2>
+      <div id="map">지도 API 섹션</div>
+    </div>
+
+    <!-- 비슷한 장소 추천 -->
+    <div class="rec-container">
+      <div class="rec-area">
+        <div class="related-area">
+          비슷한 장소
+        </div>
+        <div class="rel-locations">
+          <div><input id="rel-loc1" type="text" placeholder="비슷한 장소명 입력"></div>
+          <div><input id="rel-loc2" type="text" placeholder="비슷한 장소명 입력"></div>
+          <div><input id="rel-loc3" type="text" placeholder="비슷한 장소명 입력"></div>
+        </div>
+      </div>
+    </div>
+    <!-- 임시저장, 템플릿 등록 버튼 -->
+    <div class="adm-buttons">
+      <button class="save" type="button">임시저장</button>
+      <button class="publish" type="button">템플릿 등록</button>
+    </div>
+  </main>
+  <div id="footer"></div>
+</body>

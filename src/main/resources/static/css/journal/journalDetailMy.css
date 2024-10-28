@@ -1,0 +1,339 @@
+main{
+    margin: 176px 300px;
+    
+}
+
+.title-containerbox {
+    margin: auto;
+    text-align: center;
+    width: 100%;
+    font-size: 40px;
+}
+
+.container-display {
+    margin: 85px 0 150px 0;
+    display: flex;
+}
+
+.profile-container {
+    width: 324px;
+    height: 380px;
+    border: 1px solid #CCCCCC;
+    border-radius: 20px;
+    margin-right: 32px;
+}
+
+.profile {
+    margin: auto;
+    width: 287px;
+    height: 145px;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    border-bottom: 1px solid #CCCCCC;
+}
+
+.user-name-container {
+    padding: 60px 25px 0 50px;
+    height: 103px;
+    width: 80px;
+    position: relative; /* 상대 위치 설정 */
+}
+
+.photo {
+    margin: 25px 0 0 0;
+    width: 103px;
+    height: 103px;
+    background-color: beige;
+}
+
+.user-name {
+    font-size: 26px;
+}
+
+.message-button {
+    background: none; /* 기본 배경 제거 */
+    border: none; /* 기본 테두리 제거 */
+    cursor: pointer; /* 커서 변경 */
+    position: absolute; /* 절대 위치 설정 */
+    top: 8px; /* 상단에 위치 */
+    right: -8px; /* 오른쪽에 위치 */
+}
+
+.message-button img {
+    width: 30px; /* 버튼 이미지 너비 */
+    height: 25px; /* 버튼 이미지 높이 */
+}
+
+.nonmodal-container {
+    display: none; /* 기본적으로 숨김 */
+}
+
+.explain-container{
+    width: 324px;
+    text-align: center;
+    
+}
+
+.explain{
+    width: 100%;
+    height: 218px;
+    border: none;
+    background-color: none;
+    outline: none;
+    text-align: center;
+
+}
+
+.info-chg-container{
+  position: relative;
+  width: 100%;
+  margin-top: 135px;
+  
+}
+
+.info-chg{
+  margin-left: 380%;
+}
+
+.tag-container{
+    width: 100%;
+    height: 380px;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    
+}
+
+.tag-container-schedule{
+    display: flex;
+    
+}
+
+.footprint{
+    padding: 30px;
+    width: 76px;
+    height: 65px;
+}
+
+.schedule-container, .tag-select-container, .thema-container {
+    margin: 20px;
+}
+
+.schedule, .schedule-tag, .schedule-thema {
+    font-size: 15px;
+    color: #A1A1A1;
+    margin: 12px 0 5px;
+}
+
+.schedule-content, .schedule-tag-content, .schedule-thema-content{
+    font-size: 30px;
+}
+
+.Day-container{
+    margin: -65px 0;
+}
+
+.Day{
+    background-color: #FEF2F2;
+    width: 70px;
+    height: 40px;
+    border-radius: 10px;
+    padding-top: 10px;
+    margin-right: 10px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.detail-container{ 
+    margin: 60px 0;   
+    width: 100%;
+    height: 100%;
+    background-color: #FEF2F2;
+}
+
+.detail-box{
+    padding: 50px 0 50px 0;
+}
+.maps-API{
+    width: 90%;
+    height: 500px;
+    background-color: #888;
+    margin: auto;
+    
+}
+
+.location{
+    width: 100%;
+    margin: 30px;
+    display: flex;
+    text-align: center;
+    justify-content: space-around;
+
+
+}
+
+.location-text{
+    width: 15%;
+    height: 40px;
+    padding-top: 10px;
+    text-align: center;
+    justify-content: center;
+    background-color: #567FF2;
+    margin: 0 0 0 -50px;
+    border: none;
+    color: white;
+    font-size: 20px;
+}
+
+.detail-content-container{
+    margin: auto;
+    width: 90%;
+    height: 1000px;
+    background-color: white;
+    position: relative; /* 자식 요소의 절대 위치를 설정할 수 있도록 relative 적용 */
+}
+
+.detail-photo{
+    padding: 30px;
+    position: relative; /* 화살표의 위치를 설정할 수 있도록 relative 적용 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.main-photo{
+    width: 100%; /* 메인 이미지의 크기를 적절히 설정 */
+    height: auto;
+}
+
+.arrow{
+    position: absolute; /* 화살표를 절대 위치로 배치 */
+    top: 50%; /* 수직 중앙에 위치 */
+    transform: translateY(-50%); /* 정확히 중앙에 오도록 수직으로 조정 */
+    width: 50px; /* 화살표 크기 */
+    height: auto;
+    cursor: pointer;
+}
+
+.left-arrow {
+    left: 0; /* 왼쪽 화살표는 왼쪽 끝 */
+}
+
+.right-arrow {
+    right: 0; /* 오른쪽 화살표는 오른쪽 끝 */
+}
+
+.detail-text{
+    padding: 20px 35px;
+}
+
+*{
+    margin : 0;
+    padding:0;
+  }
+  
+  #reply-container{
+    /* width:60%; */
+    min-width: 550px;
+    margin: 0 auto;
+  }
+  .name-box{
+    font-size: 28px;
+    font-weight:bold;
+    border-bottom: 1px solid black;
+    margin-bottom: 40px;
+  }
+  #reply-write{
+    background-color: #d9d9d9;
+    padding: 10px 20px;
+    height : 100px;
+  }
+  #reply-write input{
+    width:100%;
+    height:60%;
+    margin-bottom: 5px;
+  }
+  #submit-reply{
+    display: flex;
+    justify-content: right;
+  }
+  #submit-reply button{
+    height:30px;
+    width:60px;
+    color: white;
+    background-color: #845AC6;
+    font-weight: bold;
+  }
+  #reply{
+    padding: 10px 20px;
+    list-style:none;
+  }
+  
+  .written{
+    margin-top:10px;
+    display: flex;
+    border-bottom: 1px solid #d9d9d9;
+  }
+  
+  .written .reply-image{
+    display: flex;
+    justify-content: center;
+    width: 10%;
+  }
+  .reply-image img{
+    margin-top: 5px;
+    width:50px;
+    height:50px;
+    border-radius: 25px;
+  }
+  
+  .written .reply-content{
+    padding : 0 20px;
+    width: 80%;
+  }
+  .reply-content .user{
+    font-size: 14px;
+    margin-top: 5px;
+  }
+  
+  .reply-content .likes{
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+  }
+  
+  .reply-content .likes>img{
+    width: 24px;
+    height: 24px;
+  }
+  
+  .written .reply-buttons{
+    display: flex;
+    justify-content: right;
+    align-items: flex-start;
+    width: 10%;
+  }
+  .reply-buttons img{
+    margin-left: 10px;
+    width: 24px;
+    height: 24px;
+  }
+
+  /* 신고버튼 */
+  .reportimg{
+    width: 20px;
+    height: 23px;
+    margin-bottom: 5px;
+    margin-right: 3px;
+    cursor: pointer;
+  }
+  
+  #reply-more{
+    display: block;
+    margin : 10px auto;
+    width:80px;
+    height:30px;
+    border-radius: 15px;
+    border:1px solid black;
+  }

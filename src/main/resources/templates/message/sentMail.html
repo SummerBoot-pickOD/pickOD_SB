@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>보낸편지함</title>
+  <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+  crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="../../css/message/sentMail.css">
+  <script defer src="../../js/message/sentMail.js"></script>
+  <link rel="stylesheet" href="../../css/main/header.css">
+  <link rel="stylesheet" href="../../css/main/footer.css">
+</head>
+<body>
+  <form action="#" method="">
+    <div id="header"></div>
+    <div id="sentmailModal"></div>
+    <main>
+      <section>
+        <div class="sentmail-title">
+          <div class="name-box">
+            <a href="../mypage/myPage.html"><div class="title-mypage">마이페이지&nbsp>&nbsp</div></a>
+            <a href="./mailBox.html"><div class="title-myprofile">쪽지함</div></a>
+          </div>
+        </div>
+      </section>
+      <section>
+        <div class="mailboxbtn-container">
+          <div class="btn-delete"><img src="../../img/message/쪽지함휴지통.png" alt="쪽지함휴지통"></div>
+          <div class="btn-box">
+            <a href="./mailBox.html"><div class="btn-getmail">받은쪽지</div></a>
+            <div class="wall">|</div>
+            <a href="./sentMail.html"><div class="btn-sendmail">보낸쪽지</div></a>
+            <div class="wall">|</div>
+            <a href="./deletedMail.html"><div class="btn-bin">휴지통</div></a>
+          </div>
+        </div>
+      </section>
+      
+      <section>
+        <div class="mailbox-detail">
+          <div class="check-all">
+            <input type="checkbox" name="all" class="all">
+          </div>
+          <div class="mail-open">읽음</div>
+          <div class="mail-to">받는이</div>
+          <div class="mail-content">내용</div>
+          <div class="mail-date">날짜</div>
+        </div>
+      </section>
+
+      <section>
+        <div class="mailbox-container">
+          <div class="mailbox-list">
+            <div class="check-item">
+              <input type="checkbox" name="item" class="item">
+            </div>
+            <div class="mail-open" name=""><img src="../../img/message/쪽지함.png" alt=""></div>
+            <div class="mail-to" name="">신현식</div>
+            <div class="mail-content" name="">어쩌구저쩌구</div>
+            <div class="mail-date" name="">2024-10-04</div>
+          </div>
+          <div class="mailbox-list">
+            <div class="check-item">
+              <input type="checkbox" name="item" class="item">
+            </div>
+            <div class="mail-open" name=""><img src="../../img/message/쪽지함.png" alt=""></div>
+            <div class="mail-to" name="">김태유</div>
+            <div class="mail-content" name="">저쩌구저쩌구</div>
+            <div class="mail-date" name="">2024-10-04</div>
+          </div>
+          <div class="mailbox-list">
+            <div class="check-item">
+              <input type="checkbox" name="item" class="item">
+            </div>
+            <div class="mail-open" name=""><img src="../../img/message/쪽지함.png" alt=""></div>
+            <div class="mail-to" name="">김태유</div>
+            <div class="mail-content" name="">저쩌구저쩌구</div>
+            <div class="mail-date" name="">2024-10-04</div>
+          </div>
+          <div class="mailbox-list">
+            <div class="check-item">
+              <input type="checkbox" name="item" class="item">
+            </div>
+            <div class="mail-open" name=""><img src="../../img/message/쪽지함.png" alt=""></div>
+            <div class="mail-to" name="">김태유</div>
+            <div class="mail-content" name="">저쩌구저쩌구</div>
+            <div class="mail-date" name="">2024-10-04</div>
+          </div>
+        </div>
+      </section>
+      <section>
+        <div class="container">
+          <div class="mails" id="mails"></div>
+          <div class="pagination" id="pagination"></div>
+      </div>
+      </section>
+    </main>
+    <div id='footer'></div>
+  </form>
+</body>
+</html>

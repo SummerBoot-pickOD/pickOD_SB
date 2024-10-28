@@ -1,0 +1,139 @@
+
+
+/*공간지정*/
+*{
+  margin: 0;
+  padding: 0;
+}
+
+main {
+  margin: 110px auto 0;
+  padding: 0 20px;
+  max-width: 1320px; /* 페이지의 최대 너비를 설정 */
+  width: 100%;
+  min-height: 1000px;
+}
+
+
+.myprofile-title{
+  font-size: 36px;
+}
+
+.name-box{
+  height: 50px;
+  font-size: 28px;
+  margin: 110px 0 40px 0;
+  display: flex;
+  align-items: center;
+  width: 1320px;
+  border-bottom: 2px solid #D9D9D9;
+}
+
+.name-box a{
+  text-decoration: none;
+  color: black;
+}
+
+.title-myprofile{
+  font-weight: bold;
+}
+
+.profile-containerbox{
+  display: flex;
+  align-items: center;
+}
+
+.profile-picturebox{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 233px;
+  height: 233px;
+  background-color: #F0F0F0;
+  border-radius: 30px;
+}
+
+#preview{
+  width:100%;
+  height: 100%;
+  border-radius: 30px;
+}
+
+.picture-uploadbox{
+  height: 230px;
+  width: 555px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  border-radius: 30px;
+  color: #777777;
+  border: 1px solid #F0F0F0;
+}
+
+.upload-local, .upload-basic, .delete-img{
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.picture-uploadbox img{
+  width: 40px;
+  height: 40px;
+}
+
+.picture-uploadbox div{
+  display: flex;
+  align-items: center;
+  font-size: 26px;
+  margin: 10px;
+}
+
+.basic-img-title{
+  font-size: 26px;
+  margin: 40px 0 0 20px;
+  border-bottom: 1px solid black;
+}
+
+/* 이미지박스부분 */
+
+.basic-img-containerbox{
+  display: none;
+}
+
+.basic-img-title{
+  margin: 40px 0 20px 0;
+}
+
+.basic-img-box{
+  overflow-y : scroll;
+  max-height: 900px;
+}
+
+.basic-img-containerbox img{
+  width: 300px;
+  height: 300px;
+}
+
+.basic-img-box{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  gap:10px
+}
+
+.basic-img-box>div:nth-child(1){
+  grid-column-start: 1;
+	grid-column-end: 3;
+	grid-row-start: 1;
+	grid-row-end: 3;
+}
+
+.basic-img-box>div:nth-child(1)>img{
+  width: 600px;
+  height: 600px;
+  border-radius: 20px;
+}
+
+#fileInput{
+  display: none;
+}

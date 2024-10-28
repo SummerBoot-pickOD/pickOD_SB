@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="../../css/main/header.css">
+  <link rel="stylesheet" href="../../css/main/footer.css">
+  <link rel="stylesheet" href="../../css/place/place.css">
+  <script src="../../js/place/place.js"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+  crossorigin="anonymous"></script>
+</head>
+<body>
+  <div id='header'></div>
+  <main>
+    <h2 class="place">발자국이 머무는 곳</h2>
+
+    <section class="search">
+      <form action="" method="">
+         <input type="text" placeholder="검색어를 입력하세요">
+         <button type="submit"></button>
+      </form>
+    </section>
+    
+    <div class="total_area_wrap">
+      <button class="total_area_btn" type="button">전체</button>
+      <div class="tag_area">
+        <button class="tag_area_totalseoul" type="button">서울</button>
+        <ul class="tag_area_seoul">
+          <li><button type="button">강남구</button></li>
+          <li><button type="button">도봉구</button></li>
+          <li><button type="button">동대문구</button></li>
+          <li><button type="button">동작구</button></li>
+          <li><button type="button">마포구</button></li>
+          <li><button type="button">서대문구</button></li>
+          <li><button type="button">서초구</button></li>
+          <li><button type="button">성동구</button></li>
+          <li><button type="button">성북구</button></li>
+          <li><button type="button">송파구</button></li>
+          <li><button type="button">양천구</button></li>
+          <li><button type="button">강동구</button></li>
+          <li><button type="button">영등포구</button></li>
+          <li><button type="button">용산구</button></li>
+          <li><button type="button">은평구</button></li>
+          <li><button type="button">종로구</button></li>
+          <li><button type="button">중구</button></li>
+          <li><button type="button">중랑구</button></li>
+          <li><button type="button">강북구</button></li>
+          <li><button type="button">강서구</button></li>
+          <li><button type="button">관악구</button></li>
+          <li><button type="button">광진구</button></li>
+          <li><button type="button">구로구</button></li>
+          <li><button type="button">금천구</button></li>
+          <li><button type="button">노원구</button></li>
+        </ul>
+    
+        <button class="tag_area_totalgeonggi" type="button">경기</button>
+        <ul class="tag_area_geonggi">
+          <li><button type="button">가평시</button></li>
+          <li><button type="button">동두천시</button></li>
+          <li><button type="button">부천시</button></li>
+          <li><button type="button">성남시</button></li>
+          <li><button type="button">수원시</button></li>
+          <li><button type="button">시흥시</button></li>
+          <li><button type="button">안산시</button></li>
+          <li><button type="button">안성시</button></li>
+          <li><button type="button">안양시</button></li>
+          <li><button type="button">양주시</button></li>
+          <li><button type="button">양평군</button></li>
+          <li><button type="button">고양시</button></li>
+          <li><button type="button">여주시</button></li>
+          <li><button type="button">연천군</button></li>
+          <li><button type="button">오산시</button></li>
+          <li><button type="button">용인시</button></li>
+          <li><button type="button">의왕시</button></li>
+          <li><button type="button">의정부시</button></li>
+          <li><button type="button">이천시</button></li>
+          <li><button type="button">파주시</button></li>
+          <li><button type="button">평택시</button></li>
+          <li><button type="button">포천시</button></li>
+          <li><button type="button">과천시</button></li>
+          <li><button type="button">하남시</button></li>
+          <li><button type="button">화성시</button></li>
+          <li><button type="button">광명시</button></li>
+          <li><button type="button">광주시</button></li>
+          <li><button type="button">구리시</button></li>
+          <li><button type="button">군포시</button></li>
+          <li><button type="button">김포시</button></li>
+          <li><button type="button">남양주시</button></li>
+          
+        </ul>
+      </div>
+    </div>
+    
+    <div class="place-filter">
+      <p id="itemCount"></p>
+      <div>
+        <button id="btn1">조회순</button>
+        <button id="btn2">찜하기순</button>
+      </div>
+    </div>
+    
+    <div class="place-container">
+      <ul class="place-list">
+        <li>
+          <div class="place-wrap">         
+            <div class="place-img">
+              <a href="./placeDetail.html"><img src="../../img/place/sample_place.png"></a>
+            </div>
+            <div class="place-info">
+              <a href="./placeDetail.html"><strong>스타필드 코엑스몰</strong></a>
+              <div>
+                <div>서울 강남구</div>
+                <span>일상 속 비일상을 즐기는 꿈같은 원데이 트립</span>
+              </div>
+            </div>
+          </div>
+          <div class="saveimg">
+           <img src="../../img/main/unsaved.png" alt="">
+          </div>
+        </li>
+        <li>
+          <div class="place-wrap">         
+            <div class="place-img">
+              <a href="./placeDetail.html"><img src="../../img/place/sample_place.png"></a>
+            </div>
+            <div class="place-info">
+              <a href="./placeDetail.html"><strong>스타필드 코엑스몰</strong></a>
+              <div>
+                <div class="place-info-place">서울 강남구</div>
+                <span>일상 속 비일상을 즐기는 꿈같은 원데이 트립</span>
+              </div>
+            </div>
+          </div>
+          <div class="saveimg">
+           <img src="../../img/main/unsaved.png" alt="">
+          </div>
+        </li>
+        <li>
+          <div class="place-wrap">         
+            <div class="place-img">
+              <a href="./placeDetail.html"><img src="../../img/place/sample_place.png"></a>
+            </div>
+            <div class="place-info">
+              <a href="./placeDetail.html"><strong>스타필드 코엑스몰</strong></a>
+              <div>
+                <div class="place-info-place">서울 강남구</div>
+                <span>일상 속 비일상을 즐기는 꿈같은 원데이 트립</span>
+              </div>
+            </div>
+          </div>
+          <div class="saveimg">
+           <img src="../../img/main/unsaved.png" alt="">
+          </div>
+        </li>
+        <li>
+          <div class="place-wrap">         
+            <div class="place-img">
+              <a href="./placeDetail.html"><img src="../../img/place/sample_place.png"></a>
+            </div>
+            <div class="place-info">
+              <a href="./placeDetail.html"><strong>스타필드 코엑스몰</strong></a>
+              <div>
+                <div class="place-info-place">서울 강남구</div>
+                <span>일상 속 비일상을 즐기는 꿈같은 원데이 트립</span>
+              </div>
+            </div>
+          </div>
+          <div class="saveimg">
+           <img src="../../img/main/unsaved.png" alt="">
+          </div>
+        </li>
+        <li>
+          <div class="place-wrap">         
+            <div class="place-img">
+              <a href="./placeDetail.html"><img src="../../img/place/sample_place.png"></a>
+            </div>
+            <div class="place-info">
+              <a href="./placeDetail.html"><strong>스타필드 코엑스몰</strong></a>
+              <div>
+                <div class="place-info-place">서울 강남구</div>
+                <span>일상 속 비일상을 즐기는 꿈같은 원데이 트립</span>
+              </div>
+            </div>
+          </div>
+          <div class="saveimg">
+           <img src="../../img/main/unsaved.png" alt="">
+          </div>
+        </li>
+        <li>
+          <div class="place-wrap">         
+            <div class="place-img">
+              <a href="./placeDetail.html"><img src="../../img/place/sample_place.png"></a>
+            </div>
+            <div class="place-info">
+              <a href="./placeDetail.html"><strong>스타필드 코엑스몰</strong></a>
+              <div>
+                <div class="place-info-place">서울 강남구</div>
+                <span>일상 속 비일상을 즐기는 꿈같은 원데이 트립</span>
+              </div>
+            </div>
+          </div>
+          <div class="saveimg">
+           <img src="../../img/main/unsaved.png" alt="">
+          </div>
+        </li>
+       
+      </ul>   
+    </div>
+  </main>
+
+  <div id="footer"></div>
+  
+</body>
+</html>

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Template Management</title>
+  <link rel="stylesheet" href="../../css/admin/admTemplate.css">
+  <link rel="stylesheet" href="../../css/admin/admHeader.css">
+  <link rel="stylesheet" href="../../css/main/footer.css">
+  <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+  <script defer src="../../js/admin/admTemplate.js"></script>
+</head>
+
+<body>
+  <div id="header"></div>
+  <main>
+    <form action="" method="">
+      <div class="template">
+        <h1 class="template-mgmt">템플릿 관리</h1>
+        <div class="container">
+          <div class="search">
+            <select id="condition">
+              <option value="" disabled selected>조건을 선택하세요</option>
+              <option value="title">템플릿 제목</option>
+              <option value="refer">참고 발자국</option>
+              <option value="report">신고 여부</option>
+            </select>
+            <input type="text" placeholder="검색어를 입력하세요." />
+            <label><input type="radio" name="status" value="total" checked> 전체</label>
+            <label><input type="radio" name="status" value="normal" checked> 정상등록</label>
+            <label><input type="radio" name="status" value="temp"> 임시저장</label>
+            <button type="button" class="enter">검색</button>
+          </div>
+
+          <table>
+            <tr class="table-head">
+              <th>템플릿 제목</th>
+              <th>참고 여행 발자국</th>
+              <th>찜하기 수</th>
+              <th>신고 여부</th>
+              <th>바로가기</th>
+              <th>삭제</th>
+            </tr>
+
+            <tr>
+              <td class="title">대부도 나들이</td>
+              <td></td>
+              <td>42</td>
+              <td>N</td>
+              <td><button class="to-template" type="button">바로가기</button></td>
+              <td class="last-col"><button class="delete" type="button">삭제</button></td>
+            </tr>
+            <tr>
+              <td class="title">경기도 과천시 당일정복</td>
+              <td>해당 여행기 링크</td>
+              <td>42</td>
+              <td>N</td>
+              <td><button class="to-template" type="button">바로가기</button></td>
+              <td class="last-col"><button class="delete" type="button">삭제</button></td>
+            </tr>
+            <tr>
+              <td class="title">대부도 나들이</td>
+              <td></td>
+              <td>42</td>
+              <td>N</td>
+              <td><button class="to-template" type="button">바로가기</button></td>
+              <td class="last-col"><button class="delete" type="button">삭제</button></td>
+            </tr>
+            <tr>
+              <td class="title">경기도 과천시 당일정복</td>
+              <td>해당 여행기 링크</td>
+              <td>42</td>
+              <td>N</td>
+              <td><button class="to-template" type="button">바로가기</button></td>
+              <td class="last-col"><button class="delete" type="button">삭제</button></td>
+            </tr>
+            <tr>
+              <td class="title">경기도 과천시 당일정복</td>
+              <td>해당 여행기 링크</td>
+              <td>42</td>
+              <td>N</td>
+              <td><button class="to-template" type="button">바로가기</button></td>
+              <td class="last-col"><button class="delete" type="button">삭제</button></td>
+            </tr>
+            <tr>
+              <td class="title">경기도 과천시 당일정복</td>
+              <td>해당 여행기 링크</td>
+              <td>42</td>
+              <td>N</td>
+              <td><button class="to-template" type="button">바로가기</button></td>
+              <td class="last-col"><button class="delete" type="button">삭제</button></td>
+            </tr>
+            <tr>
+              <td class="title">경기도 과천시 당일정복</td>
+              <td>해당 여행기 링크</td>
+              <td>42</td>
+              <td>N</td>
+              <td><button class="to-template" type="button">바로가기</button></td>
+              <td class="last-col"><button class="delete" type="button">삭제</button></td>
+            </tr>
+            <tr>
+              <td class="title">경기도 과천시 당일정복</td>
+              <td>해당 여행기 링크</td>
+              <td>42</td>
+              <td>N</td>
+              <td><button class="to-template" type="button">바로가기</button></td>
+              <td class="last-col"><button class="delete" type="button">삭제</button></td>
+            </tr>
+            <tr>
+              <td class="title">경기도 과천시 당일정복</td>
+              <td>해당 여행기 링크</td>
+              <td>42</td>
+              <td>N</td>
+              <td><button class="to-template" type="button">바로가기</button></td>
+              <td class="last-col"><button class="delete" type="button">삭제</button></td>
+            </tr>
+            <tr>
+              <td class="title">경기도 과천시 당일정복</td>
+              <td>해당 여행기 링크</td>
+              <td>42</td>
+              <td>N</td>
+              <td><button class="to-template" type="button">바로가기</button></td>
+              <td class="last-col"><button class="delete" type="button">삭제</button></td>
+            </tr>
+            <tr>
+              <td class="title">경기도 과천시 당일정복</td>
+              <td>해당 여행기 링크</td>
+              <td>42</td>
+              <td>N</td>
+              <td><button class="to-template" type="button">바로가기</button></td>
+              <td class="last-col"><button class="delete" type="button">삭제</button></td>
+            </tr>
+            <tr>
+              <td class="title">경기도 과천시 당일정복</td>
+              <td>해당 여행기 링크</td>
+              <td>42</td>
+              <td>N</td>
+              <td><button class="to-template" type="button">바로가기</button></td>
+              <td class="last-col"><button class="delete" type="button">삭제</button></td>
+            </tr>
+            <tr>
+              <td colspan="6" class="last-row"></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </form>
+  </main>
+  <div id='footer'></div>
+</body>
+
+</html>

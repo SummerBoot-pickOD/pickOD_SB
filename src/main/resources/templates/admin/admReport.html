@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Report management</title>
+  <link rel="stylesheet" href="../../css/admin/admReport.css">
+  <link rel="stylesheet" href="../../css/admin/admHeader.css">
+  <link rel="stylesheet" href="../../css/main/footer.css">
+  <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+  <script defer src="../../js/admin/admReport.js"></script>
+</head>
+
+<body>
+  <div id="header"></div>
+  <main>
+    <h1>신고 관리</h1>
+    <div class="container" id = "reports">
+      <div class="search">
+        <select id="condition-keyword">
+          <option value="" disabled selected>조건을 선택하세요</option>
+          <option value="writer">글 작성자</option>
+          <option value="reporter">신고자</option>
+          <option value="detail">상세 내용</option>
+        </select>
+        <input type="text" placeholder="검색어를 입력하세요." />
+        <select name="post" id="condition-post-type">
+          <option value="N" disabled selected>글 분류</option>
+          <option value="total">전체</option>
+          <option value="footprint">여행 발자국</option>
+          <option value="template">템플릿</option>
+          <option value="location">장소</option>
+          <option value="reply">댓글</option>
+          <option value="mail">쪽지</option>
+        </select>
+        <!-- <label for="solved">상태:</label> -->
+        <label><input type="radio" name="solved" value="all" checked> 전체</label>
+        <label><input type="radio" name="solved" value="Y" checked> 처리</label>
+        <label><input type="radio" name="solved" value="N"> 미처리</label>
+        <button type="button" class="enter">검색</button>
+      </div>
+
+      <table>
+        <tr class="table-head">
+          <th>신고 사유</th>
+          <th>일시</th>
+          <th>글 작성자</th>
+          <th>신고자</th>
+          <th>상세 내용</th>
+          <th>신고 처리</th>
+          <th>상세보기</th>
+        </tr>
+
+        <tr>
+          <td>pickpickkim@gmail.com</td>
+          <td>김픽미</td>
+          <td>pickme1234</td>
+          <td>3</td>
+          <td>2</td>
+          <td>Y</td>
+          <td class="last-col"><button type="button">상세보기</button></td>
+        </tr>
+        <tr>
+          <td>pickpickkim@gmail.com</td>
+          <td>김픽미</td>
+          <td>pickme1234</td>
+          <td>3</td>
+          <td>2</td>
+          <td>Y</td>
+          <td class="last-col"><button type="button">상세보기</button></td>
+        </tr>
+        <tr>
+          <td>pickpickkim@gmail.com</td>
+          <td>김픽미</td>
+          <td>pickme1234</td>
+          <td>3</td>
+          <td>2</td>
+          <td>Y</td>
+          <td class="last-col"><button type="button">상세보기</button></td>
+        </tr>
+        <tr>
+          <td>pickpickkim@gmail.com</td>
+          <td>김픽미</td>
+          <td>pickme1234</td>
+          <td>3</td>
+          <td>2</td>
+          <td>Y</td>
+          <td class="last-col"><button type="button" class="details">상세보기</button></td>
+        </tr>
+        <tr>
+          <td>pickpickkim@gmail.com</td>
+          <td>김픽미</td>
+          <td>pickme1234</td>
+          <td>3</td>
+          <td>2</td>
+          <td>N</td>
+          <td class="last-col"><button type="button">상세보기</button></td>
+        </tr>
+        <tr>
+          <td>pickpickkim@gmail.com</td>
+          <td>김픽미</td>
+          <td>pickme1234</td>
+          <td>3</td>
+          <td>2</td>
+          <td>N</td>
+          <td class="last-col"><button type="button">상세보기</button></td>
+        </tr>
+        <tr>
+          <td>pickpickkim@gmail.com</td>
+          <td>김픽미</td>
+          <td>pickme1234</td>
+          <td>3</td>
+          <td>2</td>
+          <td>N</td>
+          <td class="last-col"><button type="button">상세보기</button></td>
+        </tr>
+        <tr>
+          <td>pickpickkim@gmail.com</td>
+          <td>김픽미</td>
+          <td>pickme1234</td>
+          <td>3</td>
+          <td>2</td>
+          <td>N</td>
+          <td class="last-col"><button type="button">상세보기</button></td>
+        </tr>
+        <tr>
+          <td>pickpickkim@gmail.com</td>
+          <td>김픽미</td>
+          <td>pickme1234</td>
+          <td>3</td>
+          <td>2</td>
+          <td>N</td>
+          <td class="last-col"><button type="button">상세보기</button></td>
+        </tr>
+        <tr>
+          <td>pickpickkim@gmail.com</td>
+          <td>김픽미</td>
+          <td>pickme1234</td>
+          <td>3</td>
+          <td>2</td>
+          <td>N</td>
+          <td class="last-col"><button type=" button">상세보기</button></td>
+        </tr>
+        <!-- 맨 아래칸, 그냥 회색 섹션으로 만들고 싶음. -->
+        <tr>
+          <td colspan="7" class="last-row"></td>
+        </tr>
+      </table>
+    </div>
+
+    <h1>사용자 제재하기</h1>
+    <div class="container" id = "sanction">
+      <div class="search">
+        <select id="condition">
+          <option value="" disabled selected>조건을 선택하세요</option>
+          <option value="name">아이디(이메일)</option>
+          <option value="nick">닉네임</option>
+        </select>
+        <input type="text" placeholder="정확히 입력해주세요." />
+        <!-- <label for="status">상태:</label> -->
+        <button type="button" class="enter" id = "search-sanction">검색</button>
+        <div id = sanction-count>제재횟수 : <span id="s-count"></span>회</div>
+        <select id="sanction-reason">
+          <option value="" disabled selected>제재 사유를 선택하세요</option>
+          <option value="1">상습적인 욕설 또는 비방</option>
+          <option value="2">괴롭힘, 폭력</option>
+          <option value="3">부적절한 글 작성</option>
+          <option value="N">기타(비고 작성)</option>
+        </select>
+        <input type="text" placeholder="비고 작성">
+        <button type="button" class="enter" id = "update-sanction">적용</button>
+      </div>
+    </div>
+
+  </main>
+  <div id='footer'></div>
+</body>
+<div class = modal-container>
+  <div id="report-detail-modal">
+    <section class="report-modal-top">
+      <div id="modal-exit"><span id="exit-button">&times;</span></div>
+      <div>신고 상세정보</div>
+    </section>
+    <section class="report-modal-mid">
+      <table class="user-info">
+        <tr>
+          <th class="items">항목</th>
+          <th class="info">정보</th>
+        </tr>
+        <tr>
+          <td>신고 글 분류</td>
+          <!-- 따오는거 -->
+          <td class="post-type">쪽지</td>
+        </tr>
+        <tr>
+          <td>글 작성자</td>
+          <!-- 따오는거 -->
+          <td class="post-writer-id">ksd1231@gmail.com</td>
+        </tr>
+        <tr>
+          <td>신고자</td>
+          <td class="report-id">gabin1426@gmail.com</td>
+        </tr>
+        <tr>
+          <td>신고 분류</td>
+          <td class="report-type">욕설 또는 타인 비방</td>
+        </tr>
+        <tr>
+          <td>신고 일자</td>
+          <td class="report-date">2024.10.14 13:25</td>
+      </table>
+      <textarea id="report-detail-text" placeholder="자세한 상황을 설명해주세요." disabled></textarea>
+    </section>
+    <section id="report-modal-tail">
+      <button type="button" id="show-write">작성글 바로가기</button>
+      <button type="button" id="solved">신고 처리하기</button>
+    </section>
+  </div>
+  <div id="report-detail-msg">
+    <section class="report-modal-top">
+      <span>신고 쪽지 내용</span>
+    </section>
+    <section class="report-modal-mid">
+      <textarea id="report-msg-text" placeholder="쪽지 내용 들어갈거임." disabled></textarea>
+    </section>
+  </div>
+</div>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>비밀번호 찾기 이메일 인증 발송</title>
+  <link rel="stylesheet" href="../../css/admin/admEmailCert.css">
+  <link rel="stylesheet" href="../../css/admin/admHeader.css">
+  <link rel="stylesheet" href="../../css/main/footer.css">
+  <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+  <script defer src="../../js/admin/admEmailCert.js"></script>
+</head>
+
+<body>
+  <div id="header">
+  </div>
+  <main>
+    <div class="container">
+      <div>
+        <img class="back" src="../../img/admin/backArrow.png">
+      </div>
+      <img class="pickOD-logo" src="../../img/main/logo.png">
+      <h2>관리자 이메일 인증</h2>
+      <div id="input-container">
+        <div class="input-email">
+          <form action="" method="">
+            <input type="text" class="email" placeholder="이메일을 입력하세요." required>
+            <button type="button" class="send-email">이메일 인증</button>
+          </form>
+        </div>
+        <div class="verify-code">
+          <form action="" method="">
+            <input type="text" class="verification-code" placeholder="인증번호를 입력하세요." required>
+            <span id="left-time"></span>
+            <button type="button" id="verify">인증하기</button>
+          </form>
+        </div>
+        <br>
+        <div id="invalid-code"></div>
+      </div>
+    </div>
+  </main>
+  <div id="footer">
+  </div>
+</body>
+
+</html>

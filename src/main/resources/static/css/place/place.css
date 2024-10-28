@@ -1,0 +1,202 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+main{
+  margin:110px 300px;
+} 
+
+.place{
+  border-bottom: 1px solid #D9D9D9;
+  font-size: 28px;
+}
+
+.search{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.search form{
+  margin: 25px 0px;
+  position: relative;
+  width: 370px;
+  height: 35px;
+}
+
+input{
+  padding-left: 15px;
+  border-radius: 15px;
+  width: 100%;
+  height:100%;
+  border: 1px solid #F68791 ;
+}
+
+.search button{
+  position: absolute;
+  top: 4px;
+  bottom: 5px;
+  right: 5px;
+  width: 26px;
+  height: 26px;
+  border: 0;
+  background:transparent url("../../img/festival/searchIcon.png") center center / 26px scroll no-repeat;
+  cursor: pointer;
+}
+
+.total_area_wrap{
+  display: flex;
+  flex-direction: column;
+  margin: 10px 80px 70px 80px;
+}
+
+.total_area_btn{
+  width: 45px;
+  height: 20px;
+  border:0;
+  cursor: pointer; 
+  background:gainsboro;
+  margin-left: 5px;
+  border-radius:5px 5px 0px 0px;
+
+}
+
+.tag_area{
+  display: flex;
+  background-color: #FEF2F2;
+  padding: 15px 15px 15px 25px;
+  height: 200px;
+  border-radius: 10px;
+  align-items:flex-start;
+  justify-content: space-around;
+}
+
+.tag_area_seoul{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  height: 100%;
+  margin-right: 40px;
+ }
+ 
+.tag_area_geonggi{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  height: 100%;
+}  
+
+.tag_area button{
+  border: 0;
+  cursor: pointer;
+  background: #FEF2F2;
+  margin: 5px 10px;
+}
+
+.tag_area li button{
+  border: 1px  solid #FEF2F2 ;
+  border-radius: 5px;
+  font-size: 12px;
+}
+
+.place-filter{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+  padding: 10px;
+  border-bottom: 1px solid #D9D9D9;
+}
+
+.place-filter button{
+  border: 0 none;
+  background-color: transparent;
+  cursor: pointer;
+  padding:0 5px;
+}
+
+.place-filter div{
+  position: relative;
+}
+
+.place-filter button:after {
+  content:'';
+  display: inline-block;
+  width: 1px;
+  height: 14px;
+  background: #999;
+  position: absolute;
+  top: 5px;
+  left: 45%;
+}
+
+.place-filter button:first-child:before{
+  background: none;
+}
+#itemCount{
+  font-weight:bold ;
+}
+
+.place-img{
+  height:150px;
+}
+
+.place-img a{
+  display: inline-block;
+  width: 220px;
+  height: 150px;
+}
+
+.place-img img{
+  width: 100%;
+  height: 100%;
+}
+
+.place-wrap{
+  display: flex;
+}
+
+.place-list li{
+  display: flex;
+  margin-bottom: 25px;
+  padding-bottom: 25px;
+  border-bottom: 1px solid #D9D9D9;
+  justify-content: space-between;
+}
+
+.place-info{
+  display: flex;
+  flex-direction: column;
+  justify-content:space-around;
+  margin-left: 10px;
+}
+
+.place-info a{
+  color: black;
+}
+.place-info a:hover{
+  text-decoration: underline;
+}
+.place-info a strong{
+  font-size: 20px;
+  margin-top: 10px;
+}
+
+.place-info-place{
+  margin-bottom: 4px;
+  margin-top: 15px;
+}
+
+.place-info-place{
+  font-size: 15px;
+}
+.place-info span{
+  font-size: 13px;
+}
+
+
+.saveimg img{
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}

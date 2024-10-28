@@ -1,0 +1,199 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+main {
+  margin: 110px 300px;
+}
+
+.img-container {
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.main-img {
+  max-width: 870px;
+  height: 450px;
+  width: auto;
+}
+
+.img-container button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+#prev-btn {
+  position: absolute;
+  top: 50%;
+  left: 0;
+}
+
+#next-btn {
+  position: absolute;
+  top: 50%;
+  right: 0;
+}
+
+.img-container button img {
+  width: 20px;
+  height: 30px;
+}
+
+.place-name {
+  margin: 30px 0 15px 0;
+  font-size: 28px;
+}
+
+/* 조회수 신고 */
+.icon-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 40px;
+}
+
+.views-wrap {
+  display: flex;
+}
+
+.views {
+  width: 25px;
+  height: 20px;
+  margin-right: 3px;
+}
+
+#report-icon {
+  width: 30px;
+  height: 30px;
+  margin-bottom: 5px;
+  margin-right: 3px;
+}
+
+.report-icon:hover {
+  cursor: pointer;
+}
+
+/* 네브바 */
+.placeDetail-nav {
+  border-top: 1px solid #D9D9D9;
+  border-bottom: 1px solid #D9D9D9;
+  background: #ffffff;
+  position: sticky;
+  top: 65px;
+  z-index: 1;
+}
+
+.placeDetail-nav ul {
+  display: flex;
+  justify-content: space-around;
+}
+
+.placeDetail-nav>ul>li {
+  font-size: 20px;
+  margin: 8px 20px;
+  font-weight: bold;
+}
+
+.placeDetail-nav>ul>li>a {
+  color: black;
+}
+
+.placeDetail-nav>ul>li>a:hover {
+  color: #8C55E3;
+}
+
+/* 상세정보 */
+.nav-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-top: 40px;
+  padding-top: 20px;
+}
+
+.info-background {
+  /* background-color: #FEF2F2; */
+  padding: 5px 0px;
+  display: flex;
+  justify-content: center;
+  /* margin-top: 2%; */
+}
+
+.info-container {
+  margin: 20px 50px;
+  padding: 5px 10px;
+  /* background-color: white;
+  border: 1px solid #EC0202; */
+  max-width: 90%;
+}
+
+.section1-info {
+  margin-top: 20px;
+  border: 1px solid #D9D9D9;
+  border-radius: 15px;
+  padding: 2%;
+}
+
+.details-spec {
+  margin-top: 1%;
+}
+
+.section1-guide {
+  margin-top: 60px;
+}
+
+.section1-guide-box {
+  border: 1px solid #D9D9D9;
+  border-radius: 15px;
+  margin-top: 20px;
+  padding: 30px 90px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.section1-guide-box span {
+  padding: 8px 0;
+}
+
+.section1-guide-txt {
+  display: flex;
+  flex-direction: column;
+}
+
+.section1-location {
+  margin-top: 60px;
+}
+
+.section1-location-title {
+  display: flex;
+}
+
+.section1-location-title img {
+  width: 30px;
+  height: 30px;
+}
+
+.locationImg {
+  width: 100%;
+  height: 500px;
+  border-radius: 15px;
+  margin-top: 20px;
+  margin-bottom: 40px;
+}
+
+/* 관련정보 */
+.relatedPlace {
+  display: flex;
+  margin-top: 20px;
+  padding-bottom: 40px
+}
+
+
+.relatedPlace li {
+  margin-right: 30px;
+  border: 1px solid #6A6363;
+  padding: 3px;
+  border-radius: 5px;
+}

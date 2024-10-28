@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>관리자 여행 발자국 상세 페이지</title>
+  <link rel="stylesheet" href="../../css/admin/admHeader.css">
+  <link rel="stylesheet" href="../../css/main/footer.css">
+  <link rel="stylesheet" href="../../css/admin/admJournalDetails.css">
+  <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+  <script defer src="../../js/admin/admJournalDetails.js"></script>
+</head>
+
+<body>
+  <div id="header"></div>
+  <main>
+    <div class="title-containerbox">
+      수도권 힐링 여행
+    </div>
+    <div class="report">
+      <!-- 신고 여부 Y면 빨간색 신고 아이콘, N면 검정 신고 아이콘 -->
+      <img id="report-icon" src="" alt="신고아이콘"></a>
+    </div>
+    <div class="container-display">
+      <div class="profile-container">
+        <div class="profile">
+          <div class="photo"></div>
+          <div class="user-name-container">
+            <div class="user-name">
+              신현식
+            </div>
+            <div class="message-button">
+              <img src="../../img/message/쪽지함.png" alt="이미지 버튼" />
+            </div>
+          </div>
+        </div>
+        <div class="explain-container">
+          간략한 설명이 들어가는 곳
+          간략한 설명이 들어가는 곳
+          간략한 설명이 들어가는 곳
+          간략한 설명이 들어가는 곳
+          간략한 설명이 들어가는 곳
+          간략한 설명이 들어가는 곳
+          간략한 설명이 들어가는 곳
+        </div>
+      </div>
+      <div class="tag-container">
+        <div class="tag-container-schedule">
+          <img class="footprint" src="../../img/journal/footprint_pink.png" alt="">
+          <div class="schedule-container">
+            <div class="schedule">
+              일정
+            </div>
+            <div class="schedule-content">
+              당일여행
+            </div>
+          </div>
+        </div>
+        <div class="tag-container-schedule">
+          <img class="footprint" src="../../img/journal/footprint_pink.png" alt="">
+          <div class="tag-select-container">
+            <div class="schedule-tag">
+              태그
+            </div>
+            <div class="schedule-tag-content">
+              #친구와 함께
+            </div>
+          </div>
+        </div>
+        <div class="tag-container-schedule">
+          <img class="footprint" src="../../img/journal/footprint_pink.png" alt="">
+          <div class="thema-container">
+            <div class="schedule-thema">
+              테마
+            </div>
+            <div class="schedule-thema-content">
+              힐링
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="Day-container">
+      <div class="Day">
+        DAY1
+      </div>
+    </div>
+    <div class="detail-container">
+      <div class="detail-box">
+        <div class="maps-API">지도입니당</div>
+        <div class="location">
+          <div class="location-text">경기도미술관</div>
+          <div class="location-text">노적봉공원</div>
+          <div class="location-text">성호공원</div>
+        </div>
+        <div class="detail-content-container">
+          <div class="detail-photo">
+            <img class="arrow left-arrow" src="../../img/journal/왼쪽 화살표.png" alt="">
+            <img class="main-photo" src="../../img/journal/하단 큰 이미지.png" alt="">
+            <img class="arrow right-arrow" src="../../img/journal/오른쪽 화살표.png" alt="">
+          </div>
+          <div class="detail-text">
+            친구랑 같이 당일 수도권 여행 어쩌구 저쩌구 가려다가 미술관 가보기로 했어요.
+            기타 등등 뭐 했는지에 대한 내용들이 주절주절 들어갈거에요. 기타 등등 뭐 했는지에 대한 내용들이 주절주절 들어갈거에요.
+            기타 등등 뭐 했는지에 대한 내용들이 주절주절 들어갈거에요.기타 등등 뭐 했는지에 대한 내용들이 주절주절 들어갈거에요.
+            기타 등등 뭐 했는지에 대한 내용들이 주절주절 들어갈거에요.기타 등등 뭐 했는지에 대한 내용들이 주절주절 들어갈거에요.
+            기타 등등 뭐 했는지에 대한 내용들이 주절주절 들어갈거에요.기타 등등 뭐 했는지에 대한 내용들이 주절주절 들어갈거에요.
+            기타 등등 뭐 했는지에 대한 내용들이 주절주절 들어갈거에요.
+            기타 등등 뭐 했는지에 대한 내용들이 주절주절 들어갈거에요.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 관리자용 버튼만 추가됨 -->
+    <div class="adm-buttons">
+      <button class="to-comment" type="button">댓글 보기</button>
+      <button class="delete" type="button">삭제</button>
+    </div>
+    <!-- <div class="cmt-button">
+      <button class="to-comment" type="button">댓글 보기</button>
+    </div> -->
+
+    <!-- 쪽지 보내기 모달 -->
+    <section>
+      <form action="#" method="">
+        <div class="sendmsg-container">
+          <div class="sendmsg-content">
+            <div class="close">
+              <span class="message-close">&times;</span>
+            </div>
+            <h2 class="modal-title">쪽지 보내기</h2>
+            <div class="nonmodal-top">
+              <div class="detail-to">
+                <span>To.</span>
+                <span class="recipient">받아온 성명</span>
+              </div>
+            </div>
+            <textarea id="textarea" placeholder="쪽지를입력하세요"></textarea>
+            <div class="nonmodal-bottom">
+              <button class="send-msg" type="submit">쪽지 보내기</button>
+            </div>
+          </div>
+        </div>
+        </div>
+      </form>
+    </section>
+  </main>
+  <div id="footer"></div>
+</body>
+
+</html>

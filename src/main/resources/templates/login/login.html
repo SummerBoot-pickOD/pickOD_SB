@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <link rel="stylesheet" href="../../css/login/login.css">
+  <link rel="stylesheet" href="../../css/main/header.css">
+  <link rel="stylesheet" href="../../css/main/footer.css">
+  <script defer src="../../js/login/login.js"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+    crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <div id ="header">
+  </div>
+  <main>
+    <div class="container">
+      <div>
+        <img class="back" src="../../img/admin/backArrow.png">
+      </div>
+      <img class="logo" src="../../img/main/logo.png">
+      <h2>로그인</h2>
+      <form>
+        <input type="text" name = "id" class="id" placeholder="아이디" required>
+        <input type="password" name ="pw" class="pw" placeholder="비밀번호" required>
+        <div id="invalid-login"></div>
+        <button type="button" id="login-button">로그인</button>
+      </form>
+      <div class="login-service-container">
+        <a href="./lostIdSelectCert.html" id="forgot-id" class="login-service">아이디 찾기</a> &nbsp;&nbsp;|&nbsp;&nbsp;
+        <a href="./lostPswdSelectCert.html" id="forgot-password" class="login-service">비밀번호 찾기</a> &nbsp;&nbsp;|&nbsp;&nbsp;
+        <a href="../signup/signupTerms.html" id="sign-up" class="login-service">회원가입</a>
+      </div>
+      <div class="quick-login-container">
+        <div id="kakao" class="quick-login"><a href=><img src="../../img/login/kakaoLogo.svg" alt="">&nbsp;&nbsp;카카오로 로그인하기</a></div>
+        <div id="google" class = "quick-login"><a href=""><img src="../../img/login/googleLogo.svg" alt="">&nbsp;&nbsp;구글로 로그인하기</a></div>
+      </div>
+    </div>
+  </main>
+  <div id = "footer">
+  </div>
+</body>
+</html>

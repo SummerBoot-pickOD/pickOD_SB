@@ -1,0 +1,293 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+main{
+  margin:110px 300px;
+} 
+
+.mainImg{
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.mainImg img{
+  max-width: 870px;
+  height:450px;
+  width: auto;
+}
+
+.mainImg button{
+  background: none;
+  border: 0;
+  cursor: pointer; 
+}
+
+#prevBtn{
+  position: absolute;
+  top: 50%;
+  left: 0;
+}
+
+#nextBtn{
+  position: absolute;
+  top: 50%;
+  right: 0;
+}
+
+.mainImg button img{
+  width: 20px;
+  height: 30px;
+}
+
+.placeDetail{
+  margin: 30px 0 15px 0;
+  font-size: 28px;
+}
+
+/* 조회수 신고 찜 */
+.placeIcon{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 40px;
+}
+
+.count-wrap{
+  display: flex;
+}
+
+.countimg{
+  width: 25px;
+  height: 20px;
+  margin-right: 3px;
+}
+
+.reportimg{
+  width: 20px;
+  height: 23px;
+  margin-bottom: 5px;
+  margin-right: 3px;
+  cursor: pointer;
+}
+.saveimg{
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+
+.modal-container{
+  display: none;
+}
+
+/* 네브바 */
+.placeDetail-nav{
+  border-bottom: 1px solid #D9D9D9;
+  border-top: 1px solid #D9D9D9;
+  background: #ffffff;
+  position: sticky;
+  top: 65px;
+  z-index: 1;
+  
+}
+
+
+
+
+.placeDetail-nav ul{
+  display: flex;
+  justify-content: space-around;
+}
+
+.placeDetail-nav>ul>li{
+  font-size: 20px;
+  margin: 8px 20px;
+  color: #A1A1A1;
+  font-weight: bold;
+}
+
+.placeDetail-nav>ul>li>a{
+  color: #A1A1A1;
+}
+
+.placeDetail-nav>ul>li>a:hover{
+  color: #8C55E3;
+}
+/* 상세정보 */
+.nav-title{
+  font-size: 24px;
+  font-weight: bold;
+  margin-top: 40px;
+  padding-top: 20px;
+}
+
+article{
+  margin:0px 50px ;
+}
+
+.section1-info{
+  margin-top: 20px;
+}
+
+.section1-guide{
+  margin-top: 60px;
+}
+
+.section1-guide-box{
+  border: 1px solid #D9D9D9;
+  border-radius: 15px;
+  margin-top: 20px;
+  padding: 30px 90px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.section1-guide-box span{
+  padding: 8px 0;
+}
+.section1-guide-txt{
+  display: flex;
+  flex-direction: column;
+}
+
+.section1-location{
+  margin-top: 60px;
+}
+
+.section1-location-title{
+  display: flex;
+}
+
+.section1-location-title img{
+  width: 30px;
+  height: 30px;
+}
+
+.locationImg{
+  width: 100%;
+  height: 500px;
+  border-radius: 15px;
+  margin-top: 20px;
+  margin-bottom: 40px;
+}
+
+/* 관련정보 */
+.relatedPlace{
+  display: flex;
+  margin-top: 20px;
+  padding-bottom: 40px
+}
+
+
+.relatedPlace li{
+  margin-right: 30px;
+  border: 1px solid #6A6363;
+  padding: 3px;
+  border-radius: 5px;
+}
+
+
+
+
+
+/* 발자국톡 리뷰 */
+
+#reply-container{
+  /* width:60%; */
+  min-width: 550px;
+  margin: 0 auto;
+}
+.name-box{
+  font-size: 24px;
+  font-weight:bold;
+  border-bottom: 1px solid #d9d9d9;
+  margin: 40px 0 40px 0;
+  padding: 20px 0;
+}
+#reply-write{
+  background-color: #d9d9d9;
+  padding: 10px 20px;
+  height : 100px;
+}
+#reply-write input{
+  width:100%;
+  height:60%;
+  margin-bottom: 5px;
+}
+#submit-reply{
+  display: flex;
+  justify-content: right;
+}
+#submit-reply button{
+  height:30px;
+  width:60px;
+  color: white;
+  background-color: #845AC6;
+  font-weight: bold;
+  border: 0;
+}
+#reply{
+  padding: 10px 20px;
+  list-style:none;
+}
+
+.written{
+  margin-top:10px;
+  display: flex;
+  border-bottom: 1px solid #d9d9d9;
+}
+
+.written .reply-image{
+  display: flex;
+  justify-content: center;
+  width: 10%;
+}
+.reply-image img{
+  margin-top: 5px;
+  width:50px;
+  height:50px;
+  border-radius: 25px;
+}
+
+.written .reply-content{
+  padding : 0 20px;
+  width: 80%;
+}
+.reply-content .user{
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+.reply-content .likes{
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.reply-content .likes>img{
+  width: 24px;
+  height: 24px;
+}
+
+.written .reply-buttons{
+  display: flex;
+  justify-content: right;
+  align-items: flex-start;
+  width: 10%;
+}
+.reply-buttons img{
+  margin-left: 10px;
+  width: 24px;
+  height: 24px;
+}
+
+#reply-more{
+  display: block;
+  margin : 10px auto;
+  width:80px;
+  height:30px;
+  border-radius: 15px;
+  border:1px solid black;
+}
