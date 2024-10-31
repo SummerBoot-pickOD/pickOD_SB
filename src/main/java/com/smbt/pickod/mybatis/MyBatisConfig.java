@@ -37,7 +37,7 @@ public class MyBatisConfig {
 
         sqlSessionFactoryBean.setMapperLocations(applicationContext.getResources("classpath*:/mapper/**/*.xml")); // config.xml에 쓰지 않고도 dto랑 바로 연결하게
         sqlSessionFactoryBean.setConfigLocation(applicationContext.getResource("classpath:config/mybatisConfig.xml"));
-        sqlSessionFactoryBean.setTypeAliasesPackage("com.example.finalApp.dto");
+        sqlSessionFactoryBean.setTypeAliasesPackage("com.smbt.pickod.dto");
 
         SqlSessionFactory sqlSessionFactory = sqlSessionFactoryBean.getObject();
         sqlSessionFactory.getConfiguration().setMapUnderscoreToCamelCase(true);

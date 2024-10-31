@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smbt.pickod.mapper.login.LoginMapper">
+    <select id="isMemberExist" parameterType="LoginInputDTO" resultType="Long">
+        SELECT MEMBER_NUM FROM MEMBER
+        WHERE MEMBER_ID = #{memberId}
+          AND MEMBER_PASSWORD = #{memberPassword}
+    </select>
+    <select id="findEmail" parameterType="String" resultType="String">
+        SELECT MEMBER_ID FROM MEMBER
+        WHERE MEMBER_ID = #{memberId}
+    </select>
+    <update id="resetPassword" parameterType="LoginInputDTO">
+        UPDATE MEMBER
+        SET MEMBER_PASSWORD = #{memberPassword}
+        WHERE MEMBER_ID = #{memberId}
+    </update>
+</mapper>
