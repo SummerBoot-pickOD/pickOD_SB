@@ -1,6 +1,7 @@
 package com.smbt.pickod.mapper.login;
 
-import com.smbt.pickod.dto.login.LoginInputDTO;
+import com.smbt.pickod.dto.login.LoginDTO;
+import com.smbt.pickod.dto.login.LoginSessionDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,31 +17,32 @@ class LoginMapperTest {
     @Autowired
     private LoginMapper loginMapper;
 
-    public LoginInputDTO logputDTO;
+    public LoginDTO logputDTO;
+    public LoginSessionDTO loginSessionDTO;
 
     //제대로 된 로그인 시도 - memberNum을 제대로 가져옴
     @Test
     public void getMmbrIdTest(){
-        logputDTO = new LoginInputDTO();
+        logputDTO = new LoginDTO();
         logputDTO.setMemberId("kardiem@naver.com");
         logputDTO.setMemberPassword("ASDF1234");
 
-        Long memberNum = loginMapper.isMemberExist(logputDTO).
+        loginSessionDTO = loginMapper.isMemberExist(logputDTO).
                 orElseThrow(()->new AssertionError("아이디 비밀번호 조합이 맞지 않습니다"));
 
-        assertThat(memberNum).isEqualTo(6L);
+        assertThat(loginSessionDTO.getMemberNum()).isEqualTo(6L);
     }
 
     //이메일 혹은 비밀번호가 안맞아서 memberNum을 못가지고 올 경우
     @Test
     public void getMmbrIdTestMiss(){
-        logputDTO = new LoginInputDTO();
+        logputDTO = new LoginDTO();
         logputDTO.setMemberId("kardiem@naver.com");
         logputDTO.setMemberPassword("ASDF1235");
 
-        Long memberNum = loginMapper.isMemberExist(logputDTO).
-                orElse(-1L);
+        loginSessionDTO = loginMapper.isMemberExist(logputDTO).
+                orElse(null);
 
-        assertThat(memberNum).isEqualTo(-1L);
+        assertThat(loginSessionDTO).isEqualTo(null);
     }
 }

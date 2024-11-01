@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smbt.pickod.mapper.report.ReportMapper">
+    <insert id="insertReport" parameterType="InsertReportDTO">
+        <selectKey keyProperty="reportId" resultType="Long" order="BEFORE">
+            select SEQ_REPORT.NEXTVAL FROM DUAL
+        </selectKey>
+        INSERT INTO REPORT(REPORT_ID, REPORT_POST_TYPE, REPORT_POST_ID,
+                           REPORT_TYPE, REPORT_DETAIL, REPORT_SOLVED,
+                           REPORT_DATE, REPORTER_ID, WRITER_ID)
+        VALUES(
+                  #{reportId},
+                  #{reportPostType},
+                  #{reportPostId},
+                  #{reportType},
+                  NVL(#{reportDetail},''),
+                  0, --해결 안됐다는 뜻
+                  SYSDATE,
+                  #{reporterId},
+                  #{writerId}
+              )
+    </insert>
+</mapper>
