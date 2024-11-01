@@ -8,7 +8,7 @@ import lombok.ToString;
 @Getter @Setter
 @ToString @NoArgsConstructor
 // 아직 수정 필요
-public class admHeaderDTO {
+public class AdmHeaderDTO {
     private String memberId;
     private boolean isLoggedIn;
 

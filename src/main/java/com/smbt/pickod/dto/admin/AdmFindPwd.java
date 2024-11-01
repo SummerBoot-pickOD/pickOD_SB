@@ -7,9 +7,9 @@ import lombok.ToString;
 
 @Getter @Setter
 @ToString @NoArgsConstructor
-public class admEmailVerificationDTO {
-    // 관리자 이메일과 받은 인증 코드
+public class AdmFindPwd {
+    // 비밀번호 찾을 이메일주소, db에 저장되어 있는 비밀번호
     private String memberId;
-    private String vCode;
+    private String memberPassword;
 
 }
