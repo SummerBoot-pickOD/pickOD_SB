@@ -7,7 +7,7 @@ import lombok.ToString;
 
 @Getter @Setter @ToString
 @NoArgsConstructor
-public class AdminReportSearchSanctionDTO {
-    private String inqCondition;
-    private String inqKeyword;
+public class AdmReportGoPostDTO {
+    private String postType;
+    private Long postId;
 }

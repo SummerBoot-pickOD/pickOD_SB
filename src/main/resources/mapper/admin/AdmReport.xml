@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.smbt.pickod.mapper.admin.AdminReportMapper">
-    <select id="inqReportTable" parameterType="AdminReportSearchDTO" resultType="AdminReportListDTO">
+<mapper namespace="com.smbt.pickod.mapper.admin.AdmReportMapper">
+    <select id="inqReportTable" parameterType="AdmReportSearchDTO" resultType="AdmReportListDTO">
         SELECT
             REPORT_ID, -- 숨김
             REPORT_POST_TYPE, -- 숨김
@@ -39,7 +39,7 @@
         WHERE MSG_ID = #{postId}
     </select>
 
-    <select id="getSanctionCount" parameterType="AdminReportSearchSanctionDTO" resultType="int">
+    <select id="getSanctionCount" parameterType="AdmReportSearchSanctionDTO" resultType="int">
         SELECT COUNT(*)
         FROM SANCTION JOIN MEMBER USING(MEMBER_NUM)
         WHERE 1=1
@@ -51,7 +51,7 @@
         </if>
     </select>
 
-    <select id="getSanctionMemberNum" parameterType="AdminReportSearchSanctionDTO" resultType="Long">
+    <select id="getSanctionMemberNum" parameterType="AdmReportSearchSanctionDTO" resultType="Long">
         SELECT MEMBER_NUM FROM MEMBER
         WHERE 1=1
         <if test="inqCondition == 'id'">
@@ -67,7 +67,7 @@
         WHERE WRITER_ID = #{memberNum}
     </select>
 
-    <insert id="imposeSanction" parameterType="AdminReportInsertSanctionDTO">
+    <insert id="imposeSanction" parameterType="AdmReportInsertSanctionDTO">
         <selectKey keyProperty="sanctionNum" resultType="Long" order="BEFORE">
             SELECT SEQ_SANCTION.NEXTVAL FROM DUAL
         </selectKey>
