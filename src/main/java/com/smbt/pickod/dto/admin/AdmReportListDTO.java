@@ -7,7 +7,7 @@ import lombok.ToString;
 
 @Getter @Setter @ToString
 @NoArgsConstructor
-public class AdminReportListDTO {
+public class AdmReportListDTO {
     private Long reportId;
     private String reportPostType;
     private Long reportPostId;

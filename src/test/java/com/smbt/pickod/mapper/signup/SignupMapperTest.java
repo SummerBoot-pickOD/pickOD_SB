@@ -1,6 +1,7 @@
 package com.smbt.pickod.mapper.signup;
 
 import com.smbt.pickod.dto.signup.MemberDTO;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,6 +15,7 @@ class SignupMapperTest {
     @Autowired
     SignupMapper signupMapper;
 
+    @DisplayName("회원가입")
     @Test
     public void register() {
         MemberDTO dto = new MemberDTO();

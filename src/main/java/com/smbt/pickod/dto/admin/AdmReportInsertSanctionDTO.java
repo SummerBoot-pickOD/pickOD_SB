@@ -7,7 +7,7 @@ import lombok.ToString;
 
 @Getter @Setter @ToString
 @NoArgsConstructor
-public class AdminReportInsertSanctionDTO {
+public class AdmReportInsertSanctionDTO {
     private Long sanctionNum;
     private Long memberNum;
     private int sanctionCnt;

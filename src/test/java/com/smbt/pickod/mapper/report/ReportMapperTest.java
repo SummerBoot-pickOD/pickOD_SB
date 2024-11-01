@@ -1,6 +1,7 @@
 package com.smbt.pickod.mapper.report;
 
 import com.smbt.pickod.dto.report.InsertReportDTO;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,6 +15,7 @@ class ReportMapperTest {
     @Autowired
     ReportMapper reportMapper;
 
+    @DisplayName("신고하기 : 신고 테이블 insert")
     @Test
     public void putReport() {
         InsertReportDTO dto = new InsertReportDTO();
