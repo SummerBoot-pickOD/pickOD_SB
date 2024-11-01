@@ -1,10 +1,9 @@
 package com.smbt.pickod.mapper.admin;
 
-import com.smbt.pickod.dto.admin.AdminReportGoPostDTO;
-import com.smbt.pickod.dto.admin.AdminReportInsertSanctionDTO;
-import com.smbt.pickod.dto.admin.AdminReportSearchSanctionDTO;
+import com.smbt.pickod.dto.admin.AdmReportGoPostDTO;
+import com.smbt.pickod.dto.admin.AdmReportInsertSanctionDTO;
+import com.smbt.pickod.dto.admin.AdmReportSearchSanctionDTO;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.ibatis.annotations.Param;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,19 +11,18 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @Transactional
 @Slf4j
-class AdminReportMapperTest {
+class AdmReportMapperTest {
     @Autowired
-    AdminReportMapper adminReportMapper;
+    AdmReportMapper adminReportMapper;
 
     @DisplayName("상세 모달 작성글 바로가기 -> 쪽지면 모달로 띄워줌")
     @Test
     public void showReportedMessageContent(){
-        AdminReportGoPostDTO dto = new AdminReportGoPostDTO();
+        AdmReportGoPostDTO dto = new AdmReportGoPostDTO();
         dto.setPostType("M");
         dto.setPostId(1L);
 
@@ -36,7 +34,7 @@ class AdminReportMapperTest {
     @DisplayName("제재 횟수 검색하기")
     @Test
     public void findSanctionCount(){
-        AdminReportSearchSanctionDTO dto = new AdminReportSearchSanctionDTO();
+        AdmReportSearchSanctionDTO dto = new AdmReportSearchSanctionDTO();
         dto.setInqCondition("nick");
         dto.setInqKeyword("카디");
 
@@ -48,8 +46,8 @@ class AdminReportMapperTest {
     @DisplayName("제재 부과하기")
     @Test
     public void putSanction(){
-        AdminReportInsertSanctionDTO dto = new AdminReportInsertSanctionDTO();
-        AdminReportSearchSanctionDTO dto2 = new AdminReportSearchSanctionDTO();
+        AdmReportInsertSanctionDTO dto = new AdmReportInsertSanctionDTO();
+        AdmReportSearchSanctionDTO dto2 = new AdmReportSearchSanctionDTO();
         dto2.setInqCondition("nick");
         dto2.setInqKeyword("유진초이");
 
