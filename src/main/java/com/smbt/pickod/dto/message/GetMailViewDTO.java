@@ -5,18 +5,14 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.time.LocalDateTime;
-
-@Getter @Setter @ToString
+@Setter @Getter @ToString
 @NoArgsConstructor
-public class TrashedMailList {
-    private Long memberNum;
-    private Long msgSender;
-    private Long msgRecipient;
+public class GetMailViewDTO {
     private Long msgId;
-    private Long msgRead;
+    private Long memberNum;
     private String memberNickname;
-    private LocalDateTime msgSentTime;
     private String msgContent;
     private String msgBox;
+    private Long msgRecipient;
+    private Long msgSender;
 }

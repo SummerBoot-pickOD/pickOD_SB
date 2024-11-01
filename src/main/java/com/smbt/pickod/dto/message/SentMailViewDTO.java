@@ -7,11 +7,12 @@ import lombok.ToString;
 
 @Getter @Setter @ToString
 @NoArgsConstructor
-public class TrashedMailView {
+public class SentMailViewDTO {
     private Long memberNum;
-    private String memberNickName;
-    private String msgContent;
-    private Long msgId;
     private Long msgRecipient;
+    private Long msgId;
+    private Long msgSender;
+    private String memberNickname;
+    private String msgContent;
     private String msgBox;
 }
