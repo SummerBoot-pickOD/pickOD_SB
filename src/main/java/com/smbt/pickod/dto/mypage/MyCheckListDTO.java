@@ -13,10 +13,10 @@ public class MyCheckListDTO {
     private Long tempId;
     private Long memberNum;
     private String jnlTitle;
-    private String jnlImage;
+    private String jnlImage;//수정예정
     private Long jnlNum;
     private String placeTitle;
-    private String placeImage;
+    private String placeImage;//수정예정
     private Long placeId;
 }
 
