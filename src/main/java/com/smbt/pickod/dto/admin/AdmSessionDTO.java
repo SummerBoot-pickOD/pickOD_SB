@@ -7,7 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Getter @Setter
 @ToString @Slf4j
-public class admSessionDTO {
+public class AdmSessionDTO {
     private Long memberNum;
     private String memberId;
 }

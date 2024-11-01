@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smbt.pickod.mapper.admin.AdmReportMapper">
+    <select id="inqReportTable" parameterType="AdmReportSearchDTO" resultType="AdmReportListDTO">
+        SELECT
+            REPORT_ID, -- 숨김
+            REPORT_POST_TYPE, -- 숨김
+            REPORT_POST_ID, -- 숨김
+            REPORT_TYPE,
+            REPORT_DETAIL,
+            REPORT_SOLVED,
+            WM.MEMBER_ID AS WRITER_ID,
+            RM.MEMBER_ID AS REPORTER_ID,
+            REPORT_DATE
+        FROM REPORT T
+        LEFT JOIN (SELECT MEMBER_NUM, MEMBER_ID FROM MEMBER) WM ON (WM.MEMBER_NUM = T.WRITER_ID)
+        LEFT JOIN (SELECT MEMBER_NUM, MEMBER_ID FROM MEMBER) RM ON (RM.MEMBER_NUM = T.REPORTER_ID)
+        WHERE 1=1
+        <if test="inqCondition == 'w'">
+            AND WRITER_ID LIKE CONCAT('%', #{inqKeyword}, '%')
+        </if>
+        <if test="inqCondition == 'r'">
+            AND REPORTER_ID LIKE CONCAT('%', #{inqKeyword}, '%')
+        </if>
+        <if test="inqCondition == 'd'">
+            AND REPORT_DETAIL LIKE CONCAT('%', #{inqKeyword}, '%')
+        </if>
+        <if test="reportPostType != null">
+            AND REPORT_POST_TYPE = #{reportPostType}
+        </if>
+        <if test="reportSolved != 2">
+            AND REPORT_SOLVED = #{reportSolved}
+        </if>
+        ORDER BY REPORT_DATE
+    </select>
+
+    <select id="readReportedMessage" parameterType="Long" resultType="String">
+        SELECT MSG_CONTENT FROM MESSAGE
+        WHERE MSG_ID = #{postId}
+    </select>
+
+    <select id="getSanctionCount" parameterType="AdmReportSearchSanctionDTO" resultType="int">
+        SELECT COUNT(*)
+        FROM SANCTION JOIN MEMBER USING(MEMBER_NUM)
+        WHERE 1=1
+        <if test="inqCondition == 'id'">
+            AND MEMBER_ID = #{inqKeyword}
+        </if>
+        <if test="inqCondition == 'nick'">
+            AND MEMBER_NICKNAME = #{inqKeyword}
+        </if>
+    </select>
+
+    <select id="getSanctionMemberNum" parameterType="AdmReportSearchSanctionDTO" resultType="Long">
+        SELECT MEMBER_NUM FROM MEMBER
+        WHERE 1=1
+        <if test="inqCondition == 'id'">
+            AND MEMBER_ID = #{inqKeyword}
+        </if>
+        <if test="inqCondition == 'nick'">
+            AND MEMBER_NICKNAME = #{inqKeyword}
+        </if>
+    </select>
+
+    <select id="getLatestReportOfMember" parameterType="Long" resultType="Long">
+        SELECT MAX(REPORT_ID) FROM REPORT
+        WHERE WRITER_ID = #{memberNum}
+    </select>
+
+    <insert id="imposeSanction" parameterType="AdmReportInsertSanctionDTO">
+        <selectKey keyProperty="sanctionNum" resultType="Long" order="BEFORE">
+            SELECT SEQ_SANCTION.NEXTVAL FROM DUAL
+        </selectKey>
+        INSERT INTO SANCTION(SANCTION_NUM, MEMBER_NUM, SANCTION_CNT, SANCTION_REASON,
+                SANCTION_NOTE, SANCTION_START_DATE, SANCTION_END_DATE, REPORT_ID)
+        VALUES(
+            #{sanctionNum},
+            #{memberNum},
+            #{sanctionCnt},
+            #{sanctionReason},
+            #{sanctionNote},
+            SYSDATE,
+            CASE #{sanctionCnt}
+                WHEN 1 THEN SYSDATE + 15
+                WHEN 2 THEN SYSDATE + 30
+                WHEN 3 THEN SYSDATE + 60
+            END,
+            #{reportId}
+        )
+    </insert>
+</mapper>
