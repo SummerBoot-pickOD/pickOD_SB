@@ -7,7 +7,7 @@ import lombok.ToString;
 
 @Getter @Setter
 @ToString @NoArgsConstructor
-public class AdmJournalMgmtDTO {
+public class AdmJnlMgmtDTO {
     private Long memberNum;
     private String memberId;
     private String memberNickName;

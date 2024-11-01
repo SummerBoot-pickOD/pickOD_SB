@@ -7,6 +7,6 @@ import lombok.ToString;
 
 @Getter @Setter
 @ToString @NoArgsConstructor
-public class AdmDeleteMsgDTO {
+public class AdmMsgDeleteDTO {
     private Long msgId;
 }

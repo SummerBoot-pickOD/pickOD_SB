@@ -7,7 +7,7 @@ import lombok.ToString;
 
 @Getter @Setter
 @ToString @NoArgsConstructor
-public class AdmOpenMessageDTO {
+public class AdmMsgOpenDTO {
     private Long msgId;
     private Long memberNum;
     private String memberNickname;

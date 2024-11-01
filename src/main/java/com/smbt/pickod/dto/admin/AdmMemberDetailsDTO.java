@@ -10,7 +10,7 @@ import java.time.LocalDate;
 
 @Getter @Setter
 @ToString @NoArgsConstructor
-public class AdmUserDetails {
+public class AdmMemberDetailsDTO {
     private String memberId;
     private String memberNickName;
     private String memberAddress;
