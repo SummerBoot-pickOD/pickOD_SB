@@ -1,6 +1,7 @@
 package com.smbt.pickod.service.login;
 
 import com.smbt.pickod.dto.login.LoginDTO;
+import com.smbt.pickod.dto.login.LoginSessionDTO;
 import com.smbt.pickod.mapper.login.LoginMapper;
 import jakarta.servlet.http.HttpSession;
 import org.junit.jupiter.api.DisplayName;
@@ -31,8 +32,12 @@ class LoginServiceTest {
     @DisplayName("로그인")
     @Test
     void LoginSuccess(){
-        when(loginMapper.isMemberExist(any(LoginDTO.class))).thenReturn(Optional.of(2L));
-        when(loginMapper.checkSanction(any(LoginDTO.class))).thenReturn(Optional.of("sanctioned"));
+        LoginSessionDTO loginSessionDTO = new LoginSessionDTO();
+        loginSessionDTO.setMemberNum(2L);
+        loginSessionDTO.setMemberId("baram1@naver.com");
+        loginSessionDTO.setMemberPassword("ASDF1234");
+        when(loginMapper.isMemberExist(any(LoginDTO.class))).thenReturn(Optional.of(loginSessionDTO));
+        when(loginMapper.checkSanction(any(LoginSessionDTO.class))).thenReturn(Optional.of("sanctioned"));
 
         LoginDTO loginDTO = new LoginDTO();
         loginDTO.setMemberId("baram1@naver.com");

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smbt.pickod.mapper.signup.SignupMapper">
+    <insert id="signupMember" parameterType="MemberDTO">
+        <selectKey keyProperty="memberNum" resultType="Long" order="BEFORE">
+            select SEQ_MEMBER.NEXTVAL FROM DUAL
+        </selectKey>
+        INSERT INTO MEMBER(MEMBER_NUM, MEMBER_ID, MEMBER_PASSWORD, MEMBER_NICKNAME, MEMBER_IMG_YN)
+        VALUES(#{memberNum}, #{memberId}, #{memberPassword}, #{memberNickname},#{memberImgYN})
+    </insert>
+    <update id="updateOptionalMemberInfo" parameterType="MemberDTO">
+        <selectKey keyProperty="memberNum" resultType="Long" order="BEFORE">
+            select MEMBER_NUM FROM MEMBER WHERE MEMBER_ID = #{memberId}
+        </selectKey>
+        UPDATE MEMBER SET
+        MEMBER_ADDRESS = #{memberAddress},
+        MEMBER_BDATE = #{memberBdate},
+        MEMBER_GENDER = #{memberGender}
+        WHERE MEMBER_NUM = #{memberNum}
+    </update>
+
+
+</mapper>
