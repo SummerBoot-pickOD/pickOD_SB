@@ -1,6 +1,6 @@
 package com.smbt.pickod.mapper.journal;
 
-import com.smbt.pickod.dto.journal.JournalSearchDTO;
+import com.smbt.pickod.dto.journal.JournalDTO;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,17 +13,17 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @ExtendWith({SpringExtension.class})
-class JournalSearchMapperTest {
+class JournalFilterMapperTest {
 
     @Autowired
-    private JournalSearchMapper searchMapper;
+    private JournalFilterMapper searchMapper;
 
     @Test
     public void testSearchTag() {
-        JournalSearchDTO searchDTO = new JournalSearchDTO();
+        JournalDTO searchDTO = new JournalDTO();
         searchDTO.setTag("#가족");
 
-        List<JournalSearchDTO> results = searchMapper.searchJournals(searchDTO);
+        List<JournalDTO> results = searchMapper.searchJournals(searchDTO);
         assertNotNull(results);
         assertFalse(results.isEmpty());
         results.forEach(result -> assertTrue(result.getTag().contains("#가족")));
@@ -32,10 +32,10 @@ class JournalSearchMapperTest {
 
     @Test
     public void testSearchByTitle() {
-        JournalSearchDTO searchDTO = new JournalSearchDTO();
+        JournalDTO searchDTO = new JournalDTO();
         searchDTO.setTitle("대부도");
 
-        List<JournalSearchDTO> results = searchMapper.searchJournals(searchDTO);
+        List<JournalDTO> results = searchMapper.searchJournals(searchDTO);
         assertNotNull(results);
         assertFalse(results.isEmpty());
         results.forEach(result -> assertTrue(result.getTitle().contains("대부도")));
