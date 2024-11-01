@@ -16,10 +16,9 @@ public class AdmUserDetails {
     private String memberAddress;
     private LocalDate memberBDate;
     private String memberGender;
-    //cnt 는 mapper 에서 할 수 있음 테이블에서 불러오는 것들만 여기 작성
-    private Long jnlTotalCnt;
-    private Long planTotalCnt;
-    private Long banCnt;
+    private Long sanctionCnt;
+//    제재 여부의 경우, mapper 에서 CASE 문으로 'Y' / 'N' 로 해서 field 에 저장
     private String isBanned;
-    private Long banPeriod;
+//    HTML 에 제재 기간이 아니라 제재 종료일로 변경
+    private Long sanctionEndDate;
 }
