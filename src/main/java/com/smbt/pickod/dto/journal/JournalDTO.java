@@ -1,6 +1,5 @@
 package com.smbt.pickod.dto.journal;
 
-import com.smbt.pickod.dto.admin.AdmUserDetails;
 import lombok.*;
 
 import java.sql.Date;
@@ -20,7 +19,7 @@ public class JournalDTO {
     private String jnlTag;
     private String jnlTheme;
     private String jnlArea;
-    private List<AdmUserDetails> mumbers; //mumber 정보
+    private List<MemberDTO> mumbers; //mumber 정보
 
 }
 

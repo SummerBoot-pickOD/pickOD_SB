@@ -1,8 +1,9 @@
 package com.smbt.pickod.dto.template;
 
 
-import com.smbt.pickod.dto.admin.AdmUserDetails;
+
 import com.smbt.pickod.dto.journal.JournalDTO;
+import com.smbt.pickod.dto.journal.MemberDTO;
 import lombok.*;
 
 import java.util.List;
@@ -19,7 +20,7 @@ public class TemplateDTO {
     private Long jnlNum;
     private Long memberNum;
     private List<TempDayDTO> tempDayList; //TEMP_DAY 정보
-    private List<AdmUserDetails> MemberList; //mumber 정보
+    private List<MemberDTO> mumbers; //mumber 정보
     private List<JournalDTO> JournalList; //Journal 정보
 }
 
