@@ -5,14 +5,15 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 @Mapper
 public interface JnlDayMapper {
+    Optional<JnlDayDTO> getJnlDayById(@Param("jnlDayId") Long jnlDayId);
+
     List<JnlDayDTO> getDaysByJournalId(@Param("jnlNum") Long jnlNum);
 
-    void insertDay(JnlDayDTO jnlDay);
+    void insertJnlDay(JnlDayDTO jnlDay);
 
-    void updateDay(JnlDayDTO jnlDay);
-
-    void deleteDay(@Param("jnlDayId") Long jnlDayId);
+    void deleteJnlDay(@Param("jnlDayId") Long jnlDayId);
 }

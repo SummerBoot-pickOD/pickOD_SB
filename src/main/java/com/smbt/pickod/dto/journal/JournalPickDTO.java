@@ -15,6 +15,6 @@ public class JournalPickDTO {
     private Long memberNum;
     private Long jnlNum;
     private Date pickDate;
-    private List<MemberDTO> mumbers; //mumber 정보
+    private List<JnlMemberDTO> mumbers; //mumber 정보
     private List<JournalDTO> journalList;
 }

@@ -7,7 +7,7 @@ import lombok.ToString;
 
 @Getter @Setter @ToString
 @NoArgsConstructor
-public class MemberImgsDTO {
+public class JnlMemberImgsDTO {
     private Long memberImgsId;
     private String memberImgsGuid;
     private String fileName;

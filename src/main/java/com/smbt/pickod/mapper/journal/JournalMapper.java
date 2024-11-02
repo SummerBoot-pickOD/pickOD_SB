@@ -3,19 +3,19 @@ package com.smbt.pickod.mapper.journal;
 import com.smbt.pickod.dto.journal.JournalDTO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+
 import java.util.List;
+import java.util.Optional;
 
 @Mapper
 public interface JournalMapper {
-    List<JournalDTO> getAllJournals();  // 모든 Journal 조회
+    Optional<JournalDTO> getJournalById(@Param("jnlNum") Long jnlNum);
 
-    JournalDTO getJournalById(@Param("jnlNum") Long jnlNum);  // 특정 Journal 조회
+    List<JournalDTO> getJournalsByArea(@Param("jnlArea") String jnlArea);
 
-    void insertJournal(JournalDTO journal);  // Journal 삽입
+    void insertJournal(JournalDTO journal);
 
-    void updateJournal(JournalDTO journal);  // Journal 업데이트
-
-    void deleteJournal(@Param("jnlNum") Long jnlNum);  // Journal 삭제
+    void deleteJournal(@Param("jnlNum") Long jnlNum);
 }
 
 

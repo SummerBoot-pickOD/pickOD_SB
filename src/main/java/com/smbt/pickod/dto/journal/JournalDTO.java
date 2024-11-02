@@ -19,7 +19,7 @@ public class JournalDTO {
     private String jnlTag;
     private String jnlTheme;
     private String jnlArea;
-    private List<MemberDTO> mumbers; //mumber 정보
+    private List<JnlMemberDTO> mumbers; //mumber 정보
 
 }
 

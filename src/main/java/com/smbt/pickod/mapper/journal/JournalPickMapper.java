@@ -5,14 +5,15 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 @Mapper
 public interface JournalPickMapper {
-    List<JournalPickDTO> getPicksByMemberId(@Param("memberNum") Long memberNum); // 멤버의 모든 Picks 조회
+    Optional<JournalPickDTO> getJournalPickById(@Param("pickId") Long pickId);
 
-    JournalPickDTO getPickById(@Param("pickId") Long pickId); // 특정 Pick 조회
+    List<JournalPickDTO> getJournalPicksByMemberId(@Param("memberNum") Long memberNum);
 
-    void insertPick(JournalPickDTO journalPick); // Pick 삽입
+    void insertJournalPick(JournalPickDTO journalPick);
 
-    void deletePick(@Param("pickId") Long pickId); // Pick 삭제
+    void deleteJournalPick(@Param("pickId") Long pickId);
 }
