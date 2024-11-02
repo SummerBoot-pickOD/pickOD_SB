@@ -10,7 +10,7 @@ import java.time.LocalDate;
 
 @Setter @Getter @NoArgsConstructor
 @ToString
-public class MyPlanListDTO {
+public class MpgMyPlanListDTO {
     private String planTitle;
     private LocalDate planStartDate;
     private LocalDate planEndDate;

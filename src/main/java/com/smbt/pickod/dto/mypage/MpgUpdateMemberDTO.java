@@ -9,7 +9,7 @@ import java.time.LocalDate;
 
 @Getter @Setter @ToString
 @NoArgsConstructor
-public class UpdateMemberDTO {
+public class MpgUpdateMemberDTO {
     private String memberPassword;
     private String memberNickname;
     private String memberAddress;

@@ -7,7 +7,7 @@ import lombok.ToString;
 
 @Getter@Setter@NoArgsConstructor
 @ToString
-public class LoadCheckedPlaceDTO {
+public class PlanLoadCheckedPlaceDTO {
     private String placeName;
     private Long placeId;
     private Long memberNum;

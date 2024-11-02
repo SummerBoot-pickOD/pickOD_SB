@@ -5,14 +5,14 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-@Getter @Setter @ToString
+@Setter @Getter @ToString
 @NoArgsConstructor
-public class SentMailViewDTO {
-    private Long memberNum;
-    private Long msgRecipient;
+public class MsgGetMailViewDTO {
     private Long msgId;
-    private Long msgSender;
+    private Long memberNum;
     private String memberNickname;
     private String msgContent;
     private String msgBox;
+    private Long msgRecipient;
+    private Long msgSender;
 }

@@ -7,15 +7,16 @@ import lombok.ToString;
 
 import java.time.LocalDateTime;
 
-@Setter @Getter @ToString
+@Getter @Setter @ToString
 @NoArgsConstructor
-public class GetMailListDTO {
-    private Long msgId;
+public class MsgTrashedMailListDTO {
     private Long memberNum;
     private Long msgSender;
-    private String memberNickName;
-    private String msgContent;
-    private LocalDateTime msgSentTime;
-    private String msgBox;
+    private Long msgRecipient;
+    private Long msgId;
     private Long msgRead;
+    private String memberNickname;
+    private LocalDateTime msgSentTime;
+    private String msgContent;
+    private String msgBox;
 }

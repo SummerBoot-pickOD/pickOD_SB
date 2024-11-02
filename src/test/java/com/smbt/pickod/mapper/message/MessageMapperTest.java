@@ -12,7 +12,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @Transactional
@@ -20,28 +19,28 @@ class MessageMapperTest {
     @Autowired
     MessageMapper messageMapper;
 
-    BinToMailBoxDTO binToMailBoxDTO;
-    GetMailListDTO  getMailListDTO;
-    GetMailViewDTO  getMailViewDTO;
-    MailToBinDTO    mailToBinDTO;
-    RemoveMailDTO  removeMailDTO;
-    SentMailViewDTO  sentMailViewDTO;
-    SentMailListDTO  sentMailListDTO;
-    TrashedMailListDTO  trashedMailListDTO;
-    TrashedMailViewDTO  trashedMailViewDTO;
-    WriteMailDTO  writeMailDTO;
+    MsgBinToMailBoxDTO msgBinToMailBoxDTO;
+    MsgGetMailListDTO msgGetMailListDTO;
+    MsgGetMailViewDTO msgGetMailViewDTO;
+    MsgMailToBinDTO msgMailToBinDTO;
+    MsgRemoveMailDTO msgRemoveMailDTO;
+    MsgSentMailViewDTO msgSentMailViewDTO;
+    MsgSentMailListDTO msgSentMailListDTO;
+    MsgTrashedMailListDTO msgTrashedMailListDTO;
+    MsgTrashedMailViewDTO msgTrashedMailViewDTO;
+    MsgWriteMailDTO msgWriteMailDTO;
 
 
     @BeforeEach
     void setUp() {
-        getMailListDTO = new GetMailListDTO();
-        getMailListDTO.setMsgId(1L);
-        getMailListDTO.setMemberNum(1L);
-        getMailListDTO.setMsgRead(0L);
-        getMailListDTO.setMsgBox("S");
-        getMailListDTO.setMemberNickName("test");
-        getMailListDTO.setMsgContent("test메세지");
-        getMailListDTO.setMsgSentTime(LocalDateTime.now());
+        msgGetMailListDTO = new MsgGetMailListDTO();
+        msgGetMailListDTO.setMsgId(1L);
+        msgGetMailListDTO.setMemberNum(1L);
+        msgGetMailListDTO.setMsgRead(0L);
+        msgGetMailListDTO.setMsgBox("S");
+        msgGetMailListDTO.setMemberNickName("test");
+        msgGetMailListDTO.setMsgContent("test메세지");
+        msgGetMailListDTO.setMsgSentTime(LocalDateTime.now());
 
         messageMapper.showGetMailList(1L);
     }
@@ -51,12 +50,12 @@ class MessageMapperTest {
     void showGetMailList() {
         //given
         //when
-        List<GetMailListDTO> getmailList = messageMapper.showGetMailList(1L);
+        List<MsgGetMailListDTO> getmailList = messageMapper.showGetMailList(1L);
         //then
         assertThat(getmailList)//검증대상 설정
                 .isNotEmpty()//비어있지않은지
                 .extracting("test")
-                .contains(getMailListDTO.getMemberNickName());
+                .contains(msgGetMailListDTO.getMemberNickName());
     }
 
 }

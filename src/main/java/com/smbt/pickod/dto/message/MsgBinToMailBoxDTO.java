@@ -7,11 +7,13 @@ import lombok.ToString;
 
 import java.time.LocalDateTime;
 
-@Getter @Setter @ToString
+@Setter @Getter @ToString
 @NoArgsConstructor
-public class MailToBinDTO {
+public class MsgBinToMailBoxDTO {
+    private String msgBox;
     private Long msgId;
     private Long memberNum;
-    private String msgBox;
+    private Long msgSender;
+    private Long msgRecipient;
     private LocalDateTime msgTrashedDate;
 }

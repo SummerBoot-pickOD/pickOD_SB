@@ -7,7 +7,7 @@ import lombok.ToString;
 
 @Getter @Setter @NoArgsConstructor
 @ToString
-public class MyCheckListDTO {
+public class MpgMyCheckListDTO {
     private String tempTitle;
     private String tempImage;//수정예정
     private Long tempId;

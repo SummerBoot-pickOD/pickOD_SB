@@ -9,12 +9,8 @@ import java.time.LocalDateTime;
 
 @Getter @Setter @ToString
 @NoArgsConstructor
-public class SentMailListDTO {
-    private Long memberNum;
-    private Long msgRecipient;
+public class MsgRemoveMailDTO {
     private Long msgId;
-    private String memberNickname;
-    private String msgContent;
-    private String msgBox;
-    private LocalDateTime msgSentTime;
+    private LocalDateTime msgTrashedDate;
+
 }
