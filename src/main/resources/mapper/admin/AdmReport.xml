@@ -88,4 +88,11 @@
             #{reportId}
         )
     </insert>
+
+    <update id="solveReport" parameterType="AdmReportSolveDTO">
+        UPDATE REPORT
+        SET REPORT_SOLVED = 1
+        WHERE REPORT_ID = #{reportId}
+    </update>
+
 </mapper>

@@ -1,8 +1,9 @@
 package com.smbt.pickod.mapper.admin;
 
-import com.smbt.pickod.dto.admin.AdmReportGoPostDTO;
-import com.smbt.pickod.dto.admin.AdmReportInsertSanctionDTO;
-import com.smbt.pickod.dto.admin.AdmReportSearchSanctionDTO;
+import com.smbt.pickod.dto.admin.report.AdmReportGoPostDTO;
+import com.smbt.pickod.dto.admin.report.AdmReportInsertSanctionDTO;
+import com.smbt.pickod.dto.admin.report.AdmReportSearchSanctionDTO;
+import com.smbt.pickod.dto.admin.report.AdmReportSolveDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -64,6 +65,14 @@ class AdmReportMapperTest {
 
         adminReportMapper.imposeSanction(dto);
         log.info(dto.toString());
+    }
+
+    @DisplayName("신고 처리하기")
+    @Test
+    public void solveReport() {
+        AdmReportSolveDTO dto = new AdmReportSolveDTO();
+        dto.setReportId(8L);
+        adminReportMapper.solveReport(dto);
     }
 
 }

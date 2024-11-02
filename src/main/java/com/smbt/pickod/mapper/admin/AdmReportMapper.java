@@ -1,9 +1,6 @@
 package com.smbt.pickod.mapper.admin;
 
-import com.smbt.pickod.dto.admin.AdmReportInsertSanctionDTO;
-import com.smbt.pickod.dto.admin.AdmReportListDTO;
-import com.smbt.pickod.dto.admin.AdmReportSearchSanctionDTO;
-import com.smbt.pickod.dto.admin.AdmReportSearchDTO;
+import com.smbt.pickod.dto.admin.report.*;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -22,4 +19,6 @@ public interface AdmReportMapper {
     public Optional<Long> getLatestReportOfMember(Long memberNum);
 
     public void imposeSanction(AdmReportInsertSanctionDTO admReportInsertSanctionDTO);
+
+    public void solveReport(AdmReportSolveDTO admReportSolveDTO);
 }
