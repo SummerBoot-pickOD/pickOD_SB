@@ -7,9 +7,9 @@ import lombok.ToString;
 
 @Getter @Setter
 @ToString @NoArgsConstructor
-public class AdmFindPwd {
-    // 비밀번호 찾을 이메일주소, db에 저장되어 있는 비밀번호 /  비밀번호 변경으로
+public class AdmMemberMgmtDTO {
     private String memberId;
-    private String memberPassword;
-
+    private String memberNickName;
+    private Long sanctionCnt;
+//    여행 발자국, 여행 짜기 작성 개수는 mapper 통해서
 }
