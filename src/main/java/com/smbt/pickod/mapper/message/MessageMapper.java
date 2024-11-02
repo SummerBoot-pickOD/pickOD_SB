@@ -8,25 +8,25 @@ import java.util.Optional;
 
 @Mapper
 public interface MessageMapper {
-    List<GetMailListDTO> showGetMailList (Long memberNum);
+    List<MsgGetMailListDTO> showGetMailList (Long memberNum);
 
-    List<SentMailListDTO> showSentMailList (Long memberNum);
+    List<MsgSentMailListDTO> showSentMailList (Long memberNum);
 
-    Optional<GetMailViewDTO> getMailView (Long msgId, Long memberNum);
+    Optional<MsgGetMailViewDTO> getMailView (Long msgId, Long memberNum);
 
-    Optional<SentMailViewDTO> sentMailView (Long msgId, Long memberNum);
+    Optional<MsgSentMailViewDTO> sentMailView (Long msgId, Long memberNum);
 
-    List<TrashedMailListDTO> trashedMailList (Long memberNum);
+    List<MsgTrashedMailListDTO> trashedMailList (Long memberNum);
 
-    Optional<TrashedMailListDTO> trashedMailView (Long msgId, Long memberNum);
+    Optional<MsgTrashedMailListDTO> trashedMailView (Long msgId, Long memberNum);
 
-    void writeMail (WriteMailDTO writeMailDTO);
+    void writeMail (MsgWriteMailDTO msgWriteMailDTO);
 
-    void getMailToBean (MailToBinDTO mailToBinDTO);
+    void getMailToBean (MsgMailToBinDTO msgMailToBinDTO);
 
-    void sentMailToBin (MailToBinDTO mailToBinDTO);
+    void sentMailToBin (MsgMailToBinDTO msgMailToBinDTO);
 
-    void binToMailBox (BinToMailBoxDTO binToMailBoxDTO);
+    void binToMailBox (MsgBinToMailBoxDTO msgBinToMailBoxDTO);
 
     void removeMail (Long msgId);
 

@@ -7,7 +7,7 @@ import lombok.ToString;
 
 @Getter @Setter @NoArgsConstructor
 @ToString
-public class MyJournalCntDTO {
+public class MpgMyJournalCntDTO {
     private Long numberNum;
 
 }

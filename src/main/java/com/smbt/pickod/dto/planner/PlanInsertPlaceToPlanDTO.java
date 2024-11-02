@@ -5,12 +5,19 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-@Getter @Setter @ToString
+import java.time.LocalDate;
+
+@Getter
+@Setter
+@ToString
 @NoArgsConstructor
-public class LoadCheckedTemplateDTO {
+public class PlanInsertPlaceToPlanDTO {
+    private Long planId;
+    private Long planDay;
+    private LocalDate planDate;
+    private Long planOrder;
     private Long placeId;
     private String placeName;
-    private String tempTitle;
-    private Long tempId;
+    private String planMemo;
     private Long memberNum;
 }

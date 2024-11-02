@@ -5,14 +5,13 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-@Setter @Getter @ToString
+@Getter @Setter @ToString
 @NoArgsConstructor
-public class GetMailViewDTO {
-    private Long msgId;
+public class MsgTrashedMailViewDTO {
     private Long memberNum;
-    private String memberNickname;
+    private String memberNickName;
     private String msgContent;
-    private String msgBox;
+    private Long msgId;
     private Long msgRecipient;
-    private Long msgSender;
+    private String msgBox;
 }

@@ -9,7 +9,7 @@ import lombok.ToString;
 @Setter
 @NoArgsConstructor
 @ToString
-public class MyJournalListDTO {
+public class MpgMyJournalListDTO {
     private String jnlTitle;
     private String fileName;
     private String uploadPath;

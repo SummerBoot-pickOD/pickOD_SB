@@ -9,8 +9,9 @@ import java.time.LocalDateTime;
 
 @Getter @Setter @ToString
 @NoArgsConstructor
-public class RemoveMailDTO {
+public class MsgMailToBinDTO {
     private Long msgId;
+    private Long memberNum;
+    private String msgBox;
     private LocalDateTime msgTrashedDate;
-
 }

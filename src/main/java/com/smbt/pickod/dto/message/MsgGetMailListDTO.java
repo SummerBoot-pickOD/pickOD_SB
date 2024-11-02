@@ -7,18 +7,15 @@ import lombok.ToString;
 
 import java.time.LocalDateTime;
 
-@Getter @Setter @ToString
+@Setter @Getter @ToString
 @NoArgsConstructor
-public class WriteMailDTO {
+public class MsgGetMailListDTO {
     private Long msgId;
     private Long memberNum;
     private Long msgSender;
-    private Long msgRecipient;
-    private Long msgStatus;
-    private Long msgRead;
-    private String msgBox;
+    private String memberNickName;
     private String msgContent;
-    private LocalDateTime msgTrashedDate;
     private LocalDateTime msgSentTime;
-
+    private String msgBox;
+    private Long msgRead;
 }
