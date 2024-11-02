@@ -19,7 +19,7 @@
         AND MSG.MSG_SENDER = #{memberNum}
     </select>
 
-    <select id="getMailView" parameterType="GetMailViewDTO" resultType="MsgGetMailViewDTO">
+    <select id="getMailView" parameterType="MsgGetMailViewDTO" resultType="MsgGetMailViewDTO">
         SELECT M.MEMBER_NICKNAME, MSG.MSG_CONTENT
         FROM MESSAGE MSG
         JOIN MESSAGE_STATUS MS ON MSG.MSG_ID = MS.MSG_ID
@@ -29,7 +29,7 @@
             AND MSG.MSG_RECIPIENT = #{memberNum}
     </select>
 
-    <select id="sentMailView" parameterType="SentMailViewDTO" resultType="MsgSentMailViewDTO">
+    <select id="sentMailView" parameterType="MsgSentMailViewDTO" resultType="MsgSentMailViewDTO">
         SELECT M.MEMBER_NICKNAME, MSG.MSG_CONTENT
         FROM MESSAGE MSG
         JOIN MESSAGE_STATUS MS ON MSG.MSG_ID = MS.MSG_ID
@@ -49,7 +49,7 @@
         AND (MSG.MSG_SENDER = #{memberNum} OR MSG.MSG_RECIPIENT = #{memberNum})
     </select>
 
-    <select id="trashedMailView" parameterType="TrashedMailListDTO" resultType="MsgTrashedMailViewDTO">
+    <select id="trashedMailView" parameterType="MsgTrashedMailViewDTO" resultType="MsgTrashedMailViewDTO">
         SELECT M.MEMBER_NICKNAME, MSG.MSG_CONTENT
         FROM MESSAGE_STATUS MS
         JOIN MESSAGE MSG ON MS.MSG_ID = MSG.MSG_ID
@@ -59,18 +59,20 @@
           AND MS.MEMBER_NUM = #{memberNum}
     </select>
 
-    <insert id="writeMail" parameterType="MsgWriteMailDTO">
+    <insert id="insertMessage" parameterType="MsgWriteMailDTO">
         <selectKey keyProperty="msgId" resultType="Long" order="BEFORE">
             SELECT SEQ_MESSAGE.nextVal FROM DUAL
         </selectKey>
-            INSERT INTO MESSAGE ( MSG_ID, MSG_SENDER, MSG_RECIPIENT, MSG_CONTENT, MSG_SENT_TIME)
-            VALUES (#{msgId}, #{msgSender}, #{msgRecipient}, #{msgContent}, SYSDATE)
+        INSERT INTO MESSAGE (MSG_ID, MSG_SENDER, MSG_RECIPIENT, MSG_CONTENT, MSG_SENT_TIME)
+        VALUES (#{msgId}, #{msgSender}, #{msgRecipient}, #{msgContent}, SYSDATE);
+    </insert>
 
+    <insert id="insertMessageStatus" parameterType="MsgWriteMailDTO">
         <selectKey keyProperty="statusId" resultType="Long" order="BEFORE">
             SELECT SEQ_MESSAGE_STATUS.nextVal FROM DUAL
         </selectKey>
-            INSERT INTO MESSAGE_STATUS (STATUS_ID, MSG_ID, MEMBER_NUM, MSG_BOX, MSG_READ, MSG_TRASHED_DATE)
-            VALUES (#{statusId}, (SELECT MAX(MSG_ID) FROM MESSAGE), #{msgSender}, 'S', 0 , NULL)
+        INSERT INTO MESSAGE_STATUS (STATUS_ID, MSG_ID, MEMBER_NUM, MSG_BOX, MSG_READ, MSG_TRASHED_DATE)
+        VALUES (#{statusId}, #{msgId}, #{msgSender}, 'S', 0, NULL);
     </insert>
 
     <update id="getMailToBin" parameterType="MsgMailToBinDTO">

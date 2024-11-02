@@ -9,5 +9,3 @@ public interface TimeMapper {
     public String getTime();
     public String getVersion();
 }
-
-

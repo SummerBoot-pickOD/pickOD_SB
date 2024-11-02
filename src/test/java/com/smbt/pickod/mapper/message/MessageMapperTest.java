@@ -36,8 +36,9 @@ class MessageMapperTest {
         msgGetMailListDTO = new MsgGetMailListDTO();
         msgGetMailListDTO.setMsgId(1L);
         msgGetMailListDTO.setMemberNum(1L);
+        msgGetMailListDTO.setMsgRecipient(1L);
         msgGetMailListDTO.setMsgRead(0L);
-        msgGetMailListDTO.setMsgBox("S");
+        msgGetMailListDTO.setMsgBox("I");
         msgGetMailListDTO.setMemberNickName("test");
         msgGetMailListDTO.setMsgContent("test메세지");
         msgGetMailListDTO.setMsgSentTime(LocalDateTime.now());

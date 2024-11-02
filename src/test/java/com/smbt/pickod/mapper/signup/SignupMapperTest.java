@@ -1,6 +1,6 @@
 package com.smbt.pickod.mapper.signup;
 
-import com.smbt.pickod.dto.signup.MemberDTO;
+import com.smbt.pickod.dto.signup.SignUpMemberDTO;
 import com.smbt.pickod.dto.signup.NicknameCheckDTO;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -19,7 +19,7 @@ class SignupMapperTest {
     @DisplayName("회원가입")
     @Test
     public void register() {
-        MemberDTO dto = new MemberDTO();
+        SignUpMemberDTO dto = new SignUpMemberDTO();
         dto.setMemberId("gabin1102@naver.com");
         dto.setMemberPassword("ASDF1234");
         dto.setMemberNickname("김카디");
