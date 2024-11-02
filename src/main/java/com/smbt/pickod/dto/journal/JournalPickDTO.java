@@ -1,6 +1,6 @@
 package com.smbt.pickod.dto.journal;
 
-import com.smbt.pickod.dto.admin.AdmUserDetails;
+import com.smbt.pickod.dto.admin.AdmMemberDetailsDTO;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -16,6 +16,6 @@ public class JournalPickDTO {
     private Long memberNum;
     private Long jnlNum;
     private Date pickDate;
-    private List<AdmUserDetails> mumbers; //mumber 정보
+    private List<AdmMemberDetailsDTO> mumbers; //mumber 정보
     private List<JournalDTO> journalList;
 }
