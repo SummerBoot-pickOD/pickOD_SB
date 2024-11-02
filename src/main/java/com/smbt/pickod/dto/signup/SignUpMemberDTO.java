@@ -7,7 +7,7 @@ import lombok.ToString;
 
 @Getter @Setter @ToString
 @NoArgsConstructor
-public class MemberDTO {
+public class SignUpMemberDTO {
     private Long memberNum;
     private String memberId;
     private String memberPassword;

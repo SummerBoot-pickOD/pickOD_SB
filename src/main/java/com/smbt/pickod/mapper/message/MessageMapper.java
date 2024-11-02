@@ -20,7 +20,9 @@ public interface MessageMapper {
 
     Optional<MsgTrashedMailListDTO> trashedMailView (Long msgId, Long memberNum);
 
-    void writeMail (MsgWriteMailDTO msgWriteMailDTO);
+    void insertMessage (MsgWriteMailDTO msgWriteMailDTO);
+
+    void insertMessageStatus (MsgWriteMailDTO msgWriteMailDTO);
 
     void getMailToBean (MsgMailToBinDTO msgMailToBinDTO);
 
