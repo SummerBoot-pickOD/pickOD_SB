@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 
 @Getter @Setter @ToString
 @NoArgsConstructor
-public class MailTOBinDTO {
+public class MailToBinDTO {
     private Long msgId;
     private Long memberNum;
     private String msgBox;
