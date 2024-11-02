@@ -5,16 +5,16 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.sql.Date;
 import java.util.List;
 
 @Getter @Setter @ToString
 @NoArgsConstructor
-public class JournalPickDTO {
-    private Long pickId;
+public class MemberDTO {
     private Long memberNum;
-    private Long jnlNum;
-    private Date pickDate;
-    private List<MemberDTO> mumbers; //mumber 정보
-    private List<JournalDTO> journalList;
+    private String memberId;
+    private String nickName;
+    private String memberImgYn;
+    private Long memberImgsId;
+    private List<MemberImgsDTO> memberImgs;
+
 }
