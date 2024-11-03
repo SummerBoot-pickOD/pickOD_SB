@@ -3,6 +3,7 @@ package com.smbt.pickod.mapper.login;
 import com.smbt.pickod.dto.login.LoginDTO;
 import com.smbt.pickod.dto.login.LoginSessionDTO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.Optional;
 
@@ -13,7 +14,7 @@ public interface LoginMapper {
 
     public Optional<String> checkSanction(LoginSessionDTO loginSessionDTO);
 
-    public Optional<String> findEmail(String email);
+    public Optional<String> findEmail(@Param("memberId")String email);
 
-    public void resetPassword(LoginDTO loginInputDTO);
+    public void resetPassword(LoginDTO loginDTO);
 }
