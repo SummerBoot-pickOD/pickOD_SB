@@ -8,8 +8,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.Optional;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
@@ -45,5 +43,25 @@ class LoginMapperTest {
                 orElse(null);
 
         assertThat(loginSessionDTO).isEqualTo(null);
+    }
+
+    @DisplayName("이메일 보여주기")
+    @Test
+    public void getEmail(){
+        String res = loginMapper.findEmail("kardiem@naver.com").
+                orElseThrow(()->new AssertionError("해당 이메일이 없습니다"));
+
+        assertThat(res).isEqualTo("kardiem@naver.com");
+    }
+
+    @DisplayName("비밀번호 재설정")
+    @Test
+
+    public void resetPswd(){
+        logputDTO = new LoginDTO();
+        logputDTO.setMemberId("kardiem@naver.com");
+        logputDTO.setMemberPassword("ASDF1234");
+
+        loginMapper.resetPassword(logputDTO);
     }
 }

@@ -13,23 +13,26 @@
             RM.MEMBER_ID AS REPORTER_ID,
             REPORT_DATE
         FROM REPORT T
-        LEFT JOIN (SELECT MEMBER_NUM, MEMBER_ID FROM MEMBER) WM ON (WM.MEMBER_NUM = T.WRITER_ID)
-        LEFT JOIN (SELECT MEMBER_NUM, MEMBER_ID FROM MEMBER) RM ON (RM.MEMBER_NUM = T.REPORTER_ID)
+        JOIN (SELECT MEMBER_NUM, MEMBER_ID FROM MEMBER) WM ON (WM.MEMBER_NUM = T.WRITER_ID)
+        JOIN (SELECT MEMBER_NUM, MEMBER_ID FROM MEMBER) RM ON (RM.MEMBER_NUM = T.REPORTER_ID)
         WHERE 1=1
-        <if test="inqCondition == 'w'">
-            AND WRITER_ID LIKE CONCAT('%', #{inqKeyword}, '%')
+        <if test="inqCondition == 'writer'">
+            AND WM.MEMBER_ID LIKE '%'||#{inqKeyword}||'%'
         </if>
-        <if test="inqCondition == 'r'">
-            AND REPORTER_ID LIKE CONCAT('%', #{inqKeyword}, '%')
+        <if test="inqCondition == 'reporter'">
+            AND RM.MEMBER_ID LIKE '%'||#{inqKeyword}||'%'
         </if>
-        <if test="inqCondition == 'd'">
-            AND REPORT_DETAIL LIKE CONCAT('%', #{inqKeyword}, '%')
+        <if test="inqCondition == 'detail'">
+            AND T.REPORT_DETAIL LIKE '%'||#{inqKeyword}||'%'
+        </if>
+        <if test="inqCondition == 'postId'">
+            AND T.REPORT_POST_ID = TO_NUMBER(#{inqKeyword})
         </if>
         <if test="reportPostType != null">
-            AND REPORT_POST_TYPE = #{reportPostType}
+            AND T.REPORT_POST_TYPE = #{reportPostType}
         </if>
         <if test="reportSolved != 2">
-            AND REPORT_SOLVED = #{reportSolved}
+            AND T.REPORT_SOLVED = #{reportSolved}
         </if>
         ORDER BY REPORT_DATE
     </select>
@@ -37,6 +40,11 @@
     <select id="readReportedMessage" parameterType="Long" resultType="String">
         SELECT MSG_CONTENT FROM MESSAGE
         WHERE MSG_ID = #{postId}
+    </select>
+
+    <select id="getPostFromCmt" parameterType="Long" resultType="AdmReportGoPostDTO">
+        SELECT CMT_POST_TYPE AS POST_TYPE, CMT_POST_ID AS POST_ID FROM COMMENTS
+        WHERE CMT_ID = #{reportPostId}
     </select>
 
     <select id="getSanctionCount" parameterType="AdmReportSearchSanctionDTO" resultType="int">

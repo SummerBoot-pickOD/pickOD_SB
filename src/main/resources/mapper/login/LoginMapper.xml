@@ -10,7 +10,7 @@
         SELECT MEMBER_ID FROM MEMBER
         WHERE MEMBER_ID = #{memberId}
     </select>
-    <update id="resetPassword" parameterType="LoginDTO">
+    <update id="resetPassword" parameterType="String">
         UPDATE MEMBER
         SET MEMBER_PASSWORD = #{memberPassword}
         WHERE MEMBER_ID = #{memberId}

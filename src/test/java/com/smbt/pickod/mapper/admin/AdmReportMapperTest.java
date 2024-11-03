@@ -1,9 +1,6 @@
 package com.smbt.pickod.mapper.admin;
 
-import com.smbt.pickod.dto.admin.report.AdmReportGoPostDTO;
-import com.smbt.pickod.dto.admin.report.AdmReportInsertSanctionDTO;
-import com.smbt.pickod.dto.admin.report.AdmReportSearchSanctionDTO;
-import com.smbt.pickod.dto.admin.report.AdmReportSolveDTO;
+import com.smbt.pickod.dto.admin.report.*;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -11,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.as;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
@@ -23,14 +23,23 @@ class AdmReportMapperTest {
     @DisplayName("상세 모달 작성글 바로가기 -> 쪽지면 모달로 띄워줌")
     @Test
     public void showReportedMessageContent(){
-        AdmReportGoPostDTO dto = new AdmReportGoPostDTO();
-        dto.setPostType("M");
-        dto.setPostId(1L);
-
-        String msg = adminReportMapper.readReportedMessage(dto.getPostId()).orElse("false");
+        String msg = adminReportMapper.readReportedMessage(1L).orElse("false");
 
         assertThat(msg).isEqualTo("안녕?");
     }
+
+    @DisplayName("상세 모달 작성글 바로가기 -> 댓글이면 댓글 달린 게시물로 가야되니 게시물 id 가져오기")
+    @Test
+    public void showReportedCommentOrigin(){
+        AdmReportGoPostDTO dto = new AdmReportGoPostDTO();
+        dto.setPostId(1L);
+
+        AdmReportGoPostDTO msg = adminReportMapper.getPostFromCmt(1L).orElse(null);
+
+        assertThat(msg.getPostType()).isEqualTo("T");
+        assertThat(msg.getPostId()).isEqualTo(2L);
+    }
+
 
     @DisplayName("제재 횟수 검색하기")
     @Test
@@ -75,4 +84,16 @@ class AdmReportMapperTest {
         adminReportMapper.solveReport(dto);
     }
 
+    @DisplayName("신고 조회하기")
+    @Test
+    public void getReportTable() {
+        AdmReportSearchDTO searchDTO = new AdmReportSearchDTO();
+        searchDTO.setInqCondition("writer");
+        searchDTO.setInqKeyword("kardiem");
+        searchDTO.setReportSolved(2);
+
+        List<AdmReportListDTO> list = adminReportMapper.inqReportTable(searchDTO);
+
+        assertThat(list.get(0).getReportId()).isEqualTo(5L);
+    }
 }
