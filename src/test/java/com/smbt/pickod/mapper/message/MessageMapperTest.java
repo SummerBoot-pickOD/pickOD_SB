@@ -22,7 +22,6 @@ class MessageMapperTest {
     @Autowired
     MessageMapper messageMapper;
 
-
     MsgBinToMailBoxDTO msgBinToMailBoxDTO;
     MsgGetMailListDTO msgGetMailListDTO;
     MsgGetMailViewDTO msgGetMailViewDTO;

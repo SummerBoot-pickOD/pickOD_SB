@@ -5,9 +5,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-@Getter@Setter@NoArgsConstructor
+@Getter @Setter @NoArgsConstructor
 @ToString
-public class PlanLoadCheckedPlaceDTO {
+public class PlanCheckedPlaceDTO {
     private String placeName;
     private Long placeId;
     private Long memberNum;

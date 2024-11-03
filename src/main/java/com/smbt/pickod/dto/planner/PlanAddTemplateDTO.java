@@ -9,7 +9,7 @@ import java.time.LocalDate;
 
 @Getter @Setter @ToString
 @NoArgsConstructor
-public class PlanInsertTemplateToPlanDTO {
+public class PlanAddTemplateDTO {
     private Long planId;
     private LocalDate planDate;
     private Long planOrder;

@@ -1,6 +1,84 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.smbt.pickod.mapper.planner.PlanMapper">
-    
+    <select id="showCheckedPlace" parameterType="Long" resultType="PlanCheckedPlaceDTO">
+        SELECT P.PLACE_NAME, P.PLACE_ID
+        FROM PLACE_PICK PP
+        JOIN PLACE P ON PP.PLACE_ID = P.PLACE_ID
+        WHERE PP.MEMBER_NUM = #{memberNum}
+    </select>
 
+    <select id="showCheckedTemplate" parameterType="Long" resultType="PlanCheckedTemplateDTO">
+        SELECT T.TEMP_TITLE, T.TEMP_ID
+        FROM TEMPLATE_PICK TP
+                 JOIN TEMPLATE T ON TP.TEMP_ID = T.TEMP_ID
+        WHERE TP.MEMBER_NUM = #{memberNum}
+    </select>
+
+    <select id="addTemplate" parameterType="Long" resultType="PlanAddTemplateDTO">
+        SELECT
+            TD.TEMP_DAY_NUM AS PLAN_DAY,
+            TD.TEMP_PLACE_ORDER AS PLAN_ORDER,
+            P.PLACE_ID AS PLACE_ID,
+            P.PLACE_NAME AS PLACE_NAME
+        FROM TEMPLATE T
+                 JOIN TEMP_DAY TD ON T.TEMP_ID = TD.TEMP_ID
+                 JOIN PLACE P ON TD.PLACE_ID = P.PLACE_ID
+        WHERE T.TEMP_ID = #{tempId}
+    </select>
+
+<!--    <insert id="insertPlan" parameterType="PlanInsertPlanDTO">-->
+<!--    <selectKey keyProperty="planId" resultType="Long" order="BEFORE">-->
+<!--        SELECT SEQ_PLAN.NEXTVAL FROM DUAL-->
+<!--    </selectKey>-->
+<!--        INSERT INTO PLAN(PLAN_ID,PLAN_TITLE,PLAN_START_DATE,PLAN_END_DATE,MEMBER_NUM)-->
+<!--        VALUES(#{planId}, #{planTitle}, #{planStartDate}, #{planEndDate}, #{memberNum})-->
+<!--            RETURNING PLAN_ID INTO #{planId}-->
+<!--    </insert>-->
+
+    <insert id="insertPlanPlace" parameterType="PlanInsertPlaceDTO">
+        INSERT INTO PLAN_PLACE (PLAN_ID, PLAN_DAY, PLAN_ORDER, PLAN_DATE, PLACE_ID, PLAN_MEMO)
+        VALUES(#{planId}, #{planDay}, #{planOrder}, #{planDate}, #{placeId}, #{planMemo})
+    </insert>
+
+    <update id="updatePlan" parameterType="PlanUpdatePlanDTO">
+        UPDATE PLAN
+        SET PLAN_TITLE = #{planTitle},
+            PLAN_START_DATE = TO_DATE(#{planStartDate}),
+            PLAN_END_DATE = TO_DATE(#{planEndDate})
+            WHERE PLAN_ID = #{planId}
+                AND MEMBER_NUM = #{memberNum}
+    </update>
+
+<!--    <update id="mergePlanPlace" parameterType="PlanMergePlaceDTO">-->
+<!--        MERGE INTO PLAN_PLACE T-->
+<!--            USING (SELECT-->
+<!--                    #{planOrder} AS PLAN_ORDER,-->
+<!--                    #{planDay} AS PLAN_DAY,-->
+<!--                    #{planId} AS PLAN_ID,-->
+<!--                    #{planDate} AS PLAN_DATE,-->
+<!--                    #{planMemo} AS PLAN_MEMO,-->
+<!--                    #{placeId} AS PLACE_ID-->
+<!--                    FROM DUAL-->
+<!--                ) TTO-->
+<!--            ON (T.PLAN_ID = TTO.PLAN_ID-->
+<!--            AND T.PLAN_DAY = TTO.PLAN_DAY-->
+<!--            AND T.PLAN_ORDER = TTO.PLAN_ORDER-->
+<!--                )-->
+<!--            WHEN MATCHED THEN-->
+<!--                UPDATE SET-->
+<!--                    T.PLAN_DATE = #{planDate},-->
+<!--                    T.PLAN_MEMO = #{planMemo},-->
+<!--                    T.PLACE_ID = #{placeId}-->
+<!--            WHEN NOT MATCHED THEN-->
+<!--                INSERT (PLAN_ORDER, PLAN_DAY, PLAN_ID, PLAN_DATE, PLAN_MEMO, PLACE_ID)-->
+<!--                VALUES (TTO.PLAN_ORDER, TTO.PLAN_DAY, TTO.PLAN_ID, TTO.PLAN_DATE, TTO.PLAN_MEMO, TTO.PLACE_ID);-->
+<!--    </update>-->
+
+<!--    <delete id="deleteOrder" parameterType="PlanDeleteOrderDTO">-->
+<!--        DELETE FROM PLAN_PLACE-->
+<!--        WHERE PLAN_ID = #{planId}-->
+<!--          AND PLAN_DAY = #{planDay}-->
+<!--          AND PLAN_ORDER > #{planOrder}-->
+<!--    </delete>-->
 </mapper>
