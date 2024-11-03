@@ -33,10 +33,7 @@ class SignupMapperTest {
     @DisplayName("닉네임 중복검사")
     @Test
     public void isNickDup(){
-        NicknameCheckDTO dto = new NicknameCheckDTO();
-        dto.setNickname("박카디");
-
-        Long cnt = signupMapper.isNicknameExist(dto);
+        Long cnt = signupMapper.isNicknameExist("박카디");
 
         assertThat(cnt).isEqualTo(0L);
     }
