@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smbt.pickod.mapper.journal.JournalMapper">
+    <select id="searchJournalByTag" parameterType="String" resultType="JournalDTO">
+        SELECT *
+        FROM JOURNAL
+        WHERE JNL_TAG LIKE CONCAT('%', #{tag}, '%')
+    </select>
+</mapper>
