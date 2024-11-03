@@ -21,7 +21,7 @@ class PlaceMapperTest {
 
     @DisplayName("장소리스트 조회(조회순으로)")
     @Test
-    public void getPlacesTest() {
+    public void getPlacesByViewsTest() {
         List<PlaceDTO> placebyviewsList = placeMapper.selectPlacesByViews();
         log.info("장소조회순리스트{}", placebyviewsList);
 
@@ -45,7 +45,13 @@ class PlaceMapperTest {
         placeDetail.setImages(placeDetailImg);
         log.info("Place Detail: {}", placeDetail);
         assertThat(placeDetail).isNotNull();
+    }
 
+    @DisplayName("장소리스트조회(검색창으로)")
+    @Test
+    public void getPlacesBySearchTest(){
+        List<PlaceDTO> placebysearchList= placeMapper.selectPlacesBySearch("성곽");
+        log.info("{}",placebysearchList);
 
     }
 

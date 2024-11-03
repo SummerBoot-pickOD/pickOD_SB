@@ -50,5 +50,21 @@
         where PI.PLACE_ID=#{placeId}
     </select>
 
+    <select id="selectPlacesBySearch" resultType="PlaceDTO">
+        SELECT
+            P.PLACE_ID,
+            P.PLACE_NAME,
+            P.PLACE_ADDRESS,
+            P.PLACE_DETAILS,
+            (SELECT PI.uploadPath
+             FROM PLACE_IMGS PI
+             WHERE PI.PLACE_ID = P.PLACE_ID
+               AND ROWNUM = 1) AS IMAGE_PATH
+        FROM PLACE P
+        WHERE P.PLACE_NAME LIKE '%' || #{keyword} || '%'
+           OR P.PLACE_ADDRESS LIKE '%' || #{keyword} || '%'
+           OR P.PLACE_DETAILS LIKE '%' || #{keyword} || '%'
+    </select>
+
 
 </mapper>
