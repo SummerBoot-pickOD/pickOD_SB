@@ -3,7 +3,6 @@ package com.smbt.pickod.service.login;
 import com.smbt.pickod.dto.login.LoginDTO;
 import com.smbt.pickod.dto.login.LoginSessionDTO;
 import com.smbt.pickod.mapper.login.LoginMapper;
-import jakarta.servlet.http.HttpSession;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -14,9 +13,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class LoginServiceTest {
@@ -31,7 +29,7 @@ class LoginServiceTest {
     // 2, baram1@naver.com, ASDF1234 - 제재 걸려있음 (-2)
     @DisplayName("로그인")
     @Test
-    void LoginSuccess(){
+    void LoginCheckSuccess(){
         LoginSessionDTO loginSessionDTO = new LoginSessionDTO();
         loginSessionDTO.setMemberNum(2L);
         loginSessionDTO.setMemberId("baram1@naver.com");
@@ -44,8 +42,32 @@ class LoginServiceTest {
         loginDTO.setMemberPassword("ASDF1234");
 
 
-        int result = loginService.login(loginDTO);
+        int result = loginService.loginCheck(loginDTO);
 
         assertThat(result).isEqualTo(-2);
     }
+
+    @DisplayName("아이디 찾기")
+    @Test
+    void getMemberId(){
+        String certedEmail = "kardiem1102@navr.com";
+
+        when(loginMapper.findEmail(any())).thenReturn(Optional.ofNullable(null)); //정상으로 가져왓다면 이메일 넣고
+
+        String result = loginService.getMemberId(certedEmail);
+
+        assertThat(result).isEqualTo("해당 이메일로 가입한 아이디가 없습니다.");
+    }
+
+    @DisplayName("비밀번호 찾기")
+    @Test
+    void resetPassword(){
+
+        doNothing().when(loginMapper).resetPassword(any(LoginDTO.class));
+
+        loginService.resetPassword(new LoginDTO());
+
+        verify(loginMapper,times(1)).resetPassword(any(LoginDTO.class));
+    }
+
 }
