@@ -12,6 +12,8 @@ import java.time.LocalDate;
 @ToString
 public class MpgMyPlanListDTO {
     private String planTitle;
+    private String period;
+    private Long placeCnt;
     private LocalDate planStartDate;
     private LocalDate planEndDate;
     private Long placeId;
