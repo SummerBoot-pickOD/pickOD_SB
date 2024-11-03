@@ -9,7 +9,7 @@ import lombok.ToString;
 @NoArgsConstructor
 public class AdmReportSearchDTO {
     private String reportPostType;
-    private String reportSolved;
+    private int reportSolved;
     private String inqCondition;
     private String inqKeyword;
 }
