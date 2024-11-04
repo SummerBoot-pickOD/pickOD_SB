@@ -8,5 +8,6 @@ import lombok.ToString;
 @Getter @Setter
 @ToString @NoArgsConstructor
 public class AdmToJnlDTO {
+    //여행 발자국 바로가기
     private Long jnlNum;
 }
