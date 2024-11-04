@@ -11,6 +11,7 @@ import java.util.List;
 @Getter @Setter
 @ToString @NoArgsConstructor
 public class AdmJnlDetailsDTO {
+    //여행 발자국 상세페이지
     private Long jnlNum;
     private String jnlTitle;
     private Long memberNum;
