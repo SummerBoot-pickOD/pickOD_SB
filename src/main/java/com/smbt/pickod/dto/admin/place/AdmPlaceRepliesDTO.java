@@ -1,4 +1,4 @@
-package com.smbt.pickod.dto.admin.journal;
+package com.smbt.pickod.dto.admin.place;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -7,13 +7,13 @@ import lombok.ToString;
 
 @Getter @Setter
 @ToString @NoArgsConstructor
-public class AdmJnlMgmtDTO {
+public class AdmPlaceRepliesDTO {
+    private Long placeId;
+    private String placeName;
+    private Long cmtId;
     private Long memberNum;
     private String memberId;
     private String memberNickName;
-    private String jnlTitle;
+    private String cmtContents;
     private String isReported;
-    private String jnlNum;
-    //jnlNum 자체가 필요하지는 않지만, 게시물 번호 받아와야하면 쓰기
-
 }
