@@ -19,6 +19,8 @@ public class JournalDTO {
     private String jnlTag;
     private String jnlTheme;
     private String jnlArea;
+    private Integer pickCount;
     private List<JnlMemberDTO> jnlMumberList; //mumber 정보
+    private JournalProfileDTO authorProfile;
 
 }
