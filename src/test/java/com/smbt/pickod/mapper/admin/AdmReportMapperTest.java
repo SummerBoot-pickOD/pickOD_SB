@@ -57,18 +57,17 @@ class AdmReportMapperTest {
     @Test
     public void putSanction(){
         AdmReportInsertSanctionDTO dto = new AdmReportInsertSanctionDTO();
-        AdmReportSearchSanctionDTO dto2 = new AdmReportSearchSanctionDTO();
-        dto2.setInqCondition("nick");
-        dto2.setInqKeyword("유진초이");
+        dto.setInqCondition("nick");
+        dto.setInqKeyword("유진초이");
 
 
-        dto.setSanctionCnt(adminReportMapper.getSanctionCount(dto2));
+        dto.setSanctionCnt(2);
         dto.setSanctionReason("불건전한 게시물 등록");
         dto.setSanctionNote("5건 중 4건이 불건전 판정");
         dto.setInqCondition("nick");
         dto.setInqKeyword("유진초이");
 
-        dto.setMemberNum(adminReportMapper.getSanctionMemberNum(dto2).orElse(-1L));
+        dto.setMemberNum(adminReportMapper.getSanctionMemberNum(dto).orElse(-1L));
         dto.setReportId(adminReportMapper.getLatestReportOfMember(dto.getMemberNum()).orElse(-1L));
 
 
@@ -79,9 +78,7 @@ class AdmReportMapperTest {
     @DisplayName("신고 처리하기")
     @Test
     public void solveReport() {
-        AdmReportSolveDTO dto = new AdmReportSolveDTO();
-        dto.setReportId(8L);
-        adminReportMapper.solveReport(dto);
+        adminReportMapper.solveReport(8L);
     }
 
     @DisplayName("신고 조회하기")

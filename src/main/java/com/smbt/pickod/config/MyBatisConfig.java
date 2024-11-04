@@ -1,4 +1,4 @@
-package com.smbt.pickod.mybatis;
+package com.smbt.pickod.config;
 
 
 import com.zaxxer.hikari.HikariConfig;
