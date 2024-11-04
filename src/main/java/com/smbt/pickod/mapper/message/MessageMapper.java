@@ -12,19 +12,21 @@ public interface MessageMapper {
 
     List<MsgSentMailListDTO> showSentMailList (Long memberNum);
 
-    Optional<MsgGetMailViewDTO> getMailView (Long msgId, Long memberNum);
+    Optional<MsgGetMailViewDTO> getMailView (MsgGetMailViewDTO msgGetMailViewDTO);
 
-    Optional<MsgSentMailViewDTO> sentMailView (Long msgId, Long memberNum);
+    Optional<MsgSentMailViewDTO> sentMailView (MsgSentMailViewDTO msgSentMailViewDTO);
 
     List<MsgTrashedMailListDTO> trashedMailList (Long memberNum);
 
-    Optional<MsgTrashedMailListDTO> trashedMailView (Long msgId, Long memberNum);
+    Optional<MsgTrashedMailViewDTO> trashedMailView (MsgTrashedMailViewDTO msgTrashedMailViewDTO);
 
     void insertMessage (MsgWriteMailDTO msgWriteMailDTO);
 
-    void insertMessageStatus (MsgWriteMailDTO msgWriteMailDTO);
+    void insertMessageStatusSender (MsgWriteMailDTO msgWriteMailDTO);
 
-    void getMailToBean (MsgMailToBinDTO msgMailToBinDTO);
+    void insertMessageStatusRecipient (MsgWriteMailDTO msgWriteMailDTO);
+
+    void getMailToBin (MsgMailToBinDTO msgMailToBinDTO);
 
     void sentMailToBin (MsgMailToBinDTO msgMailToBinDTO);
 

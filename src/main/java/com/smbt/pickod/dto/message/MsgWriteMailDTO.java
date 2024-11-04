@@ -14,7 +14,7 @@ public class MsgWriteMailDTO {
     private Long memberNum;
     private Long msgSender;
     private Long msgRecipient;
-    private Long msgStatus;
+    private Long statusId;
     private Long msgRead;
     private String msgBox;
     private String msgContent;

@@ -8,15 +8,9 @@ import lombok.ToString;
 @Getter @Setter @NoArgsConstructor
 @ToString
 public class MpgMyCheckListDTO {
-    private String tempTitle;
-    private String tempImage;//수정예정
-    private Long tempId;
+    private String title;
     private Long memberNum;
-    private String jnlTitle;
-    private String jnlImage;//수정예정
-    private Long jnlNum;
-    private String placeTitle;
-    private String placeImage;//수정예정
-    private Long placeId;
+    private String pickType;
+
 }
 

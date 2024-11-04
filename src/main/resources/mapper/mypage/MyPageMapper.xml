@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smbt.pickod.mapper.mypage.MyPageMapper">
+    <select id="journalCnt" parameterType="Long" resultType="Long">
+        SELECT COUNT(MEMBER_NUM)
+        FROM JOURNAL
+        WHERE MEMBER_NUM = #{memberNum}
+    </select>
+
+    <select id="likeCnt" parameterType="Long" resultType="Long">
+        SELECT COUNT(L.CMT_ID)
+        FROM LIKED L
+        JOIN COMMENTS c ON L.CMT_ID = c.CMT_ID
+        WHERE c.MEMBER_NUM = #{memberNum}
+    </select>
+
+    <select id="myBestList" parameterType="Long" resultType="MpgMyBestDTO">
+        SELECT J.JNL_TITLE , COUNT(DISTINCT JP.PICK_ID), J.JNL_VIEWS, COUNT(DISTINCT C.CMT_ID), COALESCE(SUM(L.CMT_ID), 0)
+        FROM JOURNAL J
+        LEFT JOIN JOURNAL_PICK JP ON J.JNL_NUM = JP.JNL_NUM
+        LEFT JOIN COMMENTS C ON J.JNL_NUM = C.CMT_POST_ID AND C.CMT_POST_TYPE = 'J'
+        LEFT JOIN LIKED L ON C.CMT_ID = L.CMT_ID
+        WHERE J.MEMBER_NUM = #{memberNum}
+        GROUP BY J.JNL_TITLE, J.JNL_VIEWS
+        ORDER BY COUNT(DISTINCT JP.PICK_ID) DESC
+    </select>
+
+    <select id ="showMyCheckList" parameterType="Long" resultType="MpgMyCheckListDTO">
+        SELECT 'TEMPLATE' AS PICK_TYPE, t.TEMP_TITLE AS TITLE
+        FROM TEMPLATE_PICK tp
+        JOIN TEMPLATE t ON tp.TEMP_ID = t.TEMP_ID
+        WHERE tp.MEMBER_NUM = #{memberNum}
+        UNION ALL
+        SELECT 'JOURNAL' AS PICK_TYPE, j.JNL_TITLE AS TITLE
+        FROM JOURNAL_PICK jp
+        JOIN JOURNAL j ON jp.JNL_NUM = j.JNL_NUM
+        WHERE jp.MEMBER_NUM = #{memberNum}
+        UNION ALL
+        SELECT 'PLACE' AS PICK_TYPE, p.PLACE_NAME AS TITLE
+        FROM PLACE_PICK pp
+        JOIN PLACE p ON pp.PLACE_ID = p.PLACE_ID
+        WHERE pp.MEMBER_NUM = #{memberNum}
+    </select>
+    <select id="showMyJournalList" parameterType="Long" resultType="MpgMyJournalListDTO">
+        SELECT JNL_TITLE
+        FROM JOURNAL
+        WHERE MEMBER_NUM = #{memberNum}
+    </select>
+
+    <select id="showMyPlanList" parameterType="Long" resultType="MpgMyPlanListDTO">
+        SELECT P.PLAN_TITLE, (P.PLAN_END_DATE-P.PLAN_START_DATE) as PERIOD, P.PLAN_START_DATE, P.PLAN_END_DATE,  COUNT(PP.PLACE_ID) as "PLACE_CNT"
+        FROM PLAN P
+        LEFT JOIN PLAN_PLACE PP ON P.PLAN_ID = PP.PLAN_ID
+        WHERE P.MEMBER_NUM = #{memberNum}
+        GROUP BY P.PLAN_TITLE, P.PLAN_START_DATE, P.PLAN_END_DATE
+        ORDER BY P.PLAN_START_DATE
+    </select>
+
+</mapper>

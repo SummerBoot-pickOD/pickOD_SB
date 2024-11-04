@@ -2,21 +2,21 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.smbt.pickod.mapper.message.MessageMapper">
     <select id="showGetMailList" parameterType="Long" resultType="MsgGetMailListDTO">
-        SELECT MS.MSG_READ, M_SENDER.MEMBER_NICKNAME, MSG.MSG_CONTENT, MSG.MSG_SENT_TIME
+        SELECT MS.MSG_READ, M.MEMBER_NICKNAME, MSG.MSG_CONTENT, MSG.MSG_SENT_TIME
         FROM MESSAGE MSG
         JOIN MESSAGE_STATUS MS ON MSG.MSG_ID = MS.MSG_ID
-        JOIN MEMBER M_SENDER ON MSG.MSG_SENDER = M_SENDER.MEMBER_NUM
+        JOIN MEMBER M ON MSG.MSG_SENDER = M.MEMBER_NUM
         WHERE MS.MSG_BOX = 'I'
-        AND MSG.MSG_RECIPIENT = #{memberNum}
+        AND MS.MEMBER_NUM = #{memberNum}
     </select>
 
     <select id="showSentMailList" parameterType="Long" resultType="MsgSentMailListDTO">
-        SELECT MS.MSG_READ, M_SENDER.MEMBER_NICKNAME, MSG.MSG_CONTENT, MSG.MSG_SENT_TIME
+        SELECT MS.MSG_READ, M.MEMBER_NICKNAME, MSG.MSG_CONTENT, MSG.MSG_SENT_TIME
         FROM MESSAGE MSG
         JOIN MESSAGE_STATUS MS ON MSG.MSG_ID = MS.MSG_ID
-        JOIN MEMBER M_RECIPIENT ON MSG.MSG_RECIPIENT = M_RECIPIENT.MEMBER_NUM
+        JOIN MEMBER M ON MSG.MSG_RECIPIENT = M.MEMBER_NUM
         WHERE MS.MSG_BOX = 'S'
-        AND MSG.MSG_SENDER = #{memberNum}
+        AND MS.MEMBER_NUM = #{memberNum}
     </select>
 
     <select id="getMailView" parameterType="MsgGetMailViewDTO" resultType="MsgGetMailViewDTO">
@@ -64,16 +64,25 @@
             SELECT SEQ_MESSAGE.nextVal FROM DUAL
         </selectKey>
         INSERT INTO MESSAGE (MSG_ID, MSG_SENDER, MSG_RECIPIENT, MSG_CONTENT, MSG_SENT_TIME)
-        VALUES (#{msgId}, #{msgSender}, #{msgRecipient}, #{msgContent}, SYSDATE);
+        VALUES (#{msgId}, #{msgSender}, #{msgRecipient}, #{msgContent}, SYSDATE)
     </insert>
 
-    <insert id="insertMessageStatus" parameterType="MsgWriteMailDTO">
+    <insert id="insertMessageStatusSender" parameterType="MsgWriteMailDTO">
         <selectKey keyProperty="statusId" resultType="Long" order="BEFORE">
             SELECT SEQ_MESSAGE_STATUS.nextVal FROM DUAL
         </selectKey>
         INSERT INTO MESSAGE_STATUS (STATUS_ID, MSG_ID, MEMBER_NUM, MSG_BOX, MSG_READ, MSG_TRASHED_DATE)
-        VALUES (#{statusId}, #{msgId}, #{msgSender}, 'S', 0, NULL);
+        VALUES (#{statusId}, #{msgId}, #{msgSender}, 'S', 0, NULL)
     </insert>
+
+    <insert id="insertMessageStatusRecipient" parameterType="MsgWriteMailDTO">
+        <selectKey keyProperty="statusId" resultType="Long" order="BEFORE">
+            SELECT SEQ_MESSAGE_STATUS.nextVal FROM DUAL
+        </selectKey>
+        INSERT INTO MESSAGE_STATUS (STATUS_ID, MSG_ID, MEMBER_NUM, MSG_BOX, MSG_READ, MSG_TRASHED_DATE)
+        VALUES (#{statusId}, #{msgId}, #{msgRecipient}, 'I', 0, NULL)
+    </insert>
+
 
     <update id="getMailToBin" parameterType="MsgMailToBinDTO">
         UPDATE MESSAGE_STATUS
@@ -93,20 +102,18 @@
 
     <update id="binToMailBox" parameterType="MsgBinToMailBoxDTO">
         UPDATE MESSAGE_STATUS MS
-        SET MS.MSG_BOX = CASE
-                             WHEN M.MSG_SENDER = #{memberNum} THEN 'S'
-                             WHEN M.MSG_RECIPIENT = #{memberNum} THEN 'I'
-                         END,
+            SET MS.MSG_BOX = CASE
+                             WHEN (SELECT M.MSG_SENDER FROM MESSAGE M WHERE M.MSG_ID = MS.MSG_ID) = #{memberNum} THEN 'S'
+                             WHEN (SELECT M.MSG_RECIPIENT FROM MESSAGE M WHERE M.MSG_ID = MS.MSG_ID) = #{memberNum} THEN 'I'
+            END,
             MS.MSG_TRASHED_DATE = NULL
-        FROM MESSAGE M
-        WHERE MS.MSG_ID = M.MSG_ID
-          AND MS.MSG_ID = #{msgId}
-          AND MS.MSG_TRASHED_DATE IS NOT NULL;
+        WHERE MS.MSG_ID = #{msgId}
+          AND MS.MSG_TRASHED_DATE IS NOT NULL
     </update>
 
     <delete id="removeMail" parameterType="Long">
         DELETE FROM MESSAGE_STATUS
         WHERE MSG_ID = #{msgId}
-          AND MSG_TRASHED_DATE IS NOT NULL;
+          AND MSG_TRASHED_DATE IS NOT NULL
     </delete>
 </mapper>
