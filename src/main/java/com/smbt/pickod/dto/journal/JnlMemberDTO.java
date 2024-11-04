@@ -16,5 +16,6 @@ public class JnlMemberDTO {
     private String memberImgYn;
     private Long memberImgsId;
     private List<JnlMemberImgsDTO> memberImgsList;
+    private List<JournalDTO> journalList;
 
 }
