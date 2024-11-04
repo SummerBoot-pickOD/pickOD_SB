@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smbt.pickod.mapper.place.PlaceMapper">
+    <select id="selectPlacesByViews" resultType="PlaceDTO">
+        SELECT
+            P.PLACE_ID,
+            P.PLACE_NAME,
+            P.PLACE_ADDRESS,
+            P.PLACE_DETAILS,
+            (SELECT PI.uploadPath
+             FROM PLACE_IMGS PI
+             WHERE PI.PLACE_ID = P.PLACE_ID
+               AND ROWNUM = 1) AS IMAGE_PATH
+        FROM PLACE p
+        ORDER BY PLACE_VIEWS DESC
+    </select>
+
+    <select id="selectPlacesByLikes" resultType="PlaceDTO">
+        SELECT
+            P.PLACE_ID,
+            P.PLACE_NAME,
+            P.PLACE_ADDRESS,
+            P.PLACE_DETAILS,
+            (SELECT PI.uploadPath
+             FROM PLACE_IMGS PI
+             WHERE PI.PLACE_ID = P.PLACE_ID
+               AND ROWNUM = 1) AS IMAGE_PATH,
+            NVL(COUNT(PP.PICK_ID), 0) AS PICK_COUNT
+        FROM
+            PLACE P
+                LEFT JOIN
+            PLACE_PICK PP ON P.PLACE_ID = PP.PLACE_ID
+        GROUP BY
+            P.PLACE_ID, P.PLACE_NAME, P.PLACE_ADDRESS, P.PLACE_DETAILS
+        ORDER BY
+            PICK_COUNT DESC
+    </select>
+
+    <select id="selectPlaceDetail" resultType="PlaceDetailDTO">
+        select
+            P.*
+        from PlACE P
+        where P.PLACE_ID=#{placeID}
+    </select>
+
+    <select id="selectPlaceDetailImg" resultType="PlaceImgDTO">
+        select
+            PI.*
+        from PlACE_IMGS PI
+        where PI.PLACE_ID=#{placeId}
+    </select>
+
+    <select id="selectPlacesBySearch" resultType="PlaceDTO">
+        SELECT
+            P.PLACE_ID,
+            P.PLACE_NAME,
+            P.PLACE_ADDRESS,
+            P.PLACE_DETAILS,
+            (SELECT PI.uploadPath
+             FROM PLACE_IMGS PI
+             WHERE PI.PLACE_ID = P.PLACE_ID
+               AND ROWNUM = 1) AS IMAGE_PATH
+        FROM PLACE P
+        WHERE P.PLACE_NAME LIKE '%' || #{keyword} || '%'
+           OR P.PLACE_ADDRESS LIKE '%' || #{keyword} || '%'
+           OR P.PLACE_DETAILS LIKE '%' || #{keyword} || '%'
+    </select>
+
+
+</mapper>

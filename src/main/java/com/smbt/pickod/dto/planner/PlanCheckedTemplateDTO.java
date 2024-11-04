@@ -7,9 +7,7 @@ import lombok.ToString;
 
 @Getter @Setter @ToString
 @NoArgsConstructor
-public class PlanLoadCheckedTemplateDTO {
-    private Long placeId;
-    private String placeName;
+public class PlanCheckedTemplateDTO {
     private String tempTitle;
     private Long tempId;
     private Long memberNum;

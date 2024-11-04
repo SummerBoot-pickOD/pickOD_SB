@@ -1,5 +1,4 @@
-package com.smbt.pickod.dto.mypage;
-
+package com.smbt.pickod.dto.planner;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,15 +7,12 @@ import lombok.ToString;
 
 import java.time.LocalDate;
 
-@Setter @Getter @NoArgsConstructor
-@ToString
-public class MpgMyPlanListDTO {
+@Setter @Getter @ToString
+@NoArgsConstructor
+public class PlanUpdatePlanDTO {
     private String planTitle;
-    private String period;
-    private Long placeCnt;
     private LocalDate planStartDate;
     private LocalDate planEndDate;
-    private Long placeId;
     private Long planId;
     private Long memberNum;
 }

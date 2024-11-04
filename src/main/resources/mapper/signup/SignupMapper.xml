@@ -18,7 +18,7 @@
         MEMBER_GENDER = #{memberGender}
         WHERE MEMBER_NUM = #{memberNum}
     </update>
-    <select id="isNicknameExist" parameterType="NicknameCheckDTO" resultType="Long">
+    <select id="isNicknameExist" parameterType="String" resultType="Long">
         SELECT COUNT(*) FROM MEMBER
         WHERE MEMBER_NICKNAME = #{nickname}
     </select>
