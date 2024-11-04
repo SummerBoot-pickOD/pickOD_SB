@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smbt.pickod.mapper.place.PlacePickMapper">
+    <select id="findPlacePick" resultType="PlacePickDTO">
+        select *
+        from PlACE_PICK
+        where MEMBER_NUM=#{memberNum} and PLACE_ID=#{placeId}
+    </select>
+
+    <insert id="insertPlacePick" parameterType="PlacePickDTO">
+        INSERT INTO PLACE_PICK (pick_id, member_num, place_id, pick_date)
+        VALUES (#{pickId}, #{memberNum}, #{placeId}, #{pickDate})
+    </insert>
+    <select id="getNextPickId" resultType="Long">
+        SELECT SEQ_PLACE_PICK.nextval FROM dual
+    </select>
+
+    <delete id="deletePlacePick">
+        delete from place_pick where pick_id=#{pickId}
+    </delete>
+
+
+
+
+
+
+
+
+
+</mapper>
