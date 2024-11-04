@@ -4,6 +4,100 @@
     <select id="searchJournalByTag" parameterType="String" resultType="JournalDTO">
         SELECT *
         FROM JOURNAL
-        WHERE JNL_TAG LIKE CONCAT('%', #{tag}, '%')
+        WHERE JNL_TAG LIKE '%' || #{tag} || '%'
     </select>
+
+    <select id="searchJournalByTheme" parameterType="String" resultType="JournalDTO">
+        SELECT *
+        FROM JOURNAL
+        WHERE JNL_TAG LIKE '%' || #{theme} || '%'
+    </select>
+
+    <select id="searchJournalByTitle" parameterType="String" resultType="JournalDTO">
+        SELECT *
+        FROM JOURNAL
+        WHERE JNL_TAG LIKE '%' || #{title} || '%'
+    </select>
+
+    <select id="searchJournalByArea" parameterType="String" resultType="JournalDTO">
+        SELECT *
+        FROM JOURNAL
+        WHERE JNL_TAG LIKE '%' || #{area} || '%'
+    </select>
+
+    <select id="searchJournalByPeriod" parameterType="String" resultType="JournalDTO">
+        SELECT *
+        FROM JOURNAL
+        WHERE JNL_TAG LIKE '%' || #{period} || '%'
+    </select>
+    
+    <select id="countTotalJournals" resultType="int">
+        SELECT count(*)
+        FROM JOURNAL
+    </select>
+
+    <select id="getJournalsByDateDesc" resultType="JournalDTO">
+        SELECT *
+        FROM JOURNAL
+        ORDER BY JNL_CREATE_DATE DESC
+    </select>
+
+    <select id="getJournalsByPickCountDesc" resultType="JournalDTO">
+        SELECT j.*,
+               (SELECT COUNT(*)
+                FROM JOURNAL_PICK jp
+                WHERE jp.JNL_NUM = j.JNL_NUM) AS pick_count
+        FROM JOURNAL j
+        ORDER BY pick_count DESC
+    </select>
+
+    <select id="getSelectedFootprints" resultType="JournalDTO">
+        SELECT j.*
+        FROM JOURNAL j
+                 JOIN TEMPLATE t ON j.JNL_NUM = t.JNL_NUM
+    </select>
+
+    <select id="getJournalById" resultType="JournalDTO">
+        SELECT *
+        FROM JOURNAL
+        WHERE JNL_NUM = #{jnlNum}
+    </select>
+
+    <resultMap id="memberResultMap" type="com.smbt.pickod.dto.journal.JnlMemberDTO">
+        <id property="memberNum" column="memberNum" />
+        <result property="memberId" column="memberId" />
+        <result property="nickName" column="nickName" />
+        <collection property="memberImgsList" ofType="com.smbt.pickod.dto.journal.JnlMemberImgsDTO">
+            <result property="memberImgsGuid" column="memberImgsGuid" />
+            <result property="fileName" column="fileName" />
+            <result property="uploadPath" column="uploadPath" />
+            <result property="memberImgUrl" column="memberImgUrl" />
+            <result property="defaultYn" column="defaultYn" />
+        </collection>
+    </resultMap>
+
+    <select id="getJournalProfilesByJournalId" resultType="JournalProfileDTO">
+        SELECT
+            j.JNL_NUM,
+            m.MEMBER_NICKNAME AS nickname,
+            mi.MEMBER_IMG_URL AS memberImgUrl,
+            mi.MEMBER_IMGS_ID AS memberImgsId,
+            mi.MEMBER_IMGS_GUID AS memberImgsGuid,
+            mi.FILE_NAME AS fileName,
+            mi.UPLOADPATH AS uploadPath,
+            mi.MEMBER_IMG_TYPE AS memberImgType,
+            mi.DEFAULT_YN AS defaultYn,
+            j.JNL_MEMO AS jnlMemo  -- JNL_MEMO 필드 추가
+        FROM
+            JOURNAL j
+                JOIN
+            MEMBER m ON j.MEMBER_NUM = m.MEMBER_NUM
+                JOIN
+            MEMBER_IMGS mi ON m.MEMBER_IMGS_ID = mi.MEMBER_IMGS_ID
+        WHERE
+            j.JNL_NUM = #{jnlNum}
+    </select>
+
+
+
 </mapper>
