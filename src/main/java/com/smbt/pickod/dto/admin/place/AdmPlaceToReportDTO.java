@@ -1,4 +1,4 @@
-package com.smbt.pickod.dto.admin.journal;
+package com.smbt.pickod.dto.admin.place;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -7,6 +7,6 @@ import lombok.ToString;
 
 @Getter @Setter
 @ToString @NoArgsConstructor
-public class AdmJnlToReportDTO {
-    private Long jnlNum;
+public class AdmPlaceToReportDTO {
+    private Long placeId;
 }
