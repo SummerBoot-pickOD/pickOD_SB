@@ -87,7 +87,7 @@
             mi.UPLOADPATH AS uploadPath,
             mi.MEMBER_IMG_TYPE AS memberImgType,
             mi.DEFAULT_YN AS defaultYn,
-            j.JNL_MEMO AS jnlMemo  -- JNL_MEMO 필드 추가
+            j.JNL_MEMO AS jnlMemo
         FROM
             JOURNAL j
                 JOIN
@@ -97,6 +97,20 @@
         WHERE
             j.JNL_NUM = #{jnlNum}
     </select>
+
+    <!-- JOURNAL 테이블에 여행일지 기본 정보 삽입 -->
+    <insert id="insertJournal" parameterType="JournalDTO">
+        <selectKey keyProperty="jnlNum" resultType="Long" order="BEFORE">
+            SELECT SEQ_JOURNAL.nextVal FROM DUAL
+        </selectKey>
+        INSERT INTO JOURNAL (
+        JNL_NUM, JNL_TITLE, MEMBER_NUM, JNL_VIEWS, JNL_MEMO, JNL_CREATE_DATE,
+        JNL_UPDATE_DATE, JNL_PERIOD, JNL_TAG, JNL_THEME, JNL_AREA
+        ) VALUES (
+        #{jnlNum}, #{jnlTitle}, #{memberNum}, #{jnlViews}, #{jnlMemo}, SYSDATE,
+        SYSDATE, #{jnlPeriod}, #{jnlTag}, #{jnlTheme}, #{jnlArea}
+        )
+    </insert>
 
 
 

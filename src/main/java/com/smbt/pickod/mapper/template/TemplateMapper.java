@@ -20,6 +20,10 @@ public interface TemplateMapper {
 
     List<TemplateDTO> searchTemplateByPeriod(@Param("tempPeriod") String tempPeriod);
 
+    List<TemplateDTO> searchTemplatesByViews();
+
+    int countTotalTemplates();
+
     Optional<TemplateDTO> getTemplateById(@Param("tempId") Long tempId); //특정 템플릿을 ID로 조회
 
     List<TemplateDTO> getAllTemplates(); //모든 템플릿을 조회
@@ -55,6 +59,8 @@ public interface TemplateMapper {
     Optional<Boolean> deleteTempImg(@Param("tempImgsId") Long tempImgsId); //TempImg를 삭제
 
     // TEMPLATE_PICK 관련 메서드
+
+    List<TemplateDTO> searchTemplatesByPickCount();
 
     Optional<TemplatePickDTO> getTemplatePickById(@Param("pickId") Long pickId); //특정 TemplatePick을 ID로 조회
 
