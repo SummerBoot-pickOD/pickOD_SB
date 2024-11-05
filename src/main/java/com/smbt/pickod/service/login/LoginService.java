@@ -18,20 +18,18 @@ public class LoginService{
     private final JavaMailSender mailSender;
 
     //로그인 잘못됐는지, 제재중인지 확인
-    public int loginCheck(LoginDTO loginDTO) {
+    public LoginSessionDTO loginCheck(LoginDTO loginDTO) {
 
         LoginSessionDTO loginSessionDTO = loginMapper.isMemberExist(loginDTO).orElse(null);
         //log.info(loginDTO.toString());
         if(loginSessionDTO == null) {
             // 맞는 조합 없음
-            return -1;
         }
 
         if(!loginMapper.checkSanction(loginSessionDTO).orElse("N").equals("N")){
             //진행중인 제재가 있음
-            return -2;
         }
-        return 0;
+        return loginSessionDTO;
     }
 
     //아이디 찾기
