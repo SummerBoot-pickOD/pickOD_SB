@@ -17,6 +17,7 @@ public class MessageService {
 
     //받은메일함 보여주기
     public List<MsgGetMailListDTO> GetMessageList (Long memberNum){
+
         return messageMapper.showGetMailList(memberNum);
     }
 
@@ -24,6 +25,8 @@ public class MessageService {
     public List<MsgSentMailListDTO> SentMessageList (Long memberNum){
         return messageMapper.showSentMailList(memberNum);
     }
+
+    //
 
     //
 }
