@@ -21,8 +21,23 @@
         WHERE TEMP_PERIOD LIKE '%' || #{tempPeriod} || '%'
     </select>
 
+    <select id="searchTemplatesByViews" resultType="TemplateDTO">
+        SELECT * FROM TEMPLATE
+        ORDER BY TEMP_VIEWS DESC
+    </select>
 
+    <select id="searchTemplatesByPickCount" resultType="TemplateDTO">
+        SELECT t.*,
+               (SELECT COUNT(*)
+                FROM TEMPLATE_PICK tp
+                WHERE tp.TEMP_ID = t.TEMP_ID) AS pick_count
+        FROM TEMPLATE t
+        ORDER BY pick_count DESC
+    </select>
 
-
+    <select id="countTotalTemplates" resultType="int">
+        SELECT COUNT(*)
+        FROM TEMPLATE
+    </select>
 
 </mapper>

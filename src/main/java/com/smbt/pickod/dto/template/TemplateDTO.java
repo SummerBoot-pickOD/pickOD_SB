@@ -19,6 +19,7 @@ public class TemplateDTO {
     private String tempTheme;
     private Long jnlNum;
     private Long memberNum;
+    private Integer pickCount;
     private List<TempDayDTO> tempDayList; //TEMP_DAY 정보
     private List<JnlMemberDTO> memberImgsList; //mumber 정보
     private List<JournalDTO> JournalList; //Journal 정보
