@@ -42,9 +42,9 @@ class LoginServiceTest {
         loginDTO.setMemberPassword("ASDF1234");
 
 
-        int result = loginService.loginCheck(loginDTO);
+        LoginSessionDTO result = loginService.loginCheck(loginDTO);
 
-        assertThat(result).isEqualTo(-2);
+        assertThat(result.getMemberNum()).isEqualTo(2L);
     }
 
     @DisplayName("아이디 찾기")
