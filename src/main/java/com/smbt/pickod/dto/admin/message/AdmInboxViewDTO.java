@@ -12,6 +12,7 @@ public class AdmInboxViewDTO {
     private Long memberNum;
     private String memberNickname;
     private String msgContent;
+    private String msgBox;
     private Long msgSender;
     private Long msgRecipient;
 }

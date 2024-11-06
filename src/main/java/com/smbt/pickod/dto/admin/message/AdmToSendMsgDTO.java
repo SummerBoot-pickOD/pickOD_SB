@@ -1,4 +1,4 @@
-package com.smbt.pickod.dto.admin.member;
+package com.smbt.pickod.dto.admin.message;
 
 import java.time.LocalDate;
 
