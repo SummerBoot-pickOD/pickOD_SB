@@ -5,7 +5,7 @@ $("#report-modal-tail>button").click(function(){
     alert("신고 분류를 선택해주세요.");
     return;
   }
-
+  $(this).closest('form').submit();
   alert("신고가 정상적으로 등록되었습니다.");
   $(".modal-container").css('display','none');
 });
