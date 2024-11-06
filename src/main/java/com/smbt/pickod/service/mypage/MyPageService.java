@@ -26,7 +26,7 @@ public class MyPageService {
 
     //내 베스트 게시물조회
     public List<MpgMyBestDTO> getMyBestList(Long memberNum) {
-        return myPageMapper.myBestList(memberNum);
+                return myPageMapper.myBestList(memberNum);
     }
 
     //내찜하기 전체 조회
@@ -39,15 +39,14 @@ public class MyPageService {
         return myPageMapper.showMyJournalList(memberNum);
     }
 
-
     //내 계획 조회하기
     public List<MpgMyPlanListDTO> getMyPlanList(Long memberNum) {
         return myPageMapper.showMyPlanList(memberNum);
     }
 
     //내찜하기 삭제하기
-    public void deletePick (MpgRemovePickDTO removePickDTO) {
-        myPageMapper.removePick(removePickDTO);
-    };
+    public void deletePick (MpgRemovePickDTO mpgRemovePickDTO) {
+        myPageMapper.removePick(mpgRemovePickDTO);
+    }
 
 }
