@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>아이디 찾기</title>
-  <link rel="stylesheet" th:href="@{/css/login/login.css}">
+  <link rel="stylesheet" th:href="@{/css/login/lostIdEmailCert.css}">
   <link rel="stylesheet" th:href="@{/css/main/header.css}">
   <link rel="stylesheet" th:href="@{/css/main/footer.css}">
   <script defer th:src="@{/js/login/lostIdEmailCert.js}"></script>
@@ -19,22 +19,24 @@
   <main>
     <div class="container">
       <div>
-        <img class="back" th:src="@{/img/admin/backArrow.png}">
+        <a class="back-a" th:href="@{/login/lostId}"><img class="back" th:src="@{/img/admin/backArrow.png}"></a>
       </div>
       <img class="logo" th:src="@{/img/main/logo.png}">
       <h2>이메일 인증</h2>
       <div id="input-container">
         <div class = "input-email">
-          <input type="text" name="" placeholder="이메일을 입력하세요." required>
+          <input type="text" name="email" placeholder="이메일을 입력하세요." required>
           <button type="button" class="send-email">이메일 인증</button>
         </div>
         <div class = "input-cert">
-          <form action>
+          <form th:action = "@{/login/showId}" method = "get">
             <input type="text" name="" placeholder="인증번호를 입력하세요." required>
-            <span id = "left-time"></span>
-            <button type="button" id="send-cert">인증하기</button>
-            <div id = "invalid-cert"></div>
+            <div>
+              <span id = "left-time"></span>
+              <button type="button" id="send-cert">인증하기</button>
+            </div>
           </form>
+          <div id = "invalid-cert"></div>
         </div>
       </div>
     </div>

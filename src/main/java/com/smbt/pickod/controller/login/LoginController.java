@@ -46,22 +46,22 @@ public class LoginController {
 
     @GetMapping("lostId")
     public String lostId(){
-        return "/login/lostIdSelectCert";
+        return "login/lostIdSelectCert";
     }
 
-    @GetMapping("lostId/email")
+    @GetMapping("lostIdEmail")
     public String lostIdEmail(){
-        return "/login/lostIdEmailCert";
+        return "login/lostIdEmailCert";
     }
 
     @GetMapping("lostPswd")
     public String lostPswd(){
-        return "/login/lostPswdSelectCert";
+        return "login/lostPswdSelectCert";
     }
 
     @GetMapping("lostPswdEmail")
     public String lostPswdEmail(){
-        return "/login/lostPswdEmailCert";
+        return "login/lostPswdEmailCert";
     }
 
     @PostMapping("sendCert")
@@ -80,22 +80,22 @@ public class LoginController {
 
     @GetMapping("showId")
     public String showId(){
-        return "/login/lostIdShow";
+        return "login/lostIdShow";
     }
-
+//    @RequestParam("email") String email,Model model
     @GetMapping("resetPswd")
-    public String resetPswd(@RequestParam("email") String email, Model model){
-        model.addAttribute("email",email);
-        return "/login/lostPswdReset";
+    public String resetPswd(){
+        //model.addAttribute("email",email);
+        return "login/lostPswdReset";
     }
 
     @PostMapping("resetPswd")
     public RedirectView resetPswd(Model model){
-        LoginDTO loginDTO = new LoginDTO();
-        loginDTO.setMemberId((String) model.getAttribute("memberId"));
-        loginDTO.setMemberPassword((String) model.getAttribute("memberPassword"));
-
-        loginService.resetPassword(loginDTO);
+//        LoginDTO loginDTO = new LoginDTO();
+//        loginDTO.setMemberId((String) model.getAttribute("memberId"));
+//        loginDTO.setMemberPassword((String) model.getAttribute("memberPassword"));
+//
+//        loginService.resetPassword(loginDTO);
 
         return new RedirectView("/login/login");
     }

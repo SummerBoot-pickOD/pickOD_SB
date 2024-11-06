@@ -5,10 +5,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>아이디 찾기</title>
-  <link rel="stylesheet" href="../../css/login/lostIdSelectCert.css">
-  <link rel="stylesheet" href="../../css/main/header.css">
-  <link rel="stylesheet" href="../../css/main/footer.css">
-  <script defer src="../../js/login/lostIdSelectCert.js"></script>
+  <link rel="stylesheet" th:href="@{/css/login/lostIdSelectCert.css}">
+  <link rel="stylesheet" th:href="@{/css/main/header.css}">
+  <link rel="stylesheet" th:href="@{/css/main/footer.css}">
+  <script defer th:src="@{/js/login/lostIdSelectCert.js}"></script>
   <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
     crossorigin="anonymous"></script>
 </head>
@@ -19,15 +19,15 @@
   <main>
     <div class="container">
       <div>
-        <img class="back" src="../../img/admin/backArrow.png">
+        <a class="back-a" th:href="@{/login/login}"><img class="back" th:src="@{/img/admin/backArrow.png}"></a>
       </div>
-      <img class="logo" src="../../img/main/logo.png">
+      <img class="logo" th:src="@{/img/main/logo.png}">
       <h2>아이디 찾기</h2>
       <div id="cert-select-container">
         <ul>
           <li class = "cert" id="email">
-            <a href="./lostIdEmailCert.html">
-              <img src="../../img/login/email.svg" alt="">
+            <a th:href="@{lostIdEmail}">
+              <img th:src="@{/img/login/email.svg}" alt="">
               이메일 인증
             </a>
           </li>
