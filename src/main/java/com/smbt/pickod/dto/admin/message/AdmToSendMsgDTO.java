@@ -1,10 +1,9 @@
-package com.smbt.pickod.dto.admin.message;
+package com.smbt.pickod.dto.admin.member;
 
 import java.time.LocalDate;
 
-public class AdmMsgSendDTO {
+public class AdmToSendMsgDTO {
     private Long msgId;
-    private Long msgSender;
     private Long msgRecipient;
     private String msgContent;
     private LocalDate msgSentTime;
