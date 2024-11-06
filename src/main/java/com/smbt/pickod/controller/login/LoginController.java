@@ -28,7 +28,7 @@ public class LoginController {
 
     @PostMapping("doLogin")
     public RedirectView login(@RequestParam("memberId") String memberId, @RequestParam("memberPassword") String memberPassword, HttpSession session){
-        log.info("로그인 시도 : {} ",memberId);
+        log.info("로그인 시도 : {}, {} ",memberId,memberPassword);
 
         LoginDTO loginDTO = new LoginDTO();
         loginDTO.setMemberId(memberId);
@@ -36,9 +36,10 @@ public class LoginController {
 
         LoginSessionDTO loginSession = loginService.loginCheck(loginDTO);
 
-        session.setAttribute("loginInfo", loginSession.getMemberId());
         session.setAttribute("memberNum", loginSession.getMemberNum());
 
+        log.info("로그인 성공 : {}, {} ",memberId,memberPassword);
+        log.info("세션ID : {}",session.getId());
         return new RedirectView("/main/main");
     }
     //로그아웃은 헤더에 있는 관계로 여기선 스킵
@@ -66,37 +67,40 @@ public class LoginController {
 
     @PostMapping("sendCert")
     @ResponseBody
-    public ResponseEntity<Map<String,String>> sendCert(@RequestParam("email") String email){
-        Map<String,String> response = new HashMap<>();
-
-        //서비스 부르고? (원래는 createCert가 아니라 sendEmail이 옴)
-        //ajax 통신임 이건
-        //@Responsebody가 있다면 ajax/fetch등 js를 이용한 비동기 통신
+    public ResponseEntity<Map<String,Object>> sendCert(@RequestBody Map<String,String> email){
+        Map<String,Object> response = new HashMap<>();
+        log.info("인증번호 요청 받음 : {} ",email);
         String certNum = loginService.createCert();
         response.put("cert",certNum);
-
+        response.put("success", true);
+        log.info("인증번호 : {}", certNum);
         return ResponseEntity.ok(response);
     }
 
     @GetMapping("showId")
-    public String showId(){
+    public String showId(@RequestParam("certed-email")String email, Model model){
+        log.info("인증된 이메일 : {} ",email);
+        String res = loginService.getEmail(email);
+
+        model.addAttribute("email",res);
         return "login/lostIdShow";
     }
 //    @RequestParam("email") String email,Model model
     @GetMapping("resetPswd")
-    public String resetPswd(){
-        //model.addAttribute("email",email);
+    public String resetPswd(Model model, @RequestParam("certed-email")String email){
+        model.addAttribute("email",email);
         return "login/lostPswdReset";
     }
 
     @PostMapping("resetPswd")
-    public RedirectView resetPswd(Model model){
-//        LoginDTO loginDTO = new LoginDTO();
-//        loginDTO.setMemberId((String) model.getAttribute("memberId"));
-//        loginDTO.setMemberPassword((String) model.getAttribute("memberPassword"));
-//
-//        loginService.resetPassword(loginDTO);
+    public RedirectView resetPswd(@RequestParam("email")String email, @RequestParam("newPassword")String pswd){
+        log.info("비밀번호 재설정 시도 : {}, {} ",email,pswd);
+        LoginDTO loginDTO = new LoginDTO();
+        loginDTO.setMemberId(email);
+        loginDTO.setMemberPassword(pswd);
 
+        loginService.resetPassword(loginDTO);
+        log.info("비밀번호 재설정 성공");
         return new RedirectView("/login/login");
     }
 

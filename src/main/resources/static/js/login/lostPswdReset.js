@@ -19,7 +19,7 @@ $("#reset-pswd").click(function(){
     return;
   }
 
-  if(length(pswd1) < 8){
+  if(pswd1.length < 8){
     $("#invalid-pswd").text("길이가 8자 이하입니다. 다시 입력해주십시오.");
     return;
   }
