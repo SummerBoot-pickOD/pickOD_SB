@@ -26,7 +26,7 @@ class LoginMapperTest {
         logputDTO.setMemberId("kardiem@naver.com");
         logputDTO.setMemberPassword("ASDF1234");
 
-        loginSessionDTO = loginMapper.isMemberExist(logputDTO).
+        loginSessionDTO = loginMapper.tryLogin(logputDTO).
                 orElseThrow(()->new AssertionError("아이디 비밀번호 조합이 맞지 않습니다"));
 
         assertThat(loginSessionDTO.getMemberNum()).isEqualTo(6L);
@@ -39,7 +39,7 @@ class LoginMapperTest {
         logputDTO.setMemberId("kardiem@naver.com");
         logputDTO.setMemberPassword("ASDF1235");
 
-        loginSessionDTO = loginMapper.isMemberExist(logputDTO).
+        loginSessionDTO = loginMapper.tryLogin(logputDTO).
                 orElse(null);
 
         assertThat(loginSessionDTO).isEqualTo(null);

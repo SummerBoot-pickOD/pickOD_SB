@@ -6,6 +6,8 @@ $(function () {
   $("#footer").load("../../html/main/footer.html");
 });
 
+let madecert = 0
+
 $(".send-email").click(function(){
   put = $(".input-email input").val()
   email_regex = /^[0-9a-zA-Z]*@[0-9a-zA-Z]*.[a-zA-Z]{2,3}$/i;
@@ -14,20 +16,39 @@ $(".send-email").click(function(){
     return;
   }
   //(이메일 양식인지 아닌지 확인 기능 필요)
-  alert("인증번호가 전송되었습니다.");
+  const data = {
+      email : $(this).siblings('input').val()
+  };
 
+  fetch('/login/sendCert',{
+      method : 'POST',
+      headers :{
+          'Content-Type':'application/json'
+      },
+      body : JSON.stringify(data)
+  }).then(res => res.json())
+      .then(data => {
+          if (data.success){
+              alert("인증번호가 전송되었습니다.");
+              madecert = data.cert;
+          }else{
+              alert("이메일 전송에 실패했습니다. 다시 시도해 주세요.");
+          }
+      }).catch(e => {
+          console.log(e);
+          alert('서버와의 연결에 문제가 발생했습니다.')
+  })
   $(".input-cert").css("display","block");
-
-  let time = 10000;
+  $("#certed").val(data.email);
+  let time = 120000;
   showTime(time)
-  return;
 });
 
 $("#send-cert").click(function(){
   //인증번호 틀리면 다시
     cert = $(".input-cert input").val();
     console.log(cert)
-    if(cert !== "1234"){
+    if(cert != madecert){
       $("#invalid-cert").text("잘못된 인증번호입니다. 다시 입력해주세요.");
       return;
     }

@@ -34,7 +34,7 @@ class LoginServiceTest {
         loginSessionDTO.setMemberNum(2L);
         loginSessionDTO.setMemberId("baram1@naver.com");
         loginSessionDTO.setMemberPassword("ASDF1234");
-        when(loginMapper.isMemberExist(any(LoginDTO.class))).thenReturn(Optional.of(loginSessionDTO));
+        when(loginMapper.tryLogin(any(LoginDTO.class))).thenReturn(Optional.of(loginSessionDTO));
         when(loginMapper.checkSanction(any(LoginSessionDTO.class))).thenReturn(Optional.of("sanctioned"));
 
         LoginDTO loginDTO = new LoginDTO();
@@ -49,12 +49,12 @@ class LoginServiceTest {
 
     @DisplayName("아이디 찾기")
     @Test
-    void getMemberId(){
+    void getEmail(){
         String certedEmail = "kardiem1102@navr.com";
 
         when(loginMapper.findEmail(any())).thenReturn(Optional.ofNullable(null)); //정상으로 가져왓다면 이메일 넣고
 
-        String result = loginService.getMemberId(certedEmail);
+        String result = loginService.getEmail(certedEmail);
 
         assertThat(result).isEqualTo("해당 이메일로 가입한 아이디가 없습니다.");
     }

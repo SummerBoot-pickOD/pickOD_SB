@@ -4,7 +4,6 @@ import com.smbt.pickod.dto.login.LoginDTO;
 import com.smbt.pickod.dto.login.LoginSessionDTO;
 import com.smbt.pickod.mapper.login.LoginMapper;
 import jakarta.mail.MessagingException;
-import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -20,10 +19,10 @@ public class LoginService{
     //로그인 잘못됐는지, 제재중인지 확인
     public LoginSessionDTO loginCheck(LoginDTO loginDTO) {
 
-        LoginSessionDTO loginSessionDTO = loginMapper.isMemberExist(loginDTO).orElse(null);
+        LoginSessionDTO loginSessionDTO = loginMapper.tryLogin(loginDTO).orElse(null);
         //log.info(loginDTO.toString());
         if(loginSessionDTO == null) {
-            // 맞는 조합 없음
+             // 맞는 조합 없음
         }
 
         if(!loginMapper.checkSanction(loginSessionDTO).orElse("N").equals("N")){
@@ -33,7 +32,7 @@ public class LoginService{
     }
 
     //아이디 찾기
-    public String getMemberId(String inputEmail) {
+    public String getEmail(String inputEmail) {
         return loginMapper.findEmail(inputEmail).orElse("해당 이메일로 가입한 아이디가 없습니다.");
     }
 
