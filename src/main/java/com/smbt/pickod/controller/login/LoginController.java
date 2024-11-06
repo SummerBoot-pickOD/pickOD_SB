@@ -86,7 +86,7 @@ public class LoginController {
         return "login/lostIdShow";
     }
 //    @RequestParam("email") String email,Model model
-    @GetMapping("resetPswd")
+    @PostMapping("goResetPswd")
     public String resetPswd(Model model, @RequestParam("certed-email")String email){
         model.addAttribute("email",email);
         return "login/lostPswdReset";
