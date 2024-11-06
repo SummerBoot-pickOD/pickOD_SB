@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smbt.pickod.mapper.admin.AdmTemplateMgmtMapper">
+    <select id="getTemplates" resultType="AdmTemplateMgmtDTO">
+        SELECT
+            t.temp_title,
+            j.jnl_title,
+            COUNT(DISTINCT p.pick_id) AS pick_cnt,
+            CASE
+                WHEN r.report_post_type = "T" AND r.report_post_id = t.temp_id
+                    THEN 'Y' ELSE 'N'
+                END AS is_reported,
+        FROM
+            template t
+            LEFT JOIN
+            template_pick p ON p.temp_id = t.temp_id
+            LEFT JOIN
+            REPORT r on r.report_post_id = t.temp_id AND r.report_post_type = "T"
+        GROUP BY
+            t.temp_id, t.temp_title,
+            CASE
+                WHEN r.report_post_type = "T" AND r.report_post_id = t.temp_id
+                    THEN 'Y' ELSE 'N'
+                END
+        ORDER BY
+           t.temp_id
+    </select>
+
+    <select id="filterTemplates" parameterType="AdmTemplateFilterDTO" resultType="AdmTemplateMgmtDTO">
+        SELECT
+        t.temp_title,
+        j.jnl_title,
+        COUNT(DISTINCT p.pick_id) AS pick_cnt,
+        CASE
+        WHEN r.report_post_type = "T" AND r.report_post_id = t.temp_id
+        THEN 'Y' ELSE 'N'
+        END AS is_reported
+        FROM
+        template t
+        LEFT JOIN
+        template_pick p ON p.temp_id = t.temp_id
+        LEFT JOIN
+        REPORT r on r.report_post_id = t.temp_id AND r.report_post_type = "T"
+        WHERE
+        1 = 1
+        <if test="searchOption == '템플릿 제목' and keyword != null and keyword != ''">
+            AND t.temp_title LIKE CONCAT('%', #{keyword}, '%')
+        </if>
+        <if test="searchOption == '참고 발자국' and keyword != null and keyword != ''">
+            AND j.jnl_title LIKE CONCAT('%', #{keyword}, '%')
+        </if>
+        <if test="searchOption == '신고 여부' and keyword != null  and keyword != ''">
+            AND is_reported = #{keyword}
+        </if>
+            -- 임시저장, 정상등록, 전체 일단은 없이 하기
+        GROUP BY
+        t.temp_id, t.temp_title,
+        CASE
+        WHEN r.report_post_type = "T" AND r.report_post_id = t.temp_id
+        THEN 'Y' ELSE 'N'
+        END
+        ORDER BY
+            t.temp_id
+    </select>
+
+
+</mapper>

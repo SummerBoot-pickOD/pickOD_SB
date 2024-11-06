@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smbt.pickod.mapper.admin.AdmPlaceMgmtMapper">
+    <select id="getPlaces" resultType="AdmPlaceMgmtDTO">
+        SELECT p.place_id, p.place_name, p.place_address,
+        COUNT(DISTINCT pp.pick_id) AS pick_cnt,
+        CASE
+            WHEN  r.report_post_type = "P" AND r.report_post_id = p.place_id
+                THEN 'Y' ELSE 'N'
+        END AS is_reported
+        FROM PLACE p
+        LEFT JOIN
+        PLACE_PICK pp ON pp.place_id = p.place_id
+        LEFT JOIN
+        REPORT r on r.report_post_type = "P" AND r.report_post_id = p.place_id
+        GROUP BY
+            p.place_id, j.place_name
+        ORDER BY
+           p.place_id
+    </select>
+</mapper>

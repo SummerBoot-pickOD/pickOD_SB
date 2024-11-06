@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smbt.pickod.mapper.admin.AdmMsgMapper">
+    <select id="showInboxList" parameterType="Long" resultType="AdmInboxListDTO">
+        SELECT MS.MSG_READ, M.MEMBER_NICKNAME, MSG_CONTENT, MSG_SENT_TIME
+        FROM MESSAGE
+                 JOIN MESSAGE_STATUS MS ON MSG_ID = MS.MSG_ID
+                 JOIN MEMBER M ON MSG_SENDER = M.MEMBER_NUM
+        WHERE MS.MSG_BOX = 'I'
+          AND MS.MEMBER_NUM = #{memberNum}
+    </select>
+
+    <select id="showSentList" parameterType="Long" resultType="AdmSentMsgListDTO">
+        SELECT MS.MSG_READ, M.MEMBER_NICKNAME, MSG.MSG_CONTENT, MSG.MSG_SENT_TIME
+        FROM MESSAGE MSG
+                 JOIN MESSAGE_STATUS MS ON MSG.MSG_ID = MS.MSG_ID
+                 JOIN MEMBER M ON MSG.MSG_RECIPIENT = M.MEMBER_NUM
+        WHERE MS.MSG_BOX = 'S'
+          AND MS.MEMBER_NUM = #{memberNum}
+    </select>
+
+    <select id="inboxView" parameterType="AdmInboxViewDTO" resultType="AdmInboxViewDTO">
+        SELECT M.MEMBER_NICKNAME, MSG.MSG_CONTENT
+        FROM MESSAGE MSG
+                 JOIN MESSAGE_STATUS MS ON MSG.MSG_ID = MS.MSG_ID
+                 JOIN MEMBER M ON MSG.MSG_SENDER = M.MEMBER_NUM
+        WHERE MS.MSG_BOX = 'I'
+          AND MSG.MSG_ID = #{msgId}
+          AND MSG.MSG_RECIPIENT = #{memberNum}
+    </select>
+
+    <select id="sentMailView" parameterType="AdmSentMsgViewDTO" resultType="AdmSentMsgViewDTO">
+        SELECT M.MEMBER_NICKNAME, MSG.MSG_CONTENT
+        FROM MESSAGE MSG
+                 JOIN MESSAGE_STATUS MS ON MSG.MSG_ID = MS.MSG_ID
+                 JOIN MEMBER M ON MSG.MSG_RECIPIENT = M.MEMBER_NUM
+        WHERE MS.MSG_BOX = 'S'
+          AND MSG.MSG_ID = #{msgId}
+          AND MSG.MSG_SENDER = #{memberNum}
+    </select>
+
+
+    <select id="writeMsg" parameterType="String" resultType="AdmToWriteMsgDTO">
+        SELECT member_num, member_nickname
+        from member
+        where member_id = #{memberId}
+    </select>
+
+    <insert id="sendMsg" parameterType="AdmToSendMsgDTO">
+        <selectKey keyProperty="msgId" resultType="Long" order="BEFORE">
+            SELECT SEQ_MESSAGE.nextVal FROM DUAL
+        </selectKey>
+        INSERT INTO MESSAGE (MSG_ID, MSG_SENDER, MSG_RECIPIENT, MSG_CONTENT, MSG_SENT_TIME)
+        VALUES (#{msgId}, 1, #{msgRecipient}, #{msgContent}, SYSDATE)
+    </insert>
+
+    <insert id="insertStatusSender" parameterType="AdmToSendMsgDTO">
+        <selectKey keyProperty="statusId" resultType="Long" order="BEFORE">
+            SELECT SEQ_MESSAGE_STATUS.nextVal FROM DUAL
+        </selectKey>
+        INSERT INTO MESSAGE_STATUS (STATUS_ID, MSG_ID, MEMBER_NUM, MSG_BOX, MSG_READ, MSG_TRASHED_DATE)
+        VALUES (#{statusId}, #{msgId}, 1, 'S', 0, NULL)
+    </insert>
+
+    <insert id="insertStatusReceiver" parameterType="AdmToSendMsgDTO">
+        <selectKey keyProperty="statusId" resultType="Long" order="BEFORE">
+            SELECT SEQ_MESSAGE_STATUS.nextVal FROM DUAL
+        </selectKey>
+        INSERT INTO MESSAGE_STATUS (STATUS_ID, MSG_ID, MEMBER_NUM, MSG_BOX, MSG_READ, MSG_TRASHED_DATE)
+        VALUES (#{statusId}, #{msgId}, 1, 'I', 0, NULL)
+    </insert>
+
+    <delete id="deleteMsg" parameterType="Long">
+        DELETE FROM MESSAGE_STATUS
+        WHERE MSG_ID = #{msgId}
+    </delete>
+</mapper>
