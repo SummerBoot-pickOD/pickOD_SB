@@ -30,13 +30,16 @@ main{
   height: 450px;
 }
 
-.back {
+.back-a{
   display: block;
   max-width: 20px;
   margin: 10px;
   cursor: pointer;
   padding-left: 430px;
   padding-top: 10px;
+}
+.back {
+  width:100%;
 }
 
 .logo {
@@ -62,7 +65,7 @@ h2 {
   display: flex;
   justify-content: space-evenly;
 }
-#button-container>.button{
+#button-container .button{
   padding : 5px 10px;
   border : 1px solid #D6D6D6;
   border-radius: 20px;

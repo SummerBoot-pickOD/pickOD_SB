@@ -17,9 +17,9 @@ $(function () {
 //이메일이 없다면?
 //비밀번호 대신에 회원가입으로 버튼을 바꾸면 될듯?
 
-$("#login").click(function(){
-  window.location.href = "./login.html"
-})
+// $("#login").click(function(){
+//   window.location.href = "./login.html"
+// })
 $("#pswd").click(function(){
-  window.location.href = "./lostPswdReset.html"
+  $(this).closest('form').submit();
 })

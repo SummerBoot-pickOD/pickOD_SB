@@ -6,9 +6,9 @@ $(function () {
   $("#footer").load("../../html/main/footer.html");
 });
 
-$(".back").click(function(){
-  window.location.href = "./lostPswdSelectCert.html";
-});
+// $(".back").click(function(){
+//   window.location.href = "./lostPswdSelectCert.html";
+// });
 
 
 $(".send-email").click(function(){
@@ -41,7 +41,8 @@ $("#send-cert").click(function(){
       return;
     }
     alert("인증 성공했습니다.");
-    window.location.href = "./lostPswdReset.html";
+    //window.location.href = "./lostPswdReset.html";
+    $(".input-cert>form").submit();
 })
 
 
