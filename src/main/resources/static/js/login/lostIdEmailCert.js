@@ -6,10 +6,6 @@ $(function () {
   $("#footer").load("../../html/main/footer.html");
 });
 
-$(".back").click(function(){
-  window.location.href = "./lostIdSelectCert.html";
-});
-
 $(".send-email").click(function(){
   put = $(".input-email input").val()
   email_regex = /^[0-9a-zA-Z]*@[0-9a-zA-Z]*.[a-zA-Z]{2,3}$/i;
@@ -40,7 +36,7 @@ $("#send-cert").click(function(){
       return;
     }
     alert("인증 성공했습니다.");
-    window.location.href = "./lostIdShow.html";
+    $(".input-cert>form").submit();
 })
 
 

@@ -5,10 +5,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>비밀번호 찾기</title>
-  <link rel="stylesheet" href="../../css/login/lostPswdEmailCert.css">
-  <link rel="stylesheet" href="../../css/main/header.css">
-  <link rel="stylesheet" href="../../css/main/footer.css">
-  <script defer src="../../js/login/lostPswdEmailCert.js"></script>
+  <link rel="stylesheet" th:href="@{/css/login/lostPswdEmailCert.css}">
+  <link rel="stylesheet" th:href="@{/css/main/header.css}">
+  <link rel="stylesheet" th:href="@{/css/main/footer.css}">
+  <script defer th:src="@{/js/login/lostIdEmailCert.js}"></script>
   <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
     crossorigin="anonymous"></script>
 </head>
@@ -19,22 +19,22 @@
   <main>
     <div class="container">
       <div>
-        <img class="back" src="../../img/admin/backArrow.png">
+        <a class="back-a" th:href="@{/login/lostPswd}"><img class="back" th:src="@{/img/admin/backArrow.png}"></a>
       </div>
-      <img class="logo" src="../../img/main/logo.png">
+      <img class="logo" th:src="@{/img/main/logo.png}">
       <h2>이메일 인증</h2>
       <div id="input-container">
         <div class = "input-email">
-          <form action="">
-            <input type="text" name="" id="" placeholder="이메일을 입력하세요." required>
-            <button type="button" class="send-email">이메일 인증</button>
-          </form>
+          <input type="text" name="" placeholder="이메일을 입력하세요." required>
+          <button type="button" class="send-email">이메일 인증</button>
         </div>
         <div class = "input-cert">
-          <form action="">
-            <input type="text" name="" id="" placeholder="인증번호를 입력하세요." required>
-            <span id = "left-time"></span>
-            <button type="button" id="send-cert">인증하기</button>
+          <form th:action = "@{/login/resetPswd}" method="get">
+            <input type="text" name="" placeholder="인증번호를 입력하세요." required>
+            <div>
+              <span id = "left-time"></span>
+              <button type="button" id="send-cert">인증하기</button>
+            </div>
           </form>
         </div>
         <br><div id = "invalid-cert"></div>

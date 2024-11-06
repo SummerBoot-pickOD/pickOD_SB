@@ -7,14 +7,14 @@ import lombok.ToString;
 
 @Getter @Setter
 @ToString @NoArgsConstructor
-public class AdmJnlMgmtDTO {
+public class AdmJnlReplyDetailsDTO {
+    private Long cmtId;
+    private String jnlTitle;
     private Long memberNum;
     private String memberId;
     private String memberNickName;
-    private String jnlTitle;
-    private int pickCnt;
+    private String cmtContents;
+//    private LocalDate cmtDate;
+//    comments 테이블에 작성 일시 없음
     private String isReported;
-    private String jnlNum;
-    //jnlNum 자체가 필요하지는 않지만, 게시물 번호 받아와야하면 쓰기
-
 }

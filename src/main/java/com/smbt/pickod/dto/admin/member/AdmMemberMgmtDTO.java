@@ -10,6 +10,8 @@ import lombok.ToString;
 public class AdmMemberMgmtDTO {
     private String memberId;
     private String memberNickName;
-    private Long sanctionCnt;
-//    여행 발자국, 여행 짜기 작성 개수는 mapper 통해서
+    private int totJournals;
+    private int totPlans;
+    private int sanctionCnt;
+
 }

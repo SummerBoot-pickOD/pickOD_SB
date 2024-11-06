@@ -5,17 +5,14 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.time.LocalDateTime;
-
 @Getter @Setter
 @ToString @NoArgsConstructor
-public class AdmMsgListDTO {
-    private Long msgId;
+public class AdmSentMsgViewDTO {
     private Long memberNum;
+    private Long msgRecipient;
+    private Long msgId;
     private Long msgSender;
-    private String memberNickName;
+    private String memberNickname;
     private String msgContent;
-    private LocalDateTime msgSentTime;
     private String msgBox;
-    private Long msgRead;
 }

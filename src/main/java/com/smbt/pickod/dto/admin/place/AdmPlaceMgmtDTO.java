@@ -11,6 +11,6 @@ public class AdmPlaceMgmtDTO {
     private Long placeId;
     private String placeName;
     private String placeAddress;
-//    찜하기 수는 mapper 에서
+    private int pickCnt;
     private String isReported;
 }

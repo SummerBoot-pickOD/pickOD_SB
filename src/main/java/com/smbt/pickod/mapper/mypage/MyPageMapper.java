@@ -21,4 +21,6 @@ public interface MyPageMapper {
 
     List<MpgMyPlanListDTO> showMyPlanList (Long memberNum);
 
+    void removePick (MpgRemovePickDTO mpgRemovePickDTO);
+
 }
