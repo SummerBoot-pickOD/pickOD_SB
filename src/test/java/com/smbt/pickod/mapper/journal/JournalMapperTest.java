@@ -11,8 +11,10 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -146,7 +148,7 @@ public class JournalMapperTest {
     }
 
     @Test
-    public void testGetJournalProfilesByJournalId() { //프로필, 닉네임, 메모 가져오기
+    public void testGetJournalProfilesByJournalId() { //프로필, 닉네임 가져오기
         Long journalId = 1L; // 테스트할 JOURNAL ID
         List<JournalProfileDTO> profiles = journalMapper.getJournalProfilesByJournalId(journalId);
 
@@ -156,6 +158,50 @@ public class JournalMapperTest {
 
         assertNotNull(profiles);
         assertFalse(profiles.isEmpty());
+    }
+
+    @Test
+    @Transactional
+    public void testSaveJournalWithDays() {
+        // 1. 기본 여행일지 데이터 설정
+        JournalDTO journalDTO = new JournalDTO();
+        journalDTO.setJnlNum(1L);
+        journalDTO.setJnlTitle("수도권 여행");
+        journalDTO.setMemberNum(1L);
+        journalDTO.setJnlMemo("메모");
+        journalDTO.setJnlPeriod("2박 3일");
+        journalDTO.setJnlTag("#친구와 함께");
+        journalDTO.setJnlTheme("가을");
+        journalDTO.setJnlArea("화성");
+
+        // 2. JnlDayDTO 리스트 설정
+        List<JnlDayDTO> days = new ArrayList<>();
+        JnlDayDTO day1 = new JnlDayDTO();
+        day1.setJnlNum(1L);
+        day1.setJnlDay(1L);
+        day1.setJnlPlaceOrder(1L);
+        day1.setJnlContents("수원화성입성");
+        day1.setPlaceId(101L);
+        days.add(day1);
+
+        JnlDayDTO day2 = new JnlDayDTO();
+        day2.setJnlNum(1L);
+        day2.setJnlDay(2L);
+        day2.setJnlPlaceOrder(2L);
+        day2.setJnlContents("치킨의 거리");
+        day2.setPlaceId(102L);
+        days.add(day2);
+
+        journalDTO.setJnlDayList(days);
+
+        journalService.saveJournalWithDays(journalDTO);
+
+        // 4. 결과 확인을 위한 출력
+        System.out.println("삽입 성공");
+
+        // 확인용 - 삽입된 데이터 출력
+        System.out.println("삽입된 여행일지 제목: " + journalDTO.getJnlTitle());
+        System.out.println("여행일지 Day: " + journalDTO.getJnlDayList().size());
     }
 
 

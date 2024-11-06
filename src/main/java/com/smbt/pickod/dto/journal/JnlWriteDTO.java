@@ -1,27 +1,26 @@
 package com.smbt.pickod.dto.journal;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 import java.sql.Date;
 import java.util.List;
 
-@Getter @Setter @ToString
+@Getter
+@Setter
+@ToString
 @NoArgsConstructor
-public class JournalDTO {
+public class JnlWriteDTO {
     private Long jnlNum;
     private String jnlTitle;
     private Long memberNum;
-    private Integer jnlViews = 0;
     private String jnlMemo;
     private Date jnlCreateDate;
-    private Date jnlUpdateDate;
     private String jnlPeriod;
     private String jnlTag;
     private String jnlTheme;
     private String jnlArea;
-    private Integer pickCount;
-    private List<JnlMemberDTO> jnlMumberList; //mumber 정보
-    private JournalProfileDTO authorProfile;
     private List<JnlDayDTO> JnlDayList;
-
 }

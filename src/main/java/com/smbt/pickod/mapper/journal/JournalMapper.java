@@ -28,7 +28,11 @@ public interface JournalMapper {
 
     List<JournalDTO> searchJournalByTitle(@Param("title") String jnlTitle); //제목 검색에 따라 JOURNAL 리스트를 조회
 
-    void insertJournal(JournalDTO journal); //새로운 JOURNAL을 추가
+    void insertJournal(JournalDTO insertJournal); //새로운 JOURNAL을 추가
+
+    void insertJournalDay(JnlDayDTO insertJnlDay);
+
+    void updateJournal(JournalDTO updateJournal);
 
     void deleteJournal(@Param("jnlNum") Long jnlNum); //JOURNAL을 삭제
 

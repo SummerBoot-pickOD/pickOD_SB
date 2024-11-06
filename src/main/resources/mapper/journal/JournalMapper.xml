@@ -87,7 +87,6 @@
             mi.UPLOADPATH AS uploadPath,
             mi.MEMBER_IMG_TYPE AS memberImgType,
             mi.DEFAULT_YN AS defaultYn,
-            j.JNL_MEMO AS jnlMemo
         FROM
             JOURNAL j
                 JOIN
@@ -104,13 +103,43 @@
             SELECT SEQ_JOURNAL.nextVal FROM DUAL
         </selectKey>
         INSERT INTO JOURNAL (
-        JNL_NUM, JNL_TITLE, MEMBER_NUM, JNL_VIEWS, JNL_MEMO, JNL_CREATE_DATE,
-        JNL_UPDATE_DATE, JNL_PERIOD, JNL_TAG, JNL_THEME, JNL_AREA
+        JNL_NUM, JNL_TITLE, MEMBER_NUM, JNL_MEMO, JNL_CREATE_DATE, JNL_UPDATE_DATE,
+         JNL_PERIOD, JNL_TAG, JNL_THEME, JNL_AREA
         ) VALUES (
-        #{jnlNum}, #{jnlTitle}, #{memberNum}, #{jnlViews}, #{jnlMemo}, SYSDATE,
-        SYSDATE, #{jnlPeriod}, #{jnlTag}, #{jnlTheme}, #{jnlArea}
+        #{jnlNum}, #{jnlTitle}, #{memberNum}, #{jnlMemo},
+        SYSDATE, SYSDATE, #{jnlPeriod}, #{jnlTag}, #{jnlTheme}, #{jnlArea}
         )
     </insert>
+
+    <!-- JnlDayDTO 리스트를 삽입하는 쿼리 -->
+    <insert id="insertJournalDays" parameterType="JnlDayDTO">
+        <foreach collection="jnlDayList" item="day">
+            INSERT INTO JOURNAL_DAY (JNL_NUM, JNL_DAY, JNL_PLACE_ORDER, JNL_CONTENTS, PLACE_ID)
+            VALUES (#{day.jnlNum}, #{day.jnlDay}, #{day.jnlPlaceOrder}, #{day.jnlContents}, #{day.placeId})
+        </foreach>
+    </insert>
+
+    <update id="updateJournal" parameterType="JournalDTO">
+        UPDATE JOURNAL
+        SET JNL_TITLE = #{title}, CONTENT=#{content}, JNL_UPDATE_DATE=SYSDATE
+        WHERE JNL_NUM = #{jnlNum}
+    </update>
+
+    <!-- JnlDayDTO 리스트를 업데이트하기 위한 쿼리 -->
+    <update id="updateJournalDays" parameterType="JournalDTO">
+        <foreach collection="jnlDayList" item="day" separator=";">
+            UPDATE JOURNAL_DAY
+            SET JNL_CONTENTS = #{day.jnlContents}, JNL_PLACE_ORDER = #{day.jnlPlaceOrder}
+            WHERE JNL_NUM = #{day.jnlNum} AND JNL_DAY = #{day.jnlDay}
+        </foreach>
+    </update>
+
+    <delete id="deleteJournal" parameterType="Long">
+        DELETE FROM JOURNAL
+        WHERE JNL_NUM = #{jnlNum}
+    </delete>
+
+
 
 
 

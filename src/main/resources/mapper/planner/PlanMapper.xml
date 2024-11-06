@@ -27,14 +27,13 @@
         WHERE T.TEMP_ID = #{tempId}
     </select>
 
-<!--    <insert id="insertPlan" parameterType="PlanInsertPlanDTO">-->
-<!--    <selectKey keyProperty="planId" resultType="Long" order="BEFORE">-->
-<!--        SELECT SEQ_PLAN.NEXTVAL FROM DUAL-->
-<!--    </selectKey>-->
-<!--        INSERT INTO PLAN(PLAN_ID,PLAN_TITLE,PLAN_START_DATE,PLAN_END_DATE,MEMBER_NUM)-->
-<!--        VALUES(#{planId}, #{planTitle}, #{planStartDate}, #{planEndDate}, #{memberNum})-->
-<!--            RETURNING PLAN_ID INTO #{planId}-->
-<!--    </insert>-->
+    <insert id="insertPlan" parameterType="PlanInsertPlanDTO">
+    <selectKey keyProperty="planId" resultType="Long" order="BEFORE">
+        SELECT SEQ_PLAN.NEXTVAL FROM DUAL
+    </selectKey>
+        INSERT INTO PLAN(PLAN_ID,PLAN_TITLE,PLAN_START_DATE,PLAN_END_DATE,MEMBER_NUM)
+        VALUES(#{planId}, #{planTitle}, #{planStartDate}, #{planEndDate}, #{memberNum})
+    </insert>
 
     <insert id="insertPlanPlace" parameterType="PlanInsertPlaceDTO">
         INSERT INTO PLAN_PLACE (PLAN_ID, PLAN_DAY, PLAN_ORDER, PLAN_DATE, PLACE_ID, PLAN_MEMO)
