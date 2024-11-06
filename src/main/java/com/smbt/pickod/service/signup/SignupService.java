@@ -14,6 +14,15 @@ public class SignupService {
     //회원가입 하기
     public void signupMember(SignUpMemberDTO signUpMemberDTO) {
         signupMapper.signupMember(signUpMemberDTO);
+        if(signUpMemberDTO.getMemberBmonth() != "N" && signUpMemberDTO.getMemberBdate() != "N"){
+            signUpMemberDTO.setMemberByear(signUpMemberDTO.getMemberByear()+
+                    signUpMemberDTO.getMemberBmonth()+
+                    signUpMemberDTO.getMemberBdate());
+        }
+        if(signUpMemberDTO.getMemberAddress1() != "N" && signUpMemberDTO.getMemberAddress2() != "N"){
+            signUpMemberDTO.setMemberAddress1(signUpMemberDTO.getMemberAddress1() + signUpMemberDTO.getMemberAddress2());
+        }
+
         signupMapper.updateOptionalMemberInfo(signUpMemberDTO);
     }
 

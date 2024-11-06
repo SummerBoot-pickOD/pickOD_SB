@@ -6,15 +6,12 @@
             select SEQ_MEMBER.NEXTVAL FROM DUAL
         </selectKey>
         INSERT INTO MEMBER(MEMBER_NUM, MEMBER_ID, MEMBER_PASSWORD, MEMBER_NICKNAME, MEMBER_IMG_YN)
-        VALUES(#{memberNum}, #{memberId}, #{memberPassword}, #{memberNickname},#{memberImgYN})
+        VALUES(#{memberNum}, #{memberId}, #{memberPassword}, #{memberNickname},'N')
     </insert>
     <update id="updateOptionalMemberInfo" parameterType="SignUpMemberDTO">
-        <selectKey keyProperty="memberNum" resultType="Long" order="BEFORE">
-            select MEMBER_NUM FROM MEMBER WHERE MEMBER_ID = #{memberId}
-        </selectKey>
         UPDATE MEMBER SET
-        MEMBER_ADDRESS = #{memberAddress},
-        MEMBER_BDATE = #{memberBdate},
+        MEMBER_ADDRESS = #{memberAddress1},
+        MEMBER_BDATE = TO_DATE(#{memberByear}),
         MEMBER_GENDER = #{memberGender}
         WHERE MEMBER_NUM = #{memberNum}
     </update>

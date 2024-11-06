@@ -7,29 +7,48 @@ $(function () {
 });
 
 //이메일 입력 및 인증
+let madecert = 0;
 
 $(".send-email").click(function(){
-  put = $("#email-container input").val()
+  put = $("#email>input").val()
   email_regex = /^[0-9a-zA-Z]*@[0-9a-zA-Z]*.[a-zA-Z]{2,3}$/i;
   if(!email_regex.test(put)){
     alert('유효하지 않은 이메일입니다.');
     return;
   }
   //(이메일 양식인지 아닌지 확인 기능 필요)
-  alert("인증번호가 전송되었습니다.");
+  const data = {
+    email : $(this).siblings('input').val()
+  };
 
-  $("#cert").css("display","flex");
-
-  let time = 10000;
+  fetch('/login/sendCert',{
+    method : 'POST',
+    headers :{
+      'Content-Type':'application/json'
+    },
+    body : JSON.stringify(data)
+  }).then(res => res.json())
+      .then(data => {
+        if (data.success){
+          alert("인증번호가 전송되었습니다.");
+          madecert = data.cert;
+        }else{
+          alert("이메일 전송에 실패했습니다. 다시 시도해 주세요.");
+        }
+      }).catch(e => {
+    console.log(e);
+    alert('서버와의 연결에 문제가 발생했습니다.')
+  })
+  $("#cert").css("display","block");
+  let time = 120000;
   showTime(time)
-  return;
 });
 
 $("#send-cert").click(function(){
   //인증번호 틀리면 다시
     cert = $("#cert input").val();
     console.log(cert)
-    if(cert !== "1234"){
+    if(cert !== madecert){
       $("#invalid-cert").text("잘못된 인증번호입니다. 다시 입력해주세요.");
       $("#invalid-cert").css("color","red");
       return;
@@ -73,15 +92,36 @@ $("#send-nick-dup").click(function(){
   //입력값만 회원정보 테이블에 가서 중복 여부 확인
   nick = $("#nick-container input").val();
 
-  if(nick == "gabin"){
-    $("#invalid-nick").text("이미 사용중인 닉네임입니다. 다른 닉네임을 기입해주세요.");
-    $("#invalid-nick").css("color","red");
-    return;
-  }
-  $("#invalid-nick").text("사용 가능한 닉네임입니다.");
-  $("#invalid-nick").css("color","blue");
-  return;
+  data = {
+    nickname : nick
+  };
+
+  fetch('/signup/isNickUnique',{
+    method : 'POST',
+    headers :{
+      'Content-Type':'application/json'
+    },
+    body : JSON.stringify(data)
+  }).then(res => res.json())
+      .then(data => {
+        if (data.success){
+
+          if(data.isUnique){
+            $("#invalid-nick").text("사용 가능한 닉네임입니다.");
+            $("#invalid-nick").css("color","blue");
+          }else{
+            $("#invalid-nick").text("이미 사용중인 닉네임입니다. 다른 닉네임을 기입해주세요.");
+            $("#invalid-nick").css("color","red");
+          }
+        }else{
+          alert("닉네임 중복확인 실패.");
+        }
+      }).catch(e => {
+    console.log(e);
+    alert('서버와의 연결에 문제가 발생했습니다.')
+  })
 });
+
 
 //회원가입
 $("#signin").click(function(){
@@ -91,8 +131,8 @@ $("#signin").click(function(){
     alert("이메일을 인증해주세요.");
     return;
   }
-  if($("#pswd-first").val() != $("#pswd-again").val()){
-    alert("비밀번호가 다르니 다시 입력해 주세요.");
+  if(!validatePswd($("#pswd-first").val(),$("#pswd-again").val())){
+    alert("비밀번호 조건에 맞지 않으니 다시 입력해주세요.");
     return;
   }
   if($("#invalid-nick").text() != "사용 가능한 닉네임입니다."){
@@ -104,7 +144,31 @@ $("#signin").click(function(){
     return;
   }
   
-  // 데이터 취합해서 보내기
+  $(this).closest('form').submit();
   alert("회원가입이 완료되었습니다.\n자신의 여행을 마음껏 풀고, 꾸려보세요!!");
-  window.location.href="../login/login.html";
 });
+
+
+function validatePswd(p1,p2,r1,r2){
+  if(p1 != p2){
+    $("#invalid-pswd").text("두 비밀번호가 다릅니다. 다시 입력해주십시오.");
+    return false;
+  }
+
+  if(p1.match(r1) == null){
+    $("#invalid-pswd").text("영문 대/소문자, 숫자만 사용 가능합니다. 다시 입력해주십시오.");
+    return false;
+  }
+
+  if(p1.match(r2) == null){
+    $("#invalid-pswd").text("영문 대문자는 최소 1개 필요합니다. 다시 입력해주십시오.");
+    return false;
+  }
+
+  if(p1.length < 8){
+    $("#invalid-pswd").text("길이가 8자 이하입니다. 다시 입력해주십시오.");
+    return false;
+  }
+
+  return true;
+}
