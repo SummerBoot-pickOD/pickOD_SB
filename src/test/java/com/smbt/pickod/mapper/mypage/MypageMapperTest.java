@@ -30,6 +30,7 @@ class MyPageMapperTest {
     MpgMyCheckListDTO mpgMyMyCheckListDTO;
     MpgMyJournalListDTO mpgMyJournalListDTO;
     MpgMyPlanListDTO mpgMyPlanListDTO;
+    MpgRemovePickDTO mpgRemovePickDTO;
 
     @BeforeEach
     void setUp() {
@@ -39,6 +40,7 @@ class MyPageMapperTest {
         mpgMyMyCheckListDTO = new MpgMyCheckListDTO();
         mpgMyJournalListDTO = new MpgMyJournalListDTO();
         mpgMyPlanListDTO = new MpgMyPlanListDTO();
+        mpgRemovePickDTO = new MpgRemovePickDTO();
     }
 
     @Test
@@ -119,6 +121,23 @@ class MyPageMapperTest {
         assertThat(showMyPlanList)
                 .isNotEmpty()
                 .extracting("planTitle")
+                .isInstanceOf(ArrayList.class);
+    }
+
+    @Test
+    void removePick() {
+        //given
+        mpgMyMyCheckListDTO.setMemberNum(2L);
+        mpgRemovePickDTO.setMemberNum(2L);
+        mpgRemovePickDTO.setPlaceId(1L);
+        //when
+        myPageMapper.removePick(mpgRemovePickDTO);
+        List<MpgMyCheckListDTO> showMyCheckList = myPageMapper.showMyCheckList(mpgMyMyCheckListDTO.getMemberNum());
+
+        //then 내 체크리스트에서 보이는지 확인
+        assertThat(showMyCheckList)
+                .isNotEmpty()
+                .extracting("title")
                 .isInstanceOf(ArrayList.class);
     }
 }
