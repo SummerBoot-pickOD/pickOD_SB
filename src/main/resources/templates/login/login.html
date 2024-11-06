@@ -19,7 +19,7 @@
   <main>
     <div class="container">
       <div>
-        <img class="back" th:src="@{/img/admin/backArrow.png}">
+        <a class="back-a" th:href="@{/main/main}"{><img class="back" th:src="@{/img/admin/backArrow.png}"></a>
       </div>
       <img class="logo" th:src="@{/img/main/logo.png}">
       <h2>로그인</h2>
@@ -30,8 +30,8 @@
         <button type="button" id="login-button">로그인</button>
       </form>
       <div class="login-service-container">
-        <a th:href="@{./lostIdSelectCert}" id="forgot-id" class="login-service">아이디 찾기</a> &nbsp;&nbsp;|&nbsp;&nbsp;
-        <a th:href="@{./lostPswdSelectCert}" id="forgot-password" class="login-service">비밀번호 찾기</a> &nbsp;&nbsp;|&nbsp;&nbsp;
+        <a th:href="@{/login/lostId}" id="forgot-id" class="login-service">아이디 찾기</a> &nbsp;&nbsp;|&nbsp;&nbsp;
+        <a th:href="@{/login/lostPswd}" id="forgot-password" class="login-service">비밀번호 찾기</a> &nbsp;&nbsp;|&nbsp;&nbsp;
         <a th:href="@{../signup/signupTerms}" id="sign-up" class="login-service">회원가입</a>
       </div>
       <div class="quick-login-container">

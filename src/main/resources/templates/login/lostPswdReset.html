@@ -5,10 +5,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>비밀번호 찾기</title>
-  <link rel="stylesheet" href="../../css/login/lostPswdReset.css">
-  <link rel="stylesheet" href="../../css/main/header.css">
-  <link rel="stylesheet" href="../../css/main/footer.css">
-  <script defer src="../../js/login/lostPswdReset.js"></script>
+  <link rel="stylesheet" th:href="@{/css/login/lostPswdReset.css}">
+  <link rel="stylesheet" th:href="@{/css/main/header.css}">
+  <link rel="stylesheet" th:href="@{/css/main/footer.css}">
+  <script defer th:src="@{/js/login/lostPswdReset.js}"></script>
   <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
     crossorigin="anonymous"></script>
 </head>
@@ -19,12 +19,12 @@
   <main>
     <div class="container">
       <div>
-        <img class="back" src="../../img/admin/backArrow.png">
+        <a class="back-a" href="#"><img class="back" th:src="@{/img/admin/backArrow.png}"></a>
       </div>
-      <img class="logo" src="../../img/main/logo.png">
+      <img class="logo" th:src="@{/img/main/logo.png}">
       <h2>비밀번호 재설정</h2>
       <div id="pswd-reset-container">
-        <form action="">
+        <form th:action="@{/login/resetPswd}" method="post">
             <input type="text" class="input-pswd" id ="pswd-first" placeholder="새 비밀번호 입력">
             <br>
             <input type="text" class="input-pswd" id ="pswd-again" placeholder="다시 입력">
