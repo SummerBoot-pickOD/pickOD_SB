@@ -41,16 +41,16 @@ class AdmMemberMgmtMapperTest {
         m1.setMemberId("mem1@gmail.com");
         m1.setMemberPassword("ASDF1234");
         m1.setMemberNickname("member1");
-        m1.setMemberAddress("서울시 광진구");
-        m1.setMemberImgYN("N");
-        signupMapper.signupMember(m1);
+        //m1.setMemberAddress("서울시 광진구"); //유진아 내가 SignUpMemberDTO를 바꾸면서 얘가 오류가 났거든.
+        //m1.setMemberImgYN("N"); //행여나 충돌 생겼으면 이 주석 보고 확인하고 바꾸거나 새로 DTO를 만들면 될거야
+        signupMapper.signupMember(m1); //기존 DTO 구조도 SignUpMemberDTO 파일에 주석으로 써놨음
 
         SignUpMemberDTO m2 = new SignUpMemberDTO();
         m2.setMemberId("mem2@gmail.com");
         m2.setMemberPassword("ASDF1234");
         m2.setMemberNickname("member2");
-        m2.setMemberAddress("서울시 광진구");
-        m2.setMemberImgYN("N");
+        //m2.setMemberAddress("서울시 광진구");
+        //m2.setMemberImgYN("N");
         signupMapper.signupMember(m2);
     }
 

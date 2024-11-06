@@ -23,8 +23,8 @@ class SignupMapperTest {
         dto.setMemberId("gabin1102@naver.com");
         dto.setMemberPassword("ASDF1234");
         dto.setMemberNickname("김카디");
-        dto.setMemberAddress("서울시 광진구");
-        dto.setMemberImgYN("N");
+        //dto.setMemberAddress("서울시 광진구");
+        //dto.setMemberImgYN("N");
 
         signupMapper.signupMember(dto);
         signupMapper.updateOptionalMemberInfo(dto);
