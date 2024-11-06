@@ -125,7 +125,7 @@ class MessageServiceTest {
         verify(messageMapper, times(1)).getMailToBin(any(MsgMailToBinDTO.class));
     }
 
-    /@DisplayName("보낸 메일 휴지통 보내기")
+    @DisplayName("보낸 메일 휴지통 보내기")
     @Test
     public void testMoveSentMailToBin() {
         // given

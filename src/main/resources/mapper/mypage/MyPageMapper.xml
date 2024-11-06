@@ -56,4 +56,30 @@
         ORDER BY P.PLAN_START_DATE
     </select>
 
+    <delete id="removePick" parameterType="MpgRemovePickDTO">
+        BEGIN
+
+    IF #{tempId} IS NOT NULL THEN
+        DELETE FROM TEMPLATE_PICK
+        WHERE MEMBER_NUM = #{memberNum}
+          AND TEMP_ID = #{tempId};
+        END IF;
+
+
+    IF #{jnlNum} IS NOT NULL THEN
+        DELETE FROM JOURNAL_PICK
+        WHERE MEMBER_NUM = #{memberNum}
+          AND JNL_NUM = #{jnlNum};
+        END IF;
+
+
+    IF #{placeId} IS NOT NULL THEN
+        DELETE FROM PLACE_PICK
+        WHERE MEMBER_NUM = #{memberNum}
+          AND PLACE_ID = #{placeId};
+        END IF;
+
+        END;
+
+    </delete>
 </mapper>
