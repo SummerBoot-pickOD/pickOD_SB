@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smbt.pickod.mapper.admin.AdmMsgMapper">
+    <select id="getJournals" resultType="AdmJnlMgmtDTO">
+        SELECT
+            m.member_id,
+            m.member_nickname,
+            j.jnl_num
+            j.jnl_title,
+            COUNT(DISTINCT p.pick_id) AS pick_cnt,
+            CASE
+                WHEN r.report_post_type = "J" AND r.report_post_id = j.jnl_num
+                    THEN 'Y' ELSE 'N'
+                END AS is_reported,
+        FROM
+            JOURNAL j
+                LEFT JOIN
+            MEMBER m ON j.member_num = m.member_num
+                LEFT JOIN
+            JOURNAL_PICK p ON j.jnl_num = p.jnl_num
+                LEFT JOIN
+            REPORT r on j.jnl_num = r.report_post_id
+        GROUP BY
+        j.jnl_num, j.jnl_title
+        ORDER BY
+        j.jnl_num
+    </select>
+
+    <!--    검색을 해서 특정 여행 발자국만 불러온 것 (여행 발자국 관리 페이지) -->
+    <select id="filterJnls" parameterType="AdmJnlFilterDTO" resultType="AdmJnlMgmtDTO">
+        SELECT
+        m.member_id,
+        m.member_nickname,
+        j.jnl_num
+        j.jnl_title,
+        COUNT(DISTINCT p.pick_id) AS pick_cnt,
+        CASE
+        WHEN r.report_post_type = "J" AND r.report_post_id = j.jnl_num
+        THEN 'Y' ELSE 'N'
+        END AS is_reported,
+        FROM
+        JOURNAL j
+        LEFT JOIN
+        MEMBER m ON j.member_num = m.member_num
+        LEFT JOIN
+        JOURNAL_PICK p ON j.jnl_num = p.jnl_num
+        LEFT JOIN
+        REPORT r on j.jnl_num = r.report_post_id
+        WHERE
+        1 = 1  <!-- 쿼리의 기본 조건을 설정하기 위해 사용 -->
+        <if test="searchOption == '닉네임' and keyword != null">
+            AND m.member_nickname LIKE CONCAT('%', #{keyword}, '%')
+        </if>
+        <if test="searchOption == '제목' and keyword != null">
+            AND j.jnl_title LIKE CONCAT('%', #{keyword}, '%')
+        </if>
+        <if test="searchOption == '신고' and keyword != null">
+            AND is_reported = #{keyword}
+        </if>
+<!--        <if test="status == '정상등록'">-->
+            --정상등록일때
+<!--        </if>-->
+<!--        <if test="status == '임시저장'">-->
+            --임시 저장일때
+<!--        </if>-->
+        GROUP BY
+        m.member_id,
+        m.member_nickname,
+        j.jnl_num,
+        j.jnl_title,
+        CASE
+        WHEN r.report_post_type = 'J' AND r.report_post_id = j.jnl_num
+        THEN 'Y' ELSE 'N'
+        END
+        ORDER BY
+        j.jnl_num
+    </select>
+
+
+    <select id="jnlReplies" parameterType="Long" resultType="AdmJnlRepliesDTO">
+        SELECT
+            m.member_id, m.nickname, c.cmt_contents,
+            CASE
+                WHEN r.report_post_type = "R" AND r.report_post_id = c.cmt_id
+                    THEN 'Y' ELSE 'N'
+                END AS is_reported
+        FROM COMMENTS c
+                 LEFT JOIN
+             member m ON c.member_num = m.member_num
+                 LEFT JOIN
+             report r ON r.report_post_type = "R"
+        WHERE c.cmt_post_type = "J" AND c.cmt_post_id = #{jnlNum}
+    </select>
+
+    <select id="jnlReplyDetails" parameterType="Long" resultType="AdmJnlReplyDetailsDTO">
+        SELECT
+            m.member_id, m.member_nickname, c.cmt_contents, j.jnl_title
+            CASE
+                WHEN r.report_post_type = "R" AND r.report_post_id = #{cmtId}
+                    THEN 'Y' ELSE 'N'
+                END AS is_reported
+        FROM COMMENTS c
+                 LEFT JOIN
+                 member m ON c.member_num = m.member_num
+                 LEFT JOIN
+                 report r ON r.report_post_type = "R"
+                LEFT JOIN
+                journal j ON j.jnl_num = c.cmt_post_id
+        WHERE c.cmt_id = #{cmtId} AND c.cmt_post_type = "J"
+    </select>
+
+    <select id="commenterSanction" parameterType="Long" resultType="AdmToSanctionDTO">
+        SELECT M.MEMBER_ID
+        FROM COMMENTS C
+        LEFT JOIN MEMBER M ON M.MEMBER_NUM = C.MEMBER_NUM
+        WHERE C.MEMBER_NUM = #{memberNum}
+    </select>
+
+    <delete id="deleteReply" parameterType="Long">
+        DELETE FROM COMMENTS
+        WHERE CMT_ID = #{cmtId}
+    </delete>
+</mapper>
