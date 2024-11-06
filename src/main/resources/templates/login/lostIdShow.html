@@ -22,16 +22,17 @@
         <a class="back-a" href="#"><img class="back" th:src="@{/img/admin/backArrow.png}"></a>
       </div>
       <img class="logo" th:src="@{/img/main/logo.png}">
-      <h2>해당 이메일로 계정이 있습니다.</h2>
+      <h2>해당 이메일 계정</h2>
       <div id="email-container">
         <div class = "email">
-          <span>gabin1426@gmail.com</span>
+          <span th:text="${email}"></span>
         </div>
       </div>
       <div id="button-container">
         <button type="button" class = "button" id="login" th:onclick="|window.location.href='/login/login'|">로그인으로 돌아가기</button>
-        <form th:action = "@{/login/resetPswd}" method="get">
-          <button type="button" class = "button" id="pswd">비밀번호찾기</button>
+        <form th:action = "@{/login/goResetPswd}" method="post">
+          <button type="submit" class = "button" id="pswd">비밀번호찾기</button>
+          <input type="text" th:value = "${email}" name="certed-email" hidden>
         </form>
       </div>
     </div>

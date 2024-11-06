@@ -25,11 +25,11 @@
       <h2>비밀번호 재설정</h2>
       <div id="pswd-reset-container">
         <form th:action="@{/login/resetPswd}" method="post">
-            <input type="text" class="input-pswd" id ="pswd-first" placeholder="새 비밀번호 입력">
-            <br>
+            <input type="text" name="newPassword" class="input-pswd" id ="pswd-first" placeholder="새 비밀번호 입력">
             <input type="text" class="input-pswd" id ="pswd-again" placeholder="다시 입력">
             <br>
             <div id="invalid-pswd"></div>
+            <input type="text" th:value = "${email}" name="email" hidden>
             <button type="button" id="reset-pswd">비밀번호 변경하기</button>
         </form>
       </div>

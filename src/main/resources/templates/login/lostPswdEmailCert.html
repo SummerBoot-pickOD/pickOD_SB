@@ -29,11 +29,12 @@
           <button type="button" class="send-email">이메일 인증</button>
         </div>
         <div class = "input-cert">
-          <form th:action = "@{/login/resetPswd}" method="get">
+          <form th:action = "@{/login/goResetPswd}" method="post">
             <input type="text" name="" placeholder="인증번호를 입력하세요." required>
             <div>
               <span id = "left-time"></span>
               <button type="button" id="send-cert">인증하기</button>
+              <input type="text" id="certed" name="certed-email" hidden>
             </div>
           </form>
         </div>

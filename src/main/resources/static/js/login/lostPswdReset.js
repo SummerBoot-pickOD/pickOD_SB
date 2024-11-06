@@ -13,23 +13,28 @@ $("#reset-pswd").click(function(){
   pswd2 = $("#pswd-again").val();
 
   const regex_total = /^[A-Za-z0-9]+$/;
-  const regex_least = /[A-Z]/;
+  const regex_least = /.*[A-Z].*/;
   if(pswd1 != pswd2){
     $("#invalid-pswd").text("두 비밀번호가 다릅니다. 다시 입력해주십시오.");
     return;
   }
 
-  if(length(pswd1) < 8){
-    $("#invalid-pswd").text("길이가 8자 이하입니다. 다시 입력해주십시오.");
+  console.log(pswd1.match(regex_total))
+  console.log(pswd1.match(regex_least))
+
+  if(pswd1.match(regex_total) == null){
+    $("#invalid-pswd").text("영문 대/소문자, 숫자만 사용 가능합니다. 다시 입력해주십시오.");
     return;
   }
 
-  if(!regex_total.test(pswd1)){
-    $("#invalid-pswd").text("영문 대/소문자, 숫자만 사용 가능합니다. 다시 입력해주십시오.");
+  if(pswd1.match(regex_least) == null){
+    $("#invalid-pswd").text("영문 대문자는 최소 1개 필요합니다. 다시 입력해주십시오.");
+    return;
   }
 
-  if(!regex_least.test(pswd1)){
-    $("#invalid-pswd").text("영문 대문자는 최소 1개 필요합니다. 다시 입력해주십시오.");
+  if(pswd1.length < 8){
+    $("#invalid-pswd").text("길이가 8자 이하입니다. 다시 입력해주십시오.");
+    return;
   }
 
   //db와 통신 : 비밀번호 변경

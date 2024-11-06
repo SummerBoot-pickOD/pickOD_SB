@@ -27,12 +27,12 @@
         <input type="text" name = "memberId" class="id" placeholder="아이디" required>
         <input type="password" name ="memberPassword" class="pw" placeholder="비밀번호" required>
         <div id="invalid-login"></div>
-        <button type="button" id="login-button">로그인</button>
+        <button type="submit" id="login-button">로그인</button>
       </form>
       <div class="login-service-container">
         <a th:href="@{/login/lostId}" id="forgot-id" class="login-service">아이디 찾기</a> &nbsp;&nbsp;|&nbsp;&nbsp;
         <a th:href="@{/login/lostPswd}" id="forgot-password" class="login-service">비밀번호 찾기</a> &nbsp;&nbsp;|&nbsp;&nbsp;
-        <a th:href="@{../signup/signupTerms}" id="sign-up" class="login-service">회원가입</a>
+        <a th:href="@{/signup/signupTerms}" id="sign-up" class="login-service">회원가입</a>
       </div>
       <div class="quick-login-container">
         <div id="kakao" class="quick-login"><a href=><img th:src="@{/img/login/kakaoLogo.svg}" alt="">&nbsp;&nbsp;카카오로 로그인하기</a></div>

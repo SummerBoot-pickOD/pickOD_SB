@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.smbt.pickod.mapper.login.LoginMapper">
-    <select id="isMemberExist" parameterType="LoginDTO" resultType="LoginSessionDTO">
+    <select id="tryLogin" parameterType="LoginDTO" resultType="LoginSessionDTO">
         SELECT MEMBER_NUM, MEMBER_ID, MEMBER_PASSWORD FROM MEMBER
         WHERE MEMBER_ID = #{memberId}
           AND MEMBER_PASSWORD = #{memberPassword}
