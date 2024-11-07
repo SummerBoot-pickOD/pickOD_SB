@@ -16,13 +16,13 @@ public class MessageService {
     private final MessageMapper messageMapper;
 
     //받은메일함 보여주기
-    public List<MsgGetMailListDTO> GetMessageList (Long memberNum){
+    public List<MsgGetMailListDTO> getMessageList (Long memberNum){
 
         return messageMapper.showGetMailList(memberNum);
     }
 
     //보낸메일함 보여주기
-    public List<MsgSentMailListDTO> SentMessageList (Long memberNum){
+    public List<MsgSentMailListDTO> sentMessageList (Long memberNum){
         return messageMapper.showSentMailList(memberNum);
     }
 
@@ -35,7 +35,7 @@ public class MessageService {
     }
 
     // 보낸 메시지 상세 조회
-    public Optional<MsgSentMailViewDTO> getSentMailView(Long msgId, Long memberNum) {
+    public Optional<MsgSentMailViewDTO> toMailView(Long msgId, Long memberNum) {
         MsgSentMailViewDTO dto = new MsgSentMailViewDTO();
         dto.setMsgId(msgId);
         dto.setMemberNum(memberNum);
@@ -90,4 +90,6 @@ public class MessageService {
     public void deleteMailPermanently(Long msgId) {
         messageMapper.removeMail(msgId);
     }
+
+
 }
