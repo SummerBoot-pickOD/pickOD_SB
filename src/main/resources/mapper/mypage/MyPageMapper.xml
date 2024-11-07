@@ -25,7 +25,7 @@
         ORDER BY COUNT(DISTINCT JP.PICK_ID) DESC
     </select>
 
-<!--    내가찜한 게시물 조회하기-->
+<!--    내가찜한 전체 게시물 조회하기-->
     <select id ="showMyCheckList" parameterType="Long" resultType="MpgMyCheckListDTO">
         SELECT 'TEMPLATE' AS PICK_TYPE, t.TEMP_TITLE AS TITLE
         FROM TEMPLATE_PICK tp
@@ -40,6 +40,29 @@
         SELECT 'PLACE' AS PICK_TYPE, p.PLACE_NAME AS TITLE
         FROM PLACE_PICK pp
         JOIN PLACE p ON pp.PLACE_ID = p.PLACE_ID
+        WHERE pp.MEMBER_NUM = #{memberNum}
+    </select>
+
+<!--    내가찜한 저널만 보여주기-->
+
+    <select id="showMyTemplateCheckList" parameterType="Long" resultType="MpgMyCheckListDTO">
+        SELECT 'TEMPLATE' AS PICK_TYPE, T.TEMP_TITLE AS TITLE
+        FROM TEMPLATE_PICK TP
+                 JOIN TEMPLATE T ON TP.TEMP_ID = T.TEMP_ID
+        WHERE TP.MEMBER_NUM = #{memberNum}
+    </select>
+
+    <select id="showMyJournalCheckList" parameterType="Long" resultType="MpgMyCheckListDTO">
+        SELECT 'JOURNAL' AS PICK_TYPE, j.JNL_TITLE AS TITLE
+        FROM JOURNAL_PICK jp
+                 JOIN JOURNAL j ON jp.JNL_NUM = j.JNL_NUM
+        WHERE jp.MEMBER_NUM = #{memberNum}
+    </select>
+
+    <select id="showMyPlaceCheckList" parameterType="Long" resultType="MpgMyCheckListDTO">
+        SELECT 'PLACE' AS PICK_TYPE, P.PLACE_NAME AS TITLE
+        FROM PLACE_PICK pp
+                 JOIN PLACE P ON pp.PLACE_ID = P.PLACE_ID
         WHERE pp.MEMBER_NUM = #{memberNum}
     </select>
 

@@ -33,6 +33,18 @@ public class MyPageService {
     public List<MpgMyCheckListDTO> getMyCheckList(Long memberNum) {
         return myPageMapper.showMyCheckList(memberNum);
     }
+    //내가 찜한 템플릿만 조회
+    public List<MpgMyCheckListDTO> getCheckedTempList(Long memberNum) {
+        return myPageMapper.showMyTemplateCheckList(memberNum);
+    }
+    //내가 찜한 저널만 조회
+    public List<MpgMyCheckListDTO> getCheckedJournalList(Long memberNum) {
+        return myPageMapper.showMyJournalCheckList(memberNum);
+    }
+    //내가 찜한 장소만 조회
+    public List<MpgMyCheckListDTO> getCheckedPlaceList(Long memberNum) {
+        return myPageMapper.showMyPlaceCheckList(memberNum);
+    }
 
     //내찜하기 갯수 조회
     public Long getCntMyCheckList(Long memberNum) {
