@@ -3,6 +3,7 @@ package com.smbt.pickod.controller.login;
 import com.smbt.pickod.dto.login.LoginDTO;
 import com.smbt.pickod.dto.login.LoginSessionDTO;
 import com.smbt.pickod.service.login.LoginService;
+import jakarta.mail.MessagingException;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -67,10 +68,10 @@ public class LoginController {
 
     @PostMapping("sendCert")
     @ResponseBody
-    public ResponseEntity<Map<String,Object>> sendCert(@RequestBody Map<String,String> email){
+    public ResponseEntity<Map<String,Object>> sendCert(@RequestBody Map<String,String> email) throws MessagingException {
         Map<String,Object> response = new HashMap<>();
         log.info("인증번호 요청 받음 : {} ",email);
-        String certNum = loginService.createCert();
+        String certNum = loginService.sendEmail(email.get("email"));
         response.put("cert",certNum);
         response.put("success", true);
         log.info("인증번호 : {}", certNum);
@@ -85,7 +86,7 @@ public class LoginController {
         model.addAttribute("email",res);
         return "login/lostIdShow";
     }
-//    @RequestParam("email") String email,Model model
+
     @PostMapping("goResetPswd")
     public String resetPswd(Model model, @RequestParam("certed-email")String email){
         model.addAttribute("email",email);
