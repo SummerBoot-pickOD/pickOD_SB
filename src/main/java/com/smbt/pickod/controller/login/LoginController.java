@@ -44,7 +44,12 @@ public class LoginController {
         return new RedirectView("/main/main");
     }
     //로그아웃은 헤더에 있는 관계로 여기선 스킵
-
+    @PostMapping("logout")
+    public RedirectView logout(HttpSession session){
+        session.removeAttribute("memberNum");
+        session.invalidate();
+        return new RedirectView("/main/main");
+    }
 
     @GetMapping("lostId")
     public String lostId(){
@@ -104,6 +109,5 @@ public class LoginController {
         log.info("비밀번호 재설정 성공");
         return new RedirectView("/login/login");
     }
-
 
 }
