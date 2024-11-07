@@ -31,14 +31,14 @@
                 <div class="writing-list">
                   <div class="user-ft"><h1>작성 발자국:</h1></div>
                   <div class="user-num">
-                    <div class="ft-num">10</div>
+                    <div class="ft-num" th:text="${journalCount}"></div>
                     <div class="num-unit">개</div>
                   </div>
                 </div>
                 <div class="temporary-storage">
                   <div class="user-storage"><h1>받은 좋아요:</h1></div>
                   <div class="user-num">
-                    <div class="temporary-num">10</div>
+                    <div class="temporary-num" th:text="${likeCount}"></div>
                     <div class="num-unit">개</div>
                   </div>
                 </div>
@@ -71,7 +71,7 @@
             </div>
             <div class="mybest-index">
               <div class="index-box">
-                <div class="index-title">제목</div>
+                <div class="index-title" >제목</div>
                 <div class="index-detail">
                   <div class="index-check">찜하기</div>
                   <div class="index-view">조회수</div>
@@ -81,11 +81,11 @@
             </div>
             <div class="mybest-list">
               <div class="nth-list">
-                <div class="nth-title">네모네성수점</div>
+                <div class="nth-title" th:text="${myBestList.getJnlTitle()}"></div>
                 <div class="nth-detail">
-                  <div class="nth-check">100</div>
-                  <div class="nth-view">100</div>
-                  <div class="nth-review">100</div>
+                  <div class="nth-check" th:text="${myBestList.getNumPick()}"></div>
+                  <div class="nth-view" th:text="${myBestList.getJnlViews()}"></div>
+                  <div class="nth-review" th:text="${myBestList.getNumComments()}"></div>
                 </div>
               </div>
             </div>
@@ -104,7 +104,7 @@
         <div class="result-detail">
           <div class="search-num">
             <div>총</div>
-            <div>N</div>
+            <div th:text="${cntMyCheckList}"></div>
             <div>건</div>
           </div>
           <div class="search-detail">

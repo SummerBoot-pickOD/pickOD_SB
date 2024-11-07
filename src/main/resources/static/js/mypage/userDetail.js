@@ -55,6 +55,40 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 });
 
+//닉네임 중복 확인
+$("#send-nick-dup").click(function(){
+  //입력값만 회원정보 테이블에 가서 중복 여부 확인
+  nick = $("#nick-container input").val();
+
+  data = {
+    nickname : nick
+  };
+
+  fetch('/signup/isNickUnique',{
+    method : 'POST',
+    headers :{
+      'Content-Type':'application/json'
+    },
+    body : JSON.stringify(data)
+  }).then(res => res.json())
+      .then(data => {
+        if (data.success){
+
+          if(data.isUnique){
+            $("#invalid-nick").text("사용 가능한 닉네임입니다.");
+            $("#invalid-nick").css("color","blue");
+          }else{
+            $("#invalid-nick").text("이미 사용중인 닉네임입니다. 다른 닉네임을 기입해주세요.");
+            $("#invalid-nick").css("color","red");
+          }
+        }else{
+          alert("닉네임 중복확인 실패.");
+        }
+      }).catch(e => {
+    console.log(e);
+    alert('서버와의 연결에 문제가 발생했습니다.')
+  })
+});
 //저장하겠습니까 컨펌창 띄우기
 // document.addEventListener("DOMContentLoaded", function() {
 //   const saveButton = document.getElementById("save");

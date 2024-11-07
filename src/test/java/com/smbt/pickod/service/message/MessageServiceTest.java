@@ -43,7 +43,7 @@ class MessageServiceTest {
         when(messageMapper.showGetMailList(memberNum)).thenReturn(mockMailList);
 
         // when
-        List<MsgGetMailListDTO> result = messageService.GetMessageList(memberNum);
+        List<MsgGetMailListDTO> result = messageService.getMessageList(memberNum);
 
         // then
         assertEquals(2, result.size());
@@ -58,7 +58,7 @@ class MessageServiceTest {
         when(messageMapper.showSentMailList(memberNum)).thenReturn(mockSentMailList);
 
         // when
-        List<MsgSentMailListDTO> result = messageService.SentMessageList(memberNum);
+        List<MsgSentMailListDTO> result = messageService.sentMessageList(memberNum);
 
         // then
         assertEquals(2, result.size());
@@ -82,13 +82,13 @@ class MessageServiceTest {
 
     @DisplayName("보낸 메일 상세 조회")
     @Test
-    public void testGetSentMailView() {
+    public void testToMailView() {
         // given
         MsgSentMailViewDTO mockSentMailView = new MsgSentMailViewDTO();
         when(messageMapper.sentMailView(any(MsgSentMailViewDTO.class))).thenReturn(Optional.of(mockSentMailView));
 
         // when
-        Optional<MsgSentMailViewDTO> result = messageService.getSentMailView(msgId, memberNum);
+        Optional<MsgSentMailViewDTO> result = messageService.toMailView(msgId, memberNum);
 
         // then
         assertEquals(mockSentMailView, result.orElse(null));

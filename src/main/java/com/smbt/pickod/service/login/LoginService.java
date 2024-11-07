@@ -17,16 +17,16 @@ public class LoginService{
     private final JavaMailSender mailSender;
 
     //로그인 잘못됐는지, 제재중인지 확인
-    public LoginSessionDTO loginCheck(LoginDTO loginDTO) {
+    public LoginSessionDTO loginCheck(LoginDTO loginDTO) throws IllegalStateException{
 
         LoginSessionDTO loginSessionDTO = loginMapper.tryLogin(loginDTO).orElse(null);
         //log.info(loginDTO.toString());
         if(loginSessionDTO == null) {
-             // 맞는 조합 없음
+             throw new IllegalStateException("해당 아이디/비밀번호로 로그인할 수 없습니다.");
         }
 
         if(!loginMapper.checkSanction(loginSessionDTO).orElse("N").equals("N")){
-            //진행중인 제재가 있음
+            throw new IllegalStateException("현재 제재 중인 아이디입니다.");//진행중인 제재가 있음
         }
         return loginSessionDTO;
     }
@@ -57,7 +57,8 @@ public class LoginService{
     //이메일 폼 생성
     public MimeMessage createEmailMessage(String toEmail, String cert) throws MessagingException {
         MimeMessage mimeMsg = mailSender.createMimeMessage();
-        mimeMsg.addRecipients(MimeMessage.RecipientType.TO, toEmail);
+        mimeMsg.setFrom("gabin1426@gmail.com");
+        mimeMsg.setRecipients(MimeMessage.RecipientType.TO, toEmail);
         mimeMsg.setSubject("[pickOD] 이메일 인증 인증번호");
         mimeMsg.setFrom("gabin1426@gmail.com");
         mimeMsg.setText("<p>안녕하세요. 픽오디입니다.</p> <p>이메일 인증을 원하시면 아래의 인증번호를 인증란에 입력해주세요.</p>" +
@@ -71,7 +72,6 @@ public class LoginService{
         String cert = createCert();
         MimeMessage mail = createEmailMessage(toEmail,cert);
         mailSender.send(mail);
-
         return cert;
     }
 

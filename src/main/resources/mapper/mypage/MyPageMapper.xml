@@ -14,17 +14,18 @@
         WHERE c.MEMBER_NUM = #{memberNum}
     </select>
 
+<!--    내베스트 게시물 조회-->
     <select id="myBestList" parameterType="Long" resultType="MpgMyBestDTO">
-        SELECT J.JNL_TITLE , COUNT(DISTINCT JP.PICK_ID), J.JNL_VIEWS, COUNT(DISTINCT C.CMT_ID), COALESCE(SUM(L.CMT_ID), 0)
+        SELECT J.JNL_TITLE , COUNT(DISTINCT JP.PICK_ID) AS NUM_PICK, J.JNL_VIEWS, COUNT(C.CMT_ID) AS NUM_COMMENTS
         FROM JOURNAL J
-        LEFT JOIN JOURNAL_PICK JP ON J.JNL_NUM = JP.JNL_NUM
-        LEFT JOIN COMMENTS C ON J.JNL_NUM = C.CMT_POST_ID AND C.CMT_POST_TYPE = 'J'
-        LEFT JOIN LIKED L ON C.CMT_ID = L.CMT_ID
+                 LEFT JOIN JOURNAL_PICK JP ON J.JNL_NUM = JP.JNL_NUM
+                 LEFT JOIN COMMENTS C ON J.JNL_NUM = C.CMT_POST_ID AND C.CMT_POST_TYPE = 'J'
         WHERE J.MEMBER_NUM = #{memberNum}
         GROUP BY J.JNL_TITLE, J.JNL_VIEWS
         ORDER BY COUNT(DISTINCT JP.PICK_ID) DESC
     </select>
 
+<!--    내가찜한 게시물 조회하기-->
     <select id ="showMyCheckList" parameterType="Long" resultType="MpgMyCheckListDTO">
         SELECT 'TEMPLATE' AS PICK_TYPE, t.TEMP_TITLE AS TITLE
         FROM TEMPLATE_PICK tp
@@ -41,6 +42,26 @@
         JOIN PLACE p ON pp.PLACE_ID = p.PLACE_ID
         WHERE pp.MEMBER_NUM = #{memberNum}
     </select>
+
+<!--    내가찜한 게시물 수-->
+    <select id ="cntMyList" parameterType="Long" resultType="Long">
+        SELECT COUNT(TITLE) AS TOTAL_NUM
+        FROM (SELECT 'TEMPLATE' AS PICK_TYPE, t.TEMP_TITLE AS TITLE
+        FROM TEMPLATE_PICK tp
+        JOIN TEMPLATE t ON tp.TEMP_ID = t.TEMP_ID
+        WHERE tp.MEMBER_NUM = #{memberNum}
+        UNION ALL
+        SELECT 'JOURNAL' AS PICK_TYPE, j.JNL_TITLE AS TITLE
+        FROM JOURNAL_PICK jp
+        JOIN JOURNAL j ON jp.JNL_NUM = j.JNL_NUM
+        WHERE jp.MEMBER_NUM = #{memberNum}
+        UNION ALL
+        SELECT 'PLACE' AS PICK_TYPE, p.PLACE_NAME AS TITLE
+        FROM PLACE_PICK pp
+        JOIN PLACE p ON pp.PLACE_ID = p.PLACE_ID
+        WHERE pp.MEMBER_NUM = #{memberNum})
+    </select>
+
     <select id="showMyJournalList" parameterType="Long" resultType="MpgMyJournalListDTO">
         SELECT JNL_TITLE
         FROM JOURNAL

@@ -3,6 +3,7 @@ package com.smbt.pickod.controller.login;
 import com.smbt.pickod.dto.login.LoginDTO;
 import com.smbt.pickod.dto.login.LoginSessionDTO;
 import com.smbt.pickod.service.login.LoginService;
+import jakarta.mail.MessagingException;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -43,7 +44,12 @@ public class LoginController {
         return new RedirectView("/main/main");
     }
     //로그아웃은 헤더에 있는 관계로 여기선 스킵
-
+    @PostMapping("logout")
+    public RedirectView logout(HttpSession session){
+        session.removeAttribute("memberNum");
+        session.invalidate();
+        return new RedirectView("/main/main");
+    }
 
     @GetMapping("lostId")
     public String lostId(){
@@ -67,10 +73,10 @@ public class LoginController {
 
     @PostMapping("sendCert")
     @ResponseBody
-    public ResponseEntity<Map<String,Object>> sendCert(@RequestBody Map<String,String> email){
+    public ResponseEntity<Map<String,Object>> sendCert(@RequestBody Map<String,String> email) throws MessagingException {
         Map<String,Object> response = new HashMap<>();
         log.info("인증번호 요청 받음 : {} ",email);
-        String certNum = loginService.createCert();
+        String certNum = loginService.sendEmail(email.get("email"));
         response.put("cert",certNum);
         response.put("success", true);
         log.info("인증번호 : {}", certNum);
@@ -85,7 +91,7 @@ public class LoginController {
         model.addAttribute("email",res);
         return "login/lostIdShow";
     }
-//    @RequestParam("email") String email,Model model
+
     @PostMapping("goResetPswd")
     public String resetPswd(Model model, @RequestParam("certed-email")String email){
         model.addAttribute("email",email);
@@ -103,6 +109,5 @@ public class LoginController {
         log.info("비밀번호 재설정 성공");
         return new RedirectView("/login/login");
     }
-
 
 }
