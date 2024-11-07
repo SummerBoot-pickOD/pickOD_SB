@@ -17,6 +17,8 @@ public interface MyPageMapper {
 
     List<MpgMyCheckListDTO> showMyCheckList (Long memberNum);
 
+    Optional<Long> cntMyList (Long memberNum);
+
     List<MpgMyJournalListDTO> showMyJournalList (Long memberNum);
 
     List<MpgMyPlanListDTO> showMyPlanList (Long memberNum);
