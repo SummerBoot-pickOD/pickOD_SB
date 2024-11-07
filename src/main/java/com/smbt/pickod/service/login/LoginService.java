@@ -57,7 +57,8 @@ public class LoginService{
     //이메일 폼 생성
     public MimeMessage createEmailMessage(String toEmail, String cert) throws MessagingException {
         MimeMessage mimeMsg = mailSender.createMimeMessage();
-        mimeMsg.addRecipients(MimeMessage.RecipientType.TO, toEmail);
+        mimeMsg.setFrom("gabin1426@gmail.com");
+        mimeMsg.setRecipients(MimeMessage.RecipientType.TO, toEmail);
         mimeMsg.setSubject("[pickOD] 이메일 인증 인증번호");
         mimeMsg.setFrom("gabin1426@gmail.com");
         mimeMsg.setText("<p>안녕하세요. 픽오디입니다.</p> <p>이메일 인증을 원하시면 아래의 인증번호를 인증란에 입력해주세요.</p>" +
@@ -71,7 +72,6 @@ public class LoginService{
         String cert = createCert();
         MimeMessage mail = createEmailMessage(toEmail,cert);
         mailSender.send(mail);
-
         return cert;
     }
 
