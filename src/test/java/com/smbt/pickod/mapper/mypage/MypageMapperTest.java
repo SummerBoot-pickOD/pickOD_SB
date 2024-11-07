@@ -31,6 +31,7 @@ class MyPageMapperTest {
     MpgMyJournalListDTO mpgMyJournalListDTO;
     MpgMyPlanListDTO mpgMyPlanListDTO;
     MpgRemovePickDTO mpgRemovePickDTO;
+    MpgCntMyListDTO mpgCntMyListDTO;
 
     @BeforeEach
     void setUp() {
@@ -41,6 +42,7 @@ class MyPageMapperTest {
         mpgMyJournalListDTO = new MpgMyJournalListDTO();
         mpgMyPlanListDTO = new MpgMyPlanListDTO();
         mpgRemovePickDTO = new MpgRemovePickDTO();
+        mpgCntMyListDTO = new MpgCntMyListDTO();
     }
 
     @Test
@@ -97,6 +99,20 @@ class MyPageMapperTest {
                 .extracting("title")
                 .isInstanceOf(ArrayList.class);
     }
+
+    @Test
+    void cntMyList(){
+        //given
+        mpgCntMyListDTO.setMemberNum(2L);
+
+        //when
+        Optional<Long> cntMyList = myPageMapper.cntMyList(mpgCntMyListDTO.getMemberNum());
+        //that
+        assertThat(cntMyList)
+                .isNotEmpty()  // 비어 있지 않은지 확인
+                .get()         // Optional에서 값을 추출
+                .isInstanceOf(Long.class);  // 값이 Long인지 확인
+    };
 
     @Test
     void showMyJournalList() {

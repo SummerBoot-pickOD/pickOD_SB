@@ -7,7 +7,7 @@
   <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
   crossorigin="anonymous"></script>
   <link rel="stylesheet" href="../../css/message/mailBox.css">
-  <script defer src="../../js/message/mailBox.js"></script>
+  <script defer th:src="@{/js/message/mailBox.js}"></script>
   <link rel="stylesheet" href="../../css/main/header.css">
   <link rel="stylesheet" href="../../css/main/footer.css">
 
@@ -55,113 +55,14 @@
 
     <section>
       <div class="mailbox-container">
-        <div class="mailbox-list">
+        <div class="mailbox-list" th:each="mail : ${mailList}">
           <div class="check-item">
             <input type="checkbox" name="item" class="item">
           </div>
           <div class="mail-open" name=""><img src="../../img/message/쪽지함.png" alt=""></div>
-          <div class="mail-from" name="">신현식</div>
-          <div class="mail-content" name="">어쩌구저쩌구</div>
-          <div class="mail-date" name="">2024-10-04</div>
-        </div>
-        <div class="mailbox-list">
-          <div class="check-item">
-            <input type="checkbox" name="item" class="item">
-          </div>
-          <div class="mail-open" name=""><img src="../../img/message/쪽지함.png" alt=""></div>
-          <div class="mail-from" name="">김태유</div>
-          <div class="mail-content" name="">저쩌고저쩌고</div>
-          <div class="mail-date" name="">2024-10-04</div>
-        </div>
-        <div class="mailbox-list">
-          <div class="check-item">
-            <input type="checkbox" name="item" class="item">
-          </div>
-          <div class="mail-open" name=""><img src="../../img/message/쪽지함.png" alt=""></div>
-          <div class="mail-from" name="">김태유</div>
-          <div class="mail-content" name="">저쩌고저쩌고</div>
-          <div class="mail-date" name="">2024-10-04</div>
-        </div>
-        <div class="mailbox-list">
-          <div class="check-item">
-            <input type="checkbox" name="item" class="item">
-          </div>
-          <div class="mail-open" name=""><img src="../../img/message/쪽지함.png" alt=""></div>
-          <div class="mail-from" name="">김태유</div>
-          <div class="mail-content" name="">저쩌고저쩌고</div>
-          <div class="mail-date" name="">2024-10-04</div>
-        </div>
-        <div class="mailbox-list">
-          <div class="check-item">
-            <input type="checkbox" name="item" class="item">
-          </div>
-          <div class="mail-open" name=""><img src="../../img/message/쪽지함.png" alt=""></div>
-          <div class="mail-from" name="">김태유</div>
-          <div class="mail-content" name="">저쩌고저쩌고</div>
-          <div class="mail-date" name="">2024-10-04</div>
-        </div>
-        <div class="mailbox-list">
-          <div class="check-item">
-            <input type="checkbox" name="item" class="item">
-          </div>
-          <div class="mail-open" name=""><img src="../../img/message/쪽지함.png" alt=""></div>
-          <div class="mail-from" name="">김태유</div>
-          <div class="mail-content" name="">저쩌고저쩌고</div>
-          <div class="mail-date" name="">2024-10-04</div>
-        </div>
-        <div class="mailbox-list">
-          <div class="check-item">
-            <input type="checkbox" name="item" class="item">
-          </div>
-          <div class="mail-open" name=""><img src="../../img/message/쪽지함.png" alt=""></div>
-          <div class="mail-from" name="">김태유</div>
-          <div class="mail-content" name="">저쩌고저쩌고</div>
-          <div class="mail-date" name="">2024-10-04</div>
-        </div>
-        <div class="mailbox-list">
-          <div class="check-item">
-            <input type="checkbox" name="item" class="item">
-          </div>
-          <div class="mail-open" name=""><img src="../../img/message/쪽지함.png" alt=""></div>
-          <div class="mail-from" name="">김태유</div>
-          <div class="mail-content" name="">저쩌고저쩌고</div>
-          <div class="mail-date" name="">2024-10-04</div>
-        </div>
-        <div class="mailbox-list">
-          <div class="check-item">
-            <input type="checkbox" name="item" class="item">
-          </div>
-          <div class="mail-open" name=""><img src="../../img/message/쪽지함.png" alt=""></div>
-          <div class="mail-from" name="">김태유</div>
-          <div class="mail-content" name="">저쩌고저쩌고</div>
-          <div class="mail-date" name="">2024-10-04</div>
-        </div>
-        <div class="mailbox-list">
-          <div class="check-item">
-            <input type="checkbox" name="item" class="item">
-          </div>
-          <div class="mail-open" name=""><img src="../../img/message/쪽지함.png" alt=""></div>
-          <div class="mail-from" name="">김태유</div>
-          <div class="mail-content" name="">저쩌고저쩌고</div>
-          <div class="mail-date" name="">2024-10-04</div>
-        </div>
-        <div class="mailbox-list">
-          <div class="check-item">
-            <input type="checkbox" name="item" class="item">
-          </div>
-          <div class="mail-open" name=""><img src="../../img/message/쪽지함.png" alt=""></div>
-          <div class="mail-from" name="">김태유</div>
-          <div class="mail-content" name="">저쩌고저쩌고</div>
-          <div class="mail-date" name="">2024-10-04</div>
-        </div>
-        <div class="mailbox-list">
-          <div class="check-item">
-            <input type="checkbox" name="item" class="item">
-          </div>
-          <div class="mail-open" name=""><img src="../../img/message/쪽지함.png" alt=""></div>
-          <div class="mail-from" name="">김태유</div>
-          <div class="mail-content" name="">저쩌고저쩌고</div>
-          <div class="mail-date" name="">2024-10-04</div>
+          <div class="mail-from" name="" th:text="${mailList.memberNickName}"></div> <!--data가 dto거나 json이라서 여러값이 있을때-->
+          <div class="mail-content" name="" th:text="${mailList.getMsgContent()}"></div>
+          <div class="mail-date" name="" th:text="${mailList.getMsgSentTime()}"></div>
         </div>
       </div>
     </section>

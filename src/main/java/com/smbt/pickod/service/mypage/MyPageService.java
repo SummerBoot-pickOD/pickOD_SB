@@ -34,6 +34,11 @@ public class MyPageService {
         return myPageMapper.showMyCheckList(memberNum);
     }
 
+    //내찜하기 갯수 조회
+    public Long getCntMyCheckList(Long memberNum) {
+        return myPageMapper.cntMyList(memberNum).orElse(0L);
+    }
+
     //내 저널리스트 조회하기
     public List<MpgMyJournalListDTO> getMyJournalList(Long memberNum) {
         return myPageMapper.showMyJournalList(memberNum);
