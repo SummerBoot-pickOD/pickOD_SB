@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smbt.pickod.mapper.journal.JournalViewMapper">
+    <select id="selectJournalThumbnails" resultType="JournalDTO">
+        SELECT
+            j.JNL_NUM,
+            j.JNL_TITLE,
+            m.MEMBER_NICKNAME AS nickname,
+            mi.MEMBER_IMG_URL AS thumbnailUrl
+        FROM
+            JOURNAL j
+                JOIN MEMBER m ON j.MEMBER_NUM = m.MEMBER_NUM
+                JOIN MEMBER_IMGS mi ON m.MEMBER_IMGS_ID = mi.MEMBER_IMGS_ID
+    </select>
+
+</mapper>

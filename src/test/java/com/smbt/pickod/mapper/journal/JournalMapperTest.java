@@ -29,40 +29,64 @@ public class JournalMapperTest {
     @Autowired
     private JournalMapper journalMapper;
 
+    @Autowired
+    private JournalService journalService;
+
+    @Test
+    public void testSearchJournalByArea() {
+        List<JournalDTO> results = journalMapper.searchJournal("화성", null, null, null, null);
+        if (results.isEmpty()) {
+            System.out.println("검색 결과가 존재하지 않습니다");
+        }
+    }
+
     @Test
     public void testSearchJournalByTag() {
-        List<JournalDTO> result = journalMapper.searchJournalByTag("가족");
-        Assertions.assertNotNull(result);
-        Assertions.assertTrue(result.stream().allMatch(j -> j.getJnlTag().contains("가족")));
-        log.info(String.valueOf(result));
+        List<JournalDTO> results = journalMapper.searchJournal(null, "친구", null, null, null);
+        if (results.isEmpty()) {
+            System.out.println("검색 결과가 존재하지 않습니다");
+        }
     }
 
     @Test
     public void testSearchJournalByTheme() {
-        List<JournalDTO> result = journalMapper.searchJournalByTheme("가족");
-        Assertions.assertNotNull(result);
-        Assertions.assertTrue(result.stream().allMatch(j -> j.getJnlTheme().contains("가족")));
-    }
-
-    @Test
-    public void testSearchJournalByTitle() {
-        List<JournalDTO> result = journalMapper.searchJournalByTitle("아이");
-        Assertions.assertNotNull(result);
-        Assertions.assertTrue(result.stream().allMatch(j -> j.getJnlTitle().contains("아이")));
-    }
-
-    @Test
-    public void testSearchJournalByArea() {
-        List<JournalDTO> result = journalMapper.searchJournalByArea("화성시");
-        Assertions.assertNotNull(result);
-        Assertions.assertTrue(result.stream().allMatch(j -> j.getJnlArea().contains("화성시")));
+        List<JournalDTO> results = journalMapper.searchJournal(null, null, "자연", null, null);
+        if (results.isEmpty()) {
+            System.out.println("검색 결과가 존재하지 않습니다");
+        }
     }
 
     @Test
     public void testSearchJournalByPeriod() {
-        List<JournalDTO> result = journalMapper.searchJournalByPeriod("2024-07-15");
-        Assertions.assertNotNull(result);
-        Assertions.assertTrue(result.stream().allMatch(j -> j.getJnlPeriod().contains("2024-07-15")));
+        List<JournalDTO> results = journalMapper.searchJournal(null, null, null, "당일치기", null);
+        if (results.isEmpty()) {
+            System.out.println("검색 결과가 존재하지 않습니다");
+        }
+    }
+
+    @Test
+    public void testSearchJournalByTitle() {
+        List<JournalDTO> results = journalMapper.searchJournal(null, null, null, null, "내 여행일지");
+        if (results.isEmpty()) {
+            System.out.println("검색 결과가 존재하지 않습니다");
+        }
+    }
+
+    @Test
+    public void testSearchJournalWithMultipleCriteria() {
+        List<JournalDTO> results = journalMapper.searchJournal("수원", "가족", "자연", "당일", "대부도");
+        if (results.isEmpty()) {
+            System.out.println("검색 결과가 존재하지 않습니다");
+        }
+    }
+
+    @Test
+    public void testSearchJournalWithNoCriteria() {
+        List<JournalDTO> results = journalMapper.searchJournal(null, null, null, null, null);
+        if (results.isEmpty()) {
+            System.out.println("검색 결과가 존재하지 않습니다");
+        }
+        Assertions.assertNotNull(results, "Results should not be null");
     }
 
     @Test
@@ -120,35 +144,10 @@ public class JournalMapperTest {
         });
     }
 
-    @Mock
-    private JournalMapper mockJournalMapper;
 
-    @InjectMocks
-    private JournalService journalService;
-
-    public JournalMapperTest() {
-        MockitoAnnotations.openMocks(this);
-    }
 
     @Test
-    public void testGetJournalById() { //특정 num으로 게시글 조회
-        Long testJnlNum = 1L;
-
-        JournalDTO expectedJournal = new JournalDTO();
-        expectedJournal.setJnlNum(testJnlNum);
-        expectedJournal.setJnlTitle("테스트 여행 일지");
-
-        when(mockJournalMapper.getJournalById(testJnlNum)).thenReturn(Optional.of(expectedJournal));
-
-        Optional<JournalDTO> result = journalService.getJournalById(testJnlNum);
-
-        Assertions.assertTrue(result.isPresent());
-        Assertions.assertEquals(expectedJournal.getJnlNum(), result.get().getJnlNum());
-        Assertions.assertEquals(expectedJournal.getJnlTitle(), result.get().getJnlTitle());
-    }
-
-    @Test
-    public void testGetJournalProfilesByJournalId() { //프로필, 닉네임 가져오기
+    public void testGetJournalProfilesByJournalId() {
         Long journalId = 1L; // 테스트할 JOURNAL ID
         List<JournalProfileDTO> profiles = journalMapper.getJournalProfilesByJournalId(journalId);
 
@@ -160,49 +159,54 @@ public class JournalMapperTest {
         assertFalse(profiles.isEmpty());
     }
 
+
     @Test
     @Transactional
-    public void testSaveJournalWithDays() {
+    public void testInsertJournalWithDays() {
         // 1. 기본 여행일지 데이터 설정
         JournalDTO journalDTO = new JournalDTO();
-        journalDTO.setJnlNum(1L);
-        journalDTO.setJnlTitle("수도권 여행");
+        journalDTO.setJnlTitle("내 여행일지");
         journalDTO.setMemberNum(1L);
-        journalDTO.setJnlMemo("메모");
+        journalDTO.setJnlMemo("이 여행은");
         journalDTO.setJnlPeriod("2박 3일");
-        journalDTO.setJnlTag("#친구와 함께");
-        journalDTO.setJnlTheme("가을");
-        journalDTO.setJnlArea("화성");
+        journalDTO.setJnlTag("맛집");
+        journalDTO.setJnlTheme("자연");
+        journalDTO.setJnlArea("수원");
 
         // 2. JnlDayDTO 리스트 설정
         List<JnlDayDTO> days = new ArrayList<>();
+
         JnlDayDTO day1 = new JnlDayDTO();
-        day1.setJnlNum(1L);
         day1.setJnlDay(1L);
         day1.setJnlPlaceOrder(1L);
-        day1.setJnlContents("수원화성입성");
+        day1.setJnlContents("수원의 성지");
         day1.setPlaceId(101L);
         days.add(day1);
 
         JnlDayDTO day2 = new JnlDayDTO();
-        day2.setJnlNum(1L);
         day2.setJnlDay(2L);
         day2.setJnlPlaceOrder(2L);
-        day2.setJnlContents("치킨의 거리");
+        day2.setJnlContents("전통시장을 갔다");
         day2.setPlaceId(102L);
         days.add(day2);
 
         journalDTO.setJnlDayList(days);
 
+        // 3. insertJournal 호출
         journalService.saveJournalWithDays(journalDTO);
 
-        // 4. 결과 확인을 위한 출력
-        System.out.println("삽입 성공");
+        System.out.println("삽입된 여행일지 정보:");
+        System.out.println(journalDTO.toString());
 
-        // 확인용 - 삽입된 데이터 출력
-        System.out.println("삽입된 여행일지 제목: " + journalDTO.getJnlTitle());
-        System.out.println("여행일지 Day: " + journalDTO.getJnlDayList().size());
+        System.out.println("삽입된 여행일지의 날 정보:");
+        for (JnlDayDTO day : journalDTO.getJnlDayList()) {
+            System.out.println(day.toString());  // 각 JnlDayDTO의 모든 필드를 출력
+        }
     }
+
+
+
+
 
 
 

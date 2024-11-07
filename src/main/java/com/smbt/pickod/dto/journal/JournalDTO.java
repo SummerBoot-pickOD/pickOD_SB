@@ -11,7 +11,7 @@ public class JournalDTO {
     private Long jnlNum;
     private String jnlTitle;
     private Long memberNum;
-    private Integer jnlViews = 0;
+    private Integer jnlViews;
     private String jnlMemo;
     private Date jnlCreateDate;
     private Date jnlUpdateDate;
@@ -20,8 +20,8 @@ public class JournalDTO {
     private String jnlTheme;
     private String jnlArea;
     private Integer pickCount;
-    private List<JnlMemberDTO> jnlMumberList; //mumber 정보
+    private List<JnlMemberDTO> jnlMumberList;
     private JournalProfileDTO authorProfile;
-    private List<JnlDayDTO> JnlDayList;
-
+    private List<JnlDayDTO> jnlDayList;
+    private boolean hasPermission;
 }
