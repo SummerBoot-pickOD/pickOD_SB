@@ -5,14 +5,16 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.List;
+
 @Getter@Setter
 @ToString@NoArgsConstructor
 public class PlaceDTO {
-    private long placeId;
+    private Long placeId;
     private String placeName;
     private String placeAddress;
     private String placeDetails;
-    private String imagePath;
-    private long pickCount;
+    private PlaceImgDTO mainImage;
+    private Long pickCount;
 
 }

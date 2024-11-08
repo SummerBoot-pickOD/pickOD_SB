@@ -13,7 +13,7 @@ public interface PlaceMapper {
     List<PlaceDTO> selectPlacesByLikes();
     List<PlaceDTO> selectPlacesBySearch(@Param("keyword") String keyword);
 
-    PlaceDetailDTO selectPlaceDetail(long placeId);
-    List<PlaceImgDTO> selectPlaceDetailImg(long placeId);
+    PlaceDetailDTO selectPlaceDetail(Long placeId);
+    List<PlaceImgDTO> selectPlaceDetailImg(Long placeId);
 }
 
