@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smbt.pickod.mapper.journal.ImgMapper">
+    <insert id="insertImg" parameterType="JnlImgsDTO">
+        <selectKey keyProperty="jnlImgsId" resultType="Long" order="BEFORE">
+            SELECT SEQ_FILE.NEXTVAL FROM DUAL
+        </selectKey>
+        INSERT INTO JNL_IMGS(JNL_IMGS_ID, JNL_IMGS_GUID ,FILE_NAME, UPLOADPATH, JNL_IMGS_ORDER, JNL_NUM, JNL_DAY, PLACE_ID)
+        VALUES(#{jnlImgsId}, #{jnlImgsGuid}, #{fileName}, #{uploadpath}, #{jnlImgsOrder}, #{jnlNum}, #{jnlDay}, #{placeId})
+    </insert>
+
+    <delete id="deleteImg" parameterType="Long">
+        DELETE FROM JNL_IMGS
+        WHERE JUL_NUM = #{jnlNum}
+    </delete>
+
+    <select id="selectList" parameterType="Long" resultType="JnlImgsDTO">
+        SELECT JNL_IMGS_ID, JNL_IMGS_GUID ,FILE_NAME, UPLOADPATH, JNL_IMGS_ORDER, JNL_NUM, JNL_DAY, PLACE_ID
+        FROM JNL_IMGS
+        WHERE JUL_NUM = #{jnlNum}
+    </select>
+</mapper>

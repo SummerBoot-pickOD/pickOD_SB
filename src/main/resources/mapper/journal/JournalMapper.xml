@@ -1,36 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.smbt.pickod.mapper.journal.JournalMapper">
-    <select id="searchJournalByTag" parameterType="String" resultType="JournalDTO">
-        SELECT *
-        FROM JOURNAL
-        WHERE JNL_TAG LIKE '%' || #{tag} || '%'
+
+    <select id="getJournalByNum" parameterType="long" resultType="JournalDTO">
+        SELECT
+            j.JNL_NUM,
+            j.JNL_TITLE,
+            j.JNL_VIEWS,
+            j.JNL_MEMO,
+            j.MEMBER_NUM,
+            j.JNL_CREATE_DATE,
+            j.JNL_UPDATE_DATE,
+            j.JNL_PERIOD,
+            j.JNL_TAG,
+            j.JNL_THEME,
+            j.JNL_AREA,
+            m.MEMBER_NICKNAME AS nickname,
+            mi.MEMBER_IMG_URL AS memberImgUrl,
+            mi.MEMBER_IMGS_ID AS memberImgsId,
+            mi.MEMBER_IMGS_GUID AS memberImgsGuid,
+            mi.FILE_NAME AS fileName,
+            mi.UPLOADPATH AS uploadPath,
+            mi.MEMBER_IMG_TYPE AS memberImgType,
+            mi.DEFAULT_YN AS defaultYn
+        FROM
+            JOURNAL j
+                JOIN MEMBER m ON j.MEMBER_NUM = m.MEMBER_NUM
+                LEFT JOIN MEMBER_IMGS mi ON m.MEMBER_IMGS_ID = mi.MEMBER_IMGS_ID
+        WHERE
+            j.JNL_NUM = #{journalNum}
     </select>
 
-    <select id="searchJournalByTheme" parameterType="String" resultType="JournalDTO">
-        SELECT *
-        FROM JOURNAL
-        WHERE JNL_TAG LIKE '%' || #{theme} || '%'
+    <select id="getJournalDaysByJournalNum" parameterType="long" resultType="JnlDayDTO">
+        SELECT
+            jd.JNL_NUM,
+            jd.JNL_DAY,
+            jd.JNL_PLACE_ORDER,
+            jd.JNL_CONTENTS,
+            jd.PLACE_ID
+        FROM
+            JOURNAL_DAY jd
+        WHERE
+            jd.JNL_NUM = #{journalNum}
+        ORDER BY jd.JNL_DAY
     </select>
 
-    <select id="searchJournalByTitle" parameterType="String" resultType="JournalDTO">
-        SELECT *
-        FROM JOURNAL
-        WHERE JNL_TAG LIKE '%' || #{title} || '%'
+    <select id="searchJournal" parameterType="String" resultType="JournalDTO">
+        SELECT * FROM JOURNAL
+        WHERE 1=1
+        <if test="area != null and area != ''">
+            AND JNL_AREA LIKE '%' || #{area} || '%'
+        </if>
+        <if test="tag != null and tag != ''">
+            AND JNL_TAG LIKE '%' || #{tag} || '%'
+        </if>
+        <if test="theme != null and theme != ''">
+            AND JNL_THEME LIKE '%' || #{theme} || '%'
+        </if>
+        <if test="period != null and period != ''">
+            AND JNL_PERIOD LIKE '%' || #{period} || '%'
+        </if>
+        <if test="title != null and title != ''">
+            AND JNL_TITLE LIKE '%' || #{title} || '%'
+        </if>
     </select>
 
-    <select id="searchJournalByArea" parameterType="String" resultType="JournalDTO">
-        SELECT *
-        FROM JOURNAL
-        WHERE JNL_TAG LIKE '%' || #{area} || '%'
-    </select>
-
-    <select id="searchJournalByPeriod" parameterType="String" resultType="JournalDTO">
-        SELECT *
-        FROM JOURNAL
-        WHERE JNL_TAG LIKE '%' || #{period} || '%'
-    </select>
-    
     <select id="countTotalJournals" resultType="int">
         SELECT count(*)
         FROM JOURNAL
@@ -57,10 +91,10 @@
                  JOIN TEMPLATE t ON j.JNL_NUM = t.JNL_NUM
     </select>
 
-    <select id="getJournalById" resultType="JournalDTO">
+    <select id="getJournalByPermission" parameterType="long" resultType="JournalDTO">
         SELECT *
         FROM JOURNAL
-        WHERE JNL_NUM = #{jnlNum}
+        WHERE MEMBER_NUM = #{memberNum}
     </select>
 
     <resultMap id="memberResultMap" type="com.smbt.pickod.dto.journal.JnlMemberDTO">
@@ -86,9 +120,8 @@
             mi.FILE_NAME AS fileName,
             mi.UPLOADPATH AS uploadPath,
             mi.MEMBER_IMG_TYPE AS memberImgType,
-            mi.DEFAULT_YN AS defaultYn,
-            j.JNL_MEMO AS jnlMemo
-        FROM
+            mi.DEFAULT_YN AS defaultYn
+            FROM
             JOURNAL j
                 JOIN
             MEMBER m ON j.MEMBER_NUM = m.MEMBER_NUM
@@ -104,13 +137,46 @@
             SELECT SEQ_JOURNAL.nextVal FROM DUAL
         </selectKey>
         INSERT INTO JOURNAL (
-        JNL_NUM, JNL_TITLE, MEMBER_NUM, JNL_VIEWS, JNL_MEMO, JNL_CREATE_DATE,
-        JNL_UPDATE_DATE, JNL_PERIOD, JNL_TAG, JNL_THEME, JNL_AREA
+        JNL_NUM, JNL_TITLE, MEMBER_NUM, JNL_VIEWS, JNL_MEMO, JNL_CREATE_DATE, JNL_UPDATE_DATE,
+        JNL_PERIOD, JNL_TAG, JNL_THEME, JNL_AREA
         ) VALUES (
-        #{jnlNum}, #{jnlTitle}, #{memberNum}, #{jnlViews}, #{jnlMemo}, SYSDATE,
-        SYSDATE, #{jnlPeriod}, #{jnlTag}, #{jnlTheme}, #{jnlArea}
+        #{jnlNum}, #{jnlTitle}, #{memberNum}, 0, #{jnlMemo},
+        SYSDATE, SYSDATE, #{jnlPeriod}, #{jnlTag}, #{jnlTheme}, #{jnlArea}
         )
     </insert>
+
+    <!-- JnlDayDTO 리스트를 삽입하는 쿼리 -->
+    <insert id="insertJournalDay" parameterType="java.util.List">
+        <foreach collection="list" item="day">
+            INSERT INTO JOURNAL_DAY (JNL_NUM, JNL_DAY, JNL_PLACE_ORDER, JNL_CONTENTS, PLACE_ID)
+            VALUES (#{day.jnlNum}, #{day.jnlDay}, #{day.jnlPlaceOrder}, #{day.jnlContents}, #{day.placeId})
+        </foreach>
+    </insert>
+
+    <update id="updateJournal" parameterType="JournalDTO">
+        UPDATE JOURNAL
+        SET JNL_TITLE = #{title}, CONTENT=#{content}, JNL_UPDATE_DATE=SYSDATE
+        WHERE JNL_NUM = #{jnlNum}
+    </update>
+
+    <!-- JnlDayDTO 리스트를 업데이트하기 위한 쿼리 -->
+    <update id="updateJournalDays" parameterType="JournalDTO">
+        <foreach collection="jnlDayList" item="day" separator=";">
+            UPDATE JOURNAL_DAY
+            SET JNL_CONTENTS = #{day.jnlContents}, JNL_PLACE_ORDER = #{day.jnlPlaceOrder}
+            WHERE JNL_NUM = #{day.jnlNum} AND JNL_DAY = #{day.jnlDay}
+        </foreach>
+    </update>
+
+    <delete id="deleteJournal" parameterType="Long">
+        DELETE FROM JOURNAL
+        WHERE JNL_NUM = #{jnlNum}
+    </delete>
+
+
+
+
+
 
 
 
