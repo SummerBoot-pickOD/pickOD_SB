@@ -5,25 +5,25 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>메인페이지</title>
-  <link rel="stylesheet" href="../../css/main/main.css">
-  <link rel="stylesheet" href="../../css/main/header.css">
-  <link rel="stylesheet" href="../../css/main/footer.css">
+  <link rel="stylesheet"  th:href="@{/css/main/main.css}">
+  <link rel="stylesheet"  th:href="@{/css/main/header.css}">
+  <link rel="stylesheet"  th:href="@{/css/main/footer.css}">
   <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
-  <script src="../../js/main/main.js"></script>
+  <script defer th:src="@{/js/main/main.js}"></script>
 </head>
 
 <body>
-  <div id='header'></div>
+  <div id='header' th:replace="~{main/header}"></div>
   <!-- 행사 -->
   <div class="mainFestival">
     <div class="mainFestival-img">
-      <a id="festivalLink" href="http://recollection.kr/" target="_blank">
+      <a class="festivalLink" href="http://recollection.kr/" target="_blank">
         <img id="festivalImg" src="../../img/main/sampleFestivalImg.png" alt="">
       </a> 
     </div>
     <div class="mainFestival-wrap">
       <div class="mainFestival-info">
-        <a id="festivalLink" href="http://recollection.kr/" target="_blank"><h2 id="festivalTitle">서로 엮는 북촌의 날</h2></a>
+        <a class="festivalLink" href="http://recollection.kr/" target="_blank"><h2 id="festivalTitle">서로 엮는 북촌의 날</h2></a>
         <span id="festivalDate">2024.10.02~2024.11.30</span>
         <span id="festivalLocation">서울특별시 종로구 계동길 37 (계동) 북촌문화센터</span>
       </div>
@@ -157,11 +157,11 @@
     <section>
       <div class="main-section-title">
         <h2>발자국이 머무는 곳</h2>
-        <a href="../../html/place/place.html"><img src="../../img/main/goBtn.png" alt=""></a>
+        <a th:href="@{/place/list}"><img src="../../img/main/goBtn.png" alt=""></a>
       </div>
       <ul class="section3-place">
         <li>
-          <a href="../../html/place/placeDetail.html">
+          <a th:href="@{/place/search(keyword='강남')}">
             <div class="img-container">
               <img src="../../img/place/sample_place.png" alt="이미지">
               <span class="overlay"></span>
@@ -170,47 +170,47 @@
           </a>
         </li>
         <li>
-          <a href="../../html/place/placeDetail.html">
+          <a th:href="@{/place/search(keyword='강북')}">
             <div class="img-container">
               <img src="../../img/place/sample_place.png" alt="이미지">
               <span class="overlay"></span>
-              <span class="place-name">서울 강남</span>
+              <span class="place-name">서울 강북</span>
             </div>
           </a>
         </li>
         <li>
-          <a href="../../html/place/placeDetail.html">
+          <a th:href="@{/place/search(keyword='경기 남부')}">
             <div class="img-container">
               <img src="../../img/place/sample_place.png" alt="이미지">
               <span class="overlay"></span>
-              <span class="place-name">서울 강남</span>
+              <span class="place-name">경기 남부</span>
             </div>
           </a>
         </li>
         <li>
-          <a href="../../html/place/placeDetail.html">
+          <a th:href="@{/place/search(keyword='경기 남부')}">
             <div class="img-container">
               <img src="../../img/place/sample_place.png" alt="이미지">
               <span class="overlay"></span>
-              <span class="place-name">서울강남</span>
+              <span class="place-name">경기 남부</span>
             </div>
           </a>
         </li>
         <li>
-          <a href="../../html/place/placeDetail.html">
+          <a th:href="@{/place/search(keyword='경기 남부')}">
             <div class="img-container">
               <img src="../../img/place/sample_place.png" alt="이미지">
               <span class="overlay"></span>
-              <span class="place-name">서울강남</span>
+              <span class="place-name">경기 남부</span>
             </div>
           </a>
         </li>
         <li>
-          <a href="../../html/place/placeDetail.html">
+          <a th:href="@{/place/search(keyword='경기 남부')}">
             <div class="img-container">
               <img src="../../img/place/sample_place.png" alt="이미지">
               <span class="overlay"></span>
-              <span class="place-name">서울/강남</span>
+              <span class="place-name">경기 남부</span>
             </div>
           </a>
         </li>
@@ -220,7 +220,7 @@
   </main>
   
 
-  <div id="footer"></div>
+  <div id="footer" th:replace="~{main/footer}"></div>
   
 
 </body>

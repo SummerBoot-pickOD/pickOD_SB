@@ -4,17 +4,18 @@
 <body>
   <header>
     <div class="nav_wrap">
-      <a href="../main/main.html"><img src="../../img/main/logo2.png" alt="로고"></a>
+      <a th:href="@{/main/main}"><img src="../../img/main/logo2.png" alt="로고"></a>
       <ul class="nav_menu">
-        <li><a href="../journal/journalSearch.html">여행 발자국</a></li>
-        <li><a href="../place/place.html">장소</a></li>
-        <li><a href="../planner/myPlan.html">여행짜기</a></li>
-        <li><a href="../template/templateSearch.html">템플릿</a></li>
-        <li><a href="../festival/festival.html">행사</a></li>
+        <li><a th:href="@{/journal/write}">여행 발자국</a></li>
+        <li><a th:href="@{/place/list}">장소</a></li>
+        <li><a th:href="@{/planner/list}">여행짜기</a></li>
+        <li><a th:href="@{/board/list}">템플릿</a></li>
+        <li><a th:href="@{/board/list}">행사</a></li>
       </ul>
-      <div class="header_icon">
-        <a href="../mypage/myPage.html"><img src="../../img/main/mypage.png" alt="마이페이지"></a>
-        <a href="../login/login.html"><img src="../../img/main/login.png" alt="로그인"></a>
+      <div class="header_icon" >
+        <a th:unless="${session.memberNum == null}" th:href="@{/mypage/myPage}"><img src="../../img/main/mypage.png" alt="마이페이지"></a>
+        <a th:if="${session.memberNum == null}" th:href="@{/login/login}"><img src="../../img/main/login.png" alt="로그인"></a>
+        <a th:unless="${session.memberNum == null}" th:href="@{/login/loginout}"><img src="../../img/main/logout.png" alt="로그아웃"></a>
       </div>
     </div>
   </header>

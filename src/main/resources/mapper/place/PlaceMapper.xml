@@ -6,11 +6,7 @@
             P.PLACE_ID,
             P.PLACE_NAME,
             P.PLACE_ADDRESS,
-            P.PLACE_DETAILS,
-            (SELECT PI.uploadPath
-             FROM PLACE_IMGS PI
-             WHERE PI.PLACE_ID = P.PLACE_ID
-               AND ROWNUM = 1) AS IMAGE_PATH
+            P.PLACE_DETAILS
         FROM PLACE p
         ORDER BY PLACE_VIEWS DESC
     </select>
@@ -21,10 +17,6 @@
             P.PLACE_NAME,
             P.PLACE_ADDRESS,
             P.PLACE_DETAILS,
-            (SELECT PI.uploadPath
-             FROM PLACE_IMGS PI
-             WHERE PI.PLACE_ID = P.PLACE_ID
-               AND ROWNUM = 1) AS IMAGE_PATH,
             NVL(COUNT(PP.PICK_ID), 0) AS PICK_COUNT
         FROM
             PLACE P
@@ -55,16 +47,26 @@
             P.PLACE_ID,
             P.PLACE_NAME,
             P.PLACE_ADDRESS,
-            P.PLACE_DETAILS,
-            (SELECT PI.uploadPath
-             FROM PLACE_IMGS PI
-             WHERE PI.PLACE_ID = P.PLACE_ID
-               AND ROWNUM = 1) AS IMAGE_PATH
+            P.PLACE_DETAILS
         FROM PLACE P
         WHERE P.PLACE_NAME LIKE '%' || #{keyword} || '%'
            OR P.PLACE_ADDRESS LIKE '%' || #{keyword} || '%'
            OR P.PLACE_DETAILS LIKE '%' || #{keyword} || '%'
     </select>
+
+    <select id="selectPlacesByPlaceFilter" resultType="PlaceDTO">
+        SELECT
+            P.PLACE_ID,
+            P.PLACE_NAME,
+            P.PLACE_ADDRESS,
+            P.PLACE_DETAILS
+        FROM PLACE P
+        WHERE P.PLACE_NAME LIKE '%' || #{keyword} || '%'
+           OR P.PLACE_ADDRESS LIKE '%' || #{keyword} || '%'
+           OR P.PLACE_DETAILS LIKE '%' || #{keyword} || '%'
+    </select>
+
+
 
 
 </mapper>

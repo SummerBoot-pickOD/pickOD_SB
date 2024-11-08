@@ -4,21 +4,21 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <link rel="stylesheet" href="../../css/main/header.css">
-  <link rel="stylesheet" href="../../css/main/footer.css">
-  <link rel="stylesheet" href="../../css/place/place.css">
-  <script src="../../js/place/place.js"></script>
+  <link rel="stylesheet" th:href="@{/css/main/header.css}">
+  <link rel="stylesheet" th:href="@{/css/main/footer.css}">
+  <link rel="stylesheet" th:href="@{/css/place/place.css}">
+  <script defer th:src="@{/js/place/place.js}"></script>
   <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
   crossorigin="anonymous"></script>
 </head>
 <body>
-  <div id='header'></div>
+  <div id='header'  th:replace="~{/main/header}"></div>
   <main>
     <h2 class="place">발자국이 머무는 곳</h2>
 
     <section class="search">
-      <form action="" method="">
-         <input type="text" placeholder="검색어를 입력하세요">
+      <form action="/place/search" method="get">
+         <input type="text" name="keyword" placeholder="검색어를 입력하세요" >
          <button type="submit"></button>
       </form>
     </section>
@@ -103,16 +103,16 @@
     
     <div class="place-container">
       <ul class="place-list">
-        <li>
+        <li  th:each="place : ${placeList}">
           <div class="place-wrap">         
             <div class="place-img">
-              <a href="./placeDetail.html"><img src="../../img/place/sample_place.png"></a>
+              <a th:href="@{'/place/' + ${place.placeId}}"><img src="../../img/place/sample_place.png"></a>
             </div>
             <div class="place-info">
-              <a href="./placeDetail.html"><strong>스타필드 코엑스몰</strong></a>
+              <a th:href="@{'/place/' + ${place.placeId}}"><strong th:text="${place.placeName}"></strong></a>
               <div>
-                <div>서울 강남구</div>
-                <span>일상 속 비일상을 즐기는 꿈같은 원데이 트립</span>
+                <div  th:text="${place.placeAddress}"></div>
+                <span th:text="${place.placeDetails}"></span>
               </div>
             </div>
           </div>
@@ -120,97 +120,13 @@
            <img src="../../img/main/unsaved.png" alt="">
           </div>
         </li>
-        <li>
-          <div class="place-wrap">         
-            <div class="place-img">
-              <a href="./placeDetail.html"><img src="../../img/place/sample_place.png"></a>
-            </div>
-            <div class="place-info">
-              <a href="./placeDetail.html"><strong>스타필드 코엑스몰</strong></a>
-              <div>
-                <div class="place-info-place">서울 강남구</div>
-                <span>일상 속 비일상을 즐기는 꿈같은 원데이 트립</span>
-              </div>
-            </div>
-          </div>
-          <div class="saveimg">
-           <img src="../../img/main/unsaved.png" alt="">
-          </div>
-        </li>
-        <li>
-          <div class="place-wrap">         
-            <div class="place-img">
-              <a href="./placeDetail.html"><img src="../../img/place/sample_place.png"></a>
-            </div>
-            <div class="place-info">
-              <a href="./placeDetail.html"><strong>스타필드 코엑스몰</strong></a>
-              <div>
-                <div class="place-info-place">서울 강남구</div>
-                <span>일상 속 비일상을 즐기는 꿈같은 원데이 트립</span>
-              </div>
-            </div>
-          </div>
-          <div class="saveimg">
-           <img src="../../img/main/unsaved.png" alt="">
-          </div>
-        </li>
-        <li>
-          <div class="place-wrap">         
-            <div class="place-img">
-              <a href="./placeDetail.html"><img src="../../img/place/sample_place.png"></a>
-            </div>
-            <div class="place-info">
-              <a href="./placeDetail.html"><strong>스타필드 코엑스몰</strong></a>
-              <div>
-                <div class="place-info-place">서울 강남구</div>
-                <span>일상 속 비일상을 즐기는 꿈같은 원데이 트립</span>
-              </div>
-            </div>
-          </div>
-          <div class="saveimg">
-           <img src="../../img/main/unsaved.png" alt="">
-          </div>
-        </li>
-        <li>
-          <div class="place-wrap">         
-            <div class="place-img">
-              <a href="./placeDetail.html"><img src="../../img/place/sample_place.png"></a>
-            </div>
-            <div class="place-info">
-              <a href="./placeDetail.html"><strong>스타필드 코엑스몰</strong></a>
-              <div>
-                <div class="place-info-place">서울 강남구</div>
-                <span>일상 속 비일상을 즐기는 꿈같은 원데이 트립</span>
-              </div>
-            </div>
-          </div>
-          <div class="saveimg">
-           <img src="../../img/main/unsaved.png" alt="">
-          </div>
-        </li>
-        <li>
-          <div class="place-wrap">         
-            <div class="place-img">
-              <a href="./placeDetail.html"><img src="../../img/place/sample_place.png"></a>
-            </div>
-            <div class="place-info">
-              <a href="./placeDetail.html"><strong>스타필드 코엑스몰</strong></a>
-              <div>
-                <div class="place-info-place">서울 강남구</div>
-                <span>일상 속 비일상을 즐기는 꿈같은 원데이 트립</span>
-              </div>
-            </div>
-          </div>
-          <div class="saveimg">
-           <img src="../../img/main/unsaved.png" alt="">
-          </div>
-        </li>
+
        
       </ul>   
     </div>
   </main>
 
-  <div id="footer"></div>
+  <div id="footer"  th:replace="~{/main/footer}"></div>
   
 </body>
 </html>
