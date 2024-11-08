@@ -16,19 +16,28 @@ public interface JournalMapper {
 
     List<JournalDTO> getJournalsByDateDesc(); // 최신순 정렬
 
-    Optional<JournalDTO> getJournalById(@Param("jnlNum") Long jnlNum); //특정 여행 일지를 ID로 조회
+    JournalDTO getJournalByNum(long journalNum);  //특정 여행 일지를 ID로 조회
 
-    List<JournalDTO> searchJournalByArea(@Param("area") String jnlArea); //특정 지역(jnlArea) 기준으로 JOURNAL 리스트를 조회
+    List<JnlDayDTO> getJournalDaysByJournalNum(Long journalNum);
 
-    List<JournalDTO> searchJournalByTag(@Param("tag") String jnlTag); //태그 검색에 따라 JOURNAL 리스트를 조회
+    JournalDTO checkJournalAccessPermission(JournalDTO journal, long loggedInMemberNum);
 
-    List<JournalDTO> searchJournalByTheme(@Param("theme") String jnlTheme); //테마 검색에 따라 JOURNAL 리스트를 조회
+    JournalDTO getJournalByPermission(@Param("memberNum") long memberNum);
 
-    List<JournalDTO> searchJournalByPeriod(@Param("period") String jnlPeriod); //일정 검색에 따라 JOURNAL 리스트를 조회
 
-    List<JournalDTO> searchJournalByTitle(@Param("title") String jnlTitle); //제목 검색에 따라 JOURNAL 리스트를 조회
+    List<JournalDTO> searchJournal(
+            @Param("area") String jnlArea,
+            @Param("tag") String jnlTag,
+            @Param("theme") String jnlTheme,
+            @Param("period") String jnlPeriod,
+            @Param("title") String jnlTitle
+    );//제목 검색에 따라 JOURNAL 리스트를 조회
 
-    void insertJournal(JournalDTO journal); //새로운 JOURNAL을 추가
+    void insertJournal(JournalDTO insertJournal); //새로운 JOURNAL을 추가
+
+    void insertJournalDay(List<JnlDayDTO> insertJnlDayList);
+
+    void updateJournal(JournalDTO updateJournal);
 
     void deleteJournal(@Param("jnlNum") Long jnlNum); //JOURNAL을 삭제
 
@@ -60,6 +69,7 @@ public interface JournalMapper {
     // JNL_MEMBER 관련 메서드들
 
     JnlMemberDTO getMemberImagesAndNickName(Long memberNum);
+
 
     Optional<JnlMemberDTO> getMemberById(@Param("memberNum") Long memberNum); //특정 회원(Member)을 ID로 조회
 

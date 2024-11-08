@@ -17,5 +17,4 @@ public class JournalProfileDTO {
     private String uploadPath;
     private String memberImgType;
     private String defaultYn;
-    private String jnlMemo;
 }
