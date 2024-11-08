@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smbt.pickod.mapper.main.MainMapper">
+    <select id="selectMainbyPlaceGangbuk" resultType="PlaceDTO">
+        SELECT
+            P.PLACE_ID,
+            P.PLACE_NAME,
+            P.PLACE_ADDRESS,
+            P.PLACE_DETAILS,
+            (SELECT PI.uploadPath
+             FROM PLACE_IMGS PI
+             WHERE PI.PLACE_ID = P.PLACE_ID
+               AND ROWNUM = 1) AS IMAGE_PATH
+        FROM PLACE p
+        WHERE PLACE_ADDRESS LIKE '%강북구%'
+           OR PLACE_ADDRESS LIKE '%도봉구%'
+           OR PLACE_ADDRESS LIKE '%노원구%'
+           OR PLACE_ADDRESS LIKE '%성북구%'
+           OR PLACE_ADDRESS LIKE '%중랑구%'
+           OR PLACE_ADDRESS LIKE '%송파구%'
+        ORDER BY PLACE_VIEWS DESC
+    </select>
+    <select id="selectMainbyPlaceGangnam" resultType="PlaceDTO">
+        SELECT
+            P.PLACE_ID,
+            P.PLACE_NAME,
+            P.PLACE_ADDRESS,
+            P.PLACE_DETAILS,
+            (SELECT PI.uploadPath
+             FROM PLACE_IMGS PI
+             WHERE PI.PLACE_ID = P.PLACE_ID
+               AND ROWNUM = 1) AS IMAGE_PATH
+        FROM PLACE p
+        where PLACE_ADDRESS LIKE '%강남구%'
+        ORDER BY PLACE_VIEWS DESC
+    </select>
+
+
+    <select id="searchMainTemplates" resultType="TemplateDTO">
+        SELECT *
+        FROM TEMPLATE
+        ORDER BY TEMP_VIEWS DESC
+    </select>
+
+</mapper>

@@ -10,10 +10,10 @@ import java.util.List;
 @Getter@Setter
 @ToString@NoArgsConstructor
 public class PlaceDetailDTO {
-    private long placeId;
+    private Long placeId;
     private String placeName;
     private String placeAddress;
-    private long placeViews;
+    private Long placeViews;
     private String placeDetails;
     private String placeUrl;
     private String placePhonenum;
@@ -22,9 +22,9 @@ public class PlaceDetailDTO {
     private String placeRelated1;
     private String placeRelated2;
     private String placeRelated3;
-    private double placeLat;
-    private double placeLong;
-    private long memberNum;
+    private Double placeLat;
+    private Double placeLong;
+    private Long memberNum;
     private List<PlaceImgDTO> images;
 
 }

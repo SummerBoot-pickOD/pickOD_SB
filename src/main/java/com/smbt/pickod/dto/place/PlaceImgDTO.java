@@ -8,10 +8,10 @@ import lombok.ToString;
 @Getter@Setter
 @ToString@NoArgsConstructor
 public class PlaceImgDTO {
-    private long placeImgsId;
+    private Long placeImgsId;
     private String placeImgsGuid;
     private String fileName;
     private String uploadpath;
-    private long placeId;
+    private Long placeId;
 
 }
