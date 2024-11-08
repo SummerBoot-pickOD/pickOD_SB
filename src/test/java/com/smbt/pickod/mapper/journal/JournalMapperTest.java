@@ -209,6 +209,5 @@ public class JournalMapperTest {
 
 
 
-
 }
 
