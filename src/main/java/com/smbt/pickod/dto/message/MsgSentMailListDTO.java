@@ -13,6 +13,7 @@ public class MsgSentMailListDTO {
     private Long memberNum;
     private Long msgRecipient;
     private Long msgId;
+    private Long msgRead;
     private String memberNickname;
     private String msgContent;
     private String msgBox;

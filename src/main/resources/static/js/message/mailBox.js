@@ -70,7 +70,7 @@ btnDelete.addEventListener('click', function() {
   // 받은 쪽지 중 체크된 항목을 찾아서 휴지통으로 이동
   const checkboxes = document.querySelectorAll('.item');
   console.log(checkboxes);
-  checkboxes.forEach((checkbox, index) => {
+  checkboxes.forEach((checkbox) => {
       if (checkbox.checked) {
 
           const messageItem = checkbox.closest('.mailbox-list');
@@ -141,6 +141,83 @@ document.addEventListener('DOMContentLoaded', function() {
 //   });
 // });
 
+// 샘플데이터
+// const mailList = [
+//   {
+//     memberNickName: "닉네임1",
+//     msgContent: "메일 내용1",
+//     msgSentTime: "2023-10-01"
+//   },
+//   {
+//     memberNickName: "닉네임2",
+//     msgContent: "메일 내용2",
+//     msgSentTime: "2023-10-02"
+//   }
+//
+// ];
+
+
+// 메일 항목을 동적으로 생성
+function renderMailList(data) {
+  // 메일 컨테이너를 가져옵니다.
+  const mailboxContainer = document.getElementById('mailbox-container');
+    mailboxContainer.innerHTML = ''; // 초기화하여 기존 항목 삭제
+  // mailList 배열의 각 항목을 순회합니다.
+  data.forEach(mailList => {
+    // 메일 항목을 감싸는 div 요소 생성
+    const mailboxList = document.createElement('div');
+    mailboxList.className = 'mailbox-list';
+
+    // 체크박스 항목
+    const checkItem = document.createElement('div');
+    checkItem.className = 'check-item';
+    const checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+    checkbox.name = 'item';
+    checkbox.className = 'item';
+    checkItem.appendChild(checkbox);
+
+    // real or not
+    const mailOpen = document.createElement('div');
+    mailOpen.className = 'mail-open';
+    const mailIcon = document.createElement('img');
+    mailIcon.src = '../../img/message/쪽지함.png';
+    mailIcon.alt = '';
+    mailOpen.appendChild(mailIcon);
+
+    // 발신자 닉네임
+    const mailFrom = document.createElement('div');
+    mailFrom.className = 'mail-from';
+    mailFrom.textContent = mailList.memberNickName;
+
+    // 메일 내용
+    const mailContent = document.createElement('div');
+    mailContent.className = 'mail-content';
+    mailContent.textContent = mailList.msgContent;
+
+    // 메일 날짜
+    const mailDate = document.createElement('div');
+    mailDate.className = 'mail-date';
+    mailDate.textContent = mailList.msgSentTime;
+
+    // 각 요소를 mailboxList에 추가
+    mailboxList.appendChild(checkItem);
+    mailboxList.appendChild(mailOpen);
+    mailboxList.appendChild(mailFrom);
+    mailboxList.appendChild(mailContent);
+    mailboxList.appendChild(mailDate);
+
+    // 최종적으로 메일 컨테이너에 mailboxList 추가
+    mailboxContainer.appendChild(mailboxList);
+  });
+}
+
+// 페이지가 로드될 때 mailList 데이터를 기반으로 메일 항목을 렌더링
+document.addEventListener('DOMContentLoaded', function() {
+  renderMailList(mailList);
+});
+
+
 // 게시물 및 페이지네이션 처리
 
 const mailboxLists = Array.from(document.querySelectorAll('.mailbox-list'));
@@ -197,12 +274,6 @@ function setupPagination() {
     const nextButton = createButton(currentPage + 1, '>');
     paginationContainer.appendChild(nextButton);
   }
-};
+}
 
-
-
-  // document.addEventListener('DOMContentLoaded', function() {
-  //   setupPagination();
-  //   displayMails();
-  // });
 
