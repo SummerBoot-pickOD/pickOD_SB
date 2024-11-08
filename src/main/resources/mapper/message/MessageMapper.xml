@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.smbt.pickod.mapper.message.MessageMapper">
     <select id="showGetMailList" parameterType="Long" resultType="MsgGetMailListDTO">
-        SELECT MS.MSG_READ, M.MEMBER_NICKNAME, MSG.MSG_CONTENT, MSG.MSG_SENT_TIME
+        SELECT MS.MSG_READ, M.MEMBER_NICKNAME , MSG.MSG_CONTENT, MSG.MSG_SENT_TIME
         FROM MESSAGE MSG
         JOIN MESSAGE_STATUS MS ON MSG.MSG_ID = MS.MSG_ID
         JOIN MEMBER M ON MSG.MSG_SENDER = M.MEMBER_NUM
@@ -40,7 +40,7 @@
     </select>
 
     <select id="trashedMailList" parameterType="Long" resultType="MsgTrashedMailListDTO">
-        SELECT MS.MSG_READ, M_SENDER.MEMBER_NICKNAME, M_RECIPIENT.MEMBER_NICKNAME, MSG.MSG_CONTENT, MSG.MSG_SENT_TIME
+        SELECT MS.MSG_READ, M_SENDER.MEMBER_NICKNAME AS MSG_SENDER, M_RECIPIENT.MEMBER_NICKNAME AS MSG_RECIPIENT, MSG.MSG_CONTENT, MSG.MSG_SENT_TIME
         FROM MESSAGE MSG
         JOIN MESSAGE_STATUS MS ON MSG.MSG_ID = MS.MSG_ID
         JOIN MEMBER M_SENDER ON MSG.MSG_SENDER = M_SENDER.MEMBER_NUM

@@ -32,11 +32,11 @@
       <div class="mailboxbtn-container">
         <div class="btn-delete"><img src="../../img/message/쪽지함휴지통.png" alt="쪽지함휴지통"></div>
         <div class="btn-box">
-          <a href="./mailBox"><div class="btn-getmail">받은쪽지</div></a>
+          <a th:href="@{/message/mailBox}"><div class="btn-getmail">받은쪽지</div></a>
           <div class="wall">|</div>
-          <a href="./sentMail"><div class="btn-sendmail">보낸쪽지</div></a>
+          <a th:href="@{/message/sentMail}"><div class="btn-sendmail">보낸쪽지</div></a>
           <div class="wall">|</div>
-          <a href="./deletedMail"><div class="btn-bin">휴지통</div></a>
+          <a th:href="@{/message/deletedMail}"><div class="btn-bin">휴지통</div></a>
         </div>
       </div>
     </section>

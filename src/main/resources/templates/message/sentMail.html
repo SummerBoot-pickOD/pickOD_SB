@@ -51,14 +51,14 @@
 
       <script th:inline="javascript">
         /*<![CDATA[*/
-        const tomailList = /*[[${mailList}]]*/ [];
-        console.log("mailList:", tomailList);  // mailList 확인
-        renderMailList(tomailList);
+        const mailList = /*[[${mailList}]]*/ [];
+        console.log("mailList:", mailList);  // mailList 확인
+        renderSentMailList(mailList);
         /*]]>*/
       </script>
 
       <section>
-        <div class="mailbox-container">
+        <div class="mailbox-container" id="mailbox-container">
 <!--          <div class="mailbox-list">-->
 <!--            <div class="check-item">-->
 <!--              <input type="checkbox" name="item" class="item">-->

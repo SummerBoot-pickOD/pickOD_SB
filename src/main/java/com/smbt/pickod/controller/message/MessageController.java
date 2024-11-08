@@ -29,7 +29,7 @@ public class MessageController {
         List<MsgGetMailListDTO> mailList = messageService.getMessageList(memberNum);
         log.info(mailList.get(0).toString());
         model.addAttribute("mailList", mailList);
-        return "/message/mailBox";
+        return "message/mailBox";
     }
 
     @GetMapping("sentMail")
@@ -38,20 +38,20 @@ public class MessageController {
         if (memberNum == null) return "redirect:/login/login";
 
         System.out.println("보낸메일리스트");
-        List<MsgSentMailListDTO> tomailList = messageService.sentMessageList(memberNum);
-        model.addAttribute("tomailList", tomailList);
-        return "/message/sentMail";
+        List<MsgSentMailListDTO> mailList = messageService.sentMessageList(memberNum);
+        model.addAttribute("mailList", mailList);
+        return "message/sentMail";
     }
 
-    @GetMapping("deleteMail")
+    @GetMapping("deletedMail")
     public String binList (HttpSession session, Model model) {
         Long memberNum = (Long) session.getAttribute("memberNum");
         if (memberNum == null) return "redirect:/login/login";
 
         System.out.println("휴지통메일리스트");
         List<MsgTrashedMailListDTO> mailList = messageService.getTrashedMailList(memberNum);
-        model.addAttribute("mailList", mailList.get(0));
-        return "/message/deletedMail";
+        model.addAttribute("mailList", mailList);
+        return "message/deletedMail";
     }
 
     @GetMapping("getmailModal")
@@ -62,7 +62,7 @@ public class MessageController {
         System.out.println("받은메일상세보기");
         Optional<MsgGetMailViewDTO> view = messageService.getMailView(msgId, memberNum);
         model.addAttribute("view", view.orElse(null));
-        return "/message/getmailModal";
+        return "message/getmailModal";
     }
 
     @GetMapping("sentmailModal")
@@ -73,7 +73,7 @@ public class MessageController {
         System.out.println("보낸메일상세보기");
         Optional<MsgSentMailViewDTO> view = messageService.toMailView(msgId, memberNum);
         model.addAttribute("view", view.orElse(null));
-        return "/message/sentmailModal";
+        return "message/sentmailModal";
     }
 
     // 메시지 전송

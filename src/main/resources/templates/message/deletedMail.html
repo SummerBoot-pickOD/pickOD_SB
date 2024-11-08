@@ -54,28 +54,27 @@
         </div>
       </section>
 
+      <script th:inline="javascript">
+        /*<![CDATA[*/
+        const mailList = /*[[${mailList}]]*/ [];
+        console.log("mailList:", mailList);  // mailList 확인
+        renderDeletedMailList(mailList);
+        /*]]>*/
+      </script>
+
       <section>
-        <div class="mailbox-container">
-          <div class="mailbox-list">
-            <div class="check-item">
-              <input type="checkbox" name="item" class="item">
-            </div>
-            <div class="mail-open" name=""><img src="../../img/message/쪽지함.png" alt=""></div>
-            <div class="mail-from" name="">신현식</div>
-            <div class="mail-to">박가빈</div>
-            <div class="mail-content" name="">어쩌구저쩌구</div>
-            <div class="mail-date" name="">2024-10-04</div>
-          </div>
-          <div class="mailbox-list">
-            <div class="check-item">
-              <input type="checkbox" name="item" class="item">
-            </div>
-            <div class="mail-open" name=""><img src="../../img/message/쪽지함.png" alt=""></div>
-            <div class="mail-from">박가빈</div>
-            <div class="mail-to mail-who" name="">신현식</div>
-            <div class="mail-content" name="">어쩌구저쩌구</div>
-            <div class="mail-date" name="">2024-10-04</div>
-          </div>
+        <div class="mailbox-container" id="mailbox-container">
+
+<!--          <div class="mailbox-list">-->
+<!--            <div class="check-item">-->
+<!--              <input type="checkbox" name="item" class="item">-->
+<!--            </div>-->
+<!--            <div class="mail-open" name=""><img src="../../img/message/쪽지함.png" alt=""></div>-->
+<!--            <div class="mail-from"></div>-->
+<!--            <div class="mail-to mail-who" name=""></div>-->
+<!--            <div class="mail-content" name=""></div>-->
+<!--            <div class="mail-date" name=""></div>-->
+<!--          </div>-->
         </div>
       </section>
 
