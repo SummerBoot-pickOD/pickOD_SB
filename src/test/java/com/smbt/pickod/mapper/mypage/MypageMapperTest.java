@@ -101,6 +101,49 @@ class MyPageMapperTest {
     }
 
     @Test
+    void showMyTemplateCheckList() {
+        //given
+        mpgMyMyCheckListDTO.setMemberNum(2L);
+        //when
+        List<MpgMyCheckListDTO> showMyCheckList = myPageMapper.showMyTemplateCheckList(mpgMyMyCheckListDTO.getMemberNum());
+        //that
+        assertThat(showMyCheckList)
+                .isNotEmpty()
+                .extracting("title")
+                .isInstanceOf(ArrayList.class);
+    }
+
+    @Test
+    void showMyJournalCheckList() {
+        //given
+        mpgMyMyCheckListDTO.setMemberNum(2L);
+        //when
+        List<MpgMyCheckListDTO> showMyCheckList = myPageMapper.showMyJournalCheckList(mpgMyMyCheckListDTO.getMemberNum());
+        //that
+        assertThat(showMyCheckList)
+                .isNotEmpty()
+                .extracting("title")
+                .isInstanceOf(ArrayList.class);
+    }
+
+    @Test
+    void showMyPlaceCheckList() {
+        //given
+        mpgMyMyCheckListDTO.setMemberNum(2L);
+        //when
+        List<MpgMyCheckListDTO> showMyCheckList = myPageMapper.showMyPlaceCheckList(mpgMyMyCheckListDTO.getMemberNum());
+        //that
+        assertThat(showMyCheckList)
+                .isNotEmpty()
+                .extracting("title")
+                .isInstanceOf(ArrayList.class);
+    }
+
+
+
+
+
+    @Test
     void cntMyList(){
         //given
         mpgCntMyListDTO.setMemberNum(2L);

@@ -115,66 +115,71 @@ document.querySelectorAll('.checklist-check').forEach(function(checkElement) {
   });
 });
 
-// 게시물 및 페이지네이션 처리
 
-// const posts = Array.from(document.querySelectorAll('.check-list'));
-// const postsPerPage = 9;
-// let currentPage = 1;
-// let totalPages;
+// `checkedList`를 서버에서 받아와 JSON 형식으로 변환하여 JavaScript에 할당
+// const checkedList = /*[[${checkedList}]]*/ [];
 
-// function displayMails() {
-//   const postContainer = document.getElementById('posts');
-//   postContainer.innerHTML = ''; // 현재 표시된 항목 초기화
-
-//   const startIndex = (currentPage - 1) * postsPerPage;
-//   const endIndex = Math.min(startIndex + postsPerPage, posts.length); // 실제 항목 수와 비교하여 인덱스 계산
-
-//   // 해당 페이지에 맞는 mailbox-list만 표시
-//   for (let i = startIndex; i < endIndex; i++) {
-//     postContainer.appendChild(posts[i]);
-//   }
+// 임시 데이터 추가 (테스트용)
+// if (checkedList.length === 0) {
+//   checkedList.push(
+//       { title: "테스트 아이템 1", thumbnailUrl: "https://example.com/image1.jpg" },
+//       { title: "테스트 아이템 2", thumbnailUrl: "https://example.com/image2.jpg" },
+//       { title: "테스트 아이템 3", thumbnailUrl: "https://example.com/image3.jpg" }
+//   );
 // }
 
+function renderCheckList(data) {
+  // checklist-container를 가져옵니다.
+  const container = document.querySelector('.checklist-container');
+  container.innerHTML = ''; // 초기화하여 기존 항목 삭제
 
-// function setupPagination() {
-//   const paginationContainer = document.getElementById('pagination');
-//   paginationContainer.innerHTML = ''; // 페이지네이션 초기화
+  // 주어진 데이터 배열을 반복하여 각 항목에 대해 HTML 요소를 생성합니다.
+  data.forEach(item => {
+    // 새로운 check-list div 생성
+    const checkListDiv = document.createElement('div');
+    checkListDiv.classList.add('check-list');
 
-//   totalPages = Math.ceil(posts.length / postsPerPage); // 실제 항목 수로 페이지 수 계산
+    // 이미지 박스 생성
+    const imgBoxDiv = document.createElement('div');
+    imgBoxDiv.classList.add('checklist-imgbox');
+    const img = document.createElement('img');
+    img.classList.add('checklist-img');
+    img.src = item.thumbnailUrl ? item.thumbnailUrl : '../../img/mypage.png';
+    img.alt = '썸네일 이미지';
+    imgBoxDiv.appendChild(img);
 
-//   const createButton = (pageNum, text) => {
-//     const button = document.createElement('button');
-//     button.textContent = text;
-//     button.disabled = (currentPage === pageNum);
-//     button.addEventListener('click', () => {
-//       currentPage = pageNum;
-//       displayMails(); // 페이지 클릭 시 항목 업데이트
-//       setupPagination(); // 페이지네이션 버튼 다시 설정
-//     });
-//     return button;
-//   };
+    // 체크리스트 박스 생성
+    const boxDiv = document.createElement('div');
+    boxDiv.classList.add('checklist-box');
 
-//   // 이전 페이지 버튼
-//   if (currentPage > 1) {
-//     const prevButton = createButton(currentPage - 1, '<');
-//     paginationContainer.appendChild(prevButton);
-//   }
+    const contentDiv = document.createElement('div');
+    contentDiv.classList.add('checklist-content');
+    boxDiv.appendChild(contentDiv);
 
-//   // 페이지 버튼 생성
-//   for (let i = 1; i <= totalPages; i++) {
-//     const button = createButton(i, i);
-//     paginationContainer.appendChild(button);
-//   }
+    const checkDiv = document.createElement('div');
+    checkDiv.classList.add('checklist-check');
+    const checkImg = document.createElement('img');
+    checkImg.src = '../../img/mypage/saved.png'; // 임시 이미지
+    checkImg.alt = '찜한 아이템';
+    checkDiv.appendChild(checkImg);
+    boxDiv.appendChild(checkDiv);
 
-//   // 다음 페이지 버튼
-//   if (currentPage < totalPages) {
-//     const nextButton = createButton(currentPage + 1, '>');
-//     paginationContainer.appendChild(nextButton);
-//   }
-// };
+    // 제목 div 생성
+    const nameDiv = document.createElement('div');
+    nameDiv.classList.add('checklist-name');
+    nameDiv.textContent = item.title || '제목';
 
+    // 생성된 요소를 check-list div에 추가
+    checkListDiv.appendChild(imgBoxDiv);
+    checkListDiv.appendChild(boxDiv);
+    checkListDiv.appendChild(nameDiv);
 
-//   document.addEventListener('DOMContentLoaded', function() {
-//     setupPagination();
-//     displayMails();
-//   });
+    // check-list div를 checklist-container에 추가
+    container.appendChild(checkListDiv);
+  });
+}
+
+// 페이지 로드 시 checkedList 데이터를 사용해 렌더링
+document.addEventListener('DOMContentLoaded', () => {
+  renderCheckList(checkedList);
+});
