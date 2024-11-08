@@ -32,11 +32,11 @@
       <div class="mailboxbtn-container">
         <div class="btn-delete"><img src="../../img/message/쪽지함휴지통.png" alt="쪽지함휴지통"></div>
         <div class="btn-box">
-          <a href="./mailBox.html"><div class="btn-getmail">받은쪽지</div></a>
+          <a href="./mailBox"><div class="btn-getmail">받은쪽지</div></a>
           <div class="wall">|</div>
-          <a href="./sentMail.html"><div class="btn-sendmail">보낸쪽지</div></a>
+          <a href="./sentMail"><div class="btn-sendmail">보낸쪽지</div></a>
           <div class="wall">|</div>
-          <a href="./deletedMail.html"><div class="btn-bin">휴지통</div></a>
+          <a href="./deletedMail"><div class="btn-bin">휴지통</div></a>
         </div>
       </div>
     </section>
@@ -53,17 +53,25 @@
       </div>
     </section>
 
+    <script th:inline="javascript">
+      /*<![CDATA[*/
+      const mailList = /*[[${mailList}]]*/ [];
+      console.log("mailList:", mailList);  // mailList 확인
+      renderMailList(mailList);
+      /*]]>*/
+    </script>
+
     <section>
-      <div class="mailbox-container">
-        <div class="mailbox-list" th:each="mail : ${mailList}">
-          <div class="check-item">
-            <input type="checkbox" name="item" class="item">
-          </div>
-          <div class="mail-open" name=""><img src="../../img/message/쪽지함.png" alt=""></div>
-          <div class="mail-from" name="" th:text="${mailList.memberNickName}"></div> <!--data가 dto거나 json이라서 여러값이 있을때-->
-          <div class="mail-content" name="" th:text="${mailList.getMsgContent()}"></div>
-          <div class="mail-date" name="" th:text="${mailList.getMsgSentTime()}"></div>
-        </div>
+      <div class="mailbox-container" id="mailbox-container">
+<!--        <div class="mailbox-list" th:each="mail : ${mailList}">-->
+<!--          <div class="check-item">-->
+<!--            <input type="checkbox" name="item" class="item">-->
+<!--          </div>-->
+<!--          <div class="mail-open" name=""><img src="../../img/message/쪽지함.png" alt=""></div>-->
+<!--          <div class="mail-from" name="" th:text="${mailList.memberNickName}"></div> &lt;!&ndash;data가 dto거나 json이라서 여러값이 있을때&ndash;&gt;-->
+<!--          <div class="mail-content" name="" th:text="${mailList.getMsgContent()}"></div>-->
+<!--          <div class="mail-date" name="" th:text="${mailList.getMsgSentTime()}"></div>-->
+<!--        </div>-->
       </div>
     </section>
 
