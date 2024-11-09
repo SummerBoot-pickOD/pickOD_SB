@@ -1,30 +1,31 @@
-//헤더푸터
-$(function () {
-  $("#header").load("../main/header.html");
-  });
-  
-  $(function () {
-  $("#footer").load("../main/footer.html");
-  });
+// //헤더푸터
+// $(function () {
+//   $("#header").load("../main/header.html");
+//   });
+//
+//   $(function () {
+//   $("#footer").load("../main/footer.html");
+//   });
 
 // 신고기능
 
-$(function () {
-  $("#report").load("../report/reportSend.html");
-});
-
-$(".reportimg").click(function(){
-  $(".modal-container").css("display","block");
-});
+// $(function () {
+//   $("#report").load("../report/reportSend.html");
+// });
+//
+// $(".reportimg").click(function(){
+//   $(".modal-container").css("display","block");
+// });
 
 // 받은편지모달기능
-$(function () {
-  $("#getmailModal").load("../message/getmailModal.html");
-});
+// $(function () {
+//   $("#getmailModal").load("../message/getmailModal.html");
+// });
+
 // 답장편지모달기능
-$(function () {
-  $("#replymailModal").load("../message/replymailModal.html");
-});
+// $(function () {
+//   $("#replymailModal").load("../message/replymailModal.html");
+// });
 
 
 document.addEventListener('DOMContentLoaded', function() {

@@ -198,7 +198,7 @@ function renderSentMailList(data) {
     // 발신자 닉네임
     const mailTo = document.createElement('div');
     mailTo.className = 'mail-to';
-    mailTo.textContent = mailList.memberNickName;
+    mailTo.textContent = mailList.memberNickname;
 
     // 메일 내용
     const mailContent = document.createElement('div');

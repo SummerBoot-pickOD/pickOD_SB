@@ -6,14 +6,14 @@
   <title>휴지통</title>
   <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
   crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="../../css/message/deletedMail.css">
-  <script defer src="../../js/message/deletedMail.js"></script>
-  <link rel="stylesheet" href="../../css/main/header.css">
-  <link rel="stylesheet" href="../../css/main/footer.css">
+  <link rel="stylesheet" th:href="@{/css/message/deletedMail.css}">
+  <script defer th:src="@{/js/message/deletedMail.js}"></script>
+  <link rel="stylesheet"  th:href="@{/css/main/header.css}">
+  <link rel="stylesheet"  th:href="@{/css/main/footer.css}">
 </head>
 <body>
   <form action="#" method="">
-    <div id="header"></div>
+    <div id='header' th:replace="~{main/header}"></div>
     <div id="report"></div>
     <main>
       <section>
@@ -32,11 +32,11 @@
             <div class="btn-return">복원</div>
           </div>
           <div class="btn-box">
-            <a href="./mailBox.html"><div class="btn-getmail">받은쪽지</div></a>
+            <a th:href="@{/message/mailBox}"><div class="btn-getmail">받은쪽지</div></a>
             <div class="wall">|</div>
-            <a href="./sentMail.html"><div class="btn-sendmail">보낸쪽지</div></a>
+            <a th:href="@{/message/sentMail}"><div class="btn-sendmail">보낸쪽지</div></a>
             <div class="wall">|</div>
-            <a href="./deletedMail.html"><div class="btn-bin">휴지통</div></a>
+            <a th:href="@{/message/deletedMail}"><div class="btn-bin">휴지통</div></a>
           </div>
         </div>
       </section>
@@ -114,7 +114,7 @@
       </section>
     </main>
     <footer>
-      <div id='footer'></div>
+      <div id="footer" th:replace="~{main/footer}"></div>
     </footer>
   </form>
 </body>
