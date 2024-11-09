@@ -196,5 +196,65 @@ function setupPagination() {
     displayMails();
   });
 
-  
+// 메일 항목을 동적으로 생성하는 함수
+function renderDeletedMailList(data) {
+    // 메일 항목을 추가할 컨테이너를 가져옵니다.
+    const mailboxContainer = document.getElementById('mailbox-container');
+    mailboxContainer.innerHTML = ''; // 기존 항목 초기화
+
+    // 메일 리스트 데이터를 순회하여 각 항목을 동적으로 생성
+    data.forEach(mail => {
+        // 메일 항목을 감싸는 div 요소 생성
+        const mailboxList = document.createElement('div');
+        mailboxList.className = 'mailbox-list';
+
+        // 체크박스 항목 생성
+        const checkItem = document.createElement('div');
+        checkItem.className = 'check-item';
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.name = 'item';
+        checkbox.className = 'item';
+        checkItem.appendChild(checkbox);
+
+        // 메일 아이콘 (읽음 여부) 생성
+        const mailOpen = document.createElement('div');
+        mailOpen.className = 'mail-open';
+        const mailIcon = document.createElement('img');
+        mailIcon.src = '../../img/message/쪽지함.png'; // 이미지 경로 설정
+        mailIcon.alt = '';
+        mailOpen.appendChild(mailIcon);
+    // |msg_read |msg_sender |msg_recipient |msg_content |msg_sent_time
+        // 발신자 정보 (메일 From) 생성
+        const mailFrom = document.createElement('div');
+        mailFrom.className = 'mail-from';
+        mailFrom.textContent = mail.msgSender; // 데이터에서 발신자 정보 설정
+
+        // 수신자 정보 (메일 To) 생성
+        const mailTo = document.createElement('div');
+        mailTo.className = 'mail-to mail-who';
+        mailTo.textContent = mail.msgRecipient; // 데이터에서 수신자 정보 설정
+
+        // 메일 내용 생성
+        const mailContent = document.createElement('div');
+        mailContent.className = 'mail-content';
+        mailContent.textContent = mail.msgContent; // 데이터에서 메일 내용 설정
+
+        // 메일 날짜 생성
+        const mailDate = document.createElement('div');
+        mailDate.className = 'mail-date';
+        mailDate.textContent = mail.msgSentTime; // 데이터에서 날짜 정보 설정
+
+        // 각 요소를 mailboxList에 추가
+        mailboxList.appendChild(checkItem);
+        mailboxList.appendChild(mailOpen);
+        mailboxList.appendChild(mailFrom);
+        mailboxList.appendChild(mailTo);
+        mailboxList.appendChild(mailContent);
+        mailboxList.appendChild(mailDate);
+
+        // 최종적으로 메일 컨테이너에 mailboxList 추가
+        mailboxContainer.appendChild(mailboxList);
+    });
+}
 

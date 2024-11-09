@@ -162,8 +162,13 @@ function setupPagination() {
   });
 
 
+// 페이지가 로드될 때 mailList 데이터를 기반으로 메일 항목을 렌더링
+document.addEventListener('DOMContentLoaded', function() {
+  renderSentMailList(mailList);
+});
+
 // 메일 항목을 동적으로 생성
-function renderMailList(data) {
+function renderSentMailList(data) {
   // 메일 컨테이너를 가져옵니다.
   const mailboxContainer = document.getElementById('mailbox-container');
   mailboxContainer.innerHTML = ''; // 초기화하여 기존 항목 삭제
@@ -193,7 +198,7 @@ function renderMailList(data) {
     // 발신자 닉네임
     const mailTo = document.createElement('div');
     mailTo.className = 'mail-to';
-    mailTo.textContent = mailList.memberNickName;
+    mailTo.textContent = mailList.memberNickname;
 
     // 메일 내용
     const mailContent = document.createElement('div');
@@ -217,7 +222,3 @@ function renderMailList(data) {
   });
 }
 
-// 페이지가 로드될 때 mailList 데이터를 기반으로 메일 항목을 렌더링
-document.addEventListener('DOMContentLoaded', function() {
-  renderMailList(tomailList);
-});
