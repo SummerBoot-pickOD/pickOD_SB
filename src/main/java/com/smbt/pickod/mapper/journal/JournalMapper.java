@@ -24,6 +24,7 @@ public interface JournalMapper {
 
     JournalDTO getJournalByPermission(@Param("memberNum") long memberNum);
 
+    JnlMemberDTO getJournalProfilesByJournalNum(Long memberNum);
 
     List<JournalDTO> searchJournal(
             @Param("area") String jnlArea,

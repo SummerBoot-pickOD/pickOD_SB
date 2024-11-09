@@ -4,56 +4,58 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>너와 나의 여행 일지 작성</title>
-    <link rel="stylesheet" href="../../css/main/header.css">
-    <link rel="stylesheet" href="../../css/main/footer.css">
-    <link rel="stylesheet" href="../../css/journal/journalCreate.css">
+    <link rel="stylesheet" th:href="@{/css/main/header.css}">
+    <link rel="stylesheet" th:href="@{/css/main/footer.css}">
+    <link rel="stylesheet" th:href="@{/css/journal/journalCreate.css}">
     <script src="https://code.jquery.com/jquery-3.7.1.js?v=1.0" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
     crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script src="../../js/journal/journalCreate.js"></script>
+    <link rel="stylesheet" th:href="@{https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css}">
+    <script defer th:src="@{https://code.jquery.com/ui/1.12.1/jquery-ui.js}"></script>
+    <script th:src="@{/js/journal/journalCreate.js}"></script>
 </head>
 <body>
-    <div id="header"></div>
+    <div id="header" th:replace="~{/main/header}"></div>
     <main>
-        <form class="title-container" method="get">
+        <form class="title-container" th:action="@{/journal/write}" method="post">
             <input class="title" type="text" placeholder="제목을 입력하세요."onfocus="this.placeholder=''" onblur="this.placeholder='제목을 입력하세요.'">
         </form>
         <div class="container-display">
             <div class="profile-container">
                 <div class="profile">
                     <div class="photo">
-
+                        <img th:if="${journalProfile != null}" th:src="@{${journalProfile.memberImgUrl}}" alt="Profile Image">
+                        <div th:if="${journalProfile == null}">프로필 이미지 없음</div>
                     </div>
-                    <div class="user-name-container">
-                        <div class="user-name">
-                            신현식
-                        </div>
+                    <div class="user-name">
+                        <span th:if="${journalProfile != null}" th:text="${journalProfile.nickname}"></span>
+                        <span th:if="${journalProfile == null}">닉네임 없음</span>
                     </div>
                 </div>
                 <form class="explain-container" method="get">
-                    <input class="explain" type="text" placeholder="간략한 설명을 작성해주세요."onfocus="this.placeholder=''" onblur="this.placeholder='간략한 설명을 작성해주세요.'">
+                    <input class="explain" type="text" placeholder="간략한 설명을 적어주세요." onfocus="this.placeholder=''" onblur="this.placeholder='간략한 설명을 작성해주세요.'">
                 </form>
             </div>
             <div class="tag-container">
                 <div class="tag-container-schedule">
-                    <img src="../../img/journal/footprint_pink.png" alt="">
+                    <img th:src="@{/img/journal/footprint_pink.png}" alt="발자국 아이콘">
                     <div class="schedule-container">
                         <div class="schedule">
                             일정
-                        </div>
-                        <div class="date-picker">
-                            <label for="start-date"></label>
-                            <input type="text" id="start-date" placeholder="시작일" readonly>
-                        </div>
-                        <div class="date-picker">
-                            <label for="end-date"></label>
-                            <input type="text" id="end-date" placeholder="종료일" readonly>
+                            <select id="schedule-input" size="">
+                                <option disabled hidden selected>일정 선택</option>
+                                <option class="select-option" value="day-trip">당일 여행</option>
+                                <option class="select-option" value="one">1박 2일</option>
+                                <option class="select-option" value="two">2박 3일</option>
+                                <option class="select-option" value="three">3박 4일</option>
+                                <option class="select-option" value="four">4받 5일</option>
+                                <option class="select-option" value="five">5박 6일</option>
+                                <option class="select-option" value="etc">일주일 이상</option>
+                            </select>
                         </div>
                     </div>
                 </div>
                 <div class="tag-container-schedule">
-                    <img src="../../img/journal/footprint_pink.png" alt="">
+                    <img th:src="@{/img/journal/footprint_pink.png}" alt="발자국 아이콘">
                     <div class="tag-select-container">
                         <div class="schedule-tag">
                             태그
@@ -82,7 +84,7 @@
                     </div>
                 </div>
                 <div class="tag-container-schedule">
-                    <img src="../../img/journal/footprint_pink.png" alt="">
+                    <img th:src="@{/img/journal/footprint_pink.png}" alt="발자국 아이콘">
                     <div class="thema-container">
                         <div class="schedule-thema">
                             테마
@@ -94,6 +96,17 @@
                             <option value="delicious">#맛집 탐방</option>
                             <option value="hotel">#호캉스</option>
                         </select>
+                    </div>
+                </div>
+                <div class="area-container-schedule">
+                    <img th:src="@{/img/journal/footprint_pink.png}" alt="발자국 아이콘">
+                    <div class="area-container">
+                        <div class="schedule-area">
+                            지역
+                        </div>
+                        <form class="area-textbox" method="get">
+                            <input class="area" type="text" placeholder="ex) 강남구, 수원시"onfocus="this.placeholder=''" onblur="this.placeholder='ex) 강남구, 수원시'">
+                        </form>
                     </div>
                 </div>
             </div>
@@ -123,6 +136,6 @@
             <button class="upload-button" type="button">등 록</button>
         </div>
     </main>
-    <div id="footer"></div>
+    <div id="footer" th:replace="~{/main/footer}"></div>
 </body>
 </html>
