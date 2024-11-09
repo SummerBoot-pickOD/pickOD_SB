@@ -2,8 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.smbt.pickod.mapper.journal.JournalMapper">
 
-    <select id="getJournalByNum" parameterType="long" resultType="JournalDTO">
+    <select id="getJournalWithDaysByNum" parameterType="long" resultType="JournalDTO">
         SELECT
+            -- JOURNAL 테이블 컬럼들
             j.JNL_NUM,
             j.JNL_TITLE,
             j.JNL_VIEWS,
@@ -15,6 +16,8 @@
             j.JNL_TAG,
             j.JNL_THEME,
             j.JNL_AREA,
+
+            -- MEMBER 및 MEMBER_IMGS 테이블의 정보
             m.MEMBER_NICKNAME AS nickname,
             mi.MEMBER_IMG_URL AS memberImgUrl,
             mi.MEMBER_IMGS_ID AS memberImgsId,
@@ -22,11 +25,19 @@
             mi.FILE_NAME AS fileName,
             mi.UPLOADPATH AS uploadPath,
             mi.MEMBER_IMG_TYPE AS memberImgType,
-            mi.DEFAULT_YN AS defaultYn
+            mi.DEFAULT_YN AS defaultYn,
+
+            -- JOURNAL_DAY 테이블 컬럼들
+            jd.JNL_DAY,
+            jd.JNL_PLACE_ORDER,
+            jd.JNL_CONTENTS,
+            jd.PLACE_ID
+
         FROM
             JOURNAL j
                 JOIN MEMBER m ON j.MEMBER_NUM = m.MEMBER_NUM
                 LEFT JOIN MEMBER_IMGS mi ON m.MEMBER_IMGS_ID = mi.MEMBER_IMGS_ID
+                LEFT JOIN JOURNAL_DAY jd ON j.JNL_NUM = jd.JNL_NUM
         WHERE
             j.JNL_NUM = #{journalNum}
     </select>
@@ -76,6 +87,12 @@
         ORDER BY JNL_CREATE_DATE DESC
     </select>
 
+    <select id="getJournalsDesc" resultType="JournalDTO">
+        SELECT JNL_NUM, JNL_TITLE
+        FROM JOURNAL
+        ORDER BY JNL_VIEWS DESC
+    </select>
+
     <select id="getJournalsByPickCountDesc" resultType="JournalDTO">
         SELECT j.*,
                (SELECT COUNT(*)
@@ -121,7 +138,7 @@
             mi.UPLOADPATH AS uploadPath,
             mi.MEMBER_IMG_TYPE AS memberImgType,
             mi.DEFAULT_YN AS defaultYn
-            FROM
+        FROM
             JOURNAL j
                 JOIN
             MEMBER m ON j.MEMBER_NUM = m.MEMBER_NUM
@@ -172,12 +189,6 @@
         DELETE FROM JOURNAL
         WHERE JNL_NUM = #{jnlNum}
     </delete>
-
-
-
-
-
-
 
 
 </mapper>

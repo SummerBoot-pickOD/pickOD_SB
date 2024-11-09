@@ -18,7 +18,7 @@ public class JnlImgsDTO {
     private Long jnlNum;
     private Long jnlDay;
     private Long placeId;
-    private List<JournalDTO> journalList;
+    //    private List<JournalDTO> journalList;
     private List<JnlDayDTO> jnlDayList;
     private List<TempPlaceDTO> tempPlaceList;
     private String thumbnailPath; //썸네일 경로 추가
