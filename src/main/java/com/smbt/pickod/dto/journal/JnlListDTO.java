@@ -17,4 +17,5 @@ public class JnlListDTO {
     private String fileName;
     private String uploadpath;
     private String jnlImgsGuid;
+    private Long memberNum;
 }

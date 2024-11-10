@@ -1,19 +1,27 @@
 package com.smbt.pickod.controller.journal;
 
+import com.smbt.pickod.dto.journal.JnlListDTO;
 import com.smbt.pickod.dto.journal.JnlMemberDTO;
 import com.smbt.pickod.dto.journal.JournalDTO;
 import com.smbt.pickod.dto.journal.JournalProfileDTO;
 import com.smbt.pickod.service.journal.JournalService;
 import jakarta.servlet.http.HttpSession;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.io.IOException;
+import java.util.List;
 
 @Controller
 @RequestMapping("/journal")
+@Slf4j
 public class JournalWriteController {
 
     private static final Logger logger = LoggerFactory.getLogger(JournalWriteController.class);
@@ -50,9 +58,20 @@ public class JournalWriteController {
             // memberNum을 사용하여 해당 사용자의 프로필 정보를 가져옵니다.
             JnlMemberDTO jnlMemberDTO = journalService.getJournalByPermission(memberNum);
 
+            // jnlMemberDTO가 null인 경우 확인하기
+            log.info("jnlMemberDTO is null: {}", jnlMemberDTO == null);
+
             // journalProfile이 null일 경우에 대한 처리
             if (jnlMemberDTO == null) {
-                jnlMemberDTO = new JnlMemberDTO();  // 기본값 설정
+                jnlMemberDTO = new JnlMemberDTO(); // 기본값 설정
+                jnlMemberDTO.setMemberImgUrl("/img/mypage/기본사람사진.png");
+                log.info("Using default image: {}", jnlMemberDTO.getMemberImgUrl());
+            } else if (jnlMemberDTO.getMemberImgUrl() == null || jnlMemberDTO.getMemberImgUrl().isEmpty()) {
+                // 프로필 이미지가 설정되지 않은 경우 기본 이미지 사용
+                jnlMemberDTO.setMemberImgUrl("/img/mypage/기본사람사진.png");
+                log.info("Using default image as memberImgUrl is null or empty: {}", jnlMemberDTO.getMemberImgUrl());
+            } else {
+                log.info("memberImgUrl: {}", jnlMemberDTO.getMemberImgUrl());
             }
 
             // 모델에 프로필 정보 추가
@@ -64,5 +83,41 @@ public class JournalWriteController {
             // 로그인되지 않은 경우 로그인 페이지로 리다이렉트
             return "redirect:/login";
         }
+    }
+
+    @GetMapping("/view")
+    public String boardView(@RequestParam("jnlNum") Long jnlNum, Model model){
+        System.out.println("view 컨트롤러");
+        JournalDTO journal = journalService.findById(jnlNum);
+        model.addAttribute("board", journal);
+        return "journal/view";
+    }
+
+    @GetMapping("/modify")
+    public String boardModify(@RequestParam("jnlNum") Long jnlNum, Model model){
+        JournalDTO journal = journalService.findById(jnlNum);
+        model.addAttribute("board", journal);
+        return "journal/modify";
+    }
+
+    @PostMapping("/modify")
+    public String boardModify(JournalDTO journalDTO,
+                              @RequestParam("boardFile") List<MultipartFile> files,
+                              RedirectAttributes redirectAttributes){
+        try {
+            journalService.modifyBoard(journalDTO, files);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        // JournalDTO 객체를 통해 getJnlNum()을 호출
+        redirectAttributes.addAttribute("jnlNum", journalDTO.getJnlNum());
+        return "redirect:/journal/view";  // 리다이렉트 경로로 jnlNum 전달
+    }
+
+    @GetMapping("/remove")
+    public String boardRemove(@RequestParam("jnlNum") Long jnlNum){
+        journalService.removeBoard(jnlNum);
+        return "redirect:/journal/list";
     }
 }
