@@ -34,109 +34,109 @@ public class JournalService {
         return journalMapper.getMemberImagesAndNickName(memberNum);
     }
 
-//    //application.properties에 저장해둔 file.dir 프로퍼티 값을 가져와서 아래 필드에 넣어준다
-//    @Value("${img.upload-journal-dir}")
-//    private String jnlImgDir;
-//
-//    public void registerJournal(JournalDTO journalDTO){
-//        JournalMapper.insertJournal(journalDTO);
-//    }
-//
-//    //MultipartFile : 업로드된 파일을 처리할 때(파일업로드) 사용하는 인터페이스
-//    public void registerJournalWithFile(JournalDTO journalDTO, List<MultipartFile> files) throws IOException {
-//        journalMapper.insertJournal(journalDTO);
-//        Long boardId = journalDTO.getJnlNum();
-//
-//        for(MultipartFile file : files){
-//            if(file.isEmpty()){
-//                break;
-//            }
-//
-//            JnlImgsDTO jnlImgsDTO = saveFile(file);
-//            jnlImgsDTO.setJnlNum(jnlNum);
-//            imgMapper.insertImg(jnlImgsDTO);
-//
-//        }
-//
-//    }
-//
-//    public JnlImgsDTO saveFile(MultipartFile files) throws IOException {
-//        //사용자가 올린 파일 이름(확장자를 포함한다)
-//        String originalFileName = files.getOriginalFilename();
-//
-//        //파일이름에 붙여줄 uuid 생성
-//        UUID uuid = UUID.randomUUID();
-//
-//        //uuid와 파일이름을 합쳐준다
-//        String systemName = uuid.toString() + "_" + originalFileName;
-//
-//        //상위경로와 하위 경로를 합쳐준다
-//        File uploadPath = new File(jnlImgDir + getUploadPath());
-//
-//        //경로가 존재하지 않는다면(폴더가 만들어지지 않았다면)
-//        if(!uploadPath.exists()){
-//            //경로에 필요한 모든 폴더를 생성한다
-//            uploadPath.mkdirs();
-//        }
-//
-//        //전체경로와 파일이름을 연결한다
-//        File uploadFile = new File(uploadPath, systemName);
-//
-//        //매개변수로 받은 Multipart 객체가 가진 파일을 우리가 만든 경로와 이름으로 저장한다
-//        files.transferTo(uploadFile);
-//
-//        JnlImgsDTO jnlImgsDTO = new JnlImgsDTO();
-//        jnlImgsDTO.setJnlImgsGuid(uuid.toString());
-//        jnlImgsDTO.setFileName(originalFileName);
-//        jnlImgsDTO.setUploadPath(getUploadPath());
-//        return jnlImgsDTO;
-//    }
-//
-//    private String getUploadPath() {
-//        return new SimpleDateFormat("yyyy/MM/dd").format(new Date());
-//    }
-//
-//    public void removeBoard(Long jnlNum){
-//        List<JnlImgsDTO> fileList = imgMapper.selectList(jnlNum);
-//        imgMapper.deleteImg(jnlNum);
-//        journalMapper.deleteJournal(jnlNum);
-//
-//        for(JnlImgsDTO file : fileList){
-//            if(jnlImgDir == null || file.getUploadPath() == null){
-//                log.error("jnlImgDir 또는 uploadPath가 null입니다");
-//                continue; //다음 파일로 진행
-//            }
-//
-//            Path targetPath = Paths.get(jnlImgDir, file.getUploadPath(), file.getJnlImgsGuid() + "_" + file.getFileName());
-//            //jnlImgDir : C:/pickOD_img/Journal
-//            //file.getUploadPath() : /2024/11
-//            //file.getUuid() : 파일의 고유 식별자(UUID)를 가져옴
-//            //file.getName() : dog.jpg
-//
-//            try {
-//                if(Files.exists(targetPath)){
-//                    Files.delete(targetPath);
-//                    log.info("삭제된 파일 : " + targetPath.toString());
-//                } else {
-//                    log.info("파일 존재하지 않습니다 : " + targetPath.toString());
-//                }
-//            } catch (IOException e) {
-//                log.error("파일 삭제 실패 : " + targetPath.toString(), e);
-//                e.printStackTrace();
-//            }
-//        }
-//    }
+    //application.properties에 저장해둔 file.dir 프로퍼티 값을 가져와서 아래 필드에 넣어준다
+    @Value("${img.upload-journal-dir}")
+    private String jnlImgDir;
+
+    public void registerJournal(JournalDTO journalDTO){ journalMapper.insertJournal(journalDTO);}
+
+    //MultipartFile : 업로드된 파일을 처리할 때(파일업로드) 사용하는 인터페이스
+    public void registerJournalWithFile(JournalDTO journalDTO, List<MultipartFile> files) throws IOException {
+        journalMapper.insertJournal(journalDTO);
+        Long jnlNum = journalDTO.getJnlNum();
+
+        for(MultipartFile file : files){
+            if(file.isEmpty()){
+                break;
+            }
+
+            JnlImgsDTO jnlImgsDTO = saveFile(file);
+            jnlImgsDTO.setJnlNum(jnlNum);
+            imgMapper.insertImg(jnlImgsDTO);
+
+        }
+
+    }
+
+    public JnlImgsDTO saveFile(MultipartFile files) throws IOException {
+        //사용자가 올린 파일 이름(확장자를 포함한다)
+        String originalFileName = files.getOriginalFilename();
+
+        //파일이름에 붙여줄 uuid 생성
+        UUID uuid = UUID.randomUUID();
+
+        //uuid와 파일이름을 합쳐준다
+        String systemName = uuid.toString() + "_" + originalFileName;
+
+        //상위경로와 하위 경로를 합쳐준다
+        File uploadPath = new File(jnlImgDir + getUploadPath());
+
+        //경로가 존재하지 않는다면(폴더가 만들어지지 않았다면)
+        if(!uploadPath.exists()){
+            //경로에 필요한 모든 폴더를 생성한다
+            uploadPath.mkdirs();
+        }
+
+        //전체경로와 파일이름을 연결한다
+        File uploadFile = new File(uploadPath, systemName);
+
+        //매개변수로 받은 Multipart 객체가 가진 파일을 우리가 만든 경로와 이름으로 저장한다
+        files.transferTo(uploadFile);
+
+        JnlImgsDTO jnlImgsDTO = new JnlImgsDTO();
+        jnlImgsDTO.setJnlImgsGuid(uuid.toString());
+        jnlImgsDTO.setFileName(originalFileName);
+        jnlImgsDTO.setUploadPath(getUploadPath());
+        return jnlImgsDTO;
+    }
+
+    private String getUploadPath() {
+        return new SimpleDateFormat("yyyy/MM/dd").format(new Date());
+    }
+
+    public void removeBoard(Long jnlNum){
+        List<JnlImgsDTO> fileList = imgMapper.selectList(jnlNum);
+        imgMapper.deleteImg(jnlNum);
+        journalMapper.deleteJournal(jnlNum);
+
+        for(JnlImgsDTO file : fileList){
+            if(jnlImgDir == null || file.getUploadPath() == null){
+                log.error("jnlImgDir 또는 uploadPath가 null입니다");
+                continue; //다음 파일로 진행
+            }
+
+            Path targetPath = Paths.get(jnlImgDir, file.getUploadPath(), file.getJnlImgsGuid() + "_" + file.getFileName());
+            //jnlImgDir : C:/pickOD_img/Journal
+            //file.getUploadPath() : /2024/11
+            //file.getUuid() : 파일의 고유 식별자(UUID)를 가져옴
+            //file.getName() : dog.jpg
+
+            try {
+                if(Files.exists(targetPath)){
+                    Files.delete(targetPath);
+                    log.info("삭제된 파일 : " + targetPath.toString());
+                } else {
+                    log.info("파일 존재하지 않습니다 : " + targetPath.toString());
+                }
+            } catch (IOException e) {
+                log.error("파일 삭제 실패 : " + targetPath.toString(), e);
+                e.printStackTrace();
+            }
+        }
+    }
 
 
-//    // 로그인한 사용자가 해당 여행일지에 접근할 수 있는지 권한만 확인
-//    public void checkJournalAccessPermission(JournalDTO journal, long loggedInMemberNum) {
-//        // 현재 여행일지의 MEMBER_NUM과 로그인한 사용자의 MEMBER_NUM이 같은지 확인
-//        if (journal != null && journal.getMemberNum() == loggedInMemberNum) {
-//            journal.setHasPermission(true);  // 권한이 맞으면 특정 버튼 활성화
-//        } else {
-//            journal.setHasPermission(false);  // 권한이 없으면 다른 버튼 활성화
-//        }
-//    }
+
+
+    // 로그인한 사용자가 해당 여행일지에 접근할 수 있는지 권한만 확인
+    public void checkJournalAccessPermission(JournalDTO journal, long loggedInMemberNum) {
+        // 현재 여행일지의 MEMBER_NUM과 로그인한 사용자의 MEMBER_NUM이 같은지 확인
+        if (journal != null && journal.getMemberNum() == loggedInMemberNum) {
+            journal.setHasPermission(true);  // 권한이 맞으면 특정 버튼 활성화
+        } else {
+            journal.setHasPermission(false);  // 권한이 없으면 다른 버튼 활성화
+        }
+    }
 
     //작성 페이지
     @Transactional
@@ -155,15 +155,9 @@ public class JournalService {
         }
     }
 
-    public JournalDTO getJournalDetails(Long journalNum) {
-        // 여행일지 기본 정보 조회
-        JournalDTO journal = journalMapper.getJournalByNum(journalNum);
-
-        // 여행일지의 각 날(day) 정보 조회 및 설정
-        List<JnlDayDTO> journalDays = journalMapper.getJournalDaysByJournalNum(journalNum);
-        journal.setJnlDayList(journalDays);
-
-        return journal;
+    public JnlMemberDTO getJournalByPermission(Long memberNum) {
+        // memberNum을 사용하여 해당 사용자의 프로필 정보를 조회
+        return journalMapper.getJournalProfilesByJournalNum(memberNum);
     }
 
 

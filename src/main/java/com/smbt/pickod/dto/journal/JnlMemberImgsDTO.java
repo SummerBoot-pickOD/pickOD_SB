@@ -13,6 +13,6 @@ public class JnlMemberImgsDTO {
     private String fileName;
     private String uploadPath;
     private String memberImgType;
-    private String memberImgUrl;
+    private String memberImgUrl = "/img/footpring.png";
     private String defaultYn;
 }

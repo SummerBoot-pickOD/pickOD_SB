@@ -148,6 +148,27 @@
             j.JNL_NUM = #{jnlNum}
     </select>
 
+    <select id="getJournalProfilesByMemberNum" resultType="JournalProfileDTO">
+        SELECT
+        j.JNL_NUM,
+        m.MEMBER_NICKNAME AS nickname,
+        mi.MEMBER_IMG_URL AS memberImgUrl,
+        mi.MEMBER_IMGS_ID AS memberImgsId,
+        mi.MEMBER_IMGS_GUID AS memberImgsGuid,
+        mi.FILE_NAME AS fileName,
+        mi.UPLOADPATH AS uploadPath,
+        mi.MEMBER_IMG_TYPE AS memberImgType,
+        mi.DEFAULT_YN AS defaultYn
+        FROM
+        JOURNAL j
+        JOIN
+        MEMBER m ON j.MEMBER_NUM = m.MEMBER_NUM
+        JOIN
+        MEMBER_IMGS mi ON m.MEMBER_IMGS_ID = mi.MEMBER_IMGS_ID
+        WHERE
+        m.MEMBER_NUM = #{memberNum}  <!-- 세션에서 가져온 memberNum을 사용 -->
+    </select>
+
     <!-- JOURNAL 테이블에 여행일지 기본 정보 삽입 -->
     <insert id="insertJournal" parameterType="JournalDTO">
         <selectKey keyProperty="jnlNum" resultType="Long" order="BEFORE">

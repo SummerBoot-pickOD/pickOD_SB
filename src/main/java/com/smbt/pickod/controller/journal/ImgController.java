@@ -31,7 +31,7 @@ public class ImgController {
     @Value("${img.upload-journal-dir}")
     private String jnlImgDir;
 
-    //특정 boardId를 기반으로 파일리스트를 반환
+    //특정 jnlNum를 기반으로 파일리스트를 반환
     @GetMapping("/v1/journals/{jnlNum}/files")
     public List<JnlImgsDTO> fileList(@PathVariable("jnlNum") Long jnlNum) {
         //URL에서 boardId 추출하기 위해 @PathdVariable 어노테이션 사용
