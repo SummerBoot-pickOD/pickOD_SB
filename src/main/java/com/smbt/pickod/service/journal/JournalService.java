@@ -125,6 +125,46 @@ public class JournalService {
         }
     }
 
+    public void modifyBoard(JournalDTO journalDTO, List<MultipartFile> files) throws IOException {
+        journalMapper.updateJournal(journalDTO);
+        Long jnlNum = journalDTO.getJnlNum();
+
+        imgMapper.deleteImg(jnlNum);
+
+        for(MultipartFile file : files){
+            if(file.isEmpty()){
+                break;
+            }
+
+            JnlImgsDTO jnlImgsDTO = saveFile(file);
+            jnlImgsDTO.setJnlNum(jnlNum);
+            imgMapper.insertImg(jnlImgsDTO);
+        }
+    }
+
+    public JournalDTO findById(Long boardId){
+        return journalMapper.selectById(boardId).orElseThrow(() -> new IllegalStateException("유효하지 않은 게시물"));
+    }
+
+    public List<JournalDTO> findAll(){
+        return journalMapper.selectAll();
+    }
+
+//    public List<JournalDTO> findAllPage(Criteria criteria){
+//        return journalMapper.selectAllPage(criteria);
+//    }
+
+    public int findTotal(){
+        return journalMapper.selectTotal();
+    }
+
+    public void setFileDir(String fileDir) {
+    }
+
+    public File getFile(String dir, String fileName){
+        return new File(dir, fileName);
+    }
+
 
 
 

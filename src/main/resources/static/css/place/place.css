@@ -2,6 +2,9 @@
   margin: 0;
   padding: 0;
 }
+.bold {
+  font-weight: bold;
+}
 
 main{
   margin:110px 300px;
