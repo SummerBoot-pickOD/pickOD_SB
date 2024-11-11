@@ -5,256 +5,115 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>행사 관리</title>
-  <link rel="stylesheet" href="../../css/admin/admHeader.css">
-  <link rel="stylesheet" href="../../css/main/footer.css">
-  <link rel="stylesheet" href="../../css/admin/admFestival.css">
+  <link rel="stylesheet" th:href="@{/css/admin/admHeader.css}">
+  <link rel="stylesheet" th:href="@{/css/main/footer.css}">
+  <link rel="stylesheet" th:href="@{/css/admin/admFestival.css}">
   <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
-  <script defer src="../../js/admin/admFestival.js"></script>
+  <script defer th:src="@{/js/admin/admFestival.js}"></script>
 </head>
 
 <body>
-  <div id='header'></div>
-  <main>
-    <h2 class="festival">행사 리스트</h2>
-    <section class="search">
-      <form action="#" method="">
-        <input type="text" placeholder="검색어를 입력하세요">
-        <button type="submit"></button>
-      </form>
-    </section>
+<div id='header' th:replace="~{/admin/admHeader}"></div>
+<main>
+  <h2 class="festival">행사 리스트</h2>
 
-    <div class="total_area_wrap">
-      <button class="total_area_btn" type="button">전체</button>
-      <div class="tag_area">
-        <button class="tag_area_totalseoul" type="button">서울</button>
-        <ul class="tag_area_seoul">
-          <li><button type="button">강남구</button></li>
-          <li><button type="button">도봉구</button></li>
-          <li><button type="button">동대문구</button></li>
-          <li><button type="button">동작구</button></li>
-          <li><button type="button">마포구</button></li>
-          <li><button type="button">서대문구</button></li>
-          <li><button type="button">서초구</button></li>
-          <li><button type="button">성동구</button></li>
-          <li><button type="button">성북구</button></li>
-          <li><button type="button">송파구</button></li>
-          <li><button type="button">양천구</button></li>
-          <li><button type="button">강동구</button></li>
-          <li><button type="button">영등포구</button></li>
-          <li><button type="button">용산구</button></li>
-          <li><button type="button">은평구</button></li>
-          <li><button type="button">종로구</button></li>
-          <li><button type="button">중구</button></li>
-          <li><button type="button">중랑구</button></li>
-          <li><button type="button">강북구</button></li>
-          <li><button type="button">강서구</button></li>
-          <li><button type="button">관악구</button></li>
-          <li><button type="button">광진구</button></li>
-          <li><button type="button">구로구</button></li>
-          <li><button type="button">금천구</button></li>
-          <li><button type="button">노원구</button></li>
-        </ul>
+  <section class="search">
+    <form action="/festival/search" method="get">
+      <input type="text" name="keyword" placeholder="검색어를 입력하세요">
+      <button type="submit"></button>
+    </form>
+  </section>
 
-        <button class="tag_area_totalgeonggi" type="button">경기</button>
-        <ul class="tag_area_geonggi">
-          <li><button type="button">가평시</button></li>
-          <li><button type="button">동두천시</button></li>
-          <li><button type="button">부천시</button></li>
-          <li><button type="button">성남시</button></li>
-          <li><button type="button">수원시</button></li>
-          <li><button type="button">시흥시</button></li>
-          <li><button type="button">안산시</button></li>
-          <li><button type="button">안성시</button></li>
-          <li><button type="button">안양시</button></li>
-          <li><button type="button">양주시</button></li>
-          <li><button type="button">양평군</button></li>
-          <li><button type="button">고양시</button></li>
-          <li><button type="button">여주시</button></li>
-          <li><button type="button">연천군</button></li>
-          <li><button type="button">오산시</button></li>
-          <li><button type="button">용인시</button></li>
-          <li><button type="button">의왕시</button></li>
-          <li><button type="button">의정부시</button></li>
-          <li><button type="button">이천시</button></li>
-          <li><button type="button">파주시</button></li>
-          <li><button type="button">평택시</button></li>
-          <li><button type="button">포천시</button></li>
-          <li><button type="button">과천시</button></li>
-          <li><button type="button">하남시</button></li>
-          <li><button type="button">화성시</button></li>
-          <li><button type="button">광명시</button></li>
-          <li><button type="button">광주시</button></li>
-          <li><button type="button">구리시</button></li>
-          <li><button type="button">군포시</button></li>
-          <li><button type="button">김포시</button></li>
-          <li><button type="button">남양주시</button></li>
+  <div class="total_area_wrap">
+    <button class="total_area_btn" type="button">전체</button>
+    <div class="tag_area">
+      <button class="tag_area_totalseoul" type="button">서울</button>
+      <ul class="tag_area_seoul">
+        <li><button type="button">강남구</button></li>
+        <li><button type="button">도봉구</button></li>
+        <li><button type="button">동대문구</button></li>
+        <li><button type="button">동작구</button></li>
+        <li><button type="button">마포구</button></li>
+        <li><button type="button">서대문구</button></li>
+        <li><button type="button">서초구</button></li>
+        <li><button type="button">성동구</button></li>
+        <li><button type="button">성북구</button></li>
+        <li><button type="button">송파구</button></li>
+        <li><button type="button">양천구</button></li>
+        <li><button type="button">강동구</button></li>
+        <li><button type="button">영등포구</button></li>
+        <li><button type="button">용산구</button></li>
+        <li><button type="button">은평구</button></li>
+        <li><button type="button">종로구</button></li>
+        <li><button type="button">중구</button></li>
+        <li><button type="button">중랑구</button></li>
+        <li><button type="button">강북구</button></li>
+        <li><button type="button">강서구</button></li>
+        <li><button type="button">관악구</button></li>
+        <li><button type="button">광진구</button></li>
+        <li><button type="button">구로구</button></li>
+        <li><button type="button">금천구</button></li>
+        <li><button type="button">노원구</button></li>
+      </ul>
 
-        </ul>
-      </div>
 
-    </div>
 
-    <div class="festival-container">
-      <ul class="festival-list">
-        <li>
-          <div class="festival-img">
-            <a href="http://recollection.kr/" target="_blank"><img src="../../img/festival/festivalImg.png"></a>
-          </div>
-          <div class="festival-info">
-            <a href="http://recollection.kr/" target="_blank"><strong>광주 송정의 축제</strong></a>
-            <span>2024.10.02~2024.11.30</span>
-            <span>경기도 광주시 신청동</span>
-          </div>
-        </li>
-        <li>
-          <div class="festival-img">
-            <a href="http://recollection.kr/" target="_blank"><img src="../../img/festival/festivalImg.png"></a>
-          </div>
-          <div class="festival-info">
-            <a href="http://recollection.kr/" target="_blank"><strong>광주 송정의 축제</strong></a>
-            <span>2024.10.02~2024.11.30</span>
-            <span>경기도 광주시 신청동</span>
-          </div>
-        </li>
-        <li>
-          <div class="festival-img">
-            <a href="http://recollection.kr/" target="_blank"><img src="../../img/festival/festivalImg.png"></a>
-          </div>
-          <div class="festival-info">
-            <a href="http://recollection.kr/" target="_blank"><strong>광주 송정의 축제</strong></a>
-            <span>2024.10.02~2024.11.30</span>
-            <span>경기도 광주시 신청동</span>
-          </div>
-        </li>
-        <li>
-          <div class="festival-img">
-            <a href="http://recollection.kr/" target="_blank"><img src="../../img/festival/festivalImg.png"></a>
-          </div>
-          <div class="festival-info">
-            <a href="http://recollection.kr/" target="_blank"><strong>광주 송정의 축제</strong></a>
-            <span>2024.10.02~2024.11.30</span>
-            <span>경기도 광주시 신청동</span>
-          </div>
-        </li>
-        <li>
-          <div class="festival-img">
-            <a href="http://recollection.kr/" target="_blank"><img src="../../img/festival/festivalImg.png"></a>
-          </div>
-          <div class="festival-info">
-            <a href="http://recollection.kr/" target="_blank"><strong>광주 송정의 축제</strong></a>
-            <span>2024.10.02~2024.11.30</span>
-            <span>경기도 광주시 신청동</span>
-          </div>
-        </li>
-        <li>
-          <div class="festival-img">
-            <a href="http://recollection.kr/" target="_blank"><img src="../../img/festival/festivalImg.png"></a>
-          </div>
-          <div class="festival-info">
-            <a href="http://recollection.kr/" target="_blank"><strong>광주 송정의 축제</strong></a>
-            <span>2024.10.02~2024.11.30</span>
-            <span>경기도 광주시 신청동</span>
-          </div>
-        </li>
-        <li>
-          <div class="festival-img">
-            <a href="http://recollection.kr/" target="_blank"><img src="../../img/festival/festivalImg.png"></a>
-          </div>
-          <div class="festival-info">
-            <a href="http://recollection.kr/" target="_blank"><strong>광주 송정의 축제</strong></a>
-            <span>2024.10.02~2024.11.30</span>
-            <span>경기도 광주시 신청동</span>
-          </div>
-        </li>
-        <li>
-          <div class="festival-img">
-            <a href="http://recollection.kr/" target="_blank"><img src="../../img/festival/festivalImg.png"></a>
-          </div>
-          <div class="festival-info">
-            <a href="http://recollection.kr/" target="_blank"><strong>광주 송정의 축제</strong></a>
-            <span>2024.10.02~2024.11.30</span>
-            <span>경기도 광주시 신청동</span>
-          </div>
-        </li>
-        <li>
-          <div class="festival-img">
-            <a href="http://recollection.kr/" target="_blank"><img src="../../img/festival/festivalImg.png"></a>
-          </div>
-          <div class="festival-info">
-            <a href="http://recollection.kr/" target="_blank"><strong>광주 송정의 축제</strong></a>
-            <span>2024.10.02~2024.11.30</span>
-            <span>경기도 광주시 신청동</span>
-          </div>
-        </li>
-        <li>
-          <div class="festival-img">
-            <a href="http://recollection.kr/" target="_blank"><img src="../../img/festival/festivalImg.png"></a>
-          </div>
-          <div class="festival-info">
-            <a href="http://recollection.kr/" target="_blank"><strong>광주 송정의 축제</strong></a>
-            <span>2024.10.02~2024.11.30</span>
-            <span>경기도 광주시 신청동</span>
-          </div>
-        </li>
-        <li>
-          <div class="festival-img">
-            <a href="http://recollection.kr/" target="_blank"><img src="../../img/festival/festivalImg.png"></a>
-          </div>
-          <div class="festival-info">
-            <a href="http://recollection.kr/" target="_blank"><strong>광주 송정의 축제</strong></a>
-            <span>2024.10.02~2024.11.30</span>
-            <span>경기도 광주시 신청동</span>
-          </div>
-        </li>
-        <li>
-          <div class="festival-img">
-            <a href="http://recollection.kr/" target="_blank"><img src="../../img/festival/festivalImg.png"></a>
-          </div>
-          <div class="festival-info">
-            <a href="http://recollection.kr/" target="_blank"><strong>광주 송정의 축제</strong></a>
-            <span>2024.10.02~2024.11.30</span>
-            <span>경기도 광주시 신청동</span>
-          </div>
-        </li>
-        <li>
-          <div class="festival-img">
-            <a href="http://recollection.kr/" target="_blank"><img src="../../img/festival/festivalImg.png"></a>
-          </div>
-          <div class="festival-info">
-            <a href="http://recollection.kr/" target="_blank"><strong>광주 송정의 축제</strong></a>
-            <span>2024.10.02~2024.11.30</span>
-            <span>경기도 광주시 신청동</span>
-          </div>
-        </li>
-        <li>
-          <div class="festival-img">
-            <a href="http://recollection.kr/" target="_blank"><img src="../../img/festival/festivalImg.png"></a>
-          </div>
-          <div class="festival-info">
-            <a href="http://recollection.kr/" target="_blank"><strong>광주 송정의 축제</strong></a>
-            <span>2024.10.02~2024.11.30</span>
-            <span>경기도 광주시 신청동</span>
-          </div>
-        </li>
-        <li>
-          <div class="festival-img">
-            <a href="http://recollection.kr/" target="_blank"><img src="../../img/festival/festivalImg.png"></a>
-          </div>
-          <div class="festival-info">
-            <a href="http://recollection.kr/" target="_blank"><strong>광주 송정의 축제</strong></a>
-            <span>2024.10.02~2024.11.30</span>
-            <span>경기도 광주시 신청동</span>
-          </div>
-        </li>
-
+      <button class="tag_area_totalgeonggi" type="button">경기</button>
+      <ul class="tag_area_geonggi">
+        <li><button type="button">가평시</button></li>
+        <li><button type="button">동두천시</button></li>
+        <li><button type="button">부천시</button></li>
+        <li><button type="button">성남시</button></li>
+        <li><button type="button">수원시</button></li>
+        <li><button type="button">시흥시</button></li>
+        <li><button type="button">안산시</button></li>
+        <li><button type="button">안성시</button></li>
+        <li><button type="button">안양시</button></li>
+        <li><button type="button">양주시</button></li>
+        <li><button type="button">양평군</button></li>
+        <li><button type="button">고양시</button></li>
+        <li><button type="button">여주시</button></li>
+        <li><button type="button">연천군</button></li>
+        <li><button type="button">오산시</button></li>
+        <li><button type="button">용인시</button></li>
+        <li><button type="button">의왕시</button></li>
+        <li><button type="button">의정부시</button></li>
+        <li><button type="button">이천시</button></li>
+        <li><button type="button">파주시</button></li>
+        <li><button type="button">평택시</button></li>
+        <li><button type="button">포천시</button></li>
+        <li><button type="button">과천시</button></li>
+        <li><button type="button">하남시</button></li>
+        <li><button type="button">화성시</button></li>
+        <li><button type="button">광명시</button></li>
+        <li><button type="button">광주시</button></li>
+        <li><button type="button">구리시</button></li>
+        <li><button type="button">군포시</button></li>
+        <li><button type="button">김포시</button></li>
+        <li><button type="button">남양주시</button></li>
       </ul>
     </div>
+  </div>
+
+  <div class="festival-container">
+    <ul class="festival-list">
+      <li th:each="festival : ${festivals}">
+        <div class="festival-img">
+          <a th:href="${festival.orgLink}" target="_blank"><img th:src="${festival.mainImg}" alt="Festival Image"></a>
+        </div>
+        <div class="festival-info">
+          <a th:href="${festival.orgLink}" target="_blank"><strong th:text="${festival.title}"></strong></a>
+          <span th:text="${festival.date}"></span>
+          <span  th:text="${festival.place}"></span>
+        </div>
+      </li>
+    </ul>
+  </div>
 
 
-  </main>
+</main>
 
-  <div id="footer"></div>
+<div id="footer" th:replace="~{/main/footer}"></div>
 
 </body>
-
 </html>

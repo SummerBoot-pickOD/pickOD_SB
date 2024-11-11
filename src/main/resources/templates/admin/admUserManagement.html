@@ -17,6 +17,7 @@
   <main>
     <h1>회원관리</h1>
     <div class="container">
+      <form action="/admin/admMemberMgmt/search" method="get"></form>
       <div class="search">
         <select id="condition">
           <option value="" disabled selected>조건을 선택하세요</option>
@@ -28,9 +29,9 @@
         <label><input type="radio" name="status" value="normal" checked> 정상</label>
         <label><input type="radio" name="status" value="suspended"> 제재</label>
         <label><input type="radio" name="status" value="withdrawn"> 탈퇴</label>
-        <button type="button" class="search-button">검색</button>
+        <button type="submit" class="search-button">검색</button>
       </div>
-
+      </form>
       <table class="member-list-table">
         <thead>
         <tr class="table-head">
