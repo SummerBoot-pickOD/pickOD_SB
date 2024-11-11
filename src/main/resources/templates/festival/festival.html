@@ -4,21 +4,21 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <link rel="stylesheet" href="../../css/main/header.css">
-  <link rel="stylesheet" href="../../css/main/footer.css">
-  <link rel="stylesheet" href="../../css/festival/festival.css">
-  <script src="../../js/festival/festival.js"></script>
+  <link rel="stylesheet" th:href="@{/css/main/header.css}">
+  <link rel="stylesheet" th:href="@{/css/main/footer.css}">
+  <link rel="stylesheet" th:href="@{/css/festival/festival.css}">
+  <script defer th:src="@{/js/festival/festival.js}"></script>
   <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
   crossorigin="anonymous"></script>
 </head>
 <body>
-  <div id='header'></div>
+  <div id='header' th:replace="~{/main/header}"></div>
   <main>
     <h2 class="festival">행사 리스트</h2>
 
     <section class="search">
-      <form action="" method="">
-         <input type="text" placeholder="검색어를 입력하세요">
+      <form action="/festival/search" method="get">
+         <input type="text" name="keyword" placeholder="검색어를 입력하세요">
          <button type="submit"></button>
       </form>
     </section>
@@ -90,174 +90,29 @@
           <li><button type="button">군포시</button></li>
           <li><button type="button">김포시</button></li>
           <li><button type="button">남양주시</button></li>
-          
         </ul>
-      
       </div>
-
     </div>
       
     <div class="festival-container">
       <ul class="festival-list">
-        <li>
+        <li th:each="festival : ${festivals}">
           <div class="festival-img">
-            <a href="http://recollection.kr/" target="_blank"><img src="../../img/festival/festivalImg.png"></a>
+            <a th:href="${festival.orgLink}" target="_blank"><img th:src="${festival.mainImg}" alt="Festival Image"></a>
           </div>
           <div class="festival-info">
-            <a href="http://recollection.kr/" target="_blank"><strong>광주 송정의 축제</strong></a>
-            <span>2024.10.02~2024.11.30</span>
-            <span>경기도 광주시 신청동</span>
+            <a th:href="${festival.orgLink}" target="_blank"><strong th:text="${festival.title}"></strong></a>
+            <span th:text="${festival.date}"></span>
+            <span  th:text="${festival.place}"></span>
           </div>
         </li>
-        <li>
-          <div class="festival-img">
-            <a href="http://recollection.kr/" target="_blank"><img src="../../img/festival/festivalImg.png"></a>
-          </div>
-          <div class="festival-info">
-            <a href="http://recollection.kr/" target="_blank"><strong>광주 송정의 축제</strong></a>
-            <span>2024.10.02~2024.11.30</span>
-            <span>경기도 광주시 신청동</span>
-          </div>
-        </li>
-        <li>
-          <div class="festival-img">
-            <a href="http://recollection.kr/" target="_blank"><img src="../../img/festival/festivalImg.png"></a>
-          </div>
-          <div class="festival-info">
-            <a href="http://recollection.kr/" target="_blank"><strong>광주 송정의 축제</strong></a>
-            <span>2024.10.02~2024.11.30</span>
-            <span>경기도 광주시 신청동</span>
-          </div>
-        </li>
-        <li>
-          <div class="festival-img">
-            <a href="http://recollection.kr/" target="_blank"><img src="../../img/festival/festivalImg.png"></a>
-          </div>
-          <div class="festival-info">
-            <a href="http://recollection.kr/" target="_blank"><strong>광주 송정의 축제</strong></a>
-            <span>2024.10.02~2024.11.30</span>
-            <span>경기도 광주시 신청동</span>
-          </div>
-        </li>
-        <li>
-          <div class="festival-img">
-            <a href="http://recollection.kr/" target="_blank"><img src="../../img/festival/festivalImg.png"></a>
-          </div>
-          <div class="festival-info">
-            <a href="http://recollection.kr/" target="_blank"><strong>광주 송정의 축제</strong></a>
-            <span>2024.10.02~2024.11.30</span>
-            <span>경기도 광주시 신청동</span>
-          </div>
-        </li>
-        <li>
-          <div class="festival-img">
-            <a href="http://recollection.kr/" target="_blank"><img src="../../img/festival/festivalImg.png"></a>
-          </div>
-          <div class="festival-info">
-            <a href="http://recollection.kr/" target="_blank"><strong>광주 송정의 축제</strong></a>
-            <span>2024.10.02~2024.11.30</span>
-            <span>경기도 광주시 신청동</span>
-          </div>
-        </li>
-        <li>
-          <div class="festival-img">
-            <a href="http://recollection.kr/" target="_blank"><img src="../../img/festival/festivalImg.png"></a>
-          </div>
-          <div class="festival-info">
-            <a href="http://recollection.kr/" target="_blank"><strong>광주 송정의 축제</strong></a>
-            <span>2024.10.02~2024.11.30</span>
-            <span>경기도 광주시 신청동</span>
-          </div>
-        </li>
-        <li>
-          <div class="festival-img">
-            <a href="http://recollection.kr/" target="_blank"><img src="../../img/festival/festivalImg.png"></a>
-          </div>
-          <div class="festival-info">
-            <a href="http://recollection.kr/" target="_blank"><strong>광주 송정의 축제</strong></a>
-            <span>2024.10.02~2024.11.30</span>
-            <span>경기도 광주시 신청동</span>
-          </div>
-        </li>
-        <li>
-          <div class="festival-img">
-            <a href="http://recollection.kr/" target="_blank"><img src="../../img/festival/festivalImg.png"></a>
-          </div>
-          <div class="festival-info">
-            <a href="http://recollection.kr/" target="_blank"><strong>광주 송정의 축제</strong></a>
-            <span>2024.10.02~2024.11.30</span>
-            <span>경기도 광주시 신청동</span>
-          </div>
-        </li>
-        <li>
-          <div class="festival-img">
-            <a href="http://recollection.kr/" target="_blank"><img src="../../img/festival/festivalImg.png"></a>
-          </div>
-          <div class="festival-info">
-            <a href="http://recollection.kr/" target="_blank"><strong>광주 송정의 축제</strong></a>
-            <span>2024.10.02~2024.11.30</span>
-            <span>경기도 광주시 신청동</span>
-          </div>
-        </li>
-        <li>
-          <div class="festival-img">
-            <a href="http://recollection.kr/" target="_blank"><img src="../../img/festival/festivalImg.png"></a>
-          </div>
-          <div class="festival-info">
-            <a href="http://recollection.kr/" target="_blank"><strong>광주 송정의 축제</strong></a>
-            <span>2024.10.02~2024.11.30</span>
-            <span>경기도 광주시 신청동</span>
-          </div>
-        </li>
-        <li>
-          <div class="festival-img">
-            <a href="http://recollection.kr/" target="_blank"><img src="../../img/festival/festivalImg.png"></a>
-          </div>
-          <div class="festival-info">
-            <a href="http://recollection.kr/" target="_blank"><strong>광주 송정의 축제</strong></a>
-            <span>2024.10.02~2024.11.30</span>
-            <span>경기도 광주시 신청동</span>
-          </div>
-        </li>
-        <li>
-          <div class="festival-img">
-            <a href="http://recollection.kr/" target="_blank"><img src="../../img/festival/festivalImg.png"></a>
-          </div>
-          <div class="festival-info">
-            <a href="http://recollection.kr/" target="_blank"><strong>광주 송정의 축제</strong></a>
-            <span>2024.10.02~2024.11.30</span>
-            <span>경기도 광주시 신청동</span>
-          </div>
-        </li>
-        <li>
-          <div class="festival-img">
-            <a href="http://recollection.kr/" target="_blank"><img src="../../img/festival/festivalImg.png"></a>
-          </div>
-          <div class="festival-info">
-            <a href="http://recollection.kr/" target="_blank"><strong>광주 송정의 축제</strong></a>
-            <span>2024.10.02~2024.11.30</span>
-            <span>경기도 광주시 신청동</span>
-          </div>
-        </li>
-        <li>
-          <div class="festival-img">
-            <a href="http://recollection.kr/" target="_blank"><img src="../../img/festival/festivalImg.png"></a>
-          </div>
-          <div class="festival-info">
-            <a href="http://recollection.kr/" target="_blank"><strong>광주 송정의 축제</strong></a>
-            <span>2024.10.02~2024.11.30</span>
-            <span>경기도 광주시 신청동</span>
-          </div>
-        </li>
-      
-        
       </ul>
     </div>
- 
+
  
    </main>
 
-  <div id="footer"></div>
+  <div id="footer" th:replace="~{/main/footer}"></div>
 
 </body>
 </html>

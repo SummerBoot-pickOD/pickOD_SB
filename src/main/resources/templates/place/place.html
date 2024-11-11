@@ -96,8 +96,13 @@
     <div class="place-filter">
       <p id="itemCount"></p>
       <div>
-        <button id="btn1">조회순</button>
-        <button id="btn2">찜하기순</button>
+        <a th:href="@{/place/list(sort='orderByView')}">
+          <button id="btn1"  th:class="${sort == 'orderByView' ? 'bold' : ''}">조회순</button>
+        </a>
+        <a th:href="@{/place/list(sort='orderByLikes')}">
+          <button id="btn2" th:class="${sort == 'orderByLikes' ? 'bold' : ''}">찜하기순</button>
+        </a>
+
       </div>
     </div>
     

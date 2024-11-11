@@ -3,19 +3,21 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <title>메인페이지</title>
-  <link rel="stylesheet" href="../../css/place/placeDetail.css">
-  <link rel="stylesheet" href="../../css/main/header.css">
-  <link rel="stylesheet" href="../../css/main/footer.css">
-  <script src="../../js/place/placeDetail.js"></script>
-  <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
-  <script src="../../js/main/main.js"></script>
+    <link rel="stylesheet" th:href="@{/css/main/header.css}">
+    <link rel="stylesheet" th:href="@{/css/main/footer.css}">
+    <link rel="stylesheet" th:href="@{/css/place/placeDetail.css}">
+    <script defer th:src="@{/js/place/placeDetail.js}"></script>
+    <script crossorigin="anonymous" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+            src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2d0b4e524396053a6c4fa80ea62ba250"></script>
+
 </head>
 
 <body>
-  <div id='header'></div>
-  <div id="report"></div>
+<div id='header' th:replace="~{/main/header}"></div>
+<!--  <div id="report" th:replace="~{/repot/putreport}"></div>-->
   <main>
     <div class="mainImg">
       <button id="prevBtn"><img src="../../img/place/placeDetail/prevBtn.png" alt=""></button>
@@ -56,13 +58,13 @@
           <div class="section1-guide-box">
             <div class="section1-guide-txt">
               <span th:text="'운영시간 : '+${placeDetail.placeOpHour}"> </span>
-              <span th:text="'홈페이지 : '+${placeDetail.placeUrl}">홈페이지 : </span>
+              <span th:text="'홈페이지 : '+${placeDetail.placeUrl}"></span>
                 <span th:text="'이용요금 : ' + ${placeDetail.placeCost}"></span>
             </div>
             <div class="section1-guide-txt">
               <span th:text="'문의 : '+${placeDetail.placePhonenum}"></span>
-<!--              <span>휴일 : 매주 일요일</span>-->
-<!--              <span>휴일 : 매주 일요일</span>-->
+              <span>휴일 : </span>
+              <span>주차장 : </span>
             </div>
             
           </div>
@@ -72,7 +74,7 @@
             <img src="../../img/place/placeDetail/locationIcon.png" alt="">
             <h3>위치</h3>
           </div>
-          <img class="locationImg" src="../../img/place/placeDetail/location.png" alt="">
+            <div id="map"></div>
         </div>
       </article>
     </section>
@@ -167,8 +169,34 @@
     </div>
   </main>
   
-  <div id="footer"></div>
-  
+  <div id="footer" th:replace="~{/main/footer}"></div>
+
+
+<!--지도-->
+<script th:inline="javascript">
+    var placeLat = /*[[${placeDetail.placeLat}]]*/ 0;
+    var placeLong = /*[[${placeDetail.placeLong}]]*/ 0;
+
+
+    var container = document.getElementById('map');
+    var options = {
+        center: new kakao.maps.LatLng(placeLat, placeLong),
+        level: 3  // 확대 레벨
+    };
+
+    var map = new kakao.maps.Map(container, options);
+
+    // 마커 생성
+    var markerPosition = new kakao.maps.LatLng(placeLat, placeLong);  // 마커 위치 설정
+    var marker = new kakao.maps.Marker({
+        position: markerPosition  // 마커의 위치
+    });
+
+    // 마커 지도에 추가
+    marker.setMap(map);
+
+</script>
+
 
 </body>
 
