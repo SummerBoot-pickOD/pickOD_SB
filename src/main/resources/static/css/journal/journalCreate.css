@@ -55,6 +55,7 @@ main{
 
 .user-name{
     font-size: 26px;
+    margin: auto;
 }
 
 .explain-container{
@@ -87,19 +88,26 @@ main{
 }
 
 img{
-    padding: 30px;
-    width: 76px;
-    height: 65px;
+    margin-top: 2.7%;
+    margin-right: 2%;
+    margin-left: 2%;
+    padding: 10px;
+    width: 5.5%;
+    height: 4.8%;
 }
 
-.schedule-container, .tag-select-container, .thema-container {
-    margin: 20px;
+.schedule-container, .tag-select-container, .thema-container, .area-container {
+    margin: 10px;
 }
 
-.schedule, .schedule-tag, .schedule-thema {
+.schedule, .schedule-tag, .schedule-thema, .schedule-area {
     font-size: 15px;
     color: #A1A1A1;
     margin: 12px 0 5px;
+}
+
+.area-container-schedule{
+    display: flex;
 }
 
 .schedule{
@@ -111,45 +119,10 @@ img{
     margin-top: 8px;
 }
 
-/* 스타일을 드롭다운처럼 보이게 설정 */
-.date-picker{
-    position: relative;
-    display: inline-block;
-    width: 200px;
-    margin-right: 100px; /* 두 날짜 선택기 간격 */
-    color: black;
-}
-
-.date-picker input:hover {
-    cursor: pointer;
-}
-
-.date-picker input {
-    width: 100%;
-    padding: 10px;
-    padding-right: 0px; /* 오른쪽에 여유 공간을 줌 */
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    appearance: none; /* 기본 화살표 숨기기 */
-}
-
-/* 오른쪽에 화살표 추가 */
-.date-picker::after {
-    content: '\25BC'; /* 유니코드 아래 화살표 */
-    position: absolute;
-    right: 1px;
-    top: 46%;
-    transform: translateY(-50%);
-    pointer-events: none; /* 화살표가 클릭되지 않게 함 */
-    font-size: 20px;
-    color: #888;
-}
-
-.select-option, #schedule-input, .tag-select, .thema-select {
-    width: 210px;
-    padding: 10px;
-    margin-right: 90px; /* 두 날짜 선택기 간격 */
+.select-option, .tag-select, .thema-select {
+    width: 70%;
+    padding: 3.5%;
+    margin-right: 90px;
     color: black;
     padding-right: 30px; /* 오른쪽 여유 공간을 화살표를 위해 확보 */
     font-size: 16px;
@@ -160,7 +133,32 @@ img{
     -moz-appearance: none;
     background-color: #fff; /* 배경색 지정 */
     position: relative;
-    background-image: none; /* 기본 화살표 숨기기 */
+}
+
+#schedule-input{
+    width: 73%;
+    padding: 3.5%;
+    margin-right: 90px;
+    color: black;
+    padding-right: 30px; /* 오른쪽 여유 공간을 화살표를 위해 확보 */
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    appearance: none; /* 기본 드롭다운 화살표 숨기기 */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-color: #fff; /* 배경색 지정 */
+    position: relative;
+}
+
+.area{
+    width: 76%;
+    padding: 5.9%;
+    color: black;
+    border-radius: 4px;
+    border: none;
+    outline: 1px solid #ccc;
+
 }
 
 /* 오른쪽에 화살표 추가 */
@@ -182,67 +180,174 @@ img{
     width: 200px; /* select의 너비에 맞춤 */
 }
 
-.Day-container{
+/* 데이, 장소 태그 */
+.day-tabs {
+    margin-top: 20px;
+    font-size: 18px;
+}
+
+#place-tabs {
     display: flex;
-    margin: 0 10px -65px 0;
-}
-
-.Day-container button{
-    border: none;
-    font-size: 20px;
-    cursor: pointer;
-    position: relative;
-
-}
-
-
-.Day-plus-button{
-    background-color: transparent;
-    font-weight: bold;
-}
-
-.Day-button{
+    justify-content: space-evenly;
     background-color: #FEF2F2;
-    width: 80px;
-    height: 40px;
-    border-radius: 10px;
-    margin-right: 10px;
+    border-bottom: solid 1px #A1A1A1;
 }
 
-.Day-button .close-button {
-    position: absolute;
-    top: -5px;
-    right: -10px;
-    background-color: transparent;
+.days,
+.add-day,
+.places,
+.add-place {
+    padding: 10px;
     border: none;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.days {
+    font-size: 18px;
+    color: #ffffff;
+    background-color: #a1a1a1;
+    /* margin-right: 5px; */
+}
+
+.places {
+    font-size: 15px;
+    color: #A1A1A1;
+    background-color: #FEF2F2;
+}
+
+.days.active,
+.places.active {
+    border: none;
+    background-color: #FEF2F2;
+    color: black;
+}
+
+.add-day {
+    color: #a1a1a1;
+    font-size: 25px;
+    background-color: white;
+    padding: 0 10px;
+}
+
+.add-place {
+    color: #A1A1A1;
+    background-color: #FEF2F2;
+    padding: 10px;
+    border: none;
+    font-size: 25px;
+}
+
+/* 내용 부분 */
+.content-container {
+    background-color: #FEF2F2;
+}
+
+.place-title {
+    display: flex;
     font-size: 20px;
     font-weight: bold;
-    cursor: pointer;
-    color: #888;
+    color: navy;
+    align-items: center;
+    justify-content: center;
+    padding-top: 20px;
 }
 
-.create-container{ 
-    margin: 60px 0;   
+.place-title:hover {
+    cursor: pointer;
+}
+
+.location-descr {
     width: 100%;
-    height: 100%;
-    background-color: #FEF2F2;
+    display: flex;
+    justify-content: center;
 }
 
-.create-box{
-    padding: 50px 0 50px 0;
+#place-info {
+    width: 86%;
+    height: 300px;
+    resize: none;
+    margin: 30px 10px;
 }
-.maps-API{
+
+.location-imgs {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.upload-container {
+    background-color: #D9D9D9;
+    padding: 5%;
+    border-radius: 5%;
+    margin: 0px 10px 30px 10px;
+}
+
+.upload-label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.gallery {
+    width: 50px;
+    height: 50px;
+}
+
+.txt-addimg {
+    font-size: 15px;
+    padding-top: 15px;
+}
+
+.map-container,
+.rec-container {
+    background-color: #FEF2F2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.map-title,
+.related-area {
+    font-size: 20px;
+}
+
+#map {
+    display: flex;
     width: 90%;
-    height: 500px;
-    background-color: #888;
-    margin: auto;
-    
+    background-color: #A1A1A1;
+    height: 200px;
+    align-items: center;
+    justify-content: center;
 }
 
-.add-location{
-    width: 100%;
-    margin-top: 30px;
-    position: relative;
+.rec-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+    background-color: white;
+    padding: 10px;
+    border: 1px solid #D9D9D9;
+    border-radius: 10px;
+}
+
+.rel-locations {
+    padding-top: 10px;
+    display: flex;
+    width: 90%;
+    justify-content: space-evenly;
+}
+
+#rel-loc1,
+#rel-loc2,
+#rel-loc3 {
+    border: 1px solid #D9D9D9;
+    padding: 3px;
+    text-align: center;
+    border-radius: 2px;
 }
 
 

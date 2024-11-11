@@ -44,6 +44,14 @@ public interface JournalMapper {
 
     List<JournalDTO> getSelectedFootprints();
 
+    Optional<JournalDTO> selectById(Long boardId);
+
+    List<JournalDTO> selectAll();
+
+//    List<JournalDTO> selectAllPage(Criteria criteria);
+
+    int selectTotal();
+
     // JNL_DAY 관련 메서드들
 
     Optional<JnlDayDTO> getJnlDayById(@Param("jnlDayId") Long jnlDayId); //특정 일자(JnlDay)를 ID로 조회
