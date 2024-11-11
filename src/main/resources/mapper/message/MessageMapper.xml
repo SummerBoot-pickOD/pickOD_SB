@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.smbt.pickod.mapper.message.MessageMapper">
     <select id="showGetMailList" parameterType="Long" resultType="MsgGetMailListDTO">
-        SELECT MS.MSG_READ, M.MEMBER_NICKNAME , MSG.MSG_CONTENT, MSG.MSG_SENT_TIME
+        SELECT MS.MSG_READ, M.MEMBER_NICKNAME , MSG.MSG_CONTENT, MSG.MSG_SENT_TIME, MSG.MSG_SENDER, MSG.MSG_ID
         FROM MESSAGE MSG
         JOIN MESSAGE_STATUS MS ON MSG.MSG_ID = MS.MSG_ID
         JOIN MEMBER M ON MSG.MSG_SENDER = M.MEMBER_NUM
@@ -11,7 +11,7 @@
     </select>
 
     <select id="showSentMailList" parameterType="Long" resultType="MsgSentMailListDTO">
-        SELECT MS.MSG_READ, M.MEMBER_NICKNAME, MSG.MSG_CONTENT, MSG.MSG_SENT_TIME
+        SELECT MS.MSG_READ, M.MEMBER_NICKNAME, MSG.MSG_CONTENT, MSG.MSG_SENT_TIME, MSG.MSG_ID
         FROM MESSAGE MSG
         JOIN MESSAGE_STATUS MS ON MSG.MSG_ID = MS.MSG_ID
         JOIN MEMBER M ON MSG.MSG_RECIPIENT = M.MEMBER_NUM
@@ -20,7 +20,7 @@
     </select>
 
     <select id="getMailView" parameterType="MsgGetMailViewDTO" resultType="MsgGetMailViewDTO">
-        SELECT M.MEMBER_NICKNAME, MSG.MSG_CONTENT
+        SELECT M.MEMBER_NICKNAME, MSG.MSG_CONTENT, MSG.MSG_SENDER
         FROM MESSAGE MSG
         JOIN MESSAGE_STATUS MS ON MSG.MSG_ID = MS.MSG_ID
         JOIN MEMBER M ON MSG.MSG_SENDER = M.MEMBER_NUM

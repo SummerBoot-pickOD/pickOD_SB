@@ -54,14 +54,16 @@ public class MessageController {
         return "message/deletedMail";
     }
 
+
     @GetMapping("getmailModal")
     public String getMsgView(@RequestParam("msgId") long msgId, HttpSession session, Model model) {
         Long memberNum = (Long) session.getAttribute("memberNum");
         if (memberNum == null) return "redirect:/login/login";
+        log.info("받은 메일 상세 보기 요청: msgId = {}, memberNum = {}", msgId, memberNum);
 
-        System.out.println("받은메일상세보기");
-        Optional<MsgGetMailViewDTO> view = messageService.getMailView(msgId, memberNum);
-        model.addAttribute("view", view.orElse(null));
+        MsgGetMailViewDTO view = messageService.getMailView(msgId, memberNum).orElse(null);
+        model.addAttribute("view", view);
+        log.info("view: {}", view);
         return "message/getmailModal";
     }
 
@@ -77,8 +79,11 @@ public class MessageController {
     }
 
     // 메시지 전송
-    @PostMapping("getmailModal")
-    public ResponseEntity<String> sendMsg (@RequestBody MsgWriteMailDTO msgWriteMailDTO) {
+    @PostMapping("replymailModal")
+    public ResponseEntity<String> sendMsg (@RequestBody MsgWriteMailDTO msgWriteMailDTO, HttpSession session, Model model) {
+        Long memberNum = (Long) session.getAttribute("memberNum");
+        msgWriteMailDTO.setMsgSender(memberNum);
+        model.addAttribute("msgWriteMailDTO", msgWriteMailDTO);
         messageService.sendMessage(msgWriteMailDTO);
         return ResponseEntity.ok("메세지 보내기 완료");
     }

@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded',()=>{
+                                      document.addEventListener('DOMContentLoaded',()=>{
   const saveimg_btn2=document.querySelectorAll(".checklist-check img");
   const saveimg_btn1=document.querySelectorAll(".tp_saveimg img");
   

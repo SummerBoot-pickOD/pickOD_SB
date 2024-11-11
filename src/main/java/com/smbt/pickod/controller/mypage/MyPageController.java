@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MyPageController {
     private final MyPageService myPageService;
 
-    @GetMapping("/myPage")
+    @GetMapping("myPage")
     public String getMyPage(HttpSession session, Model model) {
         Long memberNum = (Long) session.getAttribute("memberNum");
 
@@ -30,7 +30,9 @@ public class MyPageController {
         //내가 받은 좋아요수
         model.addAttribute("likeCount", myPageService.getLikeCount(memberNum));
         //내 베스트리스트
-        model.addAttribute("myBestList", myPageService.getMyBestList(memberNum).get(0));
+        model.addAttribute("myBestList", myPageService.getMyBestList(memberNum));
+        //내 여행계획 숫자
+        model.addAttribute("myBestCount", myPageService.getPlanCount(memberNum));
         //내 체크리스트 총 숫자
         model.addAttribute("cntMyCheckList", myPageService.getCntMyCheckList(memberNum));
         //내 체크리스트 리스트(모든걸 다합쳐서)
@@ -46,6 +48,34 @@ public class MyPageController {
         //내가 만든 계획 리스트
         model.addAttribute("myPlanList", myPageService.getMyPlanList(memberNum));
 
-        return "/mypage/myPage"; // myPage.html 뷰로 이동
+        return "mypage/myPage"; // myPage.html 뷰로 이동
     }
+
+    @GetMapping("myProfile")
+    public String getMyProfile(HttpSession session, Model model) {
+        Long memberNum = (Long) session.getAttribute("memberNum");
+        if (memberNum == null) {
+            return "redirect:/login/login";
+        }
+        return "mypage/myProfile";
+    }
+
+    @GetMapping("myBest")
+    public String getMyBest(HttpSession session, Model model){
+        Long memberNum = (Long) session.getAttribute("memberNum");
+        if (memberNum == null) {
+            return "redirect:/login/login";
+        }
+        return "mypage/myBest";
+    }
+
+    @GetMapping("userDetail")
+    public String getUserDetail(HttpSession session, Model model){
+        Long memberNum = (Long) session.getAttribute("memberNum");
+        if (memberNum == null) {
+            return "redirect:/login/login";
+        }
+        return "mypage/userDetail";
+    }
+
 }

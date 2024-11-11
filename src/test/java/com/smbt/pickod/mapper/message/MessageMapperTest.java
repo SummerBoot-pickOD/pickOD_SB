@@ -81,8 +81,8 @@ class MessageMapperTest {
     @DisplayName("받은쪽지함 클릭시")
     void getMailView(){
         //given
-        msgGetMailViewDTO.setMsgId(2L);
-        msgGetMailViewDTO.setMemberNum(2L);
+        msgGetMailViewDTO.setMsgId(1L);
+        msgGetMailViewDTO.setMemberNum(3L);
         //when
         Optional<MsgGetMailViewDTO> getMailView = messageMapper.getMailView(msgGetMailViewDTO);
         //then
@@ -90,7 +90,7 @@ class MessageMapperTest {
                 .isPresent() // Optional이 비어 있지 않음을 확인
                 .get() // Optional의 실제 값을 추출
                 .extracting("memberNickname", "msgContent")
-                .contains("킴스", "안녕2?");
+                .contains("유진초이", "안녕?");
     }
 
     @Test
@@ -243,10 +243,5 @@ class MessageMapperTest {
         assertThat(trashedMailList)
                 .isEmpty();
     }
-
-
-
-
-
 
 }

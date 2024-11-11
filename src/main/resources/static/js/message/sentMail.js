@@ -210,12 +210,18 @@ function renderSentMailList(data) {
     mailDate.className = 'mail-date';
     mailDate.textContent = mailList.msgSentTime;
 
+    const mailId = document.createElement('div');
+    mailId.className = 'msg-id';
+    mailId.textContent = mailList.msgId;
+    mailId.hidden = true;
+
     // 각 요소를 mailboxList에 추가
     mailboxList.appendChild(checkItem);
     mailboxList.appendChild(mailOpen);
     mailboxList.appendChild(mailTo);
     mailboxList.appendChild(mailContent);
     mailboxList.appendChild(mailDate);
+    mailboxList.appendChild(mailId);
 
     // 최종적으로 메일 컨테이너에 mailboxList 추가
     mailboxContainer.appendChild(mailboxList);

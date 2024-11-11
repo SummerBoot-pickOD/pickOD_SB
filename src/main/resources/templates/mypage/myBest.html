@@ -14,13 +14,13 @@
 <body>
   <form action="#" method="">
     <header>
-      <div id='header'></div>
+      <div id='header' th:replace="~{main/header}"></div>
     </header>
     <main>
       <section>
         <div class="mybest-title">
           <div class="name-box">
-            <a href="./myPage.html"><div class="title-mypage">마이페이지&nbsp>&nbsp</div></a>
+            <a th:href="@{/mypage/myPage}"><div class="title-mypage">마이페이지&nbsp>&nbsp</div></a>
             <div class="title-mybest">나의 베스트 게시물</div>
           </div>
         </div>
@@ -108,7 +108,7 @@
       </main>
       </section>
     <footer>
-      <div id='footer'></div>
+      <div id="footer" th:replace="~{main/footer}"></div>
     </footer>
   </form>
 </body>
