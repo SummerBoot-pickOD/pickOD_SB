@@ -231,7 +231,7 @@ function renderCheckList(data) {
 
 // 페이지 로드 시 checkedJournalList 데이터를 사용해 렌더링
 document.addEventListener('DOMContentLoaded', () => {
-  renderTripList(checkedJournalList);
+  renderTripList(myJournalList);
 });
 
 function renderTripList(data) {
@@ -262,7 +262,7 @@ function renderTripList(data) {
     // 제목 div 생성
     const nameDiv = document.createElement('div');
     nameDiv.classList.add('triplist-name');
-    nameDiv.textContent = item.title || '제목';
+    nameDiv.textContent = item.jnlTitle;
 
     // 생성된 요소를 trip-list div에 추가
     tripListDiv.appendChild(imgBoxDiv);

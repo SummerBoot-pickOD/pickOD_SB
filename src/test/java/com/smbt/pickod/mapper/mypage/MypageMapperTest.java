@@ -160,7 +160,7 @@ class MyPageMapperTest {
     @Test
     void showMyJournalList() {
         //given
-        mpgMyJournalListDTO.setMemberNum(2L);
+        mpgMyJournalListDTO.setMemberNum(3L);
         //when
         List<MpgMyJournalListDTO> showMyJournalList = myPageMapper.showMyJournalList(mpgMyJournalListDTO.getMemberNum());
         //that
