@@ -66,6 +66,7 @@ public class MyPageController {
         if (memberNum == null) {
             return "redirect:/login/login";
         }
+        model.addAttribute("myTripList", myPageService.getMyBestList(memberNum));
         return "mypage/myBest";
     }
 
