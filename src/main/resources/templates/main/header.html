@@ -15,7 +15,7 @@
       <div class="header_icon" >
         <a th:unless="${session.memberNum == null}" th:href="@{/mypage/myPage}"><img src="../../img/main/mypage.png" alt="마이페이지"></a>
         <a th:if="${session.memberNum == null}" th:href="@{/login/login}"><img src="../../img/main/login.png" alt="로그인"></a>
-        <a th:unless="${session.memberNum == null}" th:href="@{/login/loginout}"><img src="../../img/main/logout.png" alt="로그아웃"></a>
+        <a th:unless="${session.memberNum == null}" th:href="@{/login/logout}"><img src="../../img/main/logout.png" alt="로그아웃"></a>
       </div>
     </div>
   </header>

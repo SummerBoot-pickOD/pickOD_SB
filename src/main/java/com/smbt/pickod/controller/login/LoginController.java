@@ -44,7 +44,7 @@ public class LoginController {
         return new RedirectView("/main/main");
     }
     //로그아웃은 헤더에 있는 관계로 여기선 스킵
-    @PostMapping("logout")
+    @GetMapping("logout")
     public RedirectView logout(HttpSession session){
         session.removeAttribute("memberNum");
         session.invalidate();
