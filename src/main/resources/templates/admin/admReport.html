@@ -5,15 +5,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Report management</title>
-  <link rel="stylesheet" href="../../css/admin/admReport.css">
-  <link rel="stylesheet" href="../../css/admin/admHeader.css">
-  <link rel="stylesheet" href="../../css/main/footer.css">
+  <link rel="stylesheet" th:href="@{/css/admin/admReport.css}">
+  <link rel="stylesheet" th:href="@{/css/admin/admHeader.css}">
+  <link rel="stylesheet" th:href="@{/css/main/footer.css}">
   <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
-  <script defer src="../../js/admin/admReport.js"></script>
+  <script defer th:src="@{/js/admin/admReport.js}"></script>
 </head>
 
 <body>
-  <div id="header"></div>
+<div th:replace="admin/admHeader :: header"></div>
   <main>
     <h1>신고 관리</h1>
     <div class="container" id = "reports">
@@ -153,29 +153,29 @@
     <h1>사용자 제재하기</h1>
     <div class="container" id = "sanction">
       <div class="search">
-        <select id="condition">
+        <select id="sanc-srch-condition">
           <option value="" disabled selected>조건을 선택하세요</option>
-          <option value="name">아이디(이메일)</option>
+          <option value="email">아이디(이메일)</option>
           <option value="nick">닉네임</option>
         </select>
-        <input type="text" placeholder="정확히 입력해주세요." />
+        <input type="text" id ="sanc-srch-input" placeholder="정확히 입력해주세요." />
         <!-- <label for="status">상태:</label> -->
         <button type="button" class="enter" id = "search-sanction">검색</button>
         <div id = sanction-count>제재횟수 : <span id="s-count"></span>회</div>
         <select id="sanction-reason">
           <option value="" disabled selected>제재 사유를 선택하세요</option>
-          <option value="1">상습적인 욕설 또는 비방</option>
-          <option value="2">괴롭힘, 폭력</option>
-          <option value="3">부적절한 글 작성</option>
-          <option value="N">기타(비고 작성)</option>
+          <option value="상습적인 욕설 또는 비방">상습적인 욕설 또는 비방</option>
+          <option value="괴롭힘, 폭력">괴롭힘, 폭력</option>
+          <option value="부적절한 글 작성">부적절한 글 작성</option>
+          <option value="기타">기타(비고 작성)</option>
         </select>
-        <input type="text" placeholder="비고 작성">
+        <input type="text" id="sanc-note" placeholder="비고 작성">
         <button type="button" class="enter" id = "update-sanction">적용</button>
       </div>
     </div>
 
   </main>
-  <div id='footer'></div>
+  <div th:replace="main/footer :: footer"></div>
 </body>
 <div class = modal-container>
   <div id="report-detail-modal">

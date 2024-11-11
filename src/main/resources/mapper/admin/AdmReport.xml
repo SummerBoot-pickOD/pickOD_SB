@@ -47,11 +47,11 @@
         WHERE CMT_ID = #{reportPostId}
     </select>
 
-    <select id="getSanctionCount" parameterType="AdmReportSearchSanctionDTO" resultType="int">
+    <select id="getSanctionCount" parameterType="AdmReportInsertSanctionDTO" resultType="int">
         SELECT COUNT(*)
         FROM SANCTION JOIN MEMBER USING(MEMBER_NUM)
         WHERE 1=1
-        <if test="inqCondition == 'id'">
+        <if test="inqCondition == 'email'">
             AND MEMBER_ID = #{inqKeyword}
         </if>
         <if test="inqCondition == 'nick'">
@@ -62,7 +62,7 @@
     <select id="getSanctionMemberNum" parameterType="AdmReportInsertSanctionDTO" resultType="Long">
         SELECT MEMBER_NUM FROM MEMBER
         WHERE 1=1
-        <if test="inqCondition == 'id'">
+        <if test="inqCondition == 'email'">
             AND MEMBER_ID = #{inqKeyword}
         </if>
         <if test="inqCondition == 'nick'">
@@ -92,6 +92,7 @@
                 WHEN 1 THEN SYSDATE + 15
                 WHEN 2 THEN SYSDATE + 30
                 WHEN 3 THEN SYSDATE + 60
+                ELSE SYSDATE + 400
             END,
             #{reportId}
         )
