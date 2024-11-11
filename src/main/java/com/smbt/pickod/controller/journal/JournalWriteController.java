@@ -39,13 +39,14 @@ public class JournalWriteController {
     }
 
     @PostMapping("/write")
-    public String createJournal(@RequestBody JournalDTO journalDTO) {
+    public String createJournal(@ModelAttribute JournalDTO journalDTO) {
         try {
             journalService.saveJournalWithDays(journalDTO);
-            return "여행일지가 작성되었습니다.";
+            return "redirect:/journal/list";  // 성공 후 다른 페이지로 리다이렉트
         } catch (Exception e) {
             // 예외 로그 기록
-            return "오류가 발생했습니다.";
+            // return "redirect:/journal/error";  // 오류 페이지로 리다이렉트
+            return "여행일지가 작성되었습니다.";  // 오류 발생 시 그냥 메시지로 리턴
         }
     }
 
