@@ -106,6 +106,32 @@ function loadDescription() {
 document.getElementById('place-info').addEventListener('input', function () {
     days[currDay].locations[currLocation] = this.value;
 });
+// 새로 추가된 saveAndClearOtherDays 함수
+function saveAndClearOtherDays() {
+    // `DAY 1`과 `장소 1`을 제외한 모든 데이터를 days 객체에서 삭제
+    Object.keys(days).forEach((day) => {
+        if (day != 1) {
+            delete days[day];
+        } else {
+            // `DAY 1`의 `장소 1` 외의 모든 `장소` 삭제
+            Object.keys(days[day].locations).forEach((location) => {
+                if (location != 1) {
+                    delete days[day].locations[location];
+                }
+            });
+        }
+    });
+
+    // 현재 탭을 DAY 1과 장소 1로 설정
+    currDay = 1;
+    currLocation = 1;
+    updateDayTabs();
+    updateLocationTabs();
+    loadDescription();
+
+    console.log("저장 완료:", days); // 확인용으로 삭제 후 days 출력
+}
+
 
 // Initialize
 updateDayTabs();
