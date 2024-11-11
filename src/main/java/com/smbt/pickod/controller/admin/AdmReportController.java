@@ -15,9 +15,14 @@ import java.util.Map;
 @Controller
 @Slf4j
 @RequiredArgsConstructor
-@RequestMapping("/admReport")
+@RequestMapping("/admin/admReport")
 public class AdmReportController {
     private final AdmReportService admReportService;
+
+    @GetMapping("")
+    public String admReport() {
+        return "admin/admReport";
+    }
 
     @GetMapping("inqTable")
     public String inquiryTable(@ModelAttribute AdmReportSearchDTO admReportSearchDTO, Model model) {
