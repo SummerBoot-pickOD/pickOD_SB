@@ -44,7 +44,7 @@ class AdmReportMapperTest {
     @DisplayName("제재 횟수 검색하기")
     @Test
     public void findSanctionCount(){
-        AdmReportSearchSanctionDTO dto = new AdmReportSearchSanctionDTO();
+        AdmReportInsertSanctionDTO dto = new AdmReportInsertSanctionDTO();
         dto.setInqCondition("nick");
         dto.setInqKeyword("카디");
 

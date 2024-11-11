@@ -49,8 +49,14 @@ public class AdmReportService {
     }
 
     //제재 횟수 확인
-    public int checkSncCnt(AdmReportSearchSanctionDTO admReportSearchSanctionDTO){
-        return admReportMapper.getSanctionCount(admReportSearchSanctionDTO);
+    public String checkSncCnt(AdmReportInsertSanctionDTO admReportInsertSanctionDTO){
+        Long memberNum = admReportMapper.getSanctionMemberNum(admReportInsertSanctionDTO).orElse(-1L);
+
+        if(memberNum == -1){
+            return "X";
+        }
+
+        return Integer.toString(admReportMapper.getSanctionCount(admReportInsertSanctionDTO));
     }
 
     //제재 부과

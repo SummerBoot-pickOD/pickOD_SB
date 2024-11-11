@@ -17,7 +17,7 @@ public interface AdmReportMapper {
 
     public Optional<AdmReportGoPostDTO> getPostFromCmt(@Param("reportPostId") Long reportPostId);
 
-    public int getSanctionCount(AdmReportSearchSanctionDTO admReportSearchSanctionDTO);
+    public int getSanctionCount(AdmReportInsertSanctionDTO admReportInsertSanctionDTO);
 
     public Optional<Long> getSanctionMemberNum(AdmReportInsertSanctionDTO admReportInsertSanctionDTO);
 

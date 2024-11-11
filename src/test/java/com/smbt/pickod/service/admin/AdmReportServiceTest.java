@@ -102,10 +102,10 @@ class AdmReportServiceTest {
     void chkSncCnt(){
         doReturn(1).when(admReportMapper).getSanctionCount(any());
 
-        AdmReportSearchSanctionDTO dto = new AdmReportSearchSanctionDTO();
+        AdmReportInsertSanctionDTO dto = new AdmReportInsertSanctionDTO();
         dto.setInqCondition("id");
         dto.setInqKeyword("kardiem@naver.com");
-        int res = admReportService.checkSncCnt(dto);
+        String res = admReportService.checkSncCnt(dto);
 
         verify(admReportMapper,times(1)).getSanctionCount(any());
         assertThat(res).isEqualTo(1);

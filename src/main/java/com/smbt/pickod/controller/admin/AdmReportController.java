@@ -4,6 +4,7 @@ import com.smbt.pickod.dto.admin.report.*;
 import com.smbt.pickod.service.admin.AdmReportService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -53,16 +54,23 @@ public class AdmReportController {
         return map;
     }
 
-    @GetMapping("sncCnt")
-    public int getSncCnt(@ModelAttribute AdmReportSearchSanctionDTO admReportSearchSanctionDTO) {
-        return admReportService.checkSncCnt(admReportSearchSanctionDTO);
+    @PostMapping("sncCnt")
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> getSncCnt(@RequestBody AdmReportInsertSanctionDTO admReportInsertSanctionDTO) {
+        Map<String, Object> map = new HashMap<>();
+        log.info("제대로는 들어왔니?");
+        map.put("success", true);
+        map.put("count", admReportService.checkSncCnt(admReportInsertSanctionDTO));
+        return ResponseEntity.ok(map);
     }
 
     @PostMapping("impSnc")
-    public Map<String, String> imposeSnc(@ModelAttribute AdmReportInsertSanctionDTO admReportInsertSanctionDTO) {
-        Map<String, String> map = new HashMap<>();
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> imposeSnc(@RequestBody AdmReportInsertSanctionDTO admReportInsertSanctionDTO) {
+        Map<String, Object> map = new HashMap<>();
+        log.info("값을 보자" + admReportInsertSanctionDTO.toString());
         admReportService.imposeSnc(admReportInsertSanctionDTO);
         map.put("status", "success");
-        return map;
+        return ResponseEntity.ok(map);
     }
 }

@@ -1,10 +1,10 @@
-$(function () {
-  $("#header").load("../../html/main/header.html");
-});
-
-$(function () {
-  $("#footer").load("../../html/main/footer.html");
-});
+// $(function () {
+//   $("#header").load("../../html/main/header.html");
+// });
+//
+// $(function () {
+//   $("#footer").load("../../html/main/footer.html");
+// });
 
 // $("#login-button").click(function(){
 //   $("#invalid-login").val("");
