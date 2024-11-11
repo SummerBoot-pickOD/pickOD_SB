@@ -3,6 +3,8 @@ package com.smbt.pickod.controller.admin;
 import com.smbt.pickod.dto.admin.member.AdmMemberDetailsDTO;
 import com.smbt.pickod.dto.admin.member.AdmMemberFilterDTO;
 import com.smbt.pickod.dto.admin.member.AdmMemberMgmtDTO;
+import com.smbt.pickod.dto.admin.message.AdmToSendMsgDTO;
+import com.smbt.pickod.dto.admin.message.AdmToWriteMsgDTO;
 import com.smbt.pickod.service.admin.AdmMemberMgmtService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -32,21 +34,27 @@ public class AdmMemberMgmtController {
 
     @GetMapping("/details")
     @ResponseBody
-    public ResponseEntity<?> admMemberDetails(@RequestParam Long memberNum) {
-        try {
-//            Long memNum = admMemberMgmtService.getMemberNum(memberId);
+    public ResponseEntity<AdmMemberDetailsDTO> admMemberDetails(@RequestParam Long memberNum) {
+             log.info(memberNum.toString());
+
             AdmMemberDetailsDTO details = admMemberMgmtService.getMemberDetails(memberNum);
             return ResponseEntity.ok(details);
-        } catch (NoSuchElementException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("회원 정보를 찾을 수 없습니다.");
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("서버 오류가 발생했습니다.");
-        }
     }
 
-//    @GetMapping("/search")
-//    public String admMemberSearch(@RequestParam String keyword, Model model) {
-//        List<AdmMemberFilterDTO> members = admMemberMgmtService.filterMembersList(keyword);
-//    }
+    @GetMapping("/search")
+    public String admMemberSearch(AdmMemberFilterDTO admMemberFilterDTO, Model model) {
+        System.out.println("Search Option: " + admMemberFilterDTO.getSearchOption());
+        System.out.println("Keyword: " + admMemberFilterDTO.getKeyword());
+        System.out.println("Status: " + admMemberFilterDTO.getStatus());
+        List<AdmMemberMgmtDTO> members = admMemberMgmtService.filterMembersList(admMemberFilterDTO);
+        model.addAttribute("members", members);
+        return "/admin/admUserManagement";
+    }
 
+//    @GetMapping("/details/sendMsg")
+//    @ResponseBody
+//    public ResponseEntity<AdmToSendMsgDTO> admMemberDetails(@RequestParam Long memberNum, @RequestParam String msg) {
+//        log.info(memberNum.toString());
+//
+//    }
 }

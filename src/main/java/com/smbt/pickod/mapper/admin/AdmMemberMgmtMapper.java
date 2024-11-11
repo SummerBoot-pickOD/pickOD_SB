@@ -18,6 +18,8 @@ public interface AdmMemberMgmtMapper {
 
     Optional<AdmToSanctionDTO> memToSanction(String memberId);
 
+    Optional<String> getMemNickName(Long memberNum);
+
     void deleteMember(Long memberId);
 }
 

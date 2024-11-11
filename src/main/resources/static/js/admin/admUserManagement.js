@@ -7,10 +7,15 @@ document.addEventListener('DOMContentLoaded', function () {
     $("#footer").load("../../html/main/footer.html");
   });
 
-  //댓글 상세보기 모달 
+  //회원 상세보기 모달
   const openModal = document.querySelectorAll('.user-detail-btn');
   const usrDetailModal = document.querySelector('.nonmodal-container');
   const closeBtn = document.querySelector('.close-btn');
+  //쪽지 보내기 상세보기 모달
+    const openMessage = document.querySelector('.message');
+    const msgModal = document.querySelector('.sendmsg-container');
+    const closeModal = document.querySelector('.message-close');
+    const sendMsg = document.querySelector(".send-msg")
 
   //회원 상세 보기
   openModal.forEach(btn => {
@@ -32,22 +37,19 @@ document.addEventListener('DOMContentLoaded', function () {
           })
           .catch(error => console.error('Error:', error));
 
+      // 쪽지 보내기 버튼에 memberNum 전달
+        openMessage.setAttribute('data-member-num', memberNum);
+
       usrDetailModal.style.display = "flex";
     })
   });
 
 
-  //댓글 상세보기 모달 닫기
+  //회원 상세보기 모달 닫기
   closeBtn.addEventListener("click", function () {
     usrDetailModal.style.display = "none";
   });
 
-
-  //쪽지 보내기 상세보기 모달 
-  const openMessage = document.querySelector('.message');
-  const msgModal = document.querySelector('.sendmsg-container');
-  const closeModal = document.querySelector('.message-close');
-  const sendMsg = document.querySelector(".send-msg")
 
   //쪽지 보내기 모달 띄우기
   openMessage.addEventListener("click", function () {

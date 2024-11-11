@@ -6,14 +6,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Admin Login</title>
   <link rel="stylesheet" th:href="@{/css/admin/admLogin.css}">
-  <link rel="stylesheet" th:href="@{/css/admin/admHeader.css}">
-  <link rel="stylesheet" th:href="@{/css/main/footer.css}">
+<!--  <link rel="stylesheet" th:href="@{/css/admin/admHeader.css}">-->
+<!--  <link rel="stylesheet" th:href="@{/css/main/footer.css}">-->
   <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
   <script defer th:src="@{/js/admin/admLogin.js}"></script>
 </head>
 
 <body>
-  <div id="header" th:replace="~{/admin/admHeader}"></div>
+<!--  <div id="header" th:replace="~{/admin/admHeader}"></div>-->
   <main>
     <div class="container">
       <img class="pickOD-logo" th:src="@{/img/main/logo.png}">
@@ -24,10 +24,10 @@
         <div id="invalid-login"></div>
         <button id="login-button" type="submit">로그인</button>
       </form>
-      <a th:href="@{/admin/findPwd}" id="forgot-password" class="login-service">비밀번호 찾기</a>
+<!--      <a th:href="@{/admin/findPwd}" id="forgot-password" class="login-service">비밀번호 찾기</a>-->
     </div>
   </main>
-  <div id="footer" th:replace="~{/main/footer}"></div>
+<!--  <div id="footer" th:replace="~{/main/footer}"></div>-->
 </body>
 
 </html>

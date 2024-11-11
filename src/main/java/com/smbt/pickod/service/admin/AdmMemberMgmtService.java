@@ -34,6 +34,9 @@ public class AdmMemberMgmtService {
         return admMemberMgmtMapper.getMemDetails(memberNum).orElseThrow(()->new IllegalStateException("존재하지 않는 회원입니다."));
     }
 
+    public String getMemberNickName(Long memberNum) {
+        return admMemberMgmtMapper.getMemNickName(memberNum).orElseThrow(()-> new IllegalStateException("존재하지 않는 회원입니다."));
+    }
     public AdmToSanctionDTO memberToSanction(String memberId) {
         return admMemberMgmtMapper.memToSanction(memberId).orElseThrow(()->new IllegalStateException("존재하지 않는 회원 아이디입니다."));
     }

@@ -17,20 +17,21 @@
   <main>
     <h1>회원관리</h1>
     <div class="container">
-      <form action="/admin/admMemberMgmt/search" method="get"></form>
-      <div class="search">
-        <select id="condition">
-          <option value="" disabled selected>조건을 선택하세요</option>
-          <option class="search-option" value="nick">닉네임</option>
-          <option class="search-option" value="sus">제재</option>
-        </select>
-        <input type="text" class="keyword" placeholder="검색어를 입력하세요." />
-        <label><input type="radio" name="status" value="total" checked> 전체</label>
-        <label><input type="radio" name="status" value="normal" checked> 정상</label>
-        <label><input type="radio" name="status" value="suspended"> 제재</label>
-        <label><input type="radio" name="status" value="withdrawn"> 탈퇴</label>
-        <button type="submit" class="search-button">검색</button>
-      </div>
+      <form action="/admin/admMemberMgmt/search" method="get">
+        <div class="search">
+          <select name="searchOption" id="condition">
+            <option value="" disabled selected>조건을 선택하세요</option>
+            <option value="nickname">닉네임</option>
+            <option value="suspended">제재</option>
+          </select>
+          <label>
+            <input type="text" name="keyword" class="keyword" placeholder="검색어를 입력하세요." />
+          </label>
+          <label><input type="radio" name="status" value="total" checked> 전체</label>
+          <label><input type="radio" name="status" value="normal" checked> 정상</label>
+          <label><input type="radio" name="status" value="suspended"> 제재</label>
+          <button type="submit" class="search-button">검색</button>
+        </div>
       </form>
       <table class="member-list-table">
         <thead>
@@ -94,6 +95,14 @@
                 <td>성별</td>
                 <td id="member-gender"></td>
               </tr>
+              <tr>
+                <td>작성한 여행 발자국</td>
+                <td id="tot-journals"></td>
+              </tr>
+              <tr>
+                <td>작성한 여행 짜기</td>
+                <td id="tot-plans"></td>
+              </tr>
             </table>
 
             <table class="user-info">
@@ -133,7 +142,6 @@
 
             <h2 class="modal-title">회원 상세 정보</h2>
  -->
-
         <div class="sendmsg-container">
           <div class="sendmsg-content">
             <div class="close">
@@ -149,13 +157,10 @@
             <!-- <div class="nonmodal-textarea"> -->
 
             <textarea id="textarea" placeholder="쪽지를입력하세요"></textarea>
-
-            <!-- </div> -->
             <div class="nonmodal-bottom">
               <button class="send-msg" type="submit">쪽지 보내기</button>
             </div>
           </div>
-        </div>
         </div>
       </form>
     </section>
