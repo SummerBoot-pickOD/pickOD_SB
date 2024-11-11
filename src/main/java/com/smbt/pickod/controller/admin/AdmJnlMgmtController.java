@@ -14,7 +14,7 @@ import java.util.List;
 @Controller
 @Slf4j
 @RequiredArgsConstructor
-@RequestMapping("admin/jnlMgmt")
+@RequestMapping("admin/admJnlMgmt")
 public class AdmJnlMgmtController {
     private final AdmJnlMgmtService admJnlMgmtService;
 
