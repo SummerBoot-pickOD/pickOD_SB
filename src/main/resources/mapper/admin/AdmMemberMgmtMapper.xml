@@ -5,6 +5,7 @@
     <!-- 전체 멤버 가져오는것 - 기본 회원 관리 페이지 -->
     <select id="getMembers" resultType="AdmMemberMgmtDTO">
         SELECT
+            m.member_num,
             m.member_id,
             m.member_nickname,
             COUNT(DISTINCT j.JNL_NUM) AS tot_journals,
@@ -18,7 +19,7 @@
         WHERE
             m.member_num >= 2
         GROUP BY
-            m.member_id, m.member_nickname, s.sanction_cnt, m.MEMBER_NUM
+            m.member_num, m.member_id, m.member_nickname, s.sanction_cnt, m.MEMBER_NUM
         ORDER BY
             m.member_num
     </select>
@@ -27,6 +28,7 @@
     <select id="filterMembers" parameterType="AdmMemberFilterDTO" resultType="AdmMemberMgmtDTO">
 
         SELECT
+        m.member_num,
         m.member_id,
         m.member_nickname,
         COUNT(DISTINCT j.jnl_num) AS tot_journals,
@@ -52,14 +54,14 @@
             <![CDATA[ AND  s.sanction_end_date > SYSDATE ]]>
         </if>
         GROUP BY
-        m.member_id, m.member_nickname, s.sanction_cnt, m.member_num
+        m.member_num, m.member_id, m.member_nickname, s.sanction_cnt, m.member_num
         ORDER BY
         m.member_num ASC
 
     </select>
 
     <!-- 회원Id을 가지고 memberNum 가져오기 -->
-    <select id="getMemberNum" parameterType="String" resultType="Long">
+    <select id="getMemNum" parameterType="String" resultType="Long">
         SELECT member_num
         FROM MEMBER
         WHERE MEMBER_ID = #{memberId}
@@ -69,6 +71,7 @@
     <select id="getMemDetails" parameterType="Long" resultType="AdmMemberDetailsDTO">
     <![CDATA[
         SELECT
+            m.member_num,
             m.member_id,
             m.member_nickname,
             m.member_address,
@@ -87,6 +90,7 @@
         WHERE
             m.member_num = #{memberNum}
         GROUP BY
+            m.member_num,
             m.member_id,
             m.member_nickname,
             m.member_address,
@@ -100,7 +104,7 @@
 
     <!-- 특정 회원을 제재 대상으로 가져오기 -->
     <select id="memToSanction" parameterType="String" resultType="AdmToSanctionDTO">
-        SELECT member_num
+        SELECT member_id
         FROM member
         WHERE member_id = #{memberId}
     </select>

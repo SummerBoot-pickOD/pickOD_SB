@@ -7,9 +7,9 @@ document.addEventListener('DOMContentLoaded', function () {
     $("#footer").load("../../html/main/footer.html");
   });
 
-  $(".back").click(function () {
-    window.location.href = "./admSelectCert.html";
-  });
+  // $(".back").click(function () {
+  //   window.location.href = "./admLogin.html";
+  // });
 
   $(".send-email").click(function () {
     put = $(".email").val()

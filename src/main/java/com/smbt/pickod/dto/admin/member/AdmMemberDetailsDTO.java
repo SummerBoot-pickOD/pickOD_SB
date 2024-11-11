@@ -11,6 +11,7 @@ import java.time.LocalDate;
 @Getter @Setter
 @ToString @NoArgsConstructor
 public class AdmMemberDetailsDTO {
+    private Long memberNum;
     private String memberId;
     private String memberNickName;
     private String memberAddress;
