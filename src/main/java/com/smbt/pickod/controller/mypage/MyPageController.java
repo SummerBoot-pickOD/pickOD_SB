@@ -78,4 +78,6 @@ public class MyPageController {
         return "mypage/userDetail";
     }
 
+
+
 }
