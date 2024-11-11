@@ -6,6 +6,7 @@ import com.smbt.pickod.dto.place.PlacePickDTO;
 import com.smbt.pickod.service.place.PlacePickService;
 import com.smbt.pickod.service.place.PlaceService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 @Controller
 @RequestMapping("/place")
 @RequiredArgsConstructor
@@ -30,6 +32,7 @@ public class PlaceController {
         List<PlaceDTO> placeList = placeService.getPlacesBySort(sort);
         model.addAttribute("placeList", placeList);
         model.addAttribute("sort", sort);
+        log.info(sort + "확인=======");
         return "place/place";
     }
 

@@ -164,72 +164,42 @@ document.addEventListener('DOMContentLoaded', function() {
   mailboxLists.forEach(function (mailbox) {
 
     mailbox.addEventListener('click', function (event) {
-
+      data = {
+        msgId : view.msgId,
+      };
       //체크박스부분은제외
       if (event.target.tagName === 'INPUT' && event.target.type === 'checkbox') {
         return; // 체크박스를 클릭하면 함수 실행을 멈춤
       }
+      fetch('/message/getmailModal',{
+        method: "GET",
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(data)
+      }).then(response=>{
+        if(!response.ok) throw new Error("Failed to fetch message");
+        return response.json(view);
+      }).then(data =>{
+        document.querySelector('.ppl-from').innerText = memberNickname;
+        document.querySelector('.nonmodal-textarea').innerText = msgContent;
+        document.querySelector('.getmsg-container').style.display = 'block';
+      }).catch(error=>{
+        console.error("Error:", error);
+      })
+        // // 모달 보이기
+        // document.querySelector('.getmsg-container').style.display = 'block';
 
-      console.log("왜안나오는데");
-      console.log(view.memberNickname);
-      console.log(view.msgContent);
-      console.log("왜안나오는데");
+        // 답장기능
+          let replyMsg = document.querySelector('.reply-msg');
+          replyMsg.addEventListener("click", function(){
+          let sendMsgContainer = document.querySelector('.replymsg-container');
+          sendMsgContainer.style.display="block";
 
+          document.querySelector('.ppl-to').innerText = senderText;
 
-      document.getElementsByClassName('ppl-from').innerText = view.memberNickname || "알 수 없음";
-      document.getElementsByClassName('nonmodal-textarea').innerText = view.msgContent || "내용이 없습니다.";
-      // msgId 및 발신자 닉네임 가져오기
-      // const msgId = this.getAttribute('data-msg-id');
-      // const senderNickname = this.getAttribute('data-sender-nickname');
-      // const msgContent = this.getAttribute('data-msgContent');
-      // console.log("Selected msgId:", msgId);
-      // console.log("Sender Nickname:", senderNickname);
-      //
-      // fetch(`/message/getmailModal', {
-      //   method: "GET",
-      //   headers: {'Content-Type': 'application/json'}
-      // })
-      //     .then(response => {
-      //       if (!response.ok) throw new Error("Failed to fetch message");
-      //       return response.json();
-      //     })
-      //     .then(data => {
-      //       // 서버로부터 받은 데이터와 발신자 닉네임을 모달에 표시
-      // document.querySelector('.ppl-from').innerText = senderNickname;
-      // document.querySelector('.nonmodal-textarea').innerText = msgContent;
-      // document.querySelector('.getmsg-container').style.display = 'block';
-      //     })
-      //     .catch(error => {
-      //       console.error("Error:", error);
-            // // 읽으면 편지 읽음표시기능
-            // var readMail = this.querySelector('.mail-open img');
-            // readMail.src = '../../img/message/받은편지.png';
-            // // 클릭한 mailbox-list 안의 mail-from 텍스트 가져오기
-            //  var senderText = this.querySelector('.mail-from').innerText;
-            // // // 클릭한 mailbox-list 안의 mail-content 텍스트 가져오기
-            //  var contentText = this.querySelector('.mail-content').innerText;
-            // //
-            // // 모달의 ppl-from 요소에 발신자 텍스트 설정
-            // document.querySelector('.ppl-from').innerText = senderText;
-            // // 모달의 nonmodal-textarea에 쪽지 내용 텍스트 설정
-            // document.querySelector('.nonmodal-textarea').innerText = contentText;
-            //
-            // 모달 보이기
-            document.querySelector('.getmsg-container').style.display = 'block';
-
-            // 답장기능
-            //   let replyMsg = document.querySelector('.reply-msg');
-            //   replyMsg.addEventListener("click", function(){
-            //   let sendMsgContainer = document.querySelector('.replymsg-container');
-            //   sendMsgContainer.style.display="block";
-            //
-            //   document.querySelector('.ppl-to').innerText = senderText;
-            //
-            // });
-          });
+        });
+      });
     });
   })
-// })
 
 
 
