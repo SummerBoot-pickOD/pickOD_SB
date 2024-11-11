@@ -83,29 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('itemCount').textContent = '총 ' + itemCount+'건';
   document.getElementById('itemCount').fontWeight='bold';
 
-//조회순 찜하기순 
-  const btn1 = document.getElementById('btn1');
-  const btn2 = document.getElementById('btn2');
-  
-  btn1.style.fontWeight='bold';
-
-  btn2.addEventListener('click', () => {
-      btn1.style.fontWeight = ''; 
-      btn2.style.fontWeight = 'bold'; 
-  });
-
-  btn1.addEventListener('click', () => {
-      btn1.style.fontWeight = 'bold'; 
-      btn2.style.fontWeight = '';
-  });
 
 
-  $(function () {
-    $("#header").load("../main/header.html");
-  });
-  
-  $(function () {
-    $("#footer").load("../main/footer.html");
-  });
 });
 

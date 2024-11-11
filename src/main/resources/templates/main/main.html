@@ -15,22 +15,22 @@
 <body>
   <div id='header' th:replace="~{main/header}"></div>
   <!-- 행사 -->
-  <div class="mainFestival">
+  <div class="mainFestival" >
     <div class="mainFestival-img">
-      <a class="festivalLink" href="http://recollection.kr/" target="_blank">
-        <img id="festivalImg" src="../../img/main/sampleFestivalImg.png" alt="">
+      <a id="festivalLink"  target="_blank">
+        <img id="festivalImg" alt="">
       </a> 
     </div>
     <div class="mainFestival-wrap">
-      <div class="mainFestival-info">
-        <a class="festivalLink" href="http://recollection.kr/" target="_blank"><h2 id="festivalTitle">서로 엮는 북촌의 날</h2></a>
-        <span id="festivalDate">2024.10.02~2024.11.30</span>
-        <span id="festivalLocation">서울특별시 종로구 계동길 37 (계동) 북촌문화센터</span>
-      </div>
+      <li class="mainFestival-info" >
+        <a  id="festivalTitleLink" target="_blank"><h2 id="festivalTitle"></h2></a>
+        <span id="festivalDate"></span>
+        <span id="festivalLocation" ></span>
+      </li>
       <div class="mainFestival-btn">
         <span id="festivalCounter">01/06</span>
         <button id="prevBtn"><img src="../../img/place/placeDetail/prevBtn.png" alt=""></button>
-        <button id="nextBtn"><img src="../../img/place/placeDetail/nextBtn.png" alt=""></button>
+        <button id="nextBtn" ><img src="../../img/place/placeDetail/nextBtn.png" alt=""></button>
       </div>
     </div>
   </div>
@@ -219,7 +219,52 @@
     </section>
   </main>
   
+  <script  th:inline="javascript">
+    const festivals = /*[[${festivalList}]]*/ '[]';
+    let currentFestivalIndex = 0; // 현재 페스티벌 인덱스
 
+    // 페스티벌 정보 업데이트 함수
+    function displayFestival(index) {
+      const festival = festivals[index];
+      document.getElementById('festivalLink').href = festival.orgLink;
+      document.getElementById('festivalTitleLink').href = festival.orgLink;
+      document.getElementById('festivalImg').src = festival.mainImg;
+      document.getElementById('festivalTitle').innerText = festival.title;
+      document.getElementById('festivalDate').innerText = festival.place;
+      document.getElementById('festivalLocation').innerText = festival.date;
+
+      // "다음" 버튼과 "이전" 버튼의 활성화 여부
+      document.getElementById("nextBtn").disabled = currentFestivalIndex === festivals.length - 1;
+      document.getElementById("prevBtn").disabled = currentFestivalIndex === 0;
+
+      // 축제 카운트 표시 (현재 축제 번호/전체 축제 개수)
+      document.getElementById("festivalCounter").innerText = `${currentFestivalIndex + 1}/${festivals.length}`;
+    }
+
+    // "다음" 버튼 클릭 시 다음 축제 표시
+    function showNextFestival() {
+      if (currentFestivalIndex < festivals.length - 1) {
+        currentFestivalIndex++;
+        displayFestival(currentFestivalIndex); // 현재 인덱스를 전달하여 축제 표시
+      }
+    }
+
+    // "이전" 버튼 클릭 시 이전 축제 표시
+    function showPreviousFestival() {
+      if (currentFestivalIndex > 0) {
+        currentFestivalIndex--;
+        displayFestival(currentFestivalIndex); // 현재 인덱스를 전달하여 축제 표시
+      }
+    }
+
+
+    displayFestival(currentFestivalIndex);
+
+    // 이벤트 리스너 추가 (이전, 다음 버튼)
+    document.getElementById('prevBtn').addEventListener('click', showPreviousFestival);
+    document.getElementById('nextBtn').addEventListener('click', showNextFestival);
+
+  </script>
   <div id="footer" th:replace="~{main/footer}"></div>
   
 
