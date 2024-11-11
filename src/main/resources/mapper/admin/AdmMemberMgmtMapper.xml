@@ -41,18 +41,19 @@
         LEFT JOIN SANCTION s ON m.member_num = s.member_num
         WHERE
         1 = 1
-        <if test="searchOption == '닉네임' and keyword != null and keyword != ''">
-            AND m.member_nickname = #{keyword}
+        <if test="searchOption == 'nickname' and keyword != null and keyword != ''">
+            AND m.member_nickname LIKE '%' ||  #{keyword} || '%'
         </if>
-        <if test="searchOption == '제재' and keyword != null and keyword != ''">
-            AND s.sanction_cnt = #{keyword}
+        <if test="searchOption == 'suspended' and keyword != null and keyword != ''">
+            AND s.sanction_cnt LIKE '%' ||  #{keyword} || '%'
         </if>
-        <if test="status == '정상'">
+        <if test="status == 'normal'">
             AND (s.sanction_cnt IS NULL OR s.sanction_cnt = 0)
         </if>
-        <if test="status == '제재'">
+        <if test="status == 'suspended'">
             <![CDATA[ AND  s.sanction_end_date > SYSDATE ]]>
         </if>
+        AND m.member_num >= 2
         GROUP BY
         m.member_num, m.member_id, m.member_nickname, s.sanction_cnt, m.member_num
         ORDER BY
@@ -107,6 +108,13 @@
         SELECT member_id
         FROM member
         WHERE member_id = #{memberId}
+    </select>
+
+    <!-- 회원 번호로 회원 닉네임 가져오기 -->
+    <select id="getMemNickName" parameterType="Long" resultType="String">
+        SELECT member_nickname
+        FROM member
+        where member_num = #{memberNum}
     </select>
 
     <!-- 회원 삭제 -->
