@@ -10,7 +10,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,7 +17,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @Transactional
@@ -93,7 +91,7 @@ class AdmMemberMgmtMapperTest {
 //        sctDTO.setSanctionCnt(1);
 //        sctDTO.setSanctionReason("불건전한 게시물 등록");
 //        sctDTO.setSanctionNote("5건 중 4건이 불건전 판정");
-//        sctDTO.setMemberNum(admMemberMgmtMapper.getMemberNum("mem1@gmail.com"));
+//        sctDTO.setMemberNum(admMemberMgmtMapper.getMemNum("mem1@gmail.com").orElseThrow(() -> new IllegalStateException("존재하지 않는 회원 번호")));
 //        sctDTO.setReportId(1L);
 //        admReportMapper.imposeSanction(sctDTO);
 //        // parent key not found error
@@ -115,7 +113,7 @@ class AdmMemberMgmtMapperTest {
     @DisplayName("회원 상세 정보 보기")
     void getDetails(){
         //given
-        Long memNum = admMemberMgmtMapper.getMemberNum("mem1@gmail.com").
+        Long memNum = admMemberMgmtMapper.getMemNum("mem1@gmail.com").
                 orElseThrow(() -> new IllegalStateException("존재하지 않는 회원입니다."));
         //when
         AdmMemberDetailsDTO result = admMemberMgmtMapper.getMemDetails(memNum).orElseThrow(() -> new IllegalStateException("멤버 정보 찾기 실패"));
@@ -128,7 +126,7 @@ class AdmMemberMgmtMapperTest {
     @DisplayName("회원 삭제")
     void deleteMem(){
         //given
-        Long memNum = admMemberMgmtMapper.getMemberNum("mem2@gmail.com").
+        Long memNum = admMemberMgmtMapper.getMemNum("mem2@gmail.com").
                 orElseThrow(() -> new IllegalStateException("존재하지 않는 회원입니다."));
         //when
         admMemberMgmtMapper.deleteMember(memNum);

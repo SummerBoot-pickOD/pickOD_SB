@@ -1,8 +1,6 @@
 package com.smbt.pickod.mapper.admin;
 
 import com.smbt.pickod.dto.admin.member.*;
-import com.smbt.pickod.dto.admin.message.AdmToSendMsgDTO;
-import com.smbt.pickod.dto.admin.message.AdmToWriteMsgDTO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -14,7 +12,7 @@ public interface AdmMemberMgmtMapper {
 
     List<AdmMemberMgmtDTO> filterMembers(AdmMemberFilterDTO admMemberFilterDTO);
 
-    Optional<Long> getMemberNum(String memberId);
+    Optional<Long> getMemNum(String memberId);
 
     Optional<AdmMemberDetailsDTO> getMemDetails(Long memberNum);
 

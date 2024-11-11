@@ -8,6 +8,7 @@ import lombok.ToString;
 @Getter @Setter
 @ToString @NoArgsConstructor
 public class AdmMemberMgmtDTO {
+    private Long memberNum;
     private String memberId;
     private String memberNickName;
     private int totJournals;

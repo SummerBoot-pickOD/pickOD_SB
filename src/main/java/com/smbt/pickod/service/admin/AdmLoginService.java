@@ -21,7 +21,6 @@ public class AdmLoginService {
     //    private final String admEmail = "pickOD@gmail.com"
     private final String admEmail = "admin@gmail.com";
 
-    //로그인 잘못됐는지, 제재중인지 확인
     public AdmSessionDTO login(AdmLoginDTO admLoginDTO) {
 
         return admLoginMapper.isAdmin(admLoginDTO).orElseThrow(() -> new IllegalStateException("관리자 로그인 정보가 틀렸습니다."));

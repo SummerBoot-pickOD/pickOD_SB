@@ -35,26 +35,28 @@
 
         <table class="journal-list">
           <tr class="table-head">
-            <th>아이디</th>
-            <th>성명</th>
-            <th>닉네임</th>
-            <th>여행 발자국</th>
-            <th>찜하기 수</th>
-            <th>신고 여부</th>
-            <th>댓글</th>
-            <th>바로가기</th>
+            <th class="mem-id">아이디</th>
+            <th class="nickname">닉네임</th>
+            <th class="jnl-title">여행 발자국</th>
+            <th class="jnl-pick">찜하기 수</th>
+            <th class="is-reported">신고 여부</th>
+            <th class="to-comments">댓글</th>
+            <th class="to-journal">바로가기</th>
           </tr>
 
-          <tr>
-            <td>pickpickkim@gmail.com</td>
-            <td>남궁미미</td>
-            <td>pickme1234</td>
-            <td class="jnl-title">2박 3일 대부도 나들이</td>
-            <td>50</td>
-            <td>N</td>
-            <td><button class="to-comments" type="button">댓글보기</button></td>
-            <td><button class="to-journal" type="button">바로가기</button></td>
+          <tbody>
+          <tr th:each="jnl: ${jnls}">
+            <td class="mem-id" th:text="${jnl.memberId}"></td>
+            <td class="nickname" th:text="${jnl.memberNickName}"></td>
+            <td class="jnl-title" th:text="${jnl.jnlTitle}"></td>
+            <td class="jnl-pick" th:text="${jnl.pickCnt}"></td>
+            <td class="is-reported" th:text="${jnl.isReported}"></td>
+            <td><button class="to-comments" type="button"
+                          th:data-jnl-num="${jnl.jnlNum}">댓글보기</button></td>
+            <td><button class="to-journal" type="button"
+                        th:data-jnl-num="${jnl.jnlNum}">바로가기</button></td>
           </tr>
+          </tbody>
           <tr>
             <td>pickpickkim@gmail.com</td>
             <td>김픽미</td>

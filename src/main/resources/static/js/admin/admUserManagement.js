@@ -8,14 +8,30 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   //댓글 상세보기 모달 
-  const openModal = document.querySelectorAll('.user-detail');
+  const openModal = document.querySelectorAll('.user-detail-btn');
   const usrDetailModal = document.querySelector('.nonmodal-container');
   const closeBtn = document.querySelector('.close-btn');
 
-  //댓글 상세보기 모달 띄우기
+  //회원 상세 보기
   openModal.forEach(btn => {
     btn.addEventListener("click", function () {
-      // console.log("clicked")
+      // const memberId = this.getAttribute('data-member-id');
+        const memberNum = this.getAttribute('data-member-num');
+      fetch(`/admin/admMemberMgmt/details?memberNum=${memberNum}`)
+          .then(response => response.json())
+          .then(data => {
+            console.log(data);
+            document.getElementById('member-id').textContent = data.memberId;
+            document.getElementById('member-nickname').textContent = data.memberNickname;
+            document.getElementById('member-address').textContent = data.memberAddress;
+            document.getElementById('member-bdate').textContent = data.memberBdate;
+            document.getElementById('member-gender').textContent = data.memberGender;
+            document.getElementById('sanction-cnt').textContent = data.sanctionCnt;
+            document.getElementById('is-banned').textContent = data.isBanned;
+              document.getElementById('sanction-end-date').textContent = data.sanctionEndDate;
+          })
+          .catch(error => console.error('Error:', error));
+
       usrDetailModal.style.display = "flex";
     })
   });
