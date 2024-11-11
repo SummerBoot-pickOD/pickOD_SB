@@ -12,134 +12,139 @@
   <link rel="stylesheet" href="../../css/main/footer.css">
 </head>
 <body>
-  <form action="#" method="get">
-    <header>
-      <div id='header'></div>
-    </header>
-    <main>
-      <section class="user-profile">
-        <div class="name-box">
-          마이페이지
-        </div>
-        <div class="profile-containerbox">
-          <div class="profile-left">
-            <div class="profile-upper">
-              <div class="profile-picture">
-                <img src="../../img/mypage/사람 아이콘.png" alt="">
-              </div>
-              <div class="user-detail">
-                <div class="writing-list">
-                  <div class="user-ft"><h1>작성 발자국:</h1></div>
-                  <div class="user-num">
-                    <div class="ft-num" th:text="${journalCount}"></div>
-                    <div class="num-unit">개</div>
-                  </div>
-                </div>
-                <div class="temporary-storage">
-                  <div class="user-storage"><h1>받은 좋아요:</h1></div>
-                  <div class="user-num">
-                    <div class="temporary-num" th:text="${likeCount}"></div>
-                    <div class="num-unit">개</div>
-                  </div>
-                </div>
-              </div>
+  <header>
+    <div id='header'></div>
+  </header>
+  <main>
+    <script th:inline="javascript">
+      /*<![CDATA[*/
+      // 서버에서 전달된 `checkedList`를 JSON으로 변환하여 JavaScript 변수에 할당
+      const checkedList = /*[[${checkedList}]]*/ [];
+      const checkedJournalList = /*[[${checkedJournalList}]]*/ [];
+      const myPlanList = /*[[${myPlanList}]]*/ [];
+      const myBestList = /*[[${myBestList}]]*/ [];
+      /*]]>*/
+    </script>
+    <section class="user-profile">
+      <div class="name-box">
+        마이페이지
+      </div>
+      <div class="profile-containerbox">
+        <div class="profile-left">
+          <div class="profile-upper">
+            <div class="profile-picture">
+              <img src="../../img/mypage/사람 아이콘.png" alt="">
             </div>
-
-            <!-- 프로필/회원수정/쪽지함 바로가기공간 -->
-
-            <div class="profile-under">
-              <div class="profilefix-btn">
-                <div class="btn-profilefix"><a href="./myProfile.html"><img src="../../img/mypage/사진기.png" alt="프로필수정"></a></div>
-              </div>
-              <div class="memberfix-btn">
-                <div class="btn-memberfix"><a href="./userDetail.html"><img src="../../img/mypage/연필.png" alt="정보수정"></a></div>
-              </div>
-              <div class="postbox-btn">
-                <div class="btn-postbox"><a href="../message/mailBox.html"><img src="../../img/mypage/쪽지함.png" alt="쪽지함"></a></div>
-              </div>
-            </div>
-          </div>
-
-          <!-- 내베스트공간 -->
-
-          <div class="profile-right">
-            <div class="mybest-title">
-              <div class="title-box"> 
-                <div>나의베스트게시물</div>
-                <div><a href="./myBest.html"><img src="../../img/mypage/바로가기.png" alt="바로가기버튼"></a></div>
-              </div>
-            </div>
-            <div class="mybest-index">
-              <div class="index-box">
-                <div class="index-title" >제목</div>
-                <div class="index-detail">
-                  <div class="index-check">찜하기</div>
-                  <div class="index-view">조회수</div>
-                  <div class="index-review">댓글</div>
+            <div class="user-detail">
+              <div class="writing-list">
+                <div class="user-ft"><h1>작성 발자국:</h1></div>
+                <div class="user-num">
+                  <div class="ft-num" th:text="${journalCount}"></div>
+                  <div class="num-unit">개</div>
                 </div>
               </div>
-            </div>
-            <div class="mybest-list">
-              <div class="nth-list">
-                <div class="nth-title" th:text="${myBestList.getJnlTitle()}"></div>
-                <div class="nth-detail">
-                  <div class="nth-check" th:text="${myBestList.getNumPick()}"></div>
-                  <div class="nth-view" th:text="${myBestList.getJnlViews()}"></div>
-                  <div class="nth-review" th:text="${myBestList.getNumComments()}"></div>
+              <div class="temporary-storage">
+                <div class="user-storage"><h1>받은 좋아요:</h1></div>
+                <div class="user-num">
+                  <div class="temporary-num" th:text="${likeCount}"></div>
+                  <div class="num-unit">개</div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
 
-      <!-- 섹션2 유저리스트  -->
+          <!-- 프로필/회원수정/쪽지함 바로가기공간 -->
 
-      <section class="userlist-container">
-        <div class="list-nav">
-          <div class="btn-checklist">나의 찜하기 목록</div>
-          <div class="btn-triplist">나의 여행 발자국</div>
-          <div class="btn-planlist">나의 여행 계획</div>
-        </div>
-        <div class="result-detail">
-          <div class="search-num">
-            <div>총</div>
-            <div th:text="${cntMyCheckList}"></div>
-            <div>건</div>
-          </div>
-          <div class="search-detail">
-            <div class="search-fp">발자국</div><span>|&nbsp;</span>
-            <div class="search-sp"> 장소 </div>
-            <span>|&nbsp;</span><div class="search-tpl">템플릿</div>
-          </div>
-        </div>
-        <div class="result-detail2">
-          <div class="search-num">
-            <div>총</div>
-            <div>N</div>
-            <div>건</div>
-          </div>
-        </div>
-        <div class="result-detail3">
-          <div class="search-num">
-            <div>총</div>
-            <div>N</div>
-            <div>건</div>
-          </div>
-          <div class="search-detail">
-            <div class="search-recent">최신순</div><span>|&nbsp;</span>
-            <div class="search-date">계획일정순</div><span>
+          <div class="profile-under">
+            <div class="profilefix-btn">
+              <div class="btn-profilefix"><a th:href="@{../mypage/myProfile}"><img src="../../img/mypage/사진기.png" alt="프로필수정"></a></div>
+            </div>
+            <div class="memberfix-btn">
+              <div class="btn-memberfix"><a th:href="@{../mypage/userDetail}"><img src="../../img/mypage/연필.png" alt="정보수정"></a></div>
+            </div>
+            <div class="postbox-btn">
+              <div class="btn-postbox"><a th:href="@{../message/mailBox}"><img src="../../img/mypage/쪽지함.png" alt="쪽지함"></a></div>
+            </div>
           </div>
         </div>
 
-        <!-- 나의 찜하기목록 -->
-        <script th:inline="javascript">
-          /*<![CDATA[*/
-          // 서버에서 전달된 `checkedList`를 JSON으로 변환하여 JavaScript 변수에 할당
-          const checkedList = /*[[${checkedList}]]*/ [];
-          /*]]>*/
-        </script>
-        <div class="checklist-container">
+
+        <!-- 내베스트공간 -->
+
+        <div class="profile-right">
+          <div class="mybest-title">
+            <div class="title-box">
+              <div>나의베스트게시물</div>
+              <div><a th:href="@{/mypage/myBest}"><img src="../../img/mypage/바로가기.png" alt="바로가기버튼"></a></div>
+            </div>
+          </div>
+          <div class="mybest-index">
+            <div class="index-box">
+              <div class="index-title" >제목</div>
+              <div class="index-detail">
+                <div class="index-check">찜하기</div>
+                <div class="index-view">조회수</div>
+                <div class="index-review">댓글</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mybest-list">
+<!--              <div class="nth-list">-->
+<!--                <div class="nth-title" th:text="${myBestList.getJnlTitle()}"></div>-->
+<!--                <div class="nth-detail">-->
+<!--                  <div class="nth-check" th:text="${myBestList.getNumPick()}"></div>-->
+<!--                  <div class="nth-view" th:text="${myBestList.getJnlViews()}"></div>-->
+<!--                  <div class="nth-review" th:text="${myBestList.getNumComments()}"></div>-->
+<!--                </div>-->
+<!--              </div>-->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 섹션2 유저리스트  -->
+
+    <section class="userlist-container">
+      <div class="list-nav">
+        <div class="btn-checklist">나의 찜하기 목록</div>
+        <div class="btn-triplist">나의 여행 발자국</div>
+        <div class="btn-planlist">나의 여행 계획</div>
+      </div>
+      <div class="result-detail">
+        <div class="search-num">
+          <div>총</div>
+          <div th:text="${cntMyCheckList}"></div>
+          <div>건</div>
+        </div>
+        <div class="search-detail">
+          <div class="search-fp">발자국</div><span>|&nbsp;</span>
+          <div class="search-sp"> 장소 </div>
+          <span>|&nbsp;</span><div class="search-tpl">템플릿</div>
+        </div>
+      </div>
+      <div class="result-detail2">
+        <div class="search-num">
+          <div>총</div>
+          <div th:text="${journalCount}"></div>
+          <div>건</div>
+        </div>
+      </div>
+      <div class="result-detail3">
+        <div class="search-num">
+          <div>총</div>
+          <div th:text="${myBestCount}"></div>
+          <div>건</div>
+        </div>
+        <div class="search-detail">
+          <div class="search-recent">최신순</div><span>|&nbsp;</span>
+          <div class="search-date">계획일정순</div><span>
+        </div>
+      </div>
+
+      <!-- 나의 찜하기목록 -->
+
+      <div class="checklist-container">
 <!--          <div class="check-list" &lt;!&ndash;반복될 div&ndash;&gt;>-->
 <!--            <div class="checklist-imgbox">-->
 <!--              <img src="../../img/mypage/더미사진.png" alt="썸네일이미지" class="checklist-img">-->
@@ -150,46 +155,44 @@
 <!--            </div>-->
 <!--            <div class="checklist-name">제목</div>-->
 <!--          </div>-->
-        </div>
-
-        <!-- 나의 여행일지 -->
-
-        <div class="mytrip-container">
-
-          <div class="mytrip-list">
-            <div class="triplist-imgbox"<!--반복될 div-->>
-              <img src="../../img/mypage/더미사진.png" alt="썸네일이미지" class="triplist-img">
-            </div>
-            <div class="triplist-box">
-            </div>
-            <div class="triplist-name">게시글제목</div>
-          </div>
-        </div> 
-        <!-- 나의여행계획 -->
-        <div class="myplan-container">
-          <div class="myplan-list"<!--반복될 div-->>
-            <div class="myplan-imgbox">
-              <a href="../planner/myplanDetail.html"><img src="../../img/mypage/나무사진.png" class="myplan-img" alt="내여행계획"></a>
-            </div>
-            <div class="myplan-content">
-              <div class="myplan-period">2박 3일</div>
-              <div class="myplan-title">서울 나들이</div>
-              <div class="myplan-detaildate">계획일정 | 
-                <span>20240810~20240812</span>
-              </div>
-              <div class="myplan-location">서울 강남</div>
-              <div class="myplan-loc-num">총 3개</div>
-            </div>
-          </div>
-
-        </div>
       </div>
-      </section>  
-    </main>
-    <footer>
-      <div id='footer'></div>
-    </footer>
-  </form>
+
+      <!-- 나의 여행일지 -->
+      <div class="mytrip-container">
+
+<!--          <div class="mytrip-list">-->
+<!--            <div class="triplist-imgbox"&lt;!&ndash;반복될 div&ndash;&gt;>-->
+<!--              <img src="../../img/mypage/더미사진.png" alt="썸네일이미지" class="triplist-img">-->
+<!--            </div>-->
+<!--            <div class="triplist-box">-->
+<!--            </div>-->
+<!--            <div class="triplist-name"></div>-->
+<!--          </div>-->
+      </div>
+      <!-- 나의여행계획 -->
+      <div class="myplan-container">
+<!--          <div class="myplan-list"&lt;!&ndash;반복될 div&ndash;&gt;>-->
+<!--            <div class="myplan-imgbox">-->
+<!--              <a href="../planner/myplanDetail.html"><img src="../../img/mypage/나무사진.png" class="myplan-img" alt="내여행계획"></a>-->
+<!--            </div>-->
+<!--            <div class="myplan-content">-->
+<!--              <div class="myplan-period">2박 3일</div>-->
+<!--              <div class="myplan-title">서울 나들이</div>-->
+<!--              <div class="myplan-detaildate">계획일정 | -->
+<!--                <span>20240810~20240812</span>-->
+<!--              </div>-->
+<!--              <div class="myplan-location">서울 강남</div>-->
+<!--              <div class="myplan-loc-num">총 3개</div>-->
+<!--            </div>-->
+        </div>
+
+      </div>
+    </div>
+    </section>
+  </main>
+  <footer>
+    <div id='footer'></div>
+  </footer>
 </body>
 
 </html>

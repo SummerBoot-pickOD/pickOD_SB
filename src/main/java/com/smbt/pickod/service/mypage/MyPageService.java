@@ -29,6 +29,11 @@ public class MyPageService {
                 return myPageMapper.myBestList(memberNum);
     }
 
+    //내 계획 갯수조회
+    public Long getPlanCount(Long memberNum) {
+            return myPageMapper.cntPlan(memberNum).orElse(0L);
+    }
+
     //내찜하기 전체 조회
     public List<MpgMyCheckListDTO> getMyCheckList(Long memberNum) {
         return myPageMapper.showMyCheckList(memberNum);

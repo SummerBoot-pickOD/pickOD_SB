@@ -2,6 +2,7 @@ package com.smbt.pickod.service.message;
 
 import com.smbt.pickod.dto.message.*;
 import com.smbt.pickod.mapper.message.MessageMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -9,6 +10,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Arrays;
 import java.util.List;
@@ -19,6 +22,7 @@ import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class MessageServiceTest {
+    private static final Logger logger = LoggerFactory.getLogger(MessageServiceTest.class);
 
     @Mock
     private MessageMapper messageMapper;
@@ -31,8 +35,8 @@ class MessageServiceTest {
 
     @BeforeEach
     public void setUp() {
-        memberNum = 1L;
-        msgId = 100L;
+        memberNum = 3L;
+        msgId = 1L;
     }
 
     @DisplayName("받은 메일함 목록")
@@ -67,6 +71,7 @@ class MessageServiceTest {
 
     @DisplayName("받은 메일 상세 조회")
     @Test
+
     public void testGetMailView() {
         // given
         MsgGetMailViewDTO mockMailView = new MsgGetMailViewDTO();
@@ -74,7 +79,7 @@ class MessageServiceTest {
 
         // when
         Optional<MsgGetMailViewDTO> result = messageService.getMailView(msgId, memberNum);
-
+        logger.info("Test result for getMailView: {}", result);
         // then
         assertEquals(mockMailView, result.orElse(null));
         verify(messageMapper, times(1)).getMailView(any(MsgGetMailViewDTO.class));

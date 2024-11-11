@@ -109,6 +109,8 @@ document.addEventListener('DOMContentLoaded', function() {
         return; // 체크박스를 클릭하면 함수 실행을 멈춤
       }
 
+
+
       // 읽으면 편지 읽음표시기능
       var readMail =this.querySelector('.mail-open img');
       readMail.src = '../../img/message/받은편지.png';
@@ -245,6 +247,11 @@ function renderDeletedMailList(data) {
         mailDate.className = 'mail-date';
         mailDate.textContent = mail.msgSentTime; // 데이터에서 날짜 정보 설정
 
+        const mailId = document.createElement('div');
+        mailId.className = 'msg-id';
+        mailId.textContent = mailList.msgId;
+        mailId.hidden = true;
+
         // 각 요소를 mailboxList에 추가
         mailboxList.appendChild(checkItem);
         mailboxList.appendChild(mailOpen);
@@ -252,6 +259,7 @@ function renderDeletedMailList(data) {
         mailboxList.appendChild(mailTo);
         mailboxList.appendChild(mailContent);
         mailboxList.appendChild(mailDate);
+        mailboxList.appendChild(mailId);
 
         // 최종적으로 메일 컨테이너에 mailboxList 추가
         mailboxContainer.appendChild(mailboxList);

@@ -3,6 +3,7 @@ package com.smbt.pickod.service.message;
 import com.smbt.pickod.dto.message.*;
 import com.smbt.pickod.mapper.message.MessageMapper;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,6 +13,7 @@ import java.util.Optional;
 @Service
 @Transactional
 @RequiredArgsConstructor
+@Slf4j
 public class MessageService {
     private final MessageMapper messageMapper;
 
@@ -31,8 +33,20 @@ public class MessageService {
         MsgGetMailViewDTO dto = new MsgGetMailViewDTO();
         dto.setMsgId(msgId);
         dto.setMemberNum(memberNum);
-        return messageMapper.getMailView(dto);
+        Optional<MsgGetMailViewDTO> result = messageMapper.getMailView(dto);
+
+        // 조회 결과가 없을 경우 예외를 던지거나 Optional.empty()를 반환할 수 있음
+        if (result.isEmpty()) {
+            log.warn("메일을 찾을 수 없습니다. msgId={}, memberNum={}", msgId, memberNum);
+        } else {
+            log.info("메일 조회 성공: {}", result.get());
+        }
+
+        return result;
+
     }
+
+
 
     // 보낸 메시지 상세 조회
     public Optional<MsgSentMailViewDTO> toMailView(Long msgId, Long memberNum) {

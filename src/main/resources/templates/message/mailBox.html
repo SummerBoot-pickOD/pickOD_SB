@@ -21,8 +21,8 @@
     <section>
       <div class="mailbox-title">
         <div class="name-box">
-          <a href="../mypage/myPage.html"><div class="title-mypage">마이페이지&nbsp>&nbsp</div></a>
-          <a href="./mailBox.html"><div class="title-myprofile">쪽지함</div></a>
+          <a th:href="@{/mypage/myPage}"><div class="title-mypage">마이페이지&nbsp>&nbsp</div></a>
+          <a th:href="@{/message/mailBox}"><div class="title-myprofile">쪽지함</div></a>
         </div>
       </div>
     </section>
@@ -60,6 +60,11 @@
       /*]]>*/
     </script>
 
+    <script type="text/javascript">
+      // 서버에서 전달된 view 객체 데이터를 HTML에 삽입
+      const view = /*[[${view}]]*/ {}; // Thymeleaf 사용 시 표현
+    </script>
+
     <section>
       <div class="mailbox-container" id="mailbox-container">
 <!--        <div class="mailbox-list" th:each="mail : ${mailList}">-->
@@ -74,12 +79,12 @@
       </div>
     </section>
 
-    <section>
-      <div class="container">
-        <div class="mails" id="mails"></div>
-        <div class="pagination" id="pagination"></div>
-    </div>
-    </section>
+<!--    <section>-->
+<!--      <div class="container">-->
+<!--        <div class="mails" id="mails"></div>-->
+<!--        <div class="pagination" id="pagination"></div>-->
+<!--    </div>-->
+<!--    </section>-->
   </main>
   <footer>
     <div id="footer" th:replace="~{main/footer}"></div>

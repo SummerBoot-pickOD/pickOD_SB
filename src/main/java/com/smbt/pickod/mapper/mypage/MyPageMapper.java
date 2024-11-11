@@ -13,6 +13,8 @@ public interface MyPageMapper {
 
     Optional<Long> likeCnt (Long memberNum);
 
+    Optional<Long> cntPlan (Long memberNum);
+
     List<MpgMyBestDTO> myBestList (Long memberNum);
 
     List<MpgMyCheckListDTO> showMyCheckList (Long memberNum);

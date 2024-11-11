@@ -85,6 +85,12 @@
         WHERE pp.MEMBER_NUM = #{memberNum})
     </select>
 
+    <select id="cntPlan" resultType="Long">
+        SELECT COUNT(PLAN_ID)
+        FROM PLAN
+        WHERE MEMBER_NUM = #{memberNum}
+    </select>
+
     <select id="showMyJournalList" parameterType="Long" resultType="MpgMyJournalListDTO">
         SELECT JNL_TITLE
         FROM JOURNAL

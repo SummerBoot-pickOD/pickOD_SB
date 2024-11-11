@@ -116,17 +116,65 @@ document.querySelectorAll('.checklist-check').forEach(function(checkElement) {
 });
 
 
-// `checkedList`를 서버에서 받아와 JSON 형식으로 변환하여 JavaScript에 할당
-// const checkedList = /*[[${checkedList}]]*/ [];
+//내 베스트게시물 리스트
+// 페이지 로드 시 myBestList 데이터를 사용해 렌더링
+document.addEventListener('DOMContentLoaded', () => {
+  myBest(myBestList);
+});
 
-// 임시 데이터 추가 (테스트용)
-// if (checkedList.length === 0) {
-//   checkedList.push(
-//       { title: "테스트 아이템 1", thumbnailUrl: "https://example.com/image1.jpg" },
-//       { title: "테스트 아이템 2", thumbnailUrl: "https://example.com/image2.jpg" },
-//       { title: "테스트 아이템 3", thumbnailUrl: "https://example.com/image3.jpg" }
-//   );
-// }
+function myBest (data){
+  const container = document.querySelector(".mybest-list");
+
+// 데이터에 따라 요소 반복 생성
+  data.forEach(item => {
+    // nth-list 요소 생성
+    const nthList = document.createElement("div");
+    nthList.classList.add("nth-list");
+
+    // 제목 요소 생성
+    const title = document.createElement("div");
+    title.classList.add("nth-title");
+    title.textContent = item.jnlTitle;
+
+    // 상세 정보 컨테이너 생성
+    const detail = document.createElement("div");
+    detail.classList.add("nth-detail");
+
+    // 좋아요 횟수 요소 생성
+    const check = document.createElement("div");
+    check.classList.add("nth-check");
+    check.textContent = item.numPick;
+
+    // 조회수 요소 생성
+    const view = document.createElement("div");
+    view.classList.add("nth-view");
+    view.textContent = item.jnlViews;
+
+    // 댓글 수 요소 생성
+    const review = document.createElement("div");
+    review.classList.add("nth-review");
+    review.textContent = item.numComments;
+
+    // 상세 정보에 각 요소 추가
+    detail.appendChild(check);
+    detail.appendChild(view);
+    detail.appendChild(review);
+
+    // nth-list에 제목과 상세 정보 추가
+    nthList.appendChild(title);
+    nthList.appendChild(detail);
+
+    // 컨테이너에 nth-list 추가
+    container.appendChild(nthList);
+  });
+}
+
+
+//내 체크리스트
+// 페이지 로드 시 checkedList 데이터를 사용해 렌더링
+document.addEventListener('DOMContentLoaded', () => {
+  renderCheckList(checkedList);
+});
 
 function renderCheckList(data) {
   // checklist-container를 가져옵니다.
@@ -179,7 +227,126 @@ function renderCheckList(data) {
   });
 }
 
-// 페이지 로드 시 checkedList 데이터를 사용해 렌더링
+
+// 페이지 로드 시 checkedJournalList 데이터를 사용해 렌더링
 document.addEventListener('DOMContentLoaded', () => {
-  renderCheckList(checkedList);
+  renderTripList(checkedJournalList);
 });
+
+function renderTripList(data) {
+  // tripList-container를 가져옵니다.
+  const container = document.querySelector('.mytrip-container');
+  container.innerHTML = ''; // 초기화하여 기존 항목 삭제
+
+  // 주어진 데이터 배열을 반복하여 각 항목에 대해 HTML 요소를 생성합니다.
+  data.forEach(item => {
+    // 새로운 trip-list div 생성
+    const tripListDiv = document.createElement('div');
+    tripListDiv.classList.add('mytrip-list');
+
+    // 이미지 박스 생성
+    const imgBoxDiv = document.createElement('div');
+    imgBoxDiv.classList.add('triplist-imgbox');
+    const img = document.createElement('img');
+    img.classList.add('triplist-img');
+    img.src = item.thumbnailUrl ? item.thumbnailUrl : '../../img/mypage.png';
+    img.alt = '썸네일 이미지';
+    imgBoxDiv.appendChild(img);
+
+    // 트립리스트 박스 생성
+    const boxDiv = document.createElement('div');
+    boxDiv.classList.add('triplist-box');
+
+    // 제목 div 생성
+    const nameDiv = document.createElement('div');
+    nameDiv.classList.add('triplist-name');
+    nameDiv.textContent = item.title || '제목';
+
+    // 생성된 요소를 trip-list div에 추가
+    tripListDiv.appendChild(imgBoxDiv);
+    tripListDiv.appendChild(boxDiv);
+    tripListDiv.appendChild(nameDiv);
+
+    // trip-list div를 mytrip-container에 추가
+    container.appendChild(tripListDiv);
+  });
+}
+
+//내 계획리스트
+// 페이지 로드 시 myPlanList 데이터를 사용해 렌더링
+document.addEventListener('DOMContentLoaded', () => {
+  renderMyPlanList(myPlanList);
+});
+
+function renderMyPlanList(data){
+  // 부모 컨테이너를 선택
+  const container = document.querySelector(".myplan-container");
+
+// 데이터에 따라 요소 반복 생성
+  data.forEach(plan => {
+    // myplan-list 요소 생성
+    const myPlanList = document.createElement("div");
+    myPlanList.classList.add("myplan-list");
+
+    // 이미지 박스 요소 생성
+    const imgBox = document.createElement("div");
+    imgBox.classList.add("myplan-imgbox");
+    const link = document.createElement("a");
+    link.href = "../planner/myplanDetail.html";
+    const img = document.createElement("img");
+    img.src = plan.imgSrc;
+    img.classList.add("myplan-img");
+    img.alt = "내여행계획";
+    link.appendChild(img);
+    imgBox.appendChild(link);
+
+    // 내용 컨테이너 요소 생성
+    const content = document.createElement("div");
+    content.classList.add("myplan-content");
+
+    // 기간 요소 생성
+    const period = document.createElement("div");
+    period.classList.add("myplan-period");
+    period.textContent = (plan.period-1)+"박"+ (plan.period+"일");
+
+    // 제목 요소 생성
+    const title = document.createElement("div");
+    title.classList.add("myplan-title");
+    title.textContent = plan.planTitle;
+
+    // 상세 날짜 요소 생성
+    const detailDate = document.createElement("div");
+    detailDate.classList.add("myplan-detaildate");
+    detailDate.textContent = "계획일정:"
+
+    const span = document.createElement("span");
+    span.textContent = plan.planStartDate +"~"+ plan.planEndDate;
+    detailDate.appendChild(span);
+
+    // 위치 정보 요소 생성
+    // const location = document.createElement("div");
+    // location.classList.add("myplan-location");
+    // location.textContent = plan.placeName;
+
+    // 장소 개수 요소 생성
+    // const locNum = document.createElement("div");
+    // locNum.classList.add("myplan-loc-num");
+    // locNum.textContent = `${plan.locNum} 장소`;
+
+    // 컨텐츠에 모든 요소 추가
+    content.appendChild(period);
+    content.appendChild(title);
+    content.appendChild(detailDate);
+    // content.appendChild(location);
+    // content.appendChild(locNum);
+
+    // myplan-list에 이미지 박스와 컨텐츠 추가
+    myPlanList.appendChild(imgBox);
+    myPlanList.appendChild(content);
+
+    // 컨테이너에 myplan-list 추가
+    container.appendChild(myPlanList);
+  });
+}
+
+

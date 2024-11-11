@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 public class MsgSentMailListDTO {
     private Long memberNum;
 //    private Long msgRecipient;
-//    private Long msgId;
+    private Long msgId;
     private Long msgRead;
     private String memberNickname;
     private String msgContent;

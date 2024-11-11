@@ -14,13 +14,13 @@
 <body>
   <form action="">
     <header>
-      <div id='header'></div>
+      <div id='header' th:replace="~{main/header}"></div>
     </header>
     <main>
       <section>
         <div class="myprofile-title">
           <div class="name-box">
-            <a href="./myPage.html"><div class="title-mypage">마이페이지&nbsp>&nbsp</div></a>
+            <a th:href="@{/mypage/myPage}"><div class="title-mypage">마이페이지&nbsp>&nbsp</div></a>
             <div class="title-myprofile">프로필사진변경</div>
           </div>
         </div>
@@ -63,7 +63,7 @@
       </section>
     </main>
     <footer>
-      <div id='footer'></div>
+      <div id="footer" th:replace="~{main/footer}"></div>
     </footer>
   </form>
 </body>

@@ -8,8 +8,8 @@
   <title>받은편지모달</title>
 </head>
 <body>
-    <div id="report"></div>
-    <form action="#" method="get">
+    <div id="report" th:replace="~{report/reportSend}"></div>
+    <form th:action="@{message/getmailModal}" method="get">
       <div class="nonmodal-container getmsg-container">
         <div class="nonmodal-box">
           <div class="nonmodal-top">
