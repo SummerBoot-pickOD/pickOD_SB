@@ -87,7 +87,8 @@ class AdmReportMapperTest {
         AdmReportSearchDTO searchDTO = new AdmReportSearchDTO();
         searchDTO.setInqCondition("writer");
         searchDTO.setInqKeyword("kardiem");
-        searchDTO.setReportSolved(2);
+        searchDTO.setInqPostType("total");
+        searchDTO.setInqSolved(2);
 
         List<AdmReportListDTO> list = adminReportMapper.inqReportTable(searchDTO);
 

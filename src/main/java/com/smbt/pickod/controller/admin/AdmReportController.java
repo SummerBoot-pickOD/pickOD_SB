@@ -25,12 +25,12 @@ public class AdmReportController {
         return "admin/admReport";
     }
 
-    @GetMapping("inqTable")
-    public String inquiryTable(@ModelAttribute AdmReportSearchDTO admReportSearchDTO, Model model) {
+    @PostMapping("inqTable")
+    @ResponseBody
+    public ResponseEntity<List<AdmReportListDTO>> inquiryTable(@RequestBody AdmReportSearchDTO admReportSearchDTO) {
+        log.info("값 확인 : " + admReportSearchDTO.toString());
         List<AdmReportListDTO> tableList = admReportService.inqRprtTable(admReportSearchDTO);
-
-        model.addAttribute("tableList", tableList);
-        return "admin/admReport";
+        return ResponseEntity.ok(tableList);
     }
 
     //상세보기는 있는거 가지고 모달에 값만 넣으므로 js에서 처리
@@ -46,12 +46,12 @@ public class AdmReportController {
         return map;
     }
 
-    @GetMapping("solve/{reportId}")
-    public Map<String, String> solveReport(@PathVariable("reportId") Long reportId) {
-        Map<String, String> map = new HashMap<>();
+    @PostMapping("solve/{reportId}")
+    public ResponseEntity<Map<String, Object>> solveReport(@PathVariable("reportId") Long reportId) {
+        Map<String, Object> map = new HashMap<>();
         admReportService.solveRprt(reportId);
-        map.put("status", "success");
-        return map;
+        map.put("success", true);
+        return ResponseEntity.ok(map);
     }
 
     @PostMapping("sncCnt")
@@ -70,7 +70,7 @@ public class AdmReportController {
         Map<String, Object> map = new HashMap<>();
         log.info("값을 보자" + admReportInsertSanctionDTO.toString());
         admReportService.imposeSnc(admReportInsertSanctionDTO);
-        map.put("status", "success");
+        map.put("success", true);
         return ResponseEntity.ok(map);
     }
 }
