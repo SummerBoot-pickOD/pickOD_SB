@@ -1,6 +1,7 @@
 package com.smbt.pickod.service.journal;
 
 import com.smbt.pickod.dto.journal.*;
+import com.smbt.pickod.dto.place.PlaceDTO;
 import com.smbt.pickod.mapper.journal.ImgMapper;
 import com.smbt.pickod.mapper.journal.JournalMapper;
 import lombok.RequiredArgsConstructor;
@@ -163,7 +164,15 @@ public class JournalService {
     }
 
     //journalList 검색페이지
+    //검색창 검색
+    public List<JournalDTO> getJournalBySearch(String keyword) {
+        return journalMapper.searchJournalByKeyword(keyword);  // 정확한 Mapper 메서드 호출
+    }
 
+    //지역버튼으로 조회
+    public List<JournalDTO> searchByArea(String area) {
+        return journalMapper.searchJournalByArea(area);
+    }
 
 
     //총 게시물 갯수
@@ -198,9 +207,9 @@ public class JournalService {
         }
     }
 
-    public List<JournalDTO> searchByArea(String area) {
-        return journalMapper.searchJournal(area, null, null, null, null);  // 나머지 필터들은 null로 넘기기
-    }
+//    public List<JournalDTO> searchByArea(String area) {
+//        return journalMapper.searchJournal(area, null, null, null, null);  // 나머지 필터들은 null로 넘기기
+//    }
 
 
 

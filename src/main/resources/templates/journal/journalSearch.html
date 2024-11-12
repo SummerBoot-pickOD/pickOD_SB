@@ -17,7 +17,7 @@
     <h2>너와 나의 여행 발자국</h2>
     <div class="search-box-container">
         <form class="search-box" th:action="@{/journal/search}" method="get">
-            <input class="search-text" type="text" name="" placeholder="검색어를 입력하세요." onfocus="this.placeholder=''" onblur="this.placeholder='검색어를 입력하세요.'">
+            <input class="search-text" type="text" name="keyword" placeholder="검색어를 입력하세요." onfocus="this.placeholder=''" onblur="this.placeholder='검색어를 입력하세요.'">
             <button class="search-btn" type="submit">
                 <i class="fa-solid fa-magnifying-glass"></i>
             </button>
@@ -95,17 +95,18 @@
     </div>
     <div>
         <div class="content-menu">
-            <div class="content-total">총 <span id="total-posts">0</span>개
-                <a th:href="@{/journal/list(sort='orderByDate')}" class="content-latest" th:class="${sort == 'orderByDate' ? 'bold' : ''}"
-                >최신순
+            <div class="content-total">총 <span id="total-posts">0</span>개</div>
+            <div class="content-buttons">
+                <a th:href="@{/journal/list(sort='orderByDate')}" class="content-latest" th:class="${sort == 'orderByDate' ? 'bold' : ''}">
+                    최신순
                 </a>
                 <div class="wall">|</div>
-                <a th:href="@{/journal/list(sort='orderByLikes')}" class="content-pick" th:class="${sort == 'orderByLikes' ? 'bold' : ''}"
-                >찜하기순
+                <a th:href="@{/journal/list(sort='orderByLikes')}" class="content-pick" th:class="${sort == 'orderByLikes' ? 'bold' : ''}">
+                    찜하기순
                 </a>
                 <div class="wall">|</div>
-                <a th:href="@{/journal/list(sort='orderBySelectedFootprints')}" class="content-chosen" type="button" th:class="${sort == 'orderBySelectedFootprints' ? 'bold' : ''}"
-                >선정 발자국
+                <a th:href="@{/journal/list(sort='orderBySelectedFootprints')}" class="content-chosen" th:class="${sort == 'orderBySelectedFootprints' ? 'bold' : ''}">
+                    선정 발자국
                 </a>
             </div>
         </div>
