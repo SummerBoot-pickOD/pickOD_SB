@@ -4,18 +4,18 @@
 <body>
   <header>
     <div class="nav-wrap">
-      <img src="../../img/main/logo2.png" alt="로고" class="header-logo">
+      <img th:src="@{/img/main/logo2.png}" alt="로고" class="header-logo">
       <nav>
         <ul class="nav-menu">
           <li><a th:href="@{/admin/admMemberMgmt/list}" class="link-menu">회원 관리</a></li>
           <li><a th:href="@{/admin/admReport}" class="link-menu">신고 관리</a></li>
           <li><a th:href="@{/admin/admJnlMgmt/list}" class="link-menu">여행 발자국 관리</a></li>
-          <li><a href="./admPlaces.html" class="link-menu">장소 관리</a></li>
+          <li><a th:href="@{/admin/admPlaceMgmt/list}" class="link-menu">장소 관리</a></li>
           <li class="nav-list">
             <div class="link-menu">템플릿</div>
             <div class="dropdown-container">
-              <a href="./admTemplate.html" class="dropdwn">템플릿 관리</a>
-              <a href="./admCreateTemplate.html" class="dropdwn">템플릿 작성</a>
+              <a th:href="@{/admin/admTemplateMgmt/list}" class="dropdwn">템플릿 관리</a>
+              <a th:href="@{/admin/admTemplateMgmt/write}" class="dropdwn">템플릿 작성</a>
             </div>
           </li>
           <li class="nav-list">
@@ -28,7 +28,7 @@
         </ul>
       </nav>
       <div class="header-icon">
-        <a th:href="@{/admin/admLogin}"><img src="../../img/main/login.png" alt="로그인" class="login"></a>
+        <a th:href="@{/admin/admLogin}"><img th:src="@{/img/main/login.png}" alt="로그인" class="login"></a>
       </div>
     </div>
   </header>
