@@ -4,11 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>보낸편지모달</title>
-  <link rel="stylesheet" href="../../css/message/sentmailModal.css">
-  <script defer src="../../js/message/sentmailModal.js"></script>
+  <link rel="stylesheet" th:href="@{/css/message/sentmailModal.css}">
+  <script defer th:src="@{/js/message/sentmailModal.js}"></script>
 </head>
 <body>
-  <form action="#" method="get">
+<form th:action="@{message/sentmailModal}" method="get">
     <div class="nonmodal-container sentmsg-container">
       <div class="nonmodal-box">
         <div class="nonmodal-top">

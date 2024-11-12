@@ -59,29 +59,27 @@ checkItem.forEach(function(e) {
   });
 });
 
+
+
 //휴지통 이동
-const btnDelete = document.querySelector('.btn-delete');
-console.log(btnDelete);
-const mailboxList = document.querySelectorAll('.mailbox-list');
-console.log(mailboxList);
+// const btnDelete = document.querySelector('.btn-delete');
+// const mailboxList = document.querySelectorAll('.mailbox-list');
+// btnDelete.addEventListener('click', function() {
+//
+//   // 받은 쪽지 중 체크된 항목을 찾아서 휴지통으로 이동
+//   const checkboxes = document.querySelectorAll('.item');
+//   checkboxes.forEach((checkbox) => {
+//       if (checkbox.checked) {
+//
+//           const messageItem = checkbox.closest('.mailbox-list');
+//           console.log(messageItem);
+//           messageItem.remove();
+//            // 받은 쪽지함에서 삭제
+//           checkbox.checked = false; // 체크 상태 초기화
+//       }
+//   });
+// });
 
-btnDelete.addEventListener('click', function() {
-
-  
-  // 받은 쪽지 중 체크된 항목을 찾아서 휴지통으로 이동
-  const checkboxes = document.querySelectorAll('.item');
-  console.log(checkboxes);
-  checkboxes.forEach((checkbox) => {
-      if (checkbox.checked) {
-
-          const messageItem = checkbox.closest('.mailbox-list');
-          console.log(messageItem);
-          messageItem.remove();
-           // 받은 쪽지함에서 삭제
-          checkbox.checked = false; // 체크 상태 초기화
-      }
-  });
-});
 
 
 // 메일 항목을 동적으로 생성
@@ -118,8 +116,11 @@ function renderMailList(data) {
 
     // 메일 내용
     const mailContent = document.createElement('div');
+    const maxLength = 20;
     mailContent.className = 'mail-content';
-    mailContent.textContent = mailList.msgContent;
+    mailContent.textContent = mailList.msgContent.length > maxLength
+        ? mailList.msgContent.slice(0, maxLength) +"..."
+        :mailList.msgContent;
 
     // 메일 날짜
     const mailDate = document.createElement('div');
@@ -147,12 +148,10 @@ function renderMailList(data) {
 
 // 페이지가 로드될 때 mailList 데이터를 기반으로 메일 항목을 렌더링
 document.addEventListener('DOMContentLoaded', function() {
-  renderMailList(mailList);
+  if(mailList.length != 0) {
+    renderMailList(mailList);
+  }
 });
-
-
-
-
 
 
 
@@ -164,29 +163,53 @@ document.addEventListener('DOMContentLoaded', function() {
   mailboxLists.forEach(function (mailbox) {
 
     mailbox.addEventListener('click', function (event) {
+
+
+      const hiddenMsgId = document.querySelector('.msg-id');
       data = {
-        msgId : view.msgId,
+        msgId : Number(hiddenMsgId.innerText)
       };
+      console.log(data);
       //체크박스부분은제외
       if (event.target.tagName === 'INPUT' && event.target.type === 'checkbox') {
         return; // 체크박스를 클릭하면 함수 실행을 멈춤
       }
-      fetch('/message/getmailModal',{
+      fetch(`/message/getmailModal/${data.msgId}`,{
         method: "GET",
         headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(data)
       }).then(response=>{
         if(!response.ok) throw new Error("Failed to fetch message");
-        return response.json(view);
-      }).then(data =>{
-        document.querySelector('.ppl-from').innerText = memberNickname;
-        document.querySelector('.nonmodal-textarea').innerText = msgContent;
+        return response.json();
+      }).then(view =>{
+        document.querySelector('.ppl-from').innerText = view.memberNickname;
+        document.querySelector('.nonmodal-textarea').innerText = view.msgContent;
+        //  모달 보이기
         document.querySelector('.getmsg-container').style.display = 'block';
       }).catch(error=>{
         console.error("Error:", error);
       })
-        // // 모달 보이기
-        // document.querySelector('.getmsg-container').style.display = 'block';
+//삭제버튼
+      const btnBin = document.querySelector('.delete-msg');
+      btnBin.addEventListener('click',function (){
+        const hiddenMsgId = document.querySelector('.msg-id');
+
+        fetch(`/message/mailBox`,{
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({ msgId: data.msgId })
+        })
+            .then(response => {
+              if(!response.ok) throw new Error("Fail to fetch message.");
+              return response.text();
+            })
+            .then(data=>{
+              console.log(data);
+            })
+            .catch(error => {
+              console.log("Error:", error);
+            });
+        })
+
 
         // 답장기능
           let replyMsg = document.querySelector('.reply-msg');
