@@ -36,7 +36,7 @@
       <table class="member-list-table">
         <thead>
         <tr class="table-head">
-<!--          <th class="mem-num">회원번호</th>-->
+          <th class="mem-num">번호</th>
           <th class="id">아이디</th>
           <th class="nickname">닉네임</th>
           <th class="tot-jnl">여행 발자국</th>
@@ -48,7 +48,7 @@
 
         <tbody>
         <tr th:each="member : ${members}">
-<!--          <td class="mem-num" th:text="${member.memberNum}"></td>-->
+          <td class="mem-num" th:text="${member.memberNum}"></td>
           <td class="id" th:text="${member.memberId}"></td>
           <td class="nickname" th:text="${member.memberNickName}"></td>
           <td class="tot-jnl" th:text="${member.totJournals}"></td>
@@ -56,6 +56,9 @@
           <td class="sanction-cnt" th:text="${member.sanctionCnt}"></td>
           <td class="last-col"><button class="user-detail-btn" type="button"
                                        th:data-member-num="${member.memberNum}">상세보기</button></td>
+        </tr>
+        <tr>
+          <td colspan="7" class="last-row"></td>
         </tr>
         </tbody>
 

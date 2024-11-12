@@ -155,10 +155,10 @@
       <div class="search">
         <select id="sanc-srch-condition">
           <option value="" disabled selected>조건을 선택하세요</option>
-          <option value="email">아이디(이메일)</option>
-          <option value="nick">닉네임</option>
+          <option value="email" >아이디(이메일)</option>
+          <option value="nick" th:selected="${opNick == 'nick'}">닉네임</option>
         </select>
-        <input type="text" id ="sanc-srch-input" placeholder="정확히 입력해주세요." />
+        <input type="text" id ="sanc-srch-input" placeholder="정확히 입력해주세요." th:value="${memNick != null && !memNick.isEmpty() ? memNick : ''}" />
         <!-- <label for="status">상태:</label> -->
         <button type="button" class="enter" id = "search-sanction">검색</button>
         <div id = sanction-count>제재횟수 : <span id="s-count"></span>회</div>
