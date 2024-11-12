@@ -5,175 +5,69 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Places Management</title>
-  <link rel="stylesheet" href="../../css/admin/admPlaces.css">
-  <link rel="stylesheet" href="../../css/admin/admHeader.css">
-  <link rel="stylesheet" href="../../css/main/footer.css">
+  <link rel="stylesheet" th:href="@{/css/admin/admPlaces.css}">
+  <link rel="stylesheet" th:href="@{/css/admin/admHeader.css}">
+  <link rel="stylesheet" th:href="@{/css/main/footer.css}">
   <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
-  <script defer src="../../js/admin/admPlaces.js"></script>
+  <script defer th:src="@{/js/admin/admPlaces.js}"></script>
 </head>
 
 <body>
-  <div id="header"></div>
+<div id="header" th:replace="~{/admin/admHeader}"></div>
   <main>
     <div class="posts">
       <h1 class="places-mgmt">장소 관리</h1>
       <div class="container">
+        <form action="/admin/admPlaceMgmt/search" method="get">
         <div class="search">
-          <select id="condition">
+          <select id="condition" name="searchOption">
             <!-- 신고된 것들은 일반 사람들한테 안뜨고, 관리자한테만 보이게? -->
             <option value="" disabled selected>조건을 선택하세요</option>
             <option class="search-option" value="name"> 장소명</option>
-            <option class="search-option" value="nick"> 지역</option>
+            <option class="search-option" value="region"> 지역</option>
             <option class="search-option" value="report"> 신고 여부</option>
           </select>
-          <input type="text" class="keyword" placeholder="검색어를 입력하세요." />
-          <button type="button" class="search-button">검색</button>
+          <input type="text" name="keyword" placeholder="검색어를 입력하세요." />
+          <button type="submit" class="search-button">검색</button>
         </div>
+        </form>
 
         <table>
+          <thead>
           <tr class="table-head">
-            <th>장소명</th>
-            <th>지역</th>
-            <th>주소</th>
-            <th>찜하기 수</th>
-            <th>신고 여부</th>
+            <th class="place-id">번호</th>
+            <th class="place-name">장소명</th>
+            <th class="address">주소</th>
+            <th class="views">조회수</th>
+            <th class="saved">찜하기 수</th>
+            <th class="reported">신고 여부</th>
             <th>댓글 보기</th>
             <th>바로가기</th>
           </tr>
-          <tr>
-            <td class="place-name">국립중앙박물관</td>
-            <td class="region">서울시 용산구</td>
-            <td class="address">서울특별시 용산구 서빙고로 137</td>
-            <td class="saved">50</td>
-            <td class="reported">Y</td>
-            <td><button class="to-comments" type="button">댓글보기</button></td>
-            <td><button class="to-place" type="button">바로가기</button></td>
+          </thead>
+
+          <tbody>
+          <tr th:each="place:${places}">
+            <td class="place-id" th:text="${place.placeId}"></td>
+            <td class="place-name" th:text="${place.placeName}"></td>
+            <td class="address" th:text="${place.placeAddress}"></td>
+            <td class="views" th:text="${place.placeViews}"></td>
+            <td class="saved" th:text="${place.pickCnt}"></td>
+            <td class="reported" th:text="${place.isReported}"></td>
+            <td><button class="to-comments" type="button"
+                        th:data-place-id="${place.placeId}">댓글보기</button></td>
+            <td><button class="to-place" type="button"
+                        th:data-place-id="${place.placeId}">바로가기</button></td>
           </tr>
           <tr>
-            <td class="name">K-현대미술관</td>
-            <td class="region">서울시 강남구</td>
-            <td class="address">서울특별시 강남구 선릉로 807 &#40;신사동 666-7&#41;</td>
-            <td class="saved">50</td>
-            <td class="reported">N</td>
-            <td><button class="to-comments" type="button">댓글보기</button></td>
-            <td><button class="to-place" type="button">바로가기</button></td>
+            <td colspan="8" class="last-row"></td>
           </tr>
-          <tr>
-            <td class="name">국립중앙박물관</td>
-            <td class="region">서울시 용산구</td>
-            <td class="address">서울특별시 용산구 서빙고로 137</td>
-            <td class="saved">50</td>
-            <td class="reported">N</td>
-            <td><button class="to-comments" type="button">댓글보기</button></td>
-            <td><button class="to-place" type="button">바로가기</button></td>
-          </tr>
-          <tr>
-            <td class="name">국립중앙박물관</td>
-            <td class="region">서울시 용산구</td>
-            <td class="address">서울특별시 용산구 서빙고로 137</td>
-            <td class="saved">50</td>
-            <td class="reported">N</td>
-            <td><button class="to-comments" type="button">댓글보기</button></td>
-            <td><button class="to-place" type="button">바로가기</button></td>
-          </tr>
-          <tr>
-            <td class="name">국립중앙박물관</td>
-            <td class="region">서울시 용산구</td>
-            <td class="address">서울특별시 용산구 서빙고로 137</td>
-            <td class="saved">50</td>
-            <td class="reported">N</td>
-            <td><button class="to-comments" type="button">댓글보기</button></td>
-            <td><button class="to-place" type="button">바로가기</button></td>
-          </tr>
-          <tr>
-            <td class="name">국립중앙박물관</td>
-            <td class="region">서울시 용산구</td>
-            <td class="address">서울특별시 용산구 서빙고로 137</td>
-            <td class="saved">50</td>
-            <td class="reported">Y</td>
-            <td><button class="to-comments" type="button">댓글보기</button></td>
-            <td><button class="to-place" type="button">바로가기</button></td>
-          </tr>
-          <tr>
-            <td class="name">국립중앙박물관</td>
-            <td class="region">서울시 용산구</td>
-            <td class="address">서울특별시 용산구 서빙고로 137</td>
-            <td class="saved">50</td>
-            <td class="reported">N</td>
-            <td><button class="to-comments" type="button">댓글보기</button></td>
-            <td><button class="to-place" type="button">바로가기</button></td>
-          </tr>
-          <tr>
-            <td class="name">국립중앙박물관</td>
-            <td class="region">서울시 용산구</td>
-            <td class="address">서울특별시 용산구 서빙고로 137</td>
-            <td class="saved">50</td>
-            <td class="reported">N</td>
-            <td><button class="to-comments" type="button">댓글보기</button></td>
-            <td><button class="to-place" type="button">바로가기</button></td>
-          </tr>
-          <tr>
-            <td class="name">국립중앙박물관</td>
-            <td class="region">서울시 용산구</td>
-            <td class="address">서울특별시 용산구 서빙고로 137</td>
-            <td class="saved">50</td>
-            <td class="reported">N</td>
-            <td><button class="to-comments" type="button">댓글보기</button></td>
-            <td><button class="to-place" type="button">바로가기</button></td>
-          </tr>
-          <tr>
-            <td class="name">국립중앙박물관</td>
-            <td class="region">서울시 용산구</td>
-            <td class="address">서울특별시 용산구 서빙고로 137</td>
-            <td class="saved">50</td>
-            <td class="reported">N</td>
-            <td><button class="to-comments" type="button">댓글보기</button></td>
-            <td><button class="to-place" type="button">바로가기</button></td>
-          </tr>
-          <tr>
-            <td class="name">국립중앙박물관</td>
-            <td class="region">서울시 용산구</td>
-            <td class="address">서울특별시 용산구 서빙고로 137</td>
-            <td class="saved">50</td>
-            <td class="reported">N</td>
-            <td><button class="to-comments" type="button">댓글보기</button></td>
-            <td><button class="to-place" type="button">바로가기</button></td>
-          </tr>
-          <tr>
-            <td class="name">국립중앙박물관</td>
-            <td class="region">서울시 용산구</td>
-            <td class="address">서울특별시 용산구 서빙고로 137</td>
-            <td class="saved">50</td>
-            <td class="reported">N</td>
-            <td><button class="to-comments" type="button">댓글보기</button></td>
-            <td><button class="to-place" type="button">바로가기</button></td>
-          </tr>
-          <tr>
-            <td class="name">국립중앙박물관</td>
-            <td class="region">서울시 용산구</td>
-            <td class="address">서울특별시 용산구 서빙고로 137</td>
-            <td class="saved">50</td>
-            <td class="reported">Y</td>
-            <td><button class="to-comments" type="button">댓글보기</button></td>
-            <td><button class="to-place" type="button">바로가기</button></td>
-          </tr>
-          <tr>
-            <td class="name">국립중앙박물관</td>
-            <td class="region">서울시 용산구</td>
-            <td class="address">서울특별시 용산구 서빙고로 137</td>
-            <td class="saved">50</td>
-            <td class="reported">Y</td>
-            <td><button class="to-comments" type="button">댓글보기</button></td>
-            <td><button class="to-place" type="button">바로가기</button></td>
-          </tr>
-          <tr>
-            <td colspan="7" class="last-row"></td>
-          </tr>
+          </tbody>
         </table>
       </div>
     </div>
   </main>
-  <div id='footer'></div>
+<div id='footer' th:replace="~{/main/footer}"></div>
 </body>
 
 </html>

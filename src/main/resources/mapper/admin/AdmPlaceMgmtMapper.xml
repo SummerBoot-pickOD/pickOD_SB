@@ -2,20 +2,86 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.smbt.pickod.mapper.admin.AdmPlaceMgmtMapper">
     <select id="getPlaces" resultType="AdmPlaceMgmtDTO">
-        SELECT p.place_id, p.place_name, p.place_address,
+        SELECT p.place_id, p.place_name, p.place_address, p.place_views,
         COUNT(DISTINCT pp.pick_id) AS pick_cnt,
         CASE
-            WHEN  r.report_post_type = "P" AND r.report_post_id = p.place_id
+            WHEN  r.report_post_type = 'P' AND r.report_post_id = p.place_id
                 THEN 'Y' ELSE 'N'
         END AS is_reported
         FROM PLACE p
         LEFT JOIN
         PLACE_PICK pp ON pp.place_id = p.place_id
         LEFT JOIN
-        REPORT r on r.report_post_type = "P" AND r.report_post_id = p.place_id
+        REPORT r on (r.report_post_type = 'P' AND r.report_post_id = p.place_id)
         GROUP BY
-            p.place_id, j.place_name
+            p.place_id, p.place_name, p.place_address, p.place_views,
+            CASE
+            WHEN  r.report_post_type = 'P' AND r.report_post_id = p.place_id
+            THEN 'Y' ELSE 'N'
+            END
         ORDER BY
            p.place_id
     </select>
+
+    <select id="filterPlaces" parameterType="AdmPlaceFilterDTO" resultType="AdmPlaceMgmtDTO">
+        SELECT p.place_id, p.place_name, p.place_address, p.place_views,
+               COUNT(DISTINCT pp.pick_id) AS pick_cnt,
+               CASE
+                   WHEN  r.report_post_type = 'P' AND r.report_post_id = p.place_id
+                       THEN 'Y' ELSE 'N'
+                   END AS is_reported
+        FROM PLACE p
+        LEFT JOIN
+             PLACE_PICK pp ON pp.place_id = p.place_id
+        LEFT JOIN
+             REPORT r on (r.report_post_type = 'P' AND r.report_post_id = p.place_id)
+        WHERE
+            1=1
+        <if test="searchOption == 'name' and keyword != null">
+            AND p.place_name LIKE '%' ||  #{keyword} || '%'
+        </if>
+        <if test="searchOption == 'region' and keyword != null">
+            AND p.place_address  LIKE '%' ||  #{keyword} || '%'
+        </if>
+        <if test="searchOption == 'report' and keyword != null">
+            AND  (CASE
+            WHEN r.report_post_type = 'P' AND r.report_post_id = p.place_id
+            THEN 'Y' ELSE 'N'
+            END)  = #{keyword}
+        </if>
+        GROUP BY
+        p.place_id, p.place_name, p.place_address, p.place_views,
+        CASE
+        WHEN  r.report_post_type = 'P' AND r.report_post_id = p.place_id
+        THEN 'Y' ELSE 'N'
+        END
+        ORDER BY
+            p.place_id
+    </select>
+
+    <select id="getPlaceDetail" parameterType="Long" resultType="AdmPlaceDetailsDTO">
+        select
+            p.place_id, p.place_name, p.place_address, p.place_details, p.place_url, p.place_phonenum, p.place_cost, p.place_op_hour,
+            p.place_related1, p.place_related2, p.place_related3, p.place_lat, p.place_long,
+            CASE
+                WHEN r.report_post_type = 'P' AND r.report_post_id = p.place_id
+                    THEN 'Y' ELSE 'N'
+                END AS is_reported
+        from PlACE p
+        left join report r on (p.place_id = r.report_post_id AND r.report_post_type = 'P')
+        where PLACE_ID=#{placeID}
+    </select>
+
+    <select id="getPlaceDetailImg" parameterType="Long" resultType="PlaceImgDTO">
+        select
+            PI.*
+        from PlACE_IMGS PI
+        where PI.PLACE_ID=#{placeId}
+    </select>
+
+    <delete id="deletePlace" parameterType="Long">
+        DELETE FROM PLACE
+        WHERE place_id = #{placeId}
+    </delete>
+
 </mapper>
