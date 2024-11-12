@@ -50,9 +50,9 @@ main {
 /* 조회수 신고 */
 .icon-container {
   display: flex;
-  justify-content: space-between;
+  justify-content: right;
   align-items: center;
-  margin-top: 40px;
+  margin-top: 25px;
 }
 
 .views-wrap {
@@ -74,6 +74,24 @@ main {
 
 .report-icon:hover {
   cursor: pointer;
+}
+
+.adm-buttons {
+  margin: 30px 0px;
+  width: 100%;
+  display: flex;
+  justify-content: right;
+}
+
+#delete-btn{
+  cursor: pointer;
+  color: white;
+  background-color: #845AC6;
+  padding: 5px 10px;
+  font-size: 15px;
+  margin: 0px 10px 0px 10px;
+  border-radius: 5px;
+  border: none;
 }
 
 /* 네브바 */
