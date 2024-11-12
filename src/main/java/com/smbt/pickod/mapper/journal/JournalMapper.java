@@ -34,9 +34,9 @@ public interface JournalMapper {
             @Param("title") String jnlTitle
     );//제목 검색에 따라 JOURNAL 리스트를 조회
 
-    void insertJournal(JournalDTO insertJournal); //새로운 JOURNAL을 추가
+    void insertJournal(JournalDTO journalDTO); //새로운 JOURNAL을 추가
 
-    void insertJournalDay(List<JnlDayDTO> insertJnlDayList);
+    void insertJournalDay(List<JnlDayDTO> jnlDayList);
 
     void updateJournal(JournalDTO updateJournal);
 
@@ -47,6 +47,7 @@ public interface JournalMapper {
     Optional<JournalDTO> selectById(Long boardId);
 
     List<JournalDTO> selectAll();
+
 
 //    List<JournalDTO> selectAllPage(Criteria criteria);
 

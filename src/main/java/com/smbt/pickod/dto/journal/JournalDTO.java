@@ -23,5 +23,6 @@ public class JournalDTO {
     private List<JnlMemberDTO> jnlMumberList;
     private JournalProfileDTO authorProfile;
     private List<JnlDayDTO> jnlDayList;
+    private List<JnlImgsDTO> jnlImgsList;
     private boolean hasPermission;
 }
