@@ -51,6 +51,15 @@ public class AdmMemberMgmtController {
         return "/admin/admUserManagement";
     }
 
+    @GetMapping("/toSanction")
+    public String admMemberToSanction(@RequestParam Long memNum, Model model) {
+        String memNickName = admMemberMgmtService.getMemberNickName(memNum);
+        model.addAttribute("memNick", memNickName);
+        model.addAttribute("opNick", "nick");
+        return "/admin/admReport";
+    }
+
+
 //    @GetMapping("/details/sendMsg")
 //    @ResponseBody
 //    public ResponseEntity<AdmToSendMsgDTO> admMemberDetails(@RequestParam Long memberNum, @RequestParam String msg) {

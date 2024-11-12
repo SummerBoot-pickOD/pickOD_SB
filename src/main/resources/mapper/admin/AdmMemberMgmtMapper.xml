@@ -25,6 +25,10 @@
     </select>
 
     <!-- 검색을 해서 특정 회원들만 불러온 것 (회원 관리 페이지) -->
+<!--    <if test="searchOption == 'suspended' and keyword == '0'">-->
+    <!--            AND (s.sanction_cnt IS NULL OR s.sanction_cnt = 0)-->
+    <!--        </if>-->
+<!--    OR (s.sanction_cnt IS NULL AND #{keyword} == '0')-->
     <select id="filterMembers" parameterType="AdmMemberFilterDTO" resultType="AdmMemberMgmtDTO">
 
         SELECT
@@ -44,21 +48,20 @@
         <if test="searchOption == 'nickname' and keyword != null and keyword != ''">
             AND m.member_nickname LIKE '%' ||  #{keyword} || '%'
         </if>
-        <if test="searchOption == 'suspended' and keyword != null and keyword != ''">
-            AND s.sanction_cnt LIKE '%' ||  #{keyword} || '%'
+        <if test="searchOption == 'suspended'">
+            AND COALESCE(s.sanction_cnt, 0) = TO_NUMBER(#{keyword})
         </if>
-        <if test="status == 'normal'">
-            AND (s.sanction_cnt IS NULL OR s.sanction_cnt = 0)
+        <if test="status == 'normal' and keyword != '0'">
+             AND <![CDATA[ s.sanction_end_date < SYSDATE ]]>
         </if>
         <if test="status == 'suspended'">
-            <![CDATA[ AND  s.sanction_end_date > SYSDATE ]]>
+             AND <![CDATA[  s.sanction_end_date > SYSDATE ]]>
         </if>
         AND m.member_num >= 2
         GROUP BY
-        m.member_num, m.member_id, m.member_nickname, s.sanction_cnt, m.member_num
+        m.member_num, m.member_id, m.member_nickname, s.sanction_cnt
         ORDER BY
         m.member_num ASC
-
     </select>
 
     <!-- 회원Id을 가지고 memberNum 가져오기 -->
