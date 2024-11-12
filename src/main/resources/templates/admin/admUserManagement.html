@@ -28,7 +28,7 @@
             <input type="text" name="keyword" class="keyword" placeholder="검색어를 입력하세요." />
           </label>
           <label><input type="radio" name="status" value="total" checked> 전체</label>
-          <label><input type="radio" name="status" value="normal" checked> 정상</label>
+          <label><input type="radio" name="status" value="normal"> 정상</label>
           <label><input type="radio" name="status" value="suspended"> 제재</label>
           <button type="submit" class="search-button">검색</button>
         </div>
@@ -55,7 +55,8 @@
           <td class="tot-plans" th:text="${member.totPlans}"></td>
           <td class="sanction-cnt" th:text="${member.sanctionCnt}"></td>
           <td class="last-col"><button class="user-detail-btn" type="button"
-                                       th:data-member-num="${member.memberNum}">상세보기</button></td>
+                                       th:data-member-num="${member.memberNum}"
+                                        th:data-mem-nickname="${member.memberNickName}">상세보기</button></td>
         </tr>
         <tr>
           <td colspan="7" class="last-row"></td>
@@ -154,7 +155,7 @@
             <div class="nonmodal-top">
               <div class="detail-to">
                 <span>To.</span>
-                <span class="recipient"></span>
+                <span id="recipient"></span>
               </div>
             </div>
             <!-- <div class="nonmodal-textarea"> -->

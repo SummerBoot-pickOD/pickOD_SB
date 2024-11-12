@@ -19,12 +19,15 @@ document.addEventListener('DOMContentLoaded', function () {
   const sendMsg = document.querySelector(".send-msg")
 
   //제재 부여 버튼
-  const sanctionBtn = document.querySelector('#suspend')
+  const sanctionBtn = document.querySelector('#suspend');
+
+  //회원 탈퇴 버튼
+  const deleteMemBtn = document.querySelector('.withdrawal');
 
   //회원 상세 보기
   openModal.forEach(btn => {
     btn.addEventListener("click", function () {
-      // const memberId = this.getAttribute('data-member-id');
+        const nickName = this.getAttribute('data-mem-nickname');
         const memberNum = this.getAttribute('data-member-num');
       fetch(`/admin/admMemberMgmt/details?memberNum=${memberNum}`)
           .then(response => response.json())
@@ -43,11 +46,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
       // 쪽지 보내기 버튼에 memberNum 전달
         openMessage.setAttribute('data-member-num', memberNum);
+        openMessage.setAttribute('data-mem-nickname', nickName);
 
      // 제재 부여 버튼에 memberNum 전달
         sanctionBtn.setAttribute('data-member-num', memberNum);
 
-
+      //회원 탈퇴 버튼에 memberNum, memberNickName 전달
+        deleteMemBtn.setAttribute('data-member-num', memberNum);
+        deleteMemBtn.setAttribute('data-mem-nickname', nickName);
       //회원 상세 모달 보이게 하기
       usrDetailModal.style.display = "flex";
     })
@@ -67,6 +73,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
   //쪽지 보내기 모달 띄우기
   openMessage.addEventListener("click", function () {
+      const memNum = this.getAttribute('data-member-num');
+      const nickName = this.getAttribute('data-mem-nickname');
+      document.getElementById("recipient").textContent = nickName;
+      // window.location.href='/admin/admMemberMgmt/writeMsg?memNum=' + memNum + '&memNickName=' + nickName;
     msgModal.style.display = "flex";
   })
 
@@ -81,6 +91,20 @@ document.addEventListener('DOMContentLoaded', function () {
     msgModal.style.display = "none";
     // 쪽지 내용 전달됨 
   })
+
+  //회원 삭제
+  deleteMemBtn.addEventListener("click", function(){
+      const nickname = this.getAttribute('data-mem-nickname')
+      const memNum = this.getAttribute('data-member-num')
+      let result=confirm(`회원 "${nickname}" 을 삭제하시겠습니까?`);
+      console.log(nickname);
+      if (result) {
+          window.location.href = '/admin/admMemberMgmt/deleteMember?memNum=' + memNum;
+      } else {
+          window.location.href = '/admin/admMemberMgmt/list';
+      }
+  })
+
 });
 
 
