@@ -18,15 +18,18 @@
             JOURNAL j
                 LEFT JOIN MEMBER m ON j.member_num = m.member_num
                 LEFT JOIN JOURNAL_PICK p ON j.jnl_num = p.jnl_num
-                LEFT JOIN REPORT r ON j.jnl_num = r.report_post_id
+                LEFT JOIN REPORT r ON (j.jnl_num = r.report_post_id AND r.report_post_type = 'J')
         GROUP BY
             m.member_num,
             m.member_id,
             m.member_nickname,
             j.jnl_num,
             j.jnl_title,
-            r.report_post_type,
-            r.report_post_id
+            CASE
+                WHEN r.report_post_type = 'J' AND r.report_post_id = j.jnl_num
+                    THEN 'Y'
+                ELSE 'N'
+                END
         ORDER BY
             j.jnl_num
     </select>
@@ -36,13 +39,13 @@
         SELECT
         m.member_id,
         m.member_nickname,
-        j.jnl_num
+        j.jnl_num,
         j.jnl_title,
         COUNT(DISTINCT p.pick_id) AS pick_cnt,
         CASE
-        WHEN r.report_post_type = "J" AND r.report_post_id = j.jnl_num
+        WHEN r.report_post_type = 'J' AND r.report_post_id = j.jnl_num
         THEN 'Y' ELSE 'N'
-        END AS is_reported,
+        END AS is_reported
         FROM
         JOURNAL j
         LEFT JOIN
@@ -50,24 +53,21 @@
         LEFT JOIN
         JOURNAL_PICK p ON j.jnl_num = p.jnl_num
         LEFT JOIN
-        REPORT r on j.jnl_num = r.report_post_id
+        REPORT r on (j.jnl_num = r.report_post_id AND r.report_post_type = 'J')
         WHERE
-        1 = 1  <!-- 쿼리의 기본 조건을 설정하기 위해 사용 -->
-        <if test="searchOption == '닉네임' and keyword != null">
-            AND m.member_nickname LIKE CONCAT('%', #{keyword}, '%')
+        1 = 1
+        <if test="searchOption == 'nick' and keyword != null">
+            AND m.member_nickname LIKE '%' ||  #{keyword} || '%'
         </if>
-        <if test="searchOption == '제목' and keyword != null">
-            AND j.jnl_title LIKE CONCAT('%', #{keyword}, '%')
+        <if test="searchOption == 'title' and keyword != null">
+            AND j.jnl_title  LIKE '%' ||  #{keyword} || '%'
         </if>
-        <if test="searchOption == '신고' and keyword != null">
-            AND is_reported = #{keyword}
+        <if test="searchOption == 'report' and keyword != null">
+            AND (CASE
+            WHEN r.report_post_type = 'J' AND r.report_post_id = j.jnl_num
+            THEN 'Y' ELSE 'N'
+            END) = #{keyword}
         </if>
-<!--        <if test="status == '정상등록'">-->
-            --정상등록일때
-<!--        </if>-->
-<!--        <if test="status == '임시저장'">-->
-            --임시 저장일때
-<!--        </if>-->
         GROUP BY
         m.member_id,
         m.member_nickname,
