@@ -4,9 +4,9 @@ import com.smbt.pickod.dto.admin.report.*;
 import com.smbt.pickod.service.admin.AdmReportService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -36,15 +36,7 @@ public class AdmReportController {
     //상세보기는 있는거 가지고 모달에 값만 넣으므로 js에서 처리
 
     //이거 분기를 여기서 이미 나눠줬어야 하는구나(서비스 다시 만들자)
-    @GetMapping("getContent")
-    public Map<String, String> getContent(@ModelAttribute AdmReportGoPostDTO admReportGoPostDTO) {
-        Map<String, String> map = new HashMap<>();
 
-        String result = admReportService.readRprtPost(admReportGoPostDTO);
-
-        map.put("result", result);
-        return map;
-    }
 
     @PostMapping("solve/{reportId}")
     public ResponseEntity<Map<String, Object>> solveReport(@PathVariable("reportId") Long reportId) {
@@ -52,6 +44,36 @@ public class AdmReportController {
         admReportService.solveRprt(reportId);
         map.put("success", true);
         return ResponseEntity.ok(map);
+    }
+
+    @GetMapping("goPost")
+    public String goToPost(@RequestParam("postType") String postType, @RequestParam("postId") Long postId) {
+        AdmReportGoPostDTO inputDTO = new AdmReportGoPostDTO();
+        inputDTO.setPostType(chngTypeName(postType));
+        inputDTO.setPostId(postId);
+        if(postType.equals("comment")) {
+            inputDTO = admReportService.getCmtParent(inputDTO);
+        }
+
+        String ntype = inputDTO.getPostType();
+        String nid = Long.toString(inputDTO.getPostId());
+
+        return "redirect:/"+ntype+"/"+nid;
+    }
+
+    public String chngTypeName(String postType) {
+        switch (postType) {
+            case "댓글" : return "comment";
+            case "템플릿" : return "template";
+            case "여행일지" : return "journal";
+            case "장소" : return "place";
+        }
+        return null;
+    }
+
+    @GetMapping("getMsg")
+    public String getMsg(@RequestParam("postId") Long postId){
+        return admReportService.getMsgDetail(postId);
     }
 
     @PostMapping("sncCnt")

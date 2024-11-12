@@ -17,6 +17,14 @@ function decodeType(code){
   }
 }
 
+function hideModal(){
+  if ($("#report-detail-msg").css('display') == 'block'){
+    $("#report-detail-msg").css('display','none');
+  }
+  $("#report-detail-modal").css('display','none');
+  $(".modal-container").css('display','none');
+}
+
 let current_list=undefined;
 
 //검색하기
@@ -91,31 +99,31 @@ $(".searchList").click(function(){
 
 $('#reports').on('click', 'td.last-col', function(){
   row = $(this).closest('tr').find('td');
-  rId = row.eq(9).text();
   ptype = row.eq(0).text();
-  writer = row.eq(4).text();
-  reporter = row.eq(5).text();
+  pid = row.eq(1).text();
   rtype = row.eq(2).text()
   rdate = row.eq(3).text()
+  writer = row.eq(4).text();
+  reporter = row.eq(5).text();
   content = row.eq(6).text();
+  rId = row.eq(9).text();
+
   console.log(ptype + writer + reporter + rtype + rId);
   //데이터 받아와서 내용 넣고
 
 
   $('#report-detail-modal td.post-type').text(ptype);
+  $('#report-detail-modal #modal-postType').val(ptype);
   $('#report-detail-modal td.post-writer-id').text(writer);
   $('#report-detail-modal td.report-id').text(reporter);
   $('#report-detail-modal td.report-type').text(rtype);
   $('#report-detail-modal td.report-date').text(rdate);
   $('#report-detail-modal textarea#report-detail-text').text(content);
-  $('#report-detail-modal #modal-reportId').text(rId);
+  $('#report-detail-modal #modal-reportId').val(rId);
+  $('#report-detail-modal #modal-postId').val(pid);
 
   if ($(".modal-container").css('display') == 'flex') {
-    if ($("#report-detail-msg").css('display') == 'block') {
-      $("#report-detail-msg").css('display','none');
-    }
-    $("#report-detail-modal").css('display','none');
-    $(".modal-container").css('display','none');
+    hideModal();
   }
   setTimeout(() => {
     $(".modal-container").css('display','flex');
@@ -203,25 +211,35 @@ $("#update-sanction").click(function(){
 })
 
 $("#show-write").click(function(){
-  ptype = $('#report-detail-modal td.post-type').text();
+  ptype = $('#report-detail-modal #modal-postType').val();
+  pId = $('#report-detail-modal #modal-postId').val();
   if(ptype === '쪽지'){
     console.log('모달에 값 넣어오고 보이기');
-  }else if(ptype === '댓글'){
-    console.log('게시물 id 찾아서 리다이렉트');
+    fetch(`/admin/admReport/getMessage?postId=${pId}`)
+        .then(res => res.text())
+        .then(data => {
+          $('textarea#report-msg-text').text(data);
+        }).catch(e=>{
+      console.log(e);
+      alert("에러 발생.")
+    })
+    //쪽지라면 모달 추가
+    $("#report-detail-msg").css('display','block');
+
   }else{
-    console.log('그 아이디 그대로 리다이렉트');
+    console.log('댓글만 원본 작성물 찾고, 나머진 그 아이디 그대로 리다이렉트');
+    $(this).closest('form').submit();
   }
 
 
-  //쪽지라면 모달 추가
-  $("#report-detail-msg").css('display','block');
+
 })
 
 $("#solved").click(function(){
   if(confirm("신고를 처리하시겠습니까?") == false){
     return;
   }
-  reportId = $('#report-detail-modal #modal-reportId').text();
+  reportId = $('#report-detail-modal #modal-reportId').val();
   fetch(`/admin/admReport/solve/${reportId}`,{
     method : 'POST'
   })
@@ -229,11 +247,7 @@ $("#solved").click(function(){
       .then(data => {
         if(data.success){
           alert("신고 처리 완료.");
-          if ($("#report-detail-msg").css('display') == 'block') {
-            $("#report-detail-msg").css('display','none');
-          }
-          $("#report-detail-modal").css('display','none');
-          $(".modal-container").css('display','none');
+          hideModal();
         }else{
           alert("신고 처리 실패했습니다.")
         }

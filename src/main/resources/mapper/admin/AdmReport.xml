@@ -44,7 +44,7 @@
 
     <select id="getPostFromCmt" parameterType="Long" resultType="AdmReportGoPostDTO">
         SELECT CMT_POST_TYPE AS POST_TYPE, CMT_POST_ID AS POST_ID FROM COMMENTS
-        WHERE CMT_ID = #{reportPostId}
+        WHERE CMT_ID = #{postId}
     </select>
 
     <select id="getSanctionCount" parameterType="AdmReportInsertSanctionDTO" resultType="int">
