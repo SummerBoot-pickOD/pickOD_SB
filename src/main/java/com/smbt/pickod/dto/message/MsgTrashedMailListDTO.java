@@ -11,8 +11,8 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class MsgTrashedMailListDTO {
     private Long memberNum;
-    private Long msgSender;
-    private Long msgRecipient;
+    private String msgSender;
+    private String msgRecipient;
     private Long msgId;
     private Long msgRead;
     private String memberNickname;

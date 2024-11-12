@@ -127,12 +127,19 @@ function renderSentMailList(data) {
 // 쪽지띄우기
 document.addEventListener('DOMContentLoaded', function() {
   // 모든 mailbox-list 요소들을 가져오기
-  var mailboxLists = document.querySelectorAll('.mailbox-list');
+  let mailboxLists = document.querySelectorAll('.mailbox-list');
 
   // 각 mailbox-list 요소에 클릭 이벤트 추가
   mailboxLists.forEach(function(mailbox) {
+
     mailbox.addEventListener('click', function() {
 
+      const hiddenMsgId = document.querySelector('.msg-id');
+
+      data = {
+        msgId : Number(hiddenMsgId.innerText)
+      };
+      console.log(data);
       //체크박스부분은제외
       if (event.target.tagName === 'INPUT' && event.target.type === 'checkbox') {
         return; // 체크박스를 클릭하면 함수 실행을 멈춤
@@ -141,18 +148,21 @@ document.addEventListener('DOMContentLoaded', function() {
       // 읽으면 편지 읽음표시기능
       var readMail =this.querySelector('.mail-open img');
       readMail.src = '../../img/message/받은편지.png';
-      // 클릭한 mailbox-list 안의 mail-to 텍스트 가져오기
-      var senderText = this.querySelector('.mail-to').innerText;
-      // 클릭한 mailbox-list 안의 mail-content 텍스트 가져오기
-      var contentText = this.querySelector('.mail-content').innerText;
 
-      // 모달의 ppl-to 요소에 발신자 텍스트 설정
-      document.querySelector('.ppl-to').innerText = senderText;
-      // 모달의 nonmodal-textarea에 쪽지 내용 텍스트 설정
-      document.querySelector('.nonmodal-textarea').innerText = contentText;
-
-      // 모달 보이기
-      document.querySelector('.sentmsg-container').style.display = 'block';
+      fetch(`/message/sentmailModal/${data.msgId}`,{
+        method: "GET",
+        headers: {'Content-Type': 'application/json'},
+      }).then(response=>{
+        if(!response.ok) throw new Error("Failed to fetch message");
+        return response.json();
+      }).then(view =>{
+        document.querySelector('.ppl-to').innerText = view.memberNickname;
+        document.querySelector('.nonmodal-textarea').innerText = view.msgContent;
+        //  모달 보이기
+        document.querySelector('.sentmsg-container').style.display = 'block';
+      }).catch(error=>{
+        console.error("Error:", error);
+      })
     });
   });
 });

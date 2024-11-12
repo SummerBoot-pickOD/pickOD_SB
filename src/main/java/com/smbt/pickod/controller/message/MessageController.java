@@ -10,7 +10,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Controller
@@ -20,6 +22,7 @@ import java.util.Optional;
 public class MessageController {
     private final MessageService messageService;
 
+    //받은메일 리스팅하기
     @GetMapping("mailBox")
     public String gotMailList(HttpSession session, Model model) {
         Long memberNum = (Long) session.getAttribute("memberNum");
@@ -27,11 +30,10 @@ public class MessageController {
 
         System.out.println("메일리스트");
         List<MsgGetMailListDTO> mailList = messageService.getMessageList(memberNum);
-        log.info(mailList.get(0).toString());
         model.addAttribute("mailList", mailList);
         return "message/mailBox";
     }
-
+//보낸메일 리스팅하기
     @GetMapping("sentMail")
     public String toMailList(HttpSession session, Model model) {
         Long memberNum = (Long) session.getAttribute("memberNum");
@@ -42,7 +44,7 @@ public class MessageController {
         model.addAttribute("mailList", mailList);
         return "message/sentMail";
     }
-
+//휴지통 메일리스팅하기
     @GetMapping("deletedMail")
     public String binList (HttpSession session, Model model) {
         Long memberNum = (Long) session.getAttribute("memberNum");
@@ -54,28 +56,48 @@ public class MessageController {
         return "message/deletedMail";
     }
 
-
-    @GetMapping("getmailModal")
-    public String getMsgView(@RequestParam("msgId") long msgId, HttpSession session, Model model) {
+//받은메일 상세보기
+    @GetMapping("getmailModal/{msgId}")
+    public ResponseEntity<Map<String,Object>> getMsgView(@PathVariable("msgId") long msgId, HttpSession session) {
         Long memberNum = (Long) session.getAttribute("memberNum");
-        if (memberNum == null) return "redirect:/login/login";
         log.info("받은 메일 상세 보기 요청: msgId = {}, memberNum = {}", msgId, memberNum);
-
         MsgGetMailViewDTO view = messageService.getMailView(msgId, memberNum).orElse(null);
-        model.addAttribute("view", view);
-        log.info("view: {}", view);
-        return "message/getmailModal";
+        log.info("view: {}", view.toString());
+        Map<String,Object> map = new HashMap<>();
+
+        map.put("memberNickname", view.getMemberNickname());
+        map.put("msgContent", view.getMsgContent());
+
+        return ResponseEntity.ok(map);
     }
 
-    @GetMapping("sentmailModal")
-    public String sentMsgView(@RequestParam("msgId") long msgId, HttpSession session, Model model) {
+    //보낸메일 상세보기
+    @GetMapping("sentmailModal/{msgId}")
+    public ResponseEntity<Map<String,Object>> sentMsgView(@PathVariable("msgId") long msgId, HttpSession session) {
         Long memberNum = (Long) session.getAttribute("memberNum");
-        if (memberNum == null) return "redirect:/login/login";
+        log.info("보낸 메일 상세 보기 요청: msgId = {}, memberNum = {}", msgId, memberNum);
+        MsgSentMailViewDTO view = messageService.toMailView(msgId, memberNum).orElse(null);
+        log.info("view: {}", view.toString());
+        Map<String,Object> map = new HashMap<>();
 
-        System.out.println("보낸메일상세보기");
-        Optional<MsgSentMailViewDTO> view = messageService.toMailView(msgId, memberNum);
-        model.addAttribute("view", view.orElse(null));
-        return "message/sentmailModal";
+        map.put("memberNickname", view.getMemberNickname());
+        map.put("msgContent", view.getMsgContent());
+
+        return ResponseEntity.ok(map);
+    }
+//휴지통메일 상세보기
+    @GetMapping("/{msgId}")
+    public ResponseEntity<Map<String,Object>> binMsgView(@PathVariable("msgId") long msgId, HttpSession session) {
+        Long memberNum = (Long) session.getAttribute("memberNum");
+        log.info("휴지통 메일 상세 보기 요청: msgId = {}, memberNum = {}", msgId, memberNum);
+        MsgTrashedMailViewDTO view = messageService.getTrashedMailView(msgId, memberNum).orElse(null);
+        log.info("view: {}", view.toString());
+        Map<String,Object> map = new HashMap<>();
+
+        map.put("memberNickname", view.getMemberNickName());
+        map.put("msgContent", view.getMsgContent());
+
+        return ResponseEntity.ok(map);
     }
 
     // 메시지 전송
@@ -89,10 +111,14 @@ public class MessageController {
     }
 
     // 받은 메시지를 휴지통으로 이동
-    @PostMapping("mailbox")
-    public ResponseEntity<String> getMailToBin(@RequestParam("msgId") Long msgId, HttpSession session) {
+    @PostMapping("mailBox")
+    public ResponseEntity<String> getMailToBin(@RequestBody Map<String, Long> request, HttpSession session) {
         Long memberNum = (Long) session.getAttribute("memberNum");
-        if (memberNum == null) return ResponseEntity.status(401).body("로그인이 필요합니다");
+        Long msgId = request.get("msgId");
+
+        if (msgId == null) {
+            return ResponseEntity.badRequest().body("msgId is required");
+        }
 
         messageService.moveReceivedMailToBin(msgId, memberNum);
         return ResponseEntity.ok("받은편지 휴지통이동완료");

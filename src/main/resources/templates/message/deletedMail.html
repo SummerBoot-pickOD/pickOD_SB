@@ -12,9 +12,9 @@
   <link rel="stylesheet"  th:href="@{/css/main/footer.css}">
 </head>
 <body>
-  <form action="#" method="">
+  <form action="#" method="get">
     <div id='header' th:replace="~{main/header}"></div>
-    <div id="report"></div>
+    <div id="report" th:replace="~{report/reportSend}"></div>
     <main>
       <section>
         <div class="deletedMail-title">
@@ -90,7 +90,6 @@
                 <div class="btn-close">&times;</div>
               </div>
               <div class="nonmodal-textarea">
-
               </div>
               <div class="nonmodal-bottom">
                 <div class="report-box">
