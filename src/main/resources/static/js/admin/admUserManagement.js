@@ -11,11 +11,15 @@ document.addEventListener('DOMContentLoaded', function () {
   const openModal = document.querySelectorAll('.user-detail-btn');
   const usrDetailModal = document.querySelector('.nonmodal-container');
   const closeBtn = document.querySelector('.close-btn');
+
   //쪽지 보내기 상세보기 모달
-    const openMessage = document.querySelector('.message');
-    const msgModal = document.querySelector('.sendmsg-container');
-    const closeModal = document.querySelector('.message-close');
-    const sendMsg = document.querySelector(".send-msg")
+  const openMessage = document.querySelector('.message');
+  const msgModal = document.querySelector('.sendmsg-container');
+  const closeModal = document.querySelector('.message-close');
+  const sendMsg = document.querySelector(".send-msg")
+
+  //제재 부여 버튼
+  const sanctionBtn = document.querySelector('#suspend')
 
   //회원 상세 보기
   openModal.forEach(btn => {
@@ -40,6 +44,11 @@ document.addEventListener('DOMContentLoaded', function () {
       // 쪽지 보내기 버튼에 memberNum 전달
         openMessage.setAttribute('data-member-num', memberNum);
 
+     // 제재 부여 버튼에 memberNum 전달
+        sanctionBtn.setAttribute('data-member-num', memberNum);
+
+
+      //회원 상세 모달 보이게 하기
       usrDetailModal.style.display = "flex";
     })
   });
@@ -50,6 +59,11 @@ document.addEventListener('DOMContentLoaded', function () {
     usrDetailModal.style.display = "none";
   });
 
+  //제재 부여 페이지로 이동
+  sanctionBtn.addEventListener('click', function(){
+      const memNum = this.getAttribute('data-member-num');
+      window.location.href = '/admin/admMemberMgmt/toSanction?memNum=' + memNum;
+  })
 
   //쪽지 보내기 모달 띄우기
   openMessage.addEventListener("click", function () {

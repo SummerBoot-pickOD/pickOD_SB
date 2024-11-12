@@ -6,21 +6,121 @@
 //   $("#footer").load("../../html/main/footer.html");
 // });
 
-$(".last-col").click(function(){
-  if($(".modal-container").css('display') == 'flex'){
-    if($("#report-detail-msg").css('display') == 'block'){
+function decodeType(code){
+  switch (code){
+    case 'T' : return "템플릿";
+    case 'J' : return "여행일지";
+    case 'C' : return "댓글";
+    case 'M' : return "쪽지";
+    case 'P' : return "장소";
+    default : return "불명";
+  }
+}
+
+let current_list=undefined;
+
+//검색하기
+$(".searchList").click(function(){
+  Condition = $(this).siblings('#condition-keyword').val();
+  Keyword = $(this).siblings('input[type="text"]').val();
+  PostType = $(this).siblings('#condition-post-type').val();
+  Solved = Number($('input[type="radio"][name="solved"]:checked').val());
+
+  if (Condition == null || PostType == null || Keyword == ''){
+    alert("검색 조건이 비어있습니다. 다시 입력해주세요.");
+    return;
+  }
+  data = {
+    'inqCondition' : Condition,
+    'inqKeyword' : Keyword,
+    'inqPostType' : PostType,
+    'inqSolved' : Solved
+  };
+
+  console.log(data);
+
+  fetch('/admin/admReport/inqTable', {
+    method : 'POST',
+    headers : {'Content-Type':'application/json'},
+    body : JSON.stringify(data)
+  }).then(res => res.json())
+      .then(data => {
+        console.log(data);
+
+        //페이지 세팅
+        let html = `<tr class="table-head">
+          <th>글 종류</th>
+          <th>글 ID</th>
+          <th>신고 사유</th>
+          <th>일시</th>
+          <th>글 작성자</th>
+          <th>신고자</th>
+          <th>상세 내용</th>
+          <th>신고 처리</th>
+          <th>상세보기</th>
+          <th hidden>reportId</th>
+        </tr>` ;
+
+        for(let i =0; i<data.length; i++){
+          let li = data[i];
+          let type = decodeType(li.reportPostType);
+          html += `
+          <tr>
+          <td>${type}</td>
+          <td>${li.reportPostId}</td>
+          <td>${li.reportType}</td>
+          <td>${li.reportDate}</td>
+          <td>${li.writerId}</td>
+          <td>${li.reporterId}</td>
+          <td>${li.reportDetail}</td>
+          <td>${li.reportSolved}</td>
+          <td class="last-col"><button type="button">상세보기</button></td>
+          <td hidden>${li.reportId}</td>
+        </tr>
+          `;
+        }
+        $('table#report-list').html(html)
+        current_list = data;
+      })
+      .catch(e => {
+        console.log(e);
+        alert("반환 에러");
+      });
+
+})
+
+$('#reports').on('click', 'td.last-col', function(){
+  row = $(this).closest('tr').find('td');
+  rId = row.eq(9).text();
+  ptype = row.eq(0).text();
+  writer = row.eq(4).text();
+  reporter = row.eq(5).text();
+  rtype = row.eq(2).text()
+  rdate = row.eq(3).text()
+  content = row.eq(6).text();
+  console.log(ptype + writer + reporter + rtype + rId);
+  //데이터 받아와서 내용 넣고
+
+
+  $('#report-detail-modal td.post-type').text(ptype);
+  $('#report-detail-modal td.post-writer-id').text(writer);
+  $('#report-detail-modal td.report-id').text(reporter);
+  $('#report-detail-modal td.report-type').text(rtype);
+  $('#report-detail-modal td.report-date').text(rdate);
+  $('#report-detail-modal textarea#report-detail-text').text(content);
+  $('#report-detail-modal #modal-reportId').text(rId);
+
+  if ($(".modal-container").css('display') == 'flex') {
+    if ($("#report-detail-msg").css('display') == 'block') {
       $("#report-detail-msg").css('display','none');
     }
     $("#report-detail-modal").css('display','none');
     $(".modal-container").css('display','none');
   }
-
-  //데이터 받아와서 내용 넣고
   setTimeout(() => {
     $(".modal-container").css('display','flex');
     $("#report-detail-modal").css('display','block');
   }, 200);
-  return;
 });
 
 $(".modal-container #modal-exit").click(function(){
@@ -56,8 +156,6 @@ $("#search-sanction").click(function(){
     alert('서버와의 연결에 문제가 발생했습니다.'+e);
     });
   });
-
-
 
 $("#update-sanction").click(function(){
   if(confirm("정말 제재를 부과하겠습니까?") == false){
@@ -105,9 +203,42 @@ $("#update-sanction").click(function(){
 })
 
 $("#show-write").click(function(){
-  //장소,여행일지,템플릿 등의 게시물이라면, 새 탭에서 작성글 링크로 감
-  //window.open("게시물 주소");
-  
+  ptype = $('#report-detail-modal td.post-type').text();
+  if(ptype === '쪽지'){
+    console.log('모달에 값 넣어오고 보이기');
+  }else if(ptype === '댓글'){
+    console.log('게시물 id 찾아서 리다이렉트');
+  }else{
+    console.log('그 아이디 그대로 리다이렉트');
+  }
+
+
   //쪽지라면 모달 추가
   $("#report-detail-msg").css('display','block');
 })
+
+$("#solved").click(function(){
+  if(confirm("신고를 처리하시겠습니까?") == false){
+    return;
+  }
+  reportId = $('#report-detail-modal #modal-reportId').text();
+  fetch(`/admin/admReport/solve/${reportId}`,{
+    method : 'POST'
+  })
+      .then(res => res.json())
+      .then(data => {
+        if(data.success){
+          alert("신고 처리 완료.");
+          if ($("#report-detail-msg").css('display') == 'block') {
+            $("#report-detail-msg").css('display','none');
+          }
+          $("#report-detail-modal").css('display','none');
+          $(".modal-container").css('display','none');
+        }else{
+          alert("신고 처리 실패했습니다.")
+        }
+      }).catch(e=>{
+        console.log(e);
+        alert("서버 처리 실패.")
+  })
+});

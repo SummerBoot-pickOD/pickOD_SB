@@ -29,21 +29,23 @@
         <select name="post" id="condition-post-type">
           <option value="N" disabled selected>글 분류</option>
           <option value="total">전체</option>
-          <option value="footprint">여행 발자국</option>
-          <option value="template">템플릿</option>
-          <option value="location">장소</option>
-          <option value="reply">댓글</option>
-          <option value="mail">쪽지</option>
+          <option value="J">여행 발자국</option>
+          <option value="T">템플릿</option>
+          <option value="P">장소</option>
+          <option value="C">댓글</option>
+          <option value="M">쪽지</option>
         </select>
         <!-- <label for="solved">상태:</label> -->
-        <label><input type="radio" name="solved" value="all" checked> 전체</label>
-        <label><input type="radio" name="solved" value="Y" checked> 처리</label>
-        <label><input type="radio" name="solved" value="N"> 미처리</label>
-        <button type="button" class="enter">검색</button>
+        <label><input type="radio" name="solved" value="2" checked> 전체</label>
+        <label><input type="radio" name="solved" value="1"> 처리</label>
+        <label><input type="radio" name="solved" value="0"> 미처리</label>
+        <button type="button" class="searchList">검색</button>
       </div>
 
-      <table>
+      <table id = "report-list">
         <tr class="table-head">
+          <th>글 종류</th>
+          <th>글 ID</th>
           <th>신고 사유</th>
           <th>일시</th>
           <th>글 작성자</th>
@@ -51,9 +53,11 @@
           <th>상세 내용</th>
           <th>신고 처리</th>
           <th>상세보기</th>
+          <th hidden>reportId</th>
         </tr>
-
         <tr>
+          <td>댓글</td>
+          <td>3</td>
           <td>pickpickkim@gmail.com</td>
           <td>김픽미</td>
           <td>pickme1234</td>
@@ -63,6 +67,8 @@
           <td class="last-col"><button type="button">상세보기</button></td>
         </tr>
         <tr>
+          <td>댓글</td>
+          <td>5/td>
           <td>pickpickkim@gmail.com</td>
           <td>김픽미</td>
           <td>pickme1234</td>
@@ -72,6 +78,8 @@
           <td class="last-col"><button type="button">상세보기</button></td>
         </tr>
         <tr>
+          <td>댓글</td>
+          <td>7</td>
           <td>pickpickkim@gmail.com</td>
           <td>김픽미</td>
           <td>pickme1234</td>
@@ -81,6 +89,8 @@
           <td class="last-col"><button type="button">상세보기</button></td>
         </tr>
         <tr>
+          <td>여행일지</td>
+          <td>2</td>
           <td>pickpickkim@gmail.com</td>
           <td>김픽미</td>
           <td>pickme1234</td>
@@ -90,6 +100,8 @@
           <td class="last-col"><button type="button" class="details">상세보기</button></td>
         </tr>
         <tr>
+          <td>쪽지</td>
+          <td>10</td>
           <td>pickpickkim@gmail.com</td>
           <td>김픽미</td>
           <td>pickme1234</td>
@@ -99,6 +111,8 @@
           <td class="last-col"><button type="button">상세보기</button></td>
         </tr>
         <tr>
+          <td>장소</td>
+          <td>1033300</td>
           <td>pickpickkim@gmail.com</td>
           <td>김픽미</td>
           <td>pickme1234</td>
@@ -108,6 +122,8 @@
           <td class="last-col"><button type="button">상세보기</button></td>
         </tr>
         <tr>
+          <td>템플릿</td>
+          <td>4</td>
           <td>pickpickkim@gmail.com</td>
           <td>김픽미</td>
           <td>pickme1234</td>
@@ -117,6 +133,8 @@
           <td class="last-col"><button type="button">상세보기</button></td>
         </tr>
         <tr>
+          <td>댓글</td>
+          <td>3</td>
           <td>pickpickkim@gmail.com</td>
           <td>김픽미</td>
           <td>pickme1234</td>
@@ -126,6 +144,8 @@
           <td class="last-col"><button type="button">상세보기</button></td>
         </tr>
         <tr>
+          <td>댓글</td>
+          <td>3</td>
           <td>pickpickkim@gmail.com</td>
           <td>김픽미</td>
           <td>pickme1234</td>
@@ -135,6 +155,8 @@
           <td class="last-col"><button type="button">상세보기</button></td>
         </tr>
         <tr>
+          <td>댓글</td>
+          <td>3</td>
           <td>pickpickkim@gmail.com</td>
           <td>김픽미</td>
           <td>pickme1234</td>
@@ -145,7 +167,7 @@
         </tr>
         <!-- 맨 아래칸, 그냥 회색 섹션으로 만들고 싶음. -->
         <tr>
-          <td colspan="7" class="last-row"></td>
+          <td colspan="9" class="last-row"></td>
         </tr>
       </table>
     </div>
@@ -155,10 +177,10 @@
       <div class="search">
         <select id="sanc-srch-condition">
           <option value="" disabled selected>조건을 선택하세요</option>
-          <option value="email">아이디(이메일)</option>
-          <option value="nick">닉네임</option>
+          <option value="email" >아이디(이메일)</option>
+          <option value="nick" th:selected="${opNick == 'nick'}">닉네임</option>
         </select>
-        <input type="text" id ="sanc-srch-input" placeholder="정확히 입력해주세요." />
+        <input type="text" id ="sanc-srch-input" placeholder="정확히 입력해주세요." th:value="${memNick != null && !memNick.isEmpty() ? memNick : ''}" />
         <!-- <label for="status">상태:</label> -->
         <button type="button" class="enter" id = "search-sanction">검색</button>
         <div id = sanction-count>제재횟수 : <span id="s-count"></span>회</div>
@@ -212,6 +234,7 @@
           <td class="report-date">2024.10.14 13:25</td>
       </table>
       <textarea id="report-detail-text" placeholder="자세한 상황을 설명해주세요." disabled></textarea>
+      <div id="modal-reportId" hidden></div>
     </section>
     <section id="report-modal-tail">
       <button type="button" id="show-write">작성글 바로가기</button>
