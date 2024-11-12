@@ -1,5 +1,6 @@
 // 쪽지닫기기능
 let getbtnClose = document.querySelector('.btn-close-getmail');
+//삭제버튼
 let btnRemove = document.querySelector('.delete-msg');
 
 getbtnClose.addEventListener("click", function() {

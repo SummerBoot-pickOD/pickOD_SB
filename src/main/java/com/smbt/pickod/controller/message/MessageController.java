@@ -86,7 +86,7 @@ public class MessageController {
         return ResponseEntity.ok(map);
     }
 //휴지통메일 상세보기
-    @GetMapping("/{msgId}")
+    @GetMapping("{msgId}")
     public ResponseEntity<Map<String,Object>> binMsgView(@PathVariable("msgId") long msgId, HttpSession session) {
         Long memberNum = (Long) session.getAttribute("memberNum");
         log.info("휴지통 메일 상세 보기 요청: msgId = {}, memberNum = {}", msgId, memberNum);
@@ -126,9 +126,13 @@ public class MessageController {
 
     // 보낸 메시지를 휴지통으로 이동
     @PostMapping("sentMail")
-    public ResponseEntity<String> sentMailToBin(@RequestParam("msgId") Long msgId, HttpSession session) {
+    public ResponseEntity<String> sentMailToBin(@RequestBody Map<String, Long> request, HttpSession session) {
         Long memberNum = (Long) session.getAttribute("memberNum");
-        if (memberNum == null) return ResponseEntity.status(401).body("로그인이 필요합니다");
+        Long msgId = request.get("msgId");
+
+        if (msgId == null) {
+            return ResponseEntity.badRequest().body("msgId is required");
+        }
 
         messageService.moveSentMailToBin(msgId, memberNum);
         return ResponseEntity.ok("보낸편지 휴지통이동완료");
@@ -136,17 +140,26 @@ public class MessageController {
 
     // 휴지통 메시지를 다시 받은함 또는 보낸함으로 복원
     @PostMapping("deletedMail")
-    public ResponseEntity<String> restoreMail(@RequestParam("msgId") Long msgId, HttpSession session) {
+    public ResponseEntity<String> restoreMail(@RequestBody Map<String, Long> request, HttpSession session) {
         Long memberNum = (Long) session.getAttribute("memberNum");
-        if (memberNum == null) return ResponseEntity.status(401).body("로그인이 필요합니다");
+        Long msgId = request.get("msgId");
+
+        if (msgId == null) {
+            return ResponseEntity.badRequest().body("msgId is required");
+        }
 
         messageService.restoreMailFromBin(msgId, memberNum);
         return ResponseEntity.ok("메세지 복원 완료");
     }
 
-    // 휴지통의 메시지를 완전히 삭제
-    @DeleteMapping("deletedMail")
-    public ResponseEntity<String> deleteMsgPermanently(@RequestParam("msgId") Long msgId) {
+//     휴지통의 메시지를 완전히 삭제
+    @DeleteMapping("deletedPermanently")
+    public ResponseEntity<String> deleteForever(@RequestBody Map<String, Long> request) {
+        Long msgId = request.get("msgId");
+        if (msgId == null) {
+            return ResponseEntity.badRequest().body("msgId is required");
+        }
+
         messageService.deleteMailPermanently(msgId);
         return ResponseEntity.ok("메세지 삭제완료");
     }
