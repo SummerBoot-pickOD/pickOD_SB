@@ -1,16 +1,16 @@
-//헤더푸터
-$(function () {
-$("#header").load("../main/header.html");
-});
-
-$(function () {
-$("#footer").load("../main/footer.html");
-});
-
-// 보낸편지모달기능
-$(function () {
-  $("#sentmailModal").load("../message/sentmailModal.html");
-});
+// //헤더푸터
+// $(function () {
+// $("#header").load("../main/header.html");
+// });
+//
+// $(function () {
+// $("#footer").load("../main/footer.html");
+// });
+//
+// // 보낸편지모달기능
+// $(function () {
+//   $("#sentmailModal").load("../message/sentmailModal.html");
+// });
 
 // 전체클릭 기능
 let checkAll = document.querySelector('.all');
@@ -37,29 +37,31 @@ checkItem.forEach(function(e) {
 });
 
 //휴지통 이동
-const btnDelete = document.querySelector('.btn-delete');
-console.log(btnDelete);
-const mailboxList = document.querySelectorAll('.mailbox-list');
-console.log(mailboxList);
-
-btnDelete.addEventListener('click', function() {
-  const checkboxes = document.querySelectorAll('.item');
-  console.log(checkboxes);
-  checkboxes.forEach((checkbox) => {
-      if (checkbox.checked) {
-          const messageItem = checkbox.closest('.mailbox-list');
-          console.log(messageItem);
-          messageItem.remove();
-          // 받은 쪽지함에서 삭제
-          // trashList.appendChild(messageItem);   // 휴지통으로 이동
-          checkbox.checked = false; // 체크 상태 초기화
-      }
-  });
-});
+// const btnDelete = document.querySelector('.btn-delete');
+// // console.log(btnDelete);
+// // const mailboxList = document.querySelectorAll('.mailbox-list');
+// // console.log(mailboxList);
+// //
+// // btnDelete.addEventListener('click', function() {
+// //   const checkboxes = document.querySelectorAll('.item');
+// //   console.log(checkboxes);
+// //   checkboxes.forEach((checkbox) => {
+// //       if (checkbox.checked) {
+// //           const messageItem = checkbox.closest('.mailbox-list');
+// //           console.log(messageItem);
+// //           messageItem.remove();
+// //           // 받은 쪽지함에서 삭제
+// //           // trashList.appendChild(messageItem);   // 휴지통으로 이동
+// //           checkbox.checked = false; // 체크 상태 초기화
+// //       }
+// //   });
+// // });
 
 // // 페이지가 로드될 때 mailList 데이터를 기반으로 메일 항목을 렌더링
 document.addEventListener('DOMContentLoaded', function() {
-  renderSentMailList(mailList);
+  if(mailList.length != 0) {
+    renderSentMailList(mailList);
+  }
 });
 
 // 메일 항목을 동적으로 생성
@@ -134,7 +136,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     mailbox.addEventListener('click', function() {
 
-      const hiddenMsgId = document.querySelector('.msg-id');
+      const hiddenMsgId = mailbox.querySelector('.msg-id');
 
       data = {
         msgId : Number(hiddenMsgId.innerText)
@@ -146,7 +148,7 @@ document.addEventListener('DOMContentLoaded', function() {
       }
 
       // 읽으면 편지 읽음표시기능
-      var readMail =this.querySelector('.mail-open img');
+      let readMail =this.querySelector('.mail-open img');
       readMail.src = '../../img/message/받은편지.png';
 
       fetch(`/message/sentmailModal/${data.msgId}`,{
@@ -162,6 +164,27 @@ document.addEventListener('DOMContentLoaded', function() {
         document.querySelector('.sentmsg-container').style.display = 'block';
       }).catch(error=>{
         console.error("Error:", error);
+      })
+
+      //삭제하기
+      const btnBin = document.querySelector('.delete-msg');
+      btnBin.addEventListener('click',function (){
+
+        fetch(`/message/sentMail`,{
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({ msgId: data.msgId })
+        })
+            .then(response => {
+              if(!response.ok) throw new Error("Fail to fetch message.");
+              return response.text();
+            })
+            .then(data=>{
+              console.log(data);
+            })
+            .catch(error => {
+              console.log("Error:", error);
+            });
       })
     });
   });
