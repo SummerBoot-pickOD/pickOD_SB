@@ -23,30 +23,16 @@ public class AdmReportService {
         admReportMapper.solveReport(reportId);
     }
 
-    //신고 모달 작성글 바로가기
-    public String readRprtPost(AdmReportGoPostDTO admReportGoPostDTO){
-        String type = admReportGoPostDTO.getPostType();
-        Long id = admReportGoPostDTO.getPostId();
-        //쪽지일 경우 -> 직접 보여줌
-        if(type.equals("M")){
-            return admReportMapper.readReportedMessage(id).orElse("해당 ID의 쪽지가 없습니다.");
-        }
-
-        //일반 게시물일 경우 -> 해당 ID로 그대로 리다이렉트
-        String originId = id.toString();
-
-        //댓글일 경우 -> 해당 게시물로 감
-        if(type.equals("C")){
-            AdmReportGoPostDTO origin = admReportMapper.getPostFromCmt(id).orElse(admReportGoPostDTO);
-            if(origin.getPostType().equals("C")){
-                originId = "해당 댓글이 달린 게시물을 찾을 수 없습니다.";
-            }else{
-                originId = Long.toString(origin.getPostId());
-            }
-        }
-
-        return originId;
+    //신고 모달 작성글 바로가기 - 댓글
+    public AdmReportGoPostDTO getCmtParent(AdmReportGoPostDTO admReportGoPostDTO){
+            return admReportMapper.getPostFromCmt(admReportGoPostDTO.getPostId()).orElse(admReportGoPostDTO);
     }
+
+    //신고 모달 작성글 바로가기 - 쪽지
+    public String getMsgDetail(Long postId){
+        return admReportMapper.readReportedMessage(postId).orElse("해당 쪽지가 없습니다. db를 확인해보세요.");
+    }
+
 
     //제재 횟수 확인
     public String checkSncCnt(AdmReportInsertSanctionDTO admReportInsertSanctionDTO){

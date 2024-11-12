@@ -38,9 +38,9 @@ public class PlaceController {
 
     // 장소 상세 조회
     @GetMapping("/{placeId}")
-    public String getPlaceDetail(@PathVariable Long placeId, Model model) {
+    public String getPlaceDetail(@PathVariable("placeId") Long placeId, Model model) {
         PlaceDetailDTO placeDetail = placeService.getPlaceDetail(placeId);
-        model.addAttribute("placeDetail", placeDetail); // 상세 정보
+        model.addAttribute("placeDetail", placeDetail);
         return "place/placeDetail"; // 장소 상세 페이지 템플릿
     }
 
