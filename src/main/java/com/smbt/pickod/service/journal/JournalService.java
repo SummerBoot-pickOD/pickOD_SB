@@ -94,7 +94,7 @@ public class JournalService {
         return new SimpleDateFormat("yyyy/MM/dd").format(new Date());
     }
 
-    public void removeBoard(Long jnlNum){
+    public void removeJournal(Long jnlNum){
         List<JnlImgsDTO> fileList = imgMapper.selectList(jnlNum);
         imgMapper.deleteImg(jnlNum);
         journalMapper.deleteJournal(jnlNum);
@@ -154,15 +154,36 @@ public class JournalService {
 //        return journalMapper.selectAllPage(criteria);
 //    }
 
-    public int findTotal(){
-        return journalMapper.selectTotal();
-    }
 
     public void setFileDir(String fileDir) {
     }
 
     public File getFile(String dir, String fileName){
         return new File(dir, fileName);
+    }
+
+    //journalList 검색페이지
+
+
+
+    //총 게시물 갯수
+    public int findTotal(){
+        return journalMapper.selectTotal();
+    }
+
+    // 최신순으로 가져오기
+    public List<JournalDTO> getJournalsByDateDesc() {
+        return journalMapper.getJournalsByDateDesc();
+    }
+
+    // 좋아요(픽) 순으로 가져오기
+    public List<JournalDTO> getJournalsByPickCountDesc() {
+        return journalMapper.getJournalsByPickCountDesc();
+    }
+
+    // 선택된 발자취 가져오기
+    public List<JournalDTO> getSelectedFootprints() {
+        return journalMapper.getSelectedFootprints();
     }
 
 

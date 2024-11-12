@@ -198,3 +198,27 @@ document.addEventListener('DOMContentLoaded', function() {
       });
   });
 });
+
+//지역버튼 클릭시 필터링
+$(document).ready(function() {
+    // 버튼 클릭 시
+    $(".area-btn").click(function() {
+        var selectedArea = $(this).data("area"); // 클릭한 버튼의 data-area 값 가져오기
+
+        // AJAX 요청 보내기
+        $.ajax({
+            url: "/journal/search",  // 해당 검색 URL
+            type: "GET",
+            data: {
+                searchKeyword: selectedArea // 검색어로 지역명 전달
+            },
+            success: function(response) {
+                // 결과를 받아서 화면 갱신
+                $("#journalResults").html(response); // #journalResults에 결과 출력
+            },
+            error: function() {
+                alert("검색 중 오류가 발생했습니다.");
+            }
+        });
+    });
+});

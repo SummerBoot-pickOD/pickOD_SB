@@ -3,7 +3,6 @@ package com.smbt.pickod.controller.journal;
 import com.smbt.pickod.dto.journal.JnlListDTO;
 import com.smbt.pickod.dto.journal.JnlMemberDTO;
 import com.smbt.pickod.dto.journal.JournalDTO;
-import com.smbt.pickod.dto.journal.JournalProfileDTO;
 import com.smbt.pickod.service.journal.JournalService;
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
@@ -26,6 +25,7 @@ public class JournalWriteController {
 
     private static final Logger logger = LoggerFactory.getLogger(JournalWriteController.class);
     private final JournalService journalService;
+
 
     @Autowired
     public JournalWriteController(JournalService journalService) {
@@ -86,6 +86,7 @@ public class JournalWriteController {
         }
     }
 
+
     @GetMapping("/view")
     public String boardView(@RequestParam("jnlNum") Long jnlNum, Model model){
         System.out.println("view 컨트롤러");
@@ -117,8 +118,8 @@ public class JournalWriteController {
     }
 
     @GetMapping("/remove")
-    public String boardRemove(@RequestParam("jnlNum") Long jnlNum){
-        journalService.removeBoard(jnlNum);
+    public String journalRemove(@RequestParam("jnlNum") Long jnlNum){
+        journalService.removeJournal(jnlNum);
         return "redirect:/journal/list";
     }
 }
