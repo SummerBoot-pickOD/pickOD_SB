@@ -7,28 +7,27 @@
     <link rel="stylesheet" th:href="@{/css/main/header.css}">
     <link rel="stylesheet" th:href="@{/css/main/footer.css}">
     <link rel="stylesheet" th:href="@{/css/journal/journalSearch.css}">
-    <script th:src="@{/js/journal/journalCreate.js}"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
-    crossorigin="anonymous"></script>
+            crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/abd96c8f9a.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <div id="header" th:replace="~{/main/header}"></div>
-    <main>
-        <h2>너와 나의 여행 발자국</h2>
-        <div class="search-box-container">
-            <form class="search-box" action="/journal/search" method="get">
-                <input class="search-text" type="text" name="" placeholder="검색어를 입력하세요." onfocus="this.placeholder=''" onblur="this.placeholder='검색어를 입력하세요.'">
-                <button class="search-btn" type="submit">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                </button>
-            </form>
-        </div>
-        <div class="total_area_wrap">
-            <button class="total_area_btn" type="button">전체</button>
-            <div class="tag_area">
-              <button class="tag_area_totalseoul" type="button">서울</button>
-              <ul class="tag_area_seoul">
+<div id="header" th:replace="~{/main/header}"></div>
+<main>
+    <h2>너와 나의 여행 발자국</h2>
+    <div class="search-box-container">
+        <form class="search-box" th:action="@{/journal/search}" method="get">
+            <input class="search-text" type="text" name="" placeholder="검색어를 입력하세요." onfocus="this.placeholder=''" onblur="this.placeholder='검색어를 입력하세요.'">
+            <button class="search-btn" type="submit">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+        </form>
+    </div>
+    <div class="total_area_wrap">
+        <button class="total_area_btn" type="button">전체</button>
+        <div class="tag_area">
+            <button class="tag_area_totalseoul" type="button" >서울</button>
+            <ul class="tag_area_seoul">
                 <li><button type="button">강남구</button></li>
                 <li><button type="button">도봉구</button></li>
                 <li><button type="button">동대문구</button></li>
@@ -54,10 +53,10 @@
                 <li><button type="button">구로구</button></li>
                 <li><button type="button">금천구</button></li>
                 <li><button type="button">노원구</button></li>
-              </ul>
-          
-              <button class="tag_area_totalgeonggi" type="button">경기</button>
-              <ul class="tag_area_geonggi">
+            </ul>
+
+            <button class="tag_area_totalgeonggi" type="button">경기</button>
+            <ul class="tag_area_geonggi">
                 <li><button type="button">가평시</button></li>
                 <li><button type="button">동두천시</button></li>
                 <li><button type="button">부천시</button></li>
@@ -89,32 +88,48 @@
                 <li><button type="button">군포시</button></li>
                 <li><button type="button">김포시</button></li>
                 <li><button type="button">남양주시</button></li>
-                
-              </ul>
+
+            </ul>
+        </div>
+
+    </div>
+    <div>
+        <div class="content-menu">
+            <div class="content-total">총 <span id="total-posts">0</span>개
+                <a th:href="@{/journal/list(sort='orderByDate')}" class="content-latest" th:class="${sort == 'orderByDate' ? 'bold' : ''}"
+                >최신순
+                </a>
+                <div class="wall">|</div>
+                <a th:href="@{/journal/list(sort='orderByLikes')}" class="content-pick" th:class="${sort == 'orderByLikes' ? 'bold' : ''}"
+                >찜하기순
+                </a>
+                <div class="wall">|</div>
+                <a th:href="@{/journal/list(sort='orderBySelectedFootprints')}" class="content-chosen" type="button" th:class="${sort == 'orderBySelectedFootprints' ? 'bold' : ''}"
+                >선정 발자국
+                </a>
             </div>
-      
-          </div>
+        </div>
+
         <div>
-            <div class="content-menu">
-                <div class="content-total">총 <span id="total-posts">0</span>개</div>
-                <button class="content-latest" type="button">최신순</button>
-                <div class="wall">|</div>
-                <button class="content-pick" type="button">찜하기순</button>
-                <div class="wall">|</div>
-                <button class="content-chosen" type="button">선정 발자국</button>
-            </div>
 
-            <div>
-                
-            </div>
         </div>
+    </div>
 
-        <div class="container">
-            <div class="posts" id="posts"></div>
-            <div class="pagination" id="pagination"></div>
-        </div>
+    <div class="container">
+        <div class="posts" id="posts"></div>
+        <div class="pagination" id="pagination"></div>
+    </div>
 
-    </main>
-    <div id="footer"></div>
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        const journalList = /*[[${journalList}]]*/ [];
+        console.log("journalList:", journalList);  // mailList 확인
+        renderJournalList(journalList);
+        /*]]>*/
+    </script>
+
+</main>
+<div id="footer" th:replace="~{/main/footer}"></div>
+<script th:src="@{/js/journal/journalSearch.js}"></script>
 </body>
 </html>

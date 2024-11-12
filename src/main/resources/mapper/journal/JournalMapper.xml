@@ -81,10 +81,14 @@
         FROM JOURNAL
     </select>
 
+
+
+
     <select id="getJournalsByDateDesc" resultType="JournalDTO">
-        SELECT *
-        FROM JOURNAL
-        ORDER BY JNL_CREATE_DATE DESC
+        SELECT j.*, i.*
+        FROM JOURNAL j
+                 LEFT JOIN JNL_IMGS i ON j.JNL_NUM = i.JNL_NUM
+        ORDER BY j.JNL_CREATE_DATE DESC
     </select>
 
     <select id="getJournalsDesc" resultType="JournalDTO">
@@ -103,9 +107,10 @@
     </select>
 
     <select id="getSelectedFootprints" resultType="JournalDTO">
-        SELECT j.*
+        SELECT j.*, i.*
         FROM JOURNAL j
                  JOIN TEMPLATE t ON j.JNL_NUM = t.JNL_NUM
+                 LEFT JOIN JNL_IMGS i ON j.JNL_NUM = i.JNL_NUM
     </select>
 
     <select id="getJournalByPermission" parameterType="long" resultType="JournalDTO">
@@ -114,18 +119,6 @@
         WHERE MEMBER_NUM = #{memberNum}
     </select>
 
-    <resultMap id="memberResultMap" type="com.smbt.pickod.dto.journal.JnlMemberDTO">
-        <id property="memberNum" column="memberNum" />
-        <result property="memberId" column="memberId" />
-        <result property="nickName" column="nickName" />
-        <collection property="memberImgsList" ofType="com.smbt.pickod.dto.journal.JnlMemberImgsDTO">
-            <result property="memberImgsGuid" column="memberImgsGuid" />
-            <result property="fileName" column="fileName" />
-            <result property="uploadPath" column="uploadPath" />
-            <result property="memberImgUrl" column="memberImgUrl" />
-            <result property="defaultYn" column="defaultYn" />
-        </collection>
-    </resultMap>
 
     <select id="getJournalProfilesByJournalId" resultType="JournalProfileDTO">
         SELECT

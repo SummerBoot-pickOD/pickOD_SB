@@ -186,6 +186,22 @@ public class JournalService {
         return journalMapper.getSelectedFootprints();
     }
 
+    public List<JournalDTO> getJournalBySort(String sort) {
+        if (sort.equals("orderByLikes")) {
+            return getJournalsByPickCountDesc();  // 찜하기슌
+        } else if (sort.equals("orderByDate")) {
+            return getJournalsByDateDesc();  // 최신순
+        } else if (sort.equals("orderBySelectedFootprints")){
+            return getSelectedFootprints(); // 선정된 발자국
+        }else {
+            return getJournalsByDateDesc(); // 기본값은 최신순
+        }
+    }
+
+    public List<JournalDTO> searchByArea(String area) {
+        return journalMapper.searchJournal(area, null, null, null, null);  // 나머지 필터들은 null로 넘기기
+    }
+
 
 
 
