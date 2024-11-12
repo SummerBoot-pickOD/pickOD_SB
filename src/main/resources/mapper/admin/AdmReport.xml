@@ -28,11 +28,11 @@
         <if test="inqCondition == 'postId'">
             AND T.REPORT_POST_ID = TO_NUMBER(#{inqKeyword})
         </if>
-        <if test="reportPostType != null">
-            AND T.REPORT_POST_TYPE = #{reportPostType}
+        <if test="inqPostType != 'total'">
+            AND T.REPORT_POST_TYPE = #{inqPostType}
         </if>
-        <if test="reportSolved != 2">
-            AND T.REPORT_SOLVED = #{reportSolved}
+        <if test="inqSolved != 2">
+            AND T.REPORT_SOLVED = #{inqSolved}
         </if>
         ORDER BY REPORT_DATE
     </select>
