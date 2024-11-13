@@ -71,8 +71,17 @@ public class MessageService {
 
     // 메시지 전송
     public void sendMessage(MsgWriteMailDTO msgWriteMailDTO) {
+
+//        messageMapper.insertMessage(msgWriteMailDTO);
+//        messageMapper.insertMessageStatusSender(msgWriteMailDTO);
+//        messageMapper.insertMessageStatusRecipient(msgWriteMailDTO);
+        Long msgId = messageMapper.generateMsgId();
+        msgWriteMailDTO.setMsgId(msgId); // dto에 msgId를 설정하여 여러 메서드에서 사용 가능하도록 함
+        // 2. MESSAGE 테이블에 메시지 삽입
         messageMapper.insertMessage(msgWriteMailDTO);
+        // 3. MESSAGE_STATUS 테이블에 발신자 상태 삽입
         messageMapper.insertMessageStatusSender(msgWriteMailDTO);
+        // 4. MESSAGE_STATUS 테이블에 수신자 상태 삽입
         messageMapper.insertMessageStatusRecipient(msgWriteMailDTO);
     }
 

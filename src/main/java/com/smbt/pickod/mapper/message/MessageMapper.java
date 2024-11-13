@@ -20,6 +20,9 @@ public interface MessageMapper {
 
     Optional<MsgTrashedMailViewDTO> trashedMailView (MsgTrashedMailViewDTO msgTrashedMailViewDTO);
 
+    // msgId를 미리 생성하는 메서드
+    Long generateMsgId();
+
     void insertMessage (MsgWriteMailDTO msgWriteMailDTO);
 
     void insertMessageStatusSender (MsgWriteMailDTO msgWriteMailDTO);

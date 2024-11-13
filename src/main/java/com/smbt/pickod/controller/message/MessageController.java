@@ -67,6 +67,7 @@ public class MessageController {
 
         map.put("memberNickname", view.getMemberNickname());
         map.put("msgContent", view.getMsgContent());
+        map.put("msgSender", view.getMsgSender());
 
         return ResponseEntity.ok(map);
     }
@@ -86,7 +87,7 @@ public class MessageController {
         return ResponseEntity.ok(map);
     }
 //휴지통메일 상세보기
-    @GetMapping("{msgId}")
+    @GetMapping("binBox/{msgId}")
     public ResponseEntity<Map<String,Object>> binMsgView(@PathVariable("msgId") long msgId, HttpSession session) {
         Long memberNum = (Long) session.getAttribute("memberNum");
         log.info("휴지통 메일 상세 보기 요청: msgId = {}, memberNum = {}", msgId, memberNum);
@@ -102,10 +103,10 @@ public class MessageController {
 
     // 메시지 전송
     @PostMapping("replymailModal")
-    public ResponseEntity<String> sendMsg (@RequestBody MsgWriteMailDTO msgWriteMailDTO, HttpSession session, Model model) {
+    public ResponseEntity<String> sendMsg (@RequestBody MsgWriteMailDTO msgWriteMailDTO, HttpSession session) {
         Long memberNum = (Long) session.getAttribute("memberNum");
         msgWriteMailDTO.setMsgSender(memberNum);
-        model.addAttribute("msgWriteMailDTO", msgWriteMailDTO);
+        log.info(msgWriteMailDTO.toString());
         messageService.sendMessage(msgWriteMailDTO);
         return ResponseEntity.ok("메세지 보내기 완료");
     }
