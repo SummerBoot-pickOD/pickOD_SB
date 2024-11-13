@@ -32,62 +32,6 @@ public class JournalMapperTest {
     @Autowired
     private JournalService journalService;
 
-    @Test
-    public void testSearchJournalByArea() {
-        List<JournalDTO> results = journalMapper.searchJournal("화성", null, null, null, null);
-        if (results.isEmpty()) {
-            System.out.println("검색 결과가 존재하지 않습니다");
-        }
-    }
-
-    @Test
-    public void testSearchJournalByTag() {
-        List<JournalDTO> results = journalMapper.searchJournal(null, "친구", null, null, null);
-        if (results.isEmpty()) {
-            System.out.println("검색 결과가 존재하지 않습니다");
-        }
-    }
-
-    @Test
-    public void testSearchJournalByTheme() {
-        List<JournalDTO> results = journalMapper.searchJournal(null, null, "자연", null, null);
-        if (results.isEmpty()) {
-            System.out.println("검색 결과가 존재하지 않습니다");
-        }
-    }
-
-    @Test
-    public void testSearchJournalByPeriod() {
-        List<JournalDTO> results = journalMapper.searchJournal(null, null, null, "당일치기", null);
-        if (results.isEmpty()) {
-            System.out.println("검색 결과가 존재하지 않습니다");
-        }
-    }
-
-    @Test
-    public void testSearchJournalByTitle() {
-        List<JournalDTO> results = journalMapper.searchJournal(null, null, null, null, "내 여행일지");
-        if (results.isEmpty()) {
-            System.out.println("검색 결과가 존재하지 않습니다");
-        }
-    }
-
-    @Test
-    public void testSearchJournalWithMultipleCriteria() {
-        List<JournalDTO> results = journalMapper.searchJournal("수원", "가족", "자연", "당일", "대부도");
-        if (results.isEmpty()) {
-            System.out.println("검색 결과가 존재하지 않습니다");
-        }
-    }
-
-    @Test
-    public void testSearchJournalWithNoCriteria() {
-        List<JournalDTO> results = journalMapper.searchJournal(null, null, null, null, null);
-        if (results.isEmpty()) {
-            System.out.println("검색 결과가 존재하지 않습니다");
-        }
-        Assertions.assertNotNull(results, "Results should not be null");
-    }
 
     @Test
     public void testCountAllJournals() {

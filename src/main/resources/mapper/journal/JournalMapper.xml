@@ -56,24 +56,20 @@
         ORDER BY jd.JNL_DAY
     </select>
 
-    <select id="searchJournal" parameterType="String" resultType="JournalDTO">
+    <select id="searchJournalByKeyword" resultType="JournalDTO">
         SELECT * FROM JOURNAL
-        WHERE 1=1
-        <if test="area != null and area != ''">
-            AND JNL_AREA LIKE '%' || #{area} || '%'
-        </if>
-        <if test="tag != null and tag != ''">
-            AND JNL_TAG LIKE '%' || #{tag} || '%'
-        </if>
-        <if test="theme != null and theme != ''">
-            AND JNL_THEME LIKE '%' || #{theme} || '%'
-        </if>
-        <if test="period != null and period != ''">
-            AND JNL_PERIOD LIKE '%' || #{period} || '%'
-        </if>
-        <if test="title != null and title != ''">
-            AND JNL_TITLE LIKE '%' || #{title} || '%'
-        </if>
+        WHERE
+            JNL_TITLE LIKE '%' || #{keyword} || '%'
+           OR JNL_AREA LIKE '%' || #{keyword} || '%'
+           OR JNL_TAG LIKE '%' || #{keyword} || '%'
+           OR JNL_THEME LIKE '%' || #{keyword} || '%'
+           OR JNL_PERIOD LIKE '%' || #{keyword} || '%'
+        ORDER BY JNL_CREATE_DATE DESC
+    </select>
+
+    <select id="searchJournalByArea" resultType="JournalDTO">
+        SELECT * FROM JOURNAL
+        WHERE JNL_AREA LIKE '%' || #{area} || '%'
     </select>
 
     <select id="countTotalJournals" resultType="int">
@@ -111,6 +107,7 @@
         FROM JOURNAL j
                  JOIN TEMPLATE t ON j.JNL_NUM = t.JNL_NUM
                  LEFT JOIN JNL_IMGS i ON j.JNL_NUM = i.JNL_NUM
+        ORDER BY j.JNL_CREATE_DATE DESC
     </select>
 
     <select id="getJournalByPermission" parameterType="long" resultType="JournalDTO">
