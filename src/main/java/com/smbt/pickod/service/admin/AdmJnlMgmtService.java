@@ -1,5 +1,6 @@
 package com.smbt.pickod.service.admin;
 
+import com.smbt.pickod.dto.admin.journal.AdmJnlFilterDTO;
 import com.smbt.pickod.dto.admin.journal.AdmJnlMgmtDTO;
 import com.smbt.pickod.mapper.admin.AdmJnlMgmtMapper;
 import lombok.RequiredArgsConstructor;
@@ -17,4 +18,9 @@ public class AdmJnlMgmtService {
     public List<AdmJnlMgmtDTO> getJnlList(){
         return admJnlMgmtMapper.getJournals();
     }
+
+    public List<AdmJnlMgmtDTO> filterJnlList(AdmJnlFilterDTO admJnlFilterDTO){
+        return admJnlMgmtMapper.filterJnls(admJnlFilterDTO);
+    }
+
 }

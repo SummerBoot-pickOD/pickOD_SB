@@ -23,17 +23,17 @@
           <option value="writer">글 작성자</option>
           <option value="reporter">신고자</option>
           <option value="detail">상세 내용</option>
-          <option value="postId">게시글 ID</option>
+          <option value="postId"  th:selected="${option == 'postId'}">게시글 ID</option>
         </select>
-        <input type="text" placeholder="검색어를 입력하세요." />
+        <input type="text" placeholder="검색어를 입력하세요." th:value="${postId != null && !postId.isEmpty() ? postId : ''}"/>
         <select name="post" id="condition-post-type">
           <option value="N" disabled selected>글 분류</option>
           <option value="total">전체</option>
-          <option value="J">여행 발자국</option>
-          <option value="T">템플릿</option>
-          <option value="P">장소</option>
-          <option value="C">댓글</option>
-          <option value="M">쪽지</option>
+          <option value="J" th:selected="${postType == 'J'}">여행 발자국</option>
+          <option value="T" th:selected="${postType == 'T'}">템플릿</option>
+          <option value="P" th:selected="${postType == 'P'}">장소</option>
+          <option value="C" th:selected="${postType == 'C'}">댓글</option>
+          <option value="M" th:selected="${postType == 'M'}">쪽지</option>
         </select>
         <!-- <label for="solved">상태:</label> -->
         <label><input type="radio" name="solved" value="2" checked> 전체</label>

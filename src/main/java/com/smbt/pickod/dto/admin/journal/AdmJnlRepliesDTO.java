@@ -8,6 +8,7 @@ import lombok.ToString;
 @Getter @Setter
 @ToString @NoArgsConstructor
 public class AdmJnlRepliesDTO {
+    private String cmtPostType;
     private Long jnlNum;
     private String jnlTitle;
     private Long cmtId;

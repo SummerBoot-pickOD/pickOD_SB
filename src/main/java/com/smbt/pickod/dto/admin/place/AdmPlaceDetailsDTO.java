@@ -24,6 +24,7 @@ public class AdmPlaceDetailsDTO {
     private String placeRelated3;
     private Long placeLat;
     private Long placeLong;
+    private String isReported;
     // img 파일 받아오는 부분까지
     List<PlaceImgDTO> placeImgDTO;
 

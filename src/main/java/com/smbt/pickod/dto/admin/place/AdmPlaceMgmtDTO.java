@@ -11,6 +11,7 @@ public class AdmPlaceMgmtDTO {
     private Long placeId;
     private String placeName;
     private String placeAddress;
+    private int placeViews;
     private int pickCnt;
     private String isReported;
 }

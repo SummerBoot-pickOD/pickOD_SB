@@ -1,13 +1,5 @@
 
 document.addEventListener('DOMContentLoaded', () => {
-  $(function () {
-    $("#header").load("../../html/admin/admHeader.html");
-  });
-
-  $(function () {
-    $("#footer").load("../../html/main/footer.html");
-  });
-
   //이미지 영역 < > 에 따라 다른 이미지 로딩
   const slider = document.getElementById('slider');
   const prevBtn = document.getElementById('prev-btn');
@@ -30,19 +22,20 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   //신고하기 아이콘 신고 여부에 따라 다르게 표시됨 
-  let reported = 'Y';  // 실제로는 서버에서 불러와야 함
-
+  let reported = document.getElementById('is-reported').getAttribute('data-isreported');
+  console.log(reported);
   const reportIcon = document.getElementById('report-icon');
-  if (reported === 'Y') {
-    reportIcon.src = '../../img/admin/reported.png';
+  if (String(reported) === 'Y') {
+    reportIcon.src = reportIcon.getAttribute('data-img1');
     reportIcon.style.cursor = 'pointer';
     reportIcon.addEventListener('click', () => {
       // 이때, 이 장소이름이 검색된?? 그니까 이 장소만 조회된 페이지로 넘기기
-      window.location.href = '../../html/admin/admReport.html';
+      const postId = reportIcon.getAttribute('data-place-id');
+      window.location.href = '/admin/admPlaceMgmt/toReport?postId=' + postId;
     });
-  } else if (reported === 'N') {
-    reportIcon.src = '../../img/message/report.png';
-  };
+  } else if (String(reported) === 'N') {
+    reportIcon.src = reportIcon.getAttribute('data-img2');
+  }
 
 
   //nav 버튼
@@ -61,11 +54,26 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
 
-  //nav 발자국 톡 
+  //nav 발자국 톡 > 댓글 관리페이지로 이동
   const toComments = document.getElementById('to-comments');
 
   toComments.addEventListener('click', function (event) {
     event.preventDefault();
     window.location.href = '../../html/admin/admReplies.html';
   });
+
+  //장소 삭제 버튼
+  const deleteBtn = document.getElementById('delete-btn');
+  deleteBtn.addEventListener('click', function(){
+    const placeName = this.getAttribute('data-place-name');
+    const placeId = this.getAttribute('data-place-id');
+    let result = confirm(`"${placeName}" 을 장소에서 삭제하시겠습니까?`);
+    console.log(placeName);
+    console.log(placeId);
+    if (result){
+      window.location.href = '/admin/admPlaceMgmt/details/deletePlace?placeId=' + placeId;
+    } else {
+      window.location.href='/admin/admPlaceMgmt/details/' + placeId;
+    }
+  })
 });

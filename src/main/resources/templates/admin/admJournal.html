@@ -18,24 +18,23 @@
     <div class="posts">
       <h1 class="journal-mgmt">여행 발자국 관리</h1>
       <div class="container">
-        <div class="search">
-          <select id="condition">
-            <option value="" disabled selected>조건을 선택하세요</option>
-            <option class="search-option" value="name">성명</option>
-            <option class="search-option" value="nick">닉네임</option>
-            <option class="search-option" value="title">제목</option>
-            <option class="search-option" value="report">신고 여부</option>
-          </select>
-          <input type="text" class="keyword" placeholder="검색어를 입력하세요." />
-          <label><input type="radio" name="status" value="total" checked> 전체</label>
-          <label><input type="radio" name="status" value="normal" checked> 정상등록</label>
-          <label><input type="radio" name="status" value="temp"> 임시저장</label>
-          <button type="button" class="search-button">검색</button>
-        </div>
+        <form action="/admin/admJnlMgmt/search" method="get">
+          <div class="search">
+            <select name="searchOption" id="condition">
+              <option value="" disabled selected>조건을 선택하세요</option>
+              <option class="search-option" value="nick">닉네임</option>
+              <option class="search-option" value="title">제목</option>
+              <option class="search-option" value="report">신고 여부</option>
+            </select>
+            <input type="text" name="keyword" placeholder="검색어를 입력하세요." />
+            <button type="submit" class="search-button">검색</button>
+          </div>
+        </form>
 
         <table class="journal-list">
           <thead>
           <tr class="table-head">
+            <th class="jnl-num">번호</th>
             <th class="mem-id">아이디</th>
             <th class="nickname">닉네임</th>
             <th class="jnl-title">여행 발자국</th>
@@ -48,6 +47,7 @@
 
           <tbody>
           <tr th:each="jnl: ${jnls}">
+            <td class="jnl-num" th:text="${jnl.jnlNum}"></td>
             <td class="mem-id" th:text="${jnl.memberId}"></td>
             <td class="nickname" th:text="${jnl.memberNickName}"></td>
             <td class="jnl-title" th:text="${jnl.jnlTitle}"></td>

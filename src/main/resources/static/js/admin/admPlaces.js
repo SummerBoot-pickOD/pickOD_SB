@@ -1,13 +1,4 @@
 document.addEventListener('DOMContentLoaded', function () {
-  $(function () {
-    $("#header").load("../../html/admin/admHeader.html");
-  });
-
-  $(function () {
-    $("#footer").load("../../html/main/footer.html");
-  });
-
-
   const openCmt = document.querySelectorAll('.to-comments');
   const toPlace = document.querySelectorAll('.to-place');
 
@@ -19,7 +10,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
   toPlace.forEach(btn => {
     btn.addEventListener("click", function () {
-      window.location.href = "../../html/admin/admPlaceDetails.html";
+      const placeId = this.getAttribute('data-place-id');
+      window.location.href = "/admin/admPlaceMgmt/details/" + placeId;
     });
   });
 

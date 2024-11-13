@@ -1,5 +1,6 @@
 package com.smbt.pickod.controller.admin;
 
+import com.smbt.pickod.dto.admin.journal.AdmJnlFilterDTO;
 import com.smbt.pickod.dto.admin.journal.AdmJnlMgmtDTO;
 import com.smbt.pickod.service.admin.AdmJnlMgmtService;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +22,15 @@ public class AdmJnlMgmtController {
     @GetMapping("/list")
     public String admJnlMgmt(Model model) {
         List<AdmJnlMgmtDTO> jnls = admJnlMgmtService.getJnlList();
+        model.addAttribute("jnls", jnls);
+        return "/admin/admJournal";
+    }
+
+    @GetMapping("/search")
+    public String admJnlMgmtSearch(AdmJnlFilterDTO admJnlFilterDTO, Model model) {
+        System.out.println("Search Option: " + admJnlFilterDTO.getSearchOption());
+        System.out.println("Keyword: " + admJnlFilterDTO.getKeyword());
+        List<AdmJnlMgmtDTO> jnls = admJnlMgmtService.filterJnlList(admJnlFilterDTO);
         model.addAttribute("jnls", jnls);
         return "/admin/admJournal";
     }

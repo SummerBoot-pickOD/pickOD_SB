@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -52,12 +53,13 @@ public class AdmMemberMgmtController {
     }
 
     @GetMapping("/toSanction")
-    public String admMemberToSanction(@RequestParam Long memNum, Model model) {
+    public String memberToSanction(@RequestParam Long memNum, Model model) {
         String memNickName = admMemberMgmtService.getMemberNickName(memNum);
         model.addAttribute("memNick", memNickName);
         model.addAttribute("opNick", "nick");
         return "/admin/admReport";
     }
+
 
 
 //    @GetMapping("/details/sendMsg")
@@ -66,4 +68,11 @@ public class AdmMemberMgmtController {
 //        log.info(memberNum.toString());
 //
 //    }
+
+    @GetMapping("/deleteMember")
+    public String deleteMember(@RequestParam Long memNum) {
+            admMemberMgmtService.deleteMember(memNum);
+            return "redirect:/admin/admMemberMgmt/list";
+
+    }
 }
