@@ -13,10 +13,9 @@
       <section id="report-modal-top">
         <span>신고하기</span><span id="modal-exit">&times;</span>
       </section>
-      <form th:action="@{/report/putReport}" method = "post">
+      <form th:action="@{/report/putReport}" id="reportForm" method = "post">
         <input type="text" name="reportPostType" hidden>
         <input type="text" name="reportPostId" hidden>
-        <input type="text" name="reportPostType" hidden>
         <input type="text" name="writerId" hidden>
         <!-- 이 모달 사용하는 페이지들 js에서, 신고버튼 눌러서 모달 띄울때 여기에 값 넣으면 된다 -->
         <section id="report-modal-mid">

@@ -25,7 +25,7 @@
       <form class="login-form" action="/login/doLogin" method="post">
         <input type="text" name = "memberId" class="id" placeholder="아이디" required>
         <input type="password" name ="memberPassword" class="pw" placeholder="비밀번호" required>
-        <div id="invalid-login"></div>
+        <div id="invalid-login" th:text="${invalidMsg != null} ? ${invalidMsg} : ''"></div>
         <button type="submit" id="login-button">로그인</button>
       </form>
       <div class="login-service-container">
