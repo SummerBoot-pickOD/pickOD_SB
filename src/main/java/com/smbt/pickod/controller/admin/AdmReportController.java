@@ -72,8 +72,12 @@ public class AdmReportController {
     }
 
     @GetMapping("getMsg")
-    public String getMsg(@RequestParam("postId") Long postId){
-        return admReportService.getMsgDetail(postId);
+    public ResponseEntity<Map<String,Object>> getMsg(@RequestParam("postId") Long postId){
+        String msg = admReportService.getMsgDetail(postId);
+        Map<String,Object> map = new HashMap<>();
+        map.put("msg",msg);
+        map.put("success",true);
+        return ResponseEntity.ok(map);
     }
 
     @PostMapping("sncCnt")
