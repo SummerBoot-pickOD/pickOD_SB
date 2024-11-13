@@ -95,8 +95,10 @@ document.addEventListener('DOMContentLoaded', () => {
     let totalPages;
 
     function displayPosts() {
+        console.log("journalSearch.js 확인 =========");
         const postContainer = document.getElementById('posts');
         postContainer.innerHTML = '';
+        console.log("journalSearch.js 확인 =========");
 
         const startIndex = (currentPage - 1) * postsPerPage;
         const endIndex = startIndex + postsPerPage;
@@ -106,9 +108,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const postDiv = document.createElement('div');
             postDiv.className = 'post-container';
 
+
             const img = document.createElement('img');
             img.className = 'post-image';
-            img.src = post.uploadPath + '/' + post.fileName;
+            img.src = (post.uploadPath && post.fileName) ? `${post.uploadPath}/${post.fileName}` : '/img/journal/하단 큰 이미지.png';
             img.alt = post.jnlTitle;
             postDiv.appendChild(img);
 
@@ -116,6 +119,12 @@ document.addEventListener('DOMContentLoaded', () => {
             titleDiv.className = 'post-title';
             titleDiv.textContent = post.jnlTitle;
             postDiv.appendChild(titleDiv);
+
+            // 클릭 시 해당 여행일지 상세 페이지로 이동
+            postDiv.addEventListener('click', function() {
+                // post.jnlNum 값을 URL에 포함시켜 상세 페이지로 이동
+                window.location.href = `/journal/detail/${post.jnlNum}`;  // post.jnlNum이 정확히 전달되는지 확인
+            });
 
             const pngImage = document.createElement('img');
             pngImage.className = 'toggle-image';
@@ -183,33 +192,33 @@ document.addEventListener('DOMContentLoaded', () => {
     $("#header").load("../main/header.html");
     $("#footer").load("../main/footer.html");
 
-    $(".area-btn").click(function() {
-        const selectedArea = $(this).data("area");
-
-        $.ajax({
-            url: "/journal/list/area",
-            type: "GET",
-            data: { area: selectedArea },
-            success: function(response) {
-                $("#journalResults").html(response);
-            },
-            error: function() {
-                alert("검색 중 오류가 발생했습니다.");
-            }
-        });
-    });
-
-    $(".total_area_btn").click(function() {
-        $.ajax({
-            url: "/journal/list/area",
-            type: "GET",
-            data: { area: "" },
-            success: function(response) {
-                $("#journalResults").html(response);
-            },
-            error: function() {
-                alert("검색 중 오류가 발생했습니다.");
-            }
-        });
-    });
+    // $(".area-btn").click(function() {
+    //     const selectedArea = $(this).data("area");
+    //
+    //     $.ajax({
+    //         url: "/journal/list/area",
+    //         type: "GET",
+    //         data: { area: selectedArea },
+    //         success: function(response) {
+    //             $("#journalResults").html(response);
+    //         },
+    //         error: function() {
+    //             alert("검색 중 오류가 발생했습니다.");
+    //         }
+    //     });
+    // });
+    //
+    // $(".total_area_btn").click(function() {
+    //     $.ajax({
+    //         url: "/journal/list/area",
+    //         type: "GET",
+    //         data: { area: "" },
+    //         success: function(response) {
+    //             $("#journalResults").html(response);
+    //         },
+    //         error: function() {
+    //             alert("검색 중 오류가 발생했습니다.");
+    //         }
+    //     });
+    // });
 });

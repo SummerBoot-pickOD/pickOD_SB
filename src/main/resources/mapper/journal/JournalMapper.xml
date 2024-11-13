@@ -7,9 +7,9 @@
             -- JOURNAL 테이블 컬럼들
             j.JNL_NUM,
             j.JNL_TITLE,
+            j.MEMBER_NUM,
             j.JNL_VIEWS,
             j.JNL_MEMO,
-            j.MEMBER_NUM,
             j.JNL_CREATE_DATE,
             j.JNL_UPDATE_DATE,
             j.JNL_PERIOD,
@@ -24,10 +24,9 @@
             mi.MEMBER_IMGS_GUID AS memberImgsGuid,
             mi.FILE_NAME AS fileName,
             mi.UPLOADPATH AS uploadPath,
-            mi.MEMBER_IMG_TYPE AS memberImgType,
-            mi.DEFAULT_YN AS defaultYn,
 
             -- JOURNAL_DAY 테이블 컬럼들
+            jd.JNL_NUM,
             jd.JNL_DAY,
             jd.JNL_PLACE_ORDER,
             jd.JNL_CONTENTS,
@@ -37,9 +36,9 @@
             JOURNAL j
                 JOIN MEMBER m ON j.MEMBER_NUM = m.MEMBER_NUM
                 LEFT JOIN MEMBER_IMGS mi ON m.MEMBER_IMGS_ID = mi.MEMBER_IMGS_ID
-                LEFT JOIN JOURNAL_DAY jd ON j.JNL_NUM = jd.JNL_NUM
+                LEFT JOIN JNL_DAY jd ON j.JNL_NUM = jd.JNL_NUM
         WHERE
-            j.JNL_NUM = #{journalNum}
+            j.JNL_NUM = #{jnlNum}
     </select>
 
     <select id="getJournalDaysByJournalNum" parameterType="long" resultType="JnlDayDTO">

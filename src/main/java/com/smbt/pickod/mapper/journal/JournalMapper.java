@@ -12,6 +12,9 @@ import java.util.Optional;
 public interface JournalMapper {
 
     // JOURNAL 관련 메서드들
+
+    JournalDTO getJournalWithDaysByNum(@Param("jnlNum") long jnlNum); // journalDetail로 연결하기 위한 조회
+
     int countTotalJournals(); //게시글 총 개수
 
     List<JournalDTO> getJournalsByDateDesc(); // 최신순 정렬

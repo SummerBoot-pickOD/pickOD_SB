@@ -121,16 +121,25 @@
         <div class="pagination" id="pagination"></div>
     </div>
 
-    <script th:inline="javascript">
-        /*<![CDATA[*/
-        const journalList = /*[[${journalList}]]*/ [];
-        console.log("journalList:", journalList);  // mailList 확인
-        renderJournalList(journalList);
-        /*]]>*/
-    </script>
+
 
 </main>
 <div id="footer" th:replace="~{/main/footer}"></div>
 <script th:src="@{/js/journal/journalSearch.js}"></script>
+<script th:inline="javascript" defer>
+    /*<![CDATA[*/
+    // 서버에서 전달된 journalList를 JavaScript 배열로 처리
+    const journalList = /*[[${journalList}]]*/ [];
+    console.log("journalList:", journalList);  // 서버에서 전달된 journalList 확인
+
+    // journalList가 비어있지 않다면 displayPosts와 setupPagination 호출
+    if (journalList.length > 0) {
+        displayPosts();
+        setupPagination();
+    } else {
+        console.log("No posts available.");
+    }
+    /*]]>*/
+</script>
 </body>
 </html>
