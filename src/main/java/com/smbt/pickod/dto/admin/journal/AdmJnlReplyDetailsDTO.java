@@ -5,16 +5,18 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.time.LocalDate;
+
 @Getter @Setter
 @ToString @NoArgsConstructor
 public class AdmJnlReplyDetailsDTO {
     private Long cmtId;
-    private String jnlTitle;
+    private String postTitle;
+    private Long cmtPostId;
     private Long memberNum;
     private String memberId;
     private String memberNickName;
     private String cmtContents;
-//    private LocalDate cmtDate;
-//    comments 테이블에 작성 일시 없음
+    private LocalDate cmtDate;
     private String isReported;
 }

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -34,7 +35,7 @@ public class JournalListController {
         List<JournalDTO> journalList = journalService.getJournalBySort(sort);
         model.addAttribute("journalList", journalList);
         model.addAttribute("sort", sort);
-        log.info(sort + "확인=======");
+        log.info(journalList + "확인=======");
         return "journal/journalSearch";
     }
 
@@ -56,6 +57,18 @@ public class JournalListController {
             model.addAttribute("keyword", keyword);
             return "journal/journalSearch";
         }
+    }
+
+    @GetMapping("/detail/{jnlNum}")
+    public String getJournalDetail(@PathVariable long jnlNum, Model model) {
+        // journalNum을 이용해 상세 정보를 가져옴
+        JournalDTO journalDetail = journalService.getJournalByNum(jnlNum);
+
+        // 모델에 데이터를 추가해서 뷰로 전달
+        model.addAttribute("journalDetail", journalDetail);
+
+        // 여행일지 상세 페이지로 이동
+        return "journal/journalDetail";
     }
 
 //    @GetMapping("/search")

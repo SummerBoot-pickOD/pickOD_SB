@@ -151,9 +151,7 @@ public class JournalService {
         return journalMapper.selectAll();
     }
 
-//    public List<JournalDTO> findAllPage(Criteria criteria){
-//        return journalMapper.selectAllPage(criteria);
-//    }
+
 
 
     public void setFileDir(String fileDir) {
@@ -207,9 +205,14 @@ public class JournalService {
         }
     }
 
-//    public List<JournalDTO> searchByArea(String area) {
-//        return journalMapper.searchJournal(area, null, null, null, null);  // 나머지 필터들은 null로 넘기기
-//    }
+    // journalDetail과 연결한 상세 페이지
+
+
+    // 특정 여행일지의 상세 정보를 가져오는 서비스 메서드
+    public JournalDTO getJournalByNum(long jnlNum) {
+        log.info(jnlNum + "JournalService 확인 ==========");
+        return journalMapper.getJournalWithDaysByNum(jnlNum);
+    }
 
 
 

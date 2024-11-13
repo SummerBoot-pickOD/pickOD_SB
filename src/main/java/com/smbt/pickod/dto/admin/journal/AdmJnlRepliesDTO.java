@@ -9,11 +9,10 @@ import lombok.ToString;
 @ToString @NoArgsConstructor
 public class AdmJnlRepliesDTO {
     private String cmtPostType;
-    private Long jnlNum;
-    private String jnlTitle;
+    private Long cmtPostId;
+    private String postTitle;
     private Long cmtId;
     private Long memberNum;
-    private String memberId;
     private String memberNickName;
     private String cmtContents;
     private String isReported;

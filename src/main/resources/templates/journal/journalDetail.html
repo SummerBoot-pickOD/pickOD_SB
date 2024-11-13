@@ -4,19 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>너와 나의 여행 일지</title>
-    <link rel="stylesheet" href="../../css/journal/journalDetail.css">
-    <link rel="stylesheet" href="../../css/main/header.css">
-    <link rel="stylesheet" href="../../css/main/footer.css">
+    <link rel="stylesheet" th:href="@{/css/journal/journalDetail.css}">
+    <link rel="stylesheet" th:href="@{/css/main/header.css}">
+    <link rel="stylesheet" th:href="@{/css/main/footer.css}">
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
     crossorigin="anonymous"></script>
 </head>
 <body>
-    <div id="header"></div>
+<div id="header" th:replace="~{/main/header}"></div>
     <div id="report"></div>
     <main>
-        <div class="title-containerbox">
-            수도권 힐링 여행
-        </div>
+        <div class="title-containerbox" th:text="${journalDetail.jnlTitle}"></div>
         <div class="placeIcon"> <!-- 신고, 찜 -->
             <div>
                 <img class="reportimg" src="../../img/place/placeDetail/report.png" alt="">
@@ -28,29 +26,19 @@
                 <div class="profile">
                     <div class="photo"></div>
                     <div class="user-name-container">
-                        <div class="user-name">
-                            신현식
-                        </div>
-                        <button class="message-button">
-                            <a href="#">
-                              <img src="../../img/message/쪽지함.png" alt="이미지 버튼" />
-                            </a>
-                          </button>
+                        <div class="user-name" th:text="${journalDetail.nickname}"></div>
+<!--                        <button class="message-button">-->
+<!--                            <a href="#">-->
+<!--                              <img src="../../img/message/쪽지함.png" alt="이미지 버튼" />-->
+<!--                            </a>-->
+<!--                          </button>-->
                     </div>
                 </div>
-                <div class="explain-container">
-                    간략한 설명이 들어가는 곳
-                    간략한 설명이 들어가는 곳
-                    간략한 설명이 들어가는 곳
-                    간략한 설명이 들어가는 곳
-                    간략한 설명이 들어가는 곳
-                    간략한 설명이 들어가는 곳
-                    간략한 설명이 들어가는 곳
-                </div>
+                <div class="explain-container" th:text="${journalDetail.jnlMemo}"></div>
             </div>
             <div class="tag-container">
                 <div class="tag-container-schedule">
-                    <img class="footprint" src="../../img/journal/footprint_pink.png" alt="">
+                    <img class="footprint" th:src="@{/img/journal/footprint_pink.png}" alt="">
                     <div class="schedule-container">
                         <div class="schedule">
                             일정
@@ -61,7 +49,7 @@
                     </div>
                 </div>
                 <div class="tag-container-schedule">
-                    <img class="footprint" src="../../img/journal/footprint_pink.png" alt="">
+                    <img class="footprint" th:src="@{/img/journal/footprint_pink.png}" alt="">
                     <div class="tag-select-container">
                         <div class="schedule-tag">
                             태그
@@ -72,7 +60,7 @@
                     </div>
                 </div>
                 <div class="tag-container-schedule">
-                    <img class="footprint" src="../../img/journal/footprint_pink.png" alt="">
+                    <img class="footprint" th:src="@{/img/journal/footprint_pink.png}" alt="">
                     <div class="thema-container">
                         <div class="schedule-thema">
                             테마
@@ -191,9 +179,9 @@
                 </li>
             </ul>
             <button type="button" id = "reply-more">더 보기</button>
-            <script src="../../js/journal/journalDetail.js"></script>
+            <script th:src="@{/js/journal/journalDetail.js}"></script>
     </main>
     <div id="reply"></div>
-    <div id="footer"></div>
+    <div id="footer" th:replace="~{/main/footer}"></div>
 </body>
 </html>

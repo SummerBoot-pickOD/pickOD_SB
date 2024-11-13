@@ -13,6 +13,7 @@ public class AdmTemplateRepliesDTO {
     private Long cmtId;
     private Long memberNum;
     private String memberId;
+    private String cmtPostType;
     private String memberNickName;
     private String cmtContents;
     private String isReported;

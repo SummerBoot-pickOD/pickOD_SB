@@ -12,6 +12,9 @@ import java.util.Optional;
 public interface JournalMapper {
 
     // JOURNAL 관련 메서드들
+
+    JournalDTO getJournalWithDaysByNum(@Param("jnlNum") long jnlNum); // journalDetail로 연결하기 위한 조회
+
     int countTotalJournals(); //게시글 총 개수
 
     List<JournalDTO> getJournalsByDateDesc(); // 최신순 정렬
@@ -29,7 +32,7 @@ public interface JournalMapper {
     List<JournalDTO> searchJournalByKeyword(
             @Param("keyword") String keyword);//검색에 따라 JOURNAL 리스트를 조회
 
-    public List<JournalDTO> searchJournalByArea(@Param("area") String area); // 지역 버튼 눌렀을 때 맞는 지역 조회
+    List<JournalDTO> searchJournalByArea(@Param("area") String area); // 지역 버튼 눌렀을 때 맞는 지역 조회
 
     void insertJournal(JournalDTO journalDTO); //새로운 JOURNAL을 추가
 

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smbt.pickod.mapper.admin.AdmRepliesMgmtMapper">
+
+    <select id="getJnlTitle" parameterType="Long" resultType="String">
+        SELECT j.jnl_title
+        FROM JOURNAL j
+        WHERE j.jnl_num = #{jnl_num}
+    </select>
+
+    <select id="getJnlReplies" parameterType="Long" resultType="AdmJnlRepliesDTO">
+        SELECT c.cmt_id, c.cmt_post_type, c.cmt_contents, m.member_num,
+               m.member_nickname, j.jnl_num, j.jnl_title AS post_title,
+               CASE
+                   WHEN r.report_post_type = 'C' AND r.report_post_id = c.cmt_id
+                       THEN 'Y'
+                   ELSE 'N'
+                   END AS is_reported
+        FROM comments c
+            LEFT JOIN MEMBER m ON m.member_num = c.member_num
+            LEFT JOIN JOURNAL j on (j.jnl_num = c.cmt_post_id AND c.cmt_post_type = 'J' )
+            LEFT JOIN REPORT r ON (r.report_post_type = 'C' AND r.report_post_id = c.cmt_id)
+        WHERE ( c.cmt_post_id = #{jnlNum} and c.cmt_post_type = 'J')
+        ORDER BY c.cmt_id
+    </select>
+
+    <select id="getJnlReplyDetail" parameterType="Long" resultType="AdmJnlReplyDetailsDTO">
+        SELECT c.cmt_id, c.cmt_date, c.cmt_contents, m.member_num, m.member_id,
+               m.member_nickname, c.cmt_post_id, j.jnl_title AS post_title,
+               CASE
+                   WHEN r.report_post_type = 'C' AND r.report_post_id = c.cmt_id
+                       THEN 'Y'
+                   ELSE 'N'
+                   END AS is_reported
+        FROM comments c
+                 LEFT JOIN MEMBER m ON m.member_num = c.member_num
+                 LEFT JOIN JOURNAL j on (j.jnl_num = c.cmt_post_id AND c.cmt_post_type = 'J' )
+                 LEFT JOIN REPORT r ON (r.report_post_type = 'C' AND r.report_post_id = c.cmt_id)
+        WHERE c.cmt_id = #{cmtId}
+    </select>
+
+    <select id="getPlaceTitle" parameterType="Long" resultType="String">
+        SELECT p.place_name
+        FROM place p
+        WHERE p.place_id = #{placeId}
+    </select>
+
+    <select id="getPlaceReplies" parameterType="Long" resultType="AdmPlaceRepliesDTO">
+        SELECT c.cmt_id, c.cmt_post_type, c.cmt_contents, m.member_num,
+               m.member_nickname, p.place_id, p.place_name AS post_title,
+               CASE
+                   WHEN r.report_post_type = 'C' AND r.report_post_id = c.cmt_id
+                       THEN 'Y'
+                   ELSE 'N'
+                   END AS is_reported
+        FROM comments c
+                 LEFT JOIN MEMBER m ON m.member_num = c.member_num
+                 LEFT JOIN place p on (p.place_id = c.cmt_post_id AND c.cmt_post_type = 'P' )
+                 LEFT JOIN REPORT r ON (r.report_post_type = 'C' AND r.report_post_id = c.cmt_id)
+        WHERE ( c.cmt_post_id = #{placeId} and c.cmt_post_type = 'P')
+        ORDER BY c.cmt_id
+    </select>
+
+    <select id="getPlaceReplyDetail" parameterType="Long" resultType="AdmPlaceReplyDetailsDTO">
+        SELECT c.cmt_id, c.cmt_date, c.cmt_contents, m.member_num, m.member_id,
+               m.member_nickname, c.cmt_post_id, p.place_name AS post_title,
+               CASE
+                   WHEN r.report_post_type = 'C' AND r.report_post_id = c.cmt_id
+                       THEN 'Y'
+                   ELSE 'N'
+                   END AS is_reported
+        FROM comments c
+                 LEFT JOIN MEMBER m ON m.member_num = c.member_num
+                 LEFT JOIN place p on (p.place_id = c.cmt_post_id AND c.cmt_post_type = 'P' )
+                 LEFT JOIN REPORT r ON (r.report_post_type = 'C' AND r.report_post_id = c.cmt_id)
+        WHERE c.cmt_id = #{cmtId}
+    </select>
+
+    <!-- 댓글 삭제 -->
+    <delete id="deleteCmt" parameterType="Long">
+        DELETE FROM COMMENTS
+        WHERE cmt_id = #{cmtId}
+    </delete>
+
+
+</mapper>
