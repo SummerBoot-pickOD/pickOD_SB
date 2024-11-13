@@ -103,17 +103,7 @@ searchDate.addEventListener('click', ()=>{
   // db연결하면 검색기능 들어감
 });
 
-// 찜하기 해제하면 리스트삭제
 
-document.querySelectorAll('.checklist-check').forEach(function(checkElement) {
-  checkElement.addEventListener('click', function() {
-    // 클릭된 요소의 부모의 부모(.check-list)를 찾고 제거
-    const checkListElement = this.closest('.check-list');
-    if (checkListElement) {
-      checkListElement.remove();
-    }
-  });
-});
 
 
 //내 베스트게시물 리스트
@@ -218,15 +208,48 @@ function renderCheckList(data) {
     nameDiv.classList.add('checklist-name');
     nameDiv.textContent = item.title || '제목';
 
+    //찜한 게시물 번호 추가
+    const checkId = document.createElement('div');
+
+    if (item.pickType === 'TEMPLATE') {
+      checkId.textContent = item.pickId;
+      checkId.classList.add('temp-id');
+    } else if (item.pickType === 'JOURNAL') {
+      checkId.textContent = item.pickId;
+      checkId.classList.add('jnl-id');
+    } else if (item.pickType === 'PLACE') {
+      checkId.textContent = item.pickId;
+      checkId.classList.add('place-id');
+    }
+    checkId.hidden = true;
+
     // 생성된 요소를 check-list div에 추가
     checkListDiv.appendChild(imgBoxDiv);
     checkListDiv.appendChild(boxDiv);
     checkListDiv.appendChild(nameDiv);
+    checkListDiv.appendChild(checkId);
 
     // check-list div를 checklist-container에 추가
     container.appendChild(checkListDiv);
   });
 }
+
+// 찜하기 해제하면 리스트삭제
+
+let checkListAll = document.querySelectorAll('.checklist-check')
+  checkListAll.forEach(function(checkElement) {
+  checkElement.addEventListener('click', function() {
+    const boardId = checkElement.querySelector('.temp-id');
+
+    // 클릭된 요소의 부모의 부모(.check-list)를 찾고 제거
+    // const checkListElement = this.closest('.check-list');
+    // if (checkListElement) {
+    //   checkListElement.remove();
+    // }
+    fetch
+  });
+});
+
 
 
 // 페이지 로드 시 checkedJournalList 데이터를 사용해 렌더링
@@ -341,5 +364,7 @@ function renderMyPlanList(data){
     container.appendChild(myPlanList);
   });
 }
+
+
 
 

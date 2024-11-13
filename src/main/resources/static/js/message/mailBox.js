@@ -84,7 +84,6 @@ checkItem.forEach(function(e) {
 
 // 메일 항목을 동적으로 생성
 function renderMailList(data) {
-
   const mailboxContainer = document.getElementById('mailbox-container');
   mailboxContainer.innerHTML = '';
   // mailList 배열의 각 항목을 순회합니다.
@@ -155,6 +154,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 let msgRecipientNickname;
 let msgRecipientNum;
+
 // 쪽지띄우기
 document.addEventListener('DOMContentLoaded', function () {
   // 모든 mailbox-list 요소들을 가져오기

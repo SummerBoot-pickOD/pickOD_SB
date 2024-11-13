@@ -30,4 +30,13 @@ $(function () {
 
 $(".reportimg").click(function(){
   $(".modal-container").css("display","block");
+  const postType ='M';
+  const postId = 1;
+  const writerId = 3;
+  //
+  // // Set the hidden input values
+  $('#reportForm input[name="reportPostType"]').val(postType);
+  $('#reportForm input[name="reportPostId"]').val(postId);
+  $('#reportForm input[name="writerId"]').val(writerId);
+
 });

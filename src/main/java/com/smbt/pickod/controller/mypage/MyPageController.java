@@ -1,16 +1,17 @@
 package com.smbt.pickod.controller.mypage;
 
+import com.smbt.pickod.dto.mypage.MpgRemovePickDTO;
 import com.smbt.pickod.dto.place.PlaceDetailDTO;
+import com.smbt.pickod.mapper.mypage.MyPageMapper;
 import com.smbt.pickod.service.mypage.MyPageService;
 import com.smbt.pickod.service.place.PlaceService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @Slf4j
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MyPageController {
     private final MyPageService myPageService;
     private final PlaceService placeService;
+    private final MyPageMapper myPageMapper;
 
     @GetMapping("myPage")
     public String getMyPage(HttpSession session, Model model) {
@@ -107,6 +109,22 @@ public class MyPageController {
 //        return "place/placeDetail"; // 장소 상세 페이지 템플릿
 //    }
 
+    @PostMapping("deleteCheck")
+    public ResponseEntity<String> deleteMyCheckList (@RequestBody MpgRemovePickDTO mpgRemovePickDTO , HttpSession session) {
 
+        Long memberNum = (Long) session.getAttribute("memberNum");
+        mpgRemovePickDTO.setMemberNum(memberNum);
 
+        if (mpgRemovePickDTO.getJnlNum() != null) {
+            myPageService.deletePick(mpgRemovePickDTO);
+        } else if (mpgRemovePickDTO.getPlaceId() != null) {
+            myPageService.deletePick(mpgRemovePickDTO);
+        } else if (mpgRemovePickDTO.getTempId() != null) {
+            myPageService.deletePick(mpgRemovePickDTO);
+        } else {
+            return ResponseEntity.badRequest().body("ID가 하나도 입력되지 않았습니다.");
+        }
+
+        return ResponseEntity.ok("찜하기 삭제완료");
+    }
 }

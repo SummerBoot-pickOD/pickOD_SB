@@ -11,6 +11,10 @@ public class MpgMyCheckListDTO {
     private String title;
     private Long memberNum;
     private String pickType;
+    private Long pickId;
+    private Long tempId;
+    private Long jnlNum;
+    private Long placeId;
 
 }
 
