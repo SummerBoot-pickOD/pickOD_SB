@@ -326,16 +326,6 @@ function renderMyPlanList(data){
     span.textContent = plan.planStartDate +"~"+ plan.planEndDate;
     detailDate.appendChild(span);
 
-    // 위치 정보 요소 생성
-    // const location = document.createElement("div");
-    // location.classList.add("myplan-location");
-    // location.textContent = plan.placeName;
-
-    // 장소 개수 요소 생성
-    // const locNum = document.createElement("div");
-    // locNum.classList.add("myplan-loc-num");
-    // locNum.textContent = `${plan.locNum} 장소`;
-
     // 컨텐츠에 모든 요소 추가
     content.appendChild(period);
     content.appendChild(title);
