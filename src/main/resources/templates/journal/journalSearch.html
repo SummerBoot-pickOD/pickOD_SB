@@ -24,70 +24,70 @@
         </form>
     </div>
     <div class="total_area_wrap">
-        <button class="total_area_btn" type="button">전체</button>
+        <button class="total_area_btn" type="button"><a th:href="@{/journal/list(sort='orderByDate')}">전체</a></button>
         <div class="tag_area">
             <button class="tag_area_totalseoul" type="button" >서울</button>
             <ul class="tag_area_seoul">
-                <li><button type="button">강남구</button></li>
-                <li><button type="button">도봉구</button></li>
-                <li><button type="button">동대문구</button></li>
-                <li><button type="button">동작구</button></li>
-                <li><button type="button">마포구</button></li>
-                <li><button type="button">서대문구</button></li>
-                <li><button type="button">서초구</button></li>
-                <li><button type="button">성동구</button></li>
-                <li><button type="button">성북구</button></li>
-                <li><button type="button">송파구</button></li>
-                <li><button type="button">양천구</button></li>
-                <li><button type="button">강동구</button></li>
-                <li><button type="button">영등포구</button></li>
-                <li><button type="button">용산구</button></li>
-                <li><button type="button">은평구</button></li>
-                <li><button type="button">종로구</button></li>
-                <li><button type="button">중구</button></li>
-                <li><button type="button">중랑구</button></li>
-                <li><button type="button">강북구</button></li>
-                <li><button type="button">강서구</button></li>
-                <li><button type="button">관악구</button></li>
-                <li><button type="button">광진구</button></li>
-                <li><button type="button">구로구</button></li>
-                <li><button type="button">금천구</button></li>
-                <li><button type="button">노원구</button></li>
+                <li><button type="button"><a href="/journal/list/area?area=강남">강남구</a></button></li>
+                <li><button type="button"><a href="/journal/list/area?area=도봉">도봉구</a></button></li>
+                <li><button type="button"><a href="/journal/list/area?area=동대문">동대문구</a></button></li>
+                <li><button type="button"><a href="/journal/list/area?area=동작">동작구</a></button></li>
+                <li><button type="button"><a href="/journal/list/area?area=마포">마포구</a></button></li>
+                <li><button type="button"><a href="/journal/list/area?area=서대문">서대문구</a></button></li>
+                <li><button type="button"><a href="/journal/list/area?area=서초">서초구</a></button></li>
+                <li><button type="button"><a href="/journal/list/area?area=성동">성동구</a></button></li>
+                <li><button type="button"><a href="/journal/list/area?area=성북">성북구</a></button></li>
+                <li><button type="button"><a href="/journal/list/area?area=송파">송파구</a></button></li>
+                <li><button type="button"><a href="/journal/list/area?area=양천">양천구</a></button></li>
+                <li><button type="button"><a href="/journal/list/area?area=강동">강동구</a></button></li>
+                <li><button type="button"><a href="/journal/list/area?area=영등포">영등포구</a></button></li>
+                <li><button type="button"><a href="/journal/list/area?area=용산">용산구</a></button></li>
+                <li><button type="button"><a href="/journal/list/area?area=은평">은평구</a></button></li>
+                <li><button type="button"><a href="/journal/list/area?area=종로">종로구</a></button></li>
+                <li><button type="button"><a href="/journal/list/area?area=중구">중구</a></button></li>
+                <li><button type="button"><a href="/journal/list/area?area=중랑">중랑구</a></button></li>
+                <li><button type="button"><a href="/journal/list/area?area=강북">강북구</a></button></li>
+                <li><button type="button"><a href="/journal/list/area?area=강서">강서구</a></button></li>
+                <li><button type="button"><a href="/journal/list/area?area=관악">관악구</a></button></li>
+                <li><button type="button"><a href="/journal/list/area?area=광진">광진구</a></button></li>
+                <li><button type="button"><a href="/journal/list/area?area=구로">구로구</a></button></li>
+                <li><button type="button"><a href="/journal/list/area?area=금천">금천구</a></button></li>
+                <li><button type="button"><a href="/journal/list/area?area=노원">노원구</a></button></li>
             </ul>
 
             <button class="tag_area_totalgeonggi" type="button">경기</button>
             <ul class="tag_area_geonggi">
-                <li><button type="button">가평시</button></li>
-                <li><button type="button">동두천시</button></li>
-                <li><button type="button">부천시</button></li>
-                <li><button type="button">성남시</button></li>
-                <li><button type="button">수원시</button></li>
-                <li><button type="button">시흥시</button></li>
-                <li><button type="button">안산시</button></li>
-                <li><button type="button">안성시</button></li>
-                <li><button type="button">안양시</button></li>
-                <li><button type="button">양주시</button></li>
-                <li><button type="button">양평군</button></li>
-                <li><button type="button">고양시</button></li>
-                <li><button type="button">여주시</button></li>
-                <li><button type="button">연천군</button></li>
-                <li><button type="button">오산시</button></li>
-                <li><button type="button">용인시</button></li>
-                <li><button type="button">의왕시</button></li>
-                <li><button type="button">의정부시</button></li>
-                <li><button type="button">이천시</button></li>
-                <li><button type="button">파주시</button></li>
-                <li><button type="button">평택시</button></li>
-                <li><button type="button">포천시</button></li>
-                <li><button type="button">과천시</button></li>
-                <li><button type="button">하남시</button></li>
-                <li><button type="button">화성시</button></li>
-                <li><button type="button">광명시</button></li>
-                <li><button type="button">광주시</button></li>
-                <li><button type="button">구리시</button></li>
-                <li><button type="button">군포시</button></li>
-                <li><button type="button">김포시</button></li>
-                <li><button type="button">남양주시</button></li>
+                <li><button type="button"><a href="/journal/list/area?area=가평">가평시</a></button></li>
+                <li><button type="button"><a href="/journal/list/area?area=동두천">동두천시</a></button></li>
+                <li><button type="button"><a href="/journal/list/area?area=부천">부천시</a></button></li>
+                <li><button type="button"><a href="/journal/list/area?area=성남">성남시</a></button></li>
+                <li><button type="button"><a href="/journal/list/area?area=수원">수원시</a></button></li>
+                <li><button type="button"><a href="/journal/list/area?area=시흥">시흥시</a></button></li>
+                <li><button type="button"><a href="/journal/list/area?area=안산">안산시</a></button></li>
+                <li><button type="button"><a href="/journal/list/area?area=안성">안성시</a></button></li>
+                <li><button type="button"><a href="/journal/list/area?area=안양">안양시</a></button></li>
+                <li><button type="button"><a href="/journal/list/area?area=양주">양주시</a></button></li>
+                <li><button type="button"><a href="/journal/list/area?area=양평군">양평군</a></button></li>
+                <li><button type="button"><a href="/journal/list/area?area=고양">고양시</a></button></li>
+                <li><button type="button"><a href="/journal/list/area?area=여주">여주시</a></button></li>
+                <li><button type="button"><a href="/journal/list/area?area=연천">연천군</a></button></li>
+                <li><button type="button"><a href="/journal/list/area?area=오산">오산시</a></button></li>
+                <li><button type="button"><a href="/journal/list/area?area=용인">용인시</a></button></li>
+                <li><button type="button"><a href="/journal/list/area?area=의왕">의왕시</a></button></li>
+                <li><button type="button"><a href="/journal/list/area?area=의정부">의정부시</a></button></li>
+                <li><button type="button"><a href="/journal/list/area?area=이천">이천시</a></button></li>
+                <li><button type="button"><a href="/journal/list/area?area=파주">파주시</a></button></li>
+                <li><button type="button"><a href="/journal/list/area?area=평택">평택시</a></button></li>
+                <li><button type="button"><a href="/journal/list/area?area=포천">포천시</a></button></li>
+                <li><button type="button"><a href="/journal/list/area?area=과천">과천시</a></button></li>
+                <li><button type="button"><a href="/journal/list/area?area=하남">하남시</a></button></li>
+                <li><button type="button"><a href="/journal/list/area?area=화성">화성시</a></button></li>
+                <li><button type="button"><a href="/journal/list/area?area=광명">광명시</a></button></li>
+                <li><button type="button"><a href="/journal/list/area?area=광주">광주시</a></button></li>
+                <li><button type="button"><a href="/journal/list/area?area=구리">구리시</a></button></li>
+                <li><button type="button"><a href="/journal/list/area?area=군포">군포시</a></button></li>
+                <li><button type="button"><a href="/journal/list/area?area=김포">김포시</a></button></li>
+                <li><button type="button"><a href="/journal/list/area?area=남양주">남양주시</a></button></li>
 
             </ul>
         </div>
@@ -121,16 +121,25 @@
         <div class="pagination" id="pagination"></div>
     </div>
 
-    <script th:inline="javascript">
-        /*<![CDATA[*/
-        const journalList = /*[[${journalList}]]*/ [];
-        console.log("journalList:", journalList);  // mailList 확인
-        renderJournalList(journalList);
-        /*]]>*/
-    </script>
+
 
 </main>
 <div id="footer" th:replace="~{/main/footer}"></div>
 <script th:src="@{/js/journal/journalSearch.js}"></script>
+<script th:inline="javascript" defer>
+    /*<![CDATA[*/
+    // 서버에서 전달된 journalList를 JavaScript 배열로 처리
+    const journalList = /*[[${journalList}]]*/ [];
+    console.log("journalList:", journalList);  // 서버에서 전달된 journalList 확인
+
+    // journalList가 비어있지 않다면 displayPosts와 setupPagination 호출
+    if (journalList.length > 0) {
+        displayPosts();
+        setupPagination();
+    } else {
+        console.log("No posts available.");
+    }
+    /*]]>*/
+</script>
 </body>
 </html>
