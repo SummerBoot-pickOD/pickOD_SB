@@ -151,3 +151,20 @@ strong{
   height: 43.2px;
   display: block;
 }
+
+.pagination{
+  margin: 30px;
+  display: flex;
+  justify-content: center;
+}
+.pagination span a{
+  padding: 0px 7px 0px 7px;
+}
+a{
+  text-decoration: none;
+  color: black;
+}
+
+.bold{
+  font-weight: bold;
+}

@@ -5,6 +5,7 @@ import com.smbt.pickod.dto.place.PlaceDetailDTO;
 import com.smbt.pickod.dto.place.PlacePickDTO;
 import com.smbt.pickod.service.place.PlacePickService;
 import com.smbt.pickod.service.place.PlaceService;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -53,21 +54,41 @@ public class PlaceController {
     }
 
 
-    // 찜 조회
-    @GetMapping("/{memberNum}/pick/{placeId}")
-    public Optional<PlacePickDTO> findPlacePick(@PathVariable Long memberNum, @PathVariable Long placeId) {
-        return placePickService.findPlacePick(memberNum, placeId);
+    @PostMapping("/toggle")
+    @ResponseBody
+    public String PlacePick(@RequestParam Long placeId, HttpSession session) {
+        Long memberNum = (Long) session.getAttribute("memberNum");
+        if (memberNum == null) {
+            return "로그인이 필요합니다";
+        }
+
+        // 찜 상태 확인
+        PlacePickDTO existingPick = placePickService.findPlacePick(memberNum, placeId);
+        if (existingPick != null) {
+            // 이미 존재하면 삭제
+            placePickService.removePlacePick(existingPick);
+            return "찜이 삭제되었습니다";
+        } else {
+            // 존재하지 않으면 추가
+            PlacePickDTO newPick = new PlacePickDTO();
+            newPick.setMemberNum(memberNum);
+            newPick.setPlaceId(placeId);
+            placePickService.addPlacePick(newPick);
+            return "찜이 추가되었습니다";
+        }
     }
 
-    // 찜 삽입
-    @PostMapping("/pick")
-    public void insertPlacePick(@RequestBody PlacePickDTO placePick) {
-        placePickService.insertPlacePick(placePick);
+    @GetMapping("/status")
+    @ResponseBody
+    public String checkPickStatus(@RequestParam Long placeId, HttpSession session) {
+        Long memberNum = (Long) session.getAttribute("memberNum");
+        if (memberNum == null || placePickService.findPlacePick(memberNum, placeId) == null) {
+            return "null";
+        } else {
+            return "yes";
+        }
+
+
     }
 
-    // 찜 삭제
-    @DeleteMapping("/pick/{pickId}")
-    public void deletePlacePick(@PathVariable Long pickId) {
-        placePickService.deletePlacePick(pickId);
-    }
 }
