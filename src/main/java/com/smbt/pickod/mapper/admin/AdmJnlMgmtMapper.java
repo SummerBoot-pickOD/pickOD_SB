@@ -3,7 +3,7 @@ package com.smbt.pickod.mapper.admin;
 import com.smbt.pickod.dto.admin.journal.AdmJnlFilterDTO;
 import com.smbt.pickod.dto.admin.journal.AdmJnlMgmtDTO;
 import com.smbt.pickod.dto.admin.journal.AdmJnlRepliesDTO;
-import com.smbt.pickod.dto.admin.journal.AdmJnlReplyDetailsDTO;
+import com.smbt.pickod.dto.admin.journal.AdmPlaceReplyDetailsDTO;
 import com.smbt.pickod.dto.admin.member.AdmToSanctionDTO;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -18,7 +18,7 @@ public interface AdmJnlMgmtMapper {
 
     List<AdmJnlRepliesDTO> jnlReplies(Long jnlNum);
 
-    Optional<AdmJnlReplyDetailsDTO> jnlReplyDetails(Long cmtId);
+    Optional<AdmPlaceReplyDetailsDTO> jnlReplyDetails(Long cmtId);
 
     Optional<AdmToSanctionDTO> commenterSanction(Long memberNum);
 

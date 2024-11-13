@@ -5,7 +5,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
   openCmt.forEach(btn => {
     btn.addEventListener("click", function () {
-      window.location.href = "../../html/admin/admReplies.html";
+      const jnlNum = this.getAttribute('data-jnl-num');
+      window.location.href = "/admin/admReplies/journal?jnlNum=" + jnlNum;
     });
   });
 

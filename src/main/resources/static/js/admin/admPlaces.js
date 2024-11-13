@@ -4,7 +4,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
   openCmt.forEach(btn => {
     btn.addEventListener("click", function () {
-      window.location.href = "../../html/admin/admReplies.html";
+      const placeId = this.getAttribute('data-place-id');
+      window.location.href = "/admin/admReplies/place?placeId=" + placeId;
     });
   });
 
