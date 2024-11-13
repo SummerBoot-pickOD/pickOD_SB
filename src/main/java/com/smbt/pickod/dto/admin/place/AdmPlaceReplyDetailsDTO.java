@@ -1,20 +1,22 @@
-package com.smbt.pickod.dto.admin.place;
+package com.smbt.pickod.dto.admin.journal;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.time.LocalDate;
+
 @Getter @Setter
 @ToString @NoArgsConstructor
-public class AdmPlaceRepliesDTO {
-    private Long placeId;
-    private String placeName;
+public class AdmPlaceReplyDetailsDTO {
     private Long cmtId;
-    private String cmtPostType;
+    private String postTitle;
+    private Long cmtPostId;
     private Long memberNum;
     private String memberId;
     private String memberNickName;
     private String cmtContents;
+    private LocalDate cmtDate;
     private String isReported;
 }
