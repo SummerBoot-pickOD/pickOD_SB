@@ -29,7 +29,7 @@ public interface JournalMapper {
     List<JournalDTO> searchJournalByKeyword(
             @Param("keyword") String keyword);//검색에 따라 JOURNAL 리스트를 조회
 
-    public List<JournalDTO> searchJournalByArea(@Param("area") String area); // 지역 버튼 눌렀을 때 맞는 지역 조회
+    List<JournalDTO> searchJournalByArea(@Param("area") String area); // 지역 버튼 눌렀을 때 맞는 지역 조회
 
     void insertJournal(JournalDTO journalDTO); //새로운 JOURNAL을 추가
 

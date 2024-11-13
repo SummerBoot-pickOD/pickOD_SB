@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>너와 나의 여행 일지</title>
-    <link rel="stylesheet" href="../../css/journal/journalDetail.css">
-    <link rel="stylesheet" href="../../css/main/header.css">
-    <link rel="stylesheet" href="../../css/main/footer.css">
+    <link rel="stylesheet" th:href="@{/css/journal/journalDetail.css}">
+    <link rel="stylesheet" th:href="@{/css/main/header.css}">
+    <link rel="stylesheet" th:href="@{/css/main/footer.css}">
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
     crossorigin="anonymous"></script>
 </head>
 <body>
-    <div id="header"></div>
+<div id="header" th:replace="~{/main/header}"></div>
     <div id="report"></div>
     <main>
         <div class="title-containerbox">
@@ -191,9 +191,9 @@
                 </li>
             </ul>
             <button type="button" id = "reply-more">더 보기</button>
-            <script src="../../js/journal/journalDetail.js"></script>
+            <script th:src="@{/js/journal/journalDetail.js}"></script>
     </main>
     <div id="reply"></div>
-    <div id="footer"></div>
+    <div id="footer" th:replace="~{/main/footer}"></div>
 </body>
 </html>
