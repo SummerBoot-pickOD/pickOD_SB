@@ -2,6 +2,7 @@ package com.smbt.pickod.controller.report;
 
 import com.smbt.pickod.dto.report.InsertReportDTO;
 import com.smbt.pickod.service.report.ReportService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -24,15 +25,10 @@ public class ReportController {
     private final ReportService reportService;
 
     @PostMapping("putReport")
-    @ResponseBody
-    public String putReport(@ModelAttribute InsertReportDTO insertReportDTO, HttpSession session,
-                            RedirectAttributes redirectAttributes) {
+    public String putReport(@ModelAttribute InsertReportDTO insertReportDTO, HttpSession session) {
         insertReportDTO.setReporterId((Long) session.getAttribute("memberNum"));
         reportService.registerReport(insertReportDTO);
-
-        redirectAttributes.addAttribute("boardId", insertReportDTO.getReportPostId());
-
-        return "redirect:/place/placeDetail";
+        return "redirect:/place/" + insertReportDTO.getReportPostId();
         //얘는 각 사용처가 만들어지고 나야, posttype별로 리다이렉팅 가능
     }
 }

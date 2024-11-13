@@ -100,16 +100,15 @@ document.addEventListener('DOMContentLoaded',()=>{
 
 // 신고
   $(".reportimg").click(function(){
-    // const postType ='post'
-    // const postId = 12389
-    // const writerId ="df"
-    // const reportType = "df"
+    const postType ='P';
+    const postId = 1;
+    const writerId = 3;
     //
     // // Set the hidden input values
-    // $("#reportPostType").val(postType);
-    // $("#reportPostId").val(postId);
-    // $("#writerId").val(writerId);
-    // $("#reportType").val(reportType);
+    $('#reportForm input[name="reportPostType"]').val(postType);
+    $('#reportForm input[name="reportPostId"]').val(postId);
+    $('#reportForm input[name="writerId"]').val(writerId);
+
     $(".modal-container").css("display","block");
   });
 
