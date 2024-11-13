@@ -9,9 +9,10 @@ import java.sql.Date;
 
 @Getter@Setter
 @ToString@NoArgsConstructor
-public class PlacePickDTO {
-    private Long pickId;
+public class CommentDTO {
+    private Long cmtId;
     private Long memberNum;
-    private Long placeId;
-    private Date pickDate;
+    private String cmtPostType;
+    private String cmtContents;
+    private Long likeCount;
 }

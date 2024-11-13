@@ -8,9 +8,8 @@ import java.util.Optional;
 
 @Mapper
 public interface PlacePickMapper {
-    Optional<PlacePickDTO> findPlacePick(@Param("memberNum") Long memberNum, @Param("placeId") Long placeId); //찜 조회
-    void insertPlacePick(PlacePickDTO placePick);//찜 삽입
-    void deletePlacePick(@Param("pickId") Long pickId);//찜 삭제
+    PlacePickDTO findPlacePick(Long memberNum,Long placeId); //찜 조회
+    void insertPlacePick(PlacePickDTO placePickDTO);//찜 삽입
+    void deletePlacePick(PlacePickDTO placePickDTO);
     Long getNextPickId();
-
 }

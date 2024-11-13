@@ -1,9 +1,10 @@
 package com.smbt.pickod.service.festival;
 
+import com.smbt.pickod.dto.festival.Criteria;
 import com.smbt.pickod.dto.festival.FestivalDTO;
+import com.smbt.pickod.dto.festival.Page;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -16,15 +17,15 @@ import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+
 
 @Service
 @RequiredArgsConstructor
 public class FestivalService {
     WebClient webClient = WebClient.create();
 
-    public List<FestivalDTO> getFestivals(String keyword) {
-        String urlPath = "http://openapi.seoul.go.kr:8088/5254625053737964383558464c6d4b/xml/culturalEventInfo/1/30/";
+    public Page getFestivals(Criteria criteria, String keyword) {
+        String urlPath = "http://openapi.seoul.go.kr:8088/5254625053737964383558464c6d4b/xml/culturalEventInfo/1/55/";
 
         String response = webClient
                 .get()
@@ -37,23 +38,33 @@ public class FestivalService {
         // XML 응답을 파싱하여 데이터를 리스트로 추출
         List<FestivalDTO> festivals = parseFestivalData(response);
 
-
-
+        //검색어 필터
+        List<FestivalDTO> filteredFestivals;
         if (keyword != null) {
-            List<FestivalDTO> getFestivalsList = new ArrayList<>();
+            filteredFestivals = new ArrayList<>();
             for (FestivalDTO festival : festivals) {
                 if (festival.getTitle().contains(keyword) || festival.getPlace().contains(keyword)) {
-                    getFestivalsList.add(festival);
+                    filteredFestivals.add(festival);
                 }
-                System.out.println("Festival Title: " + festival.getTitle());
-                System.out.println("Festival Place: " + festival.getPlace());
-                System.out.println(getFestivalsList);
             }
-            return getFestivalsList;
-        }else {
-            return festivals;
+        } else {
+            // keyword가 없으면 전체 리스트 사용
+            filteredFestivals = festivals;
         }
 
+        //페이징객체
+        int total = filteredFestivals.size();
+        Page page = new Page(criteria,total);
+
+        // 페이징된 리스트 반환(그 페이지만 반환)
+        int startIdx = (criteria.getPage() - 1) * criteria.getAmount();
+        int endIdx = Math.min(startIdx + criteria.getAmount(), filteredFestivals.size()); //Math.min 둘 중에 더 작은거
+
+        //subList는 List 인터페이스의 메소드.  리스트의 일부분을 추출하여 새로운 리스트를 반환
+        List<FestivalDTO> pagedFestivals = filteredFestivals.subList(startIdx, endIdx);
+
+        page.setFestivals(pagedFestivals);
+        return page;
     }
 
     private List<FestivalDTO> parseFestivalData(String xmlResponse) {

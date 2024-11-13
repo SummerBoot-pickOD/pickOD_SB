@@ -1,3 +1,4 @@
+
 document.addEventListener('DOMContentLoaded', () => {
   const total_btn=document.querySelector('.total_area_btn');
   const area_btn = document.querySelectorAll('.tag_area li button');
@@ -68,15 +69,34 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   
 //찜하기 버튼
-  saveimg_btn.forEach(button=>{
-    button.addEventListener('click',()=>{
-      if(button.getAttribute('src')==="../../img/main/unsaved.png"){
-       button.setAttribute('src',"../../img/main/saved.png");
-      }else{
-        button.setAttribute('src',"../../img/main/unsaved.png");
-      } 
-    })
+  $('.saveimg').click(function() {
+    let clickedElement = $(this);
+    let placeId = clickedElement.data('place-id');  // 클릭한 버튼의 placeId 가져오기
+
+
+
+    $.ajax({
+      url: '/place/toggle',  // 서버로 요청 보낼 URL
+      type: 'POST',
+      data: {
+        placeId: placeId
+
+      },
+      success: function(response) {
+        if(response==="찜이 추가되었습니다"){
+          clickedElement.attr('src', "../../img/main/saved.png");
+        }else if(response==="찜이 삭제되었습니다"){
+          clickedElement.attr('src', "../../img/main/unsaved.png");
+        }
+        alert(response);
+
+      },
+      error: function() {
+        alert('에러가 발생했습니다.');
+      }
+    });
   });
+
 
 //총 장소 개수
   const itemCount= listItems.length;

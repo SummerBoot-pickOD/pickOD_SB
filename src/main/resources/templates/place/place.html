@@ -108,7 +108,7 @@
     
     <div class="place-container">
       <ul class="place-list">
-        <li  th:each="place : ${placeList}">
+        <li  th:each="place : ${placeList}" th:data-place-id="${place.placeId}">
           <div class="place-wrap">         
             <div class="place-img">
               <a th:href="@{'/place/' + ${place.placeId}}"><img src="../../img/place/sample_place.png"></a>
@@ -121,9 +121,8 @@
               </div>
             </div>
           </div>
-          <div class="saveimg">
-           <img src="../../img/main/unsaved.png" alt="">
-          </div>
+          <img class="saveimg" th:data-place-id="${place.placeId}"  src="../../img/main/unsaved.png" alt="찜이미지">
+<!--          <input type="hidden"  th:id="${placeList}">-->
         </li>
 
        
