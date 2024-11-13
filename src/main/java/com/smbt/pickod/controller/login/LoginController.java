@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.HashMap;
@@ -28,21 +29,32 @@ public class LoginController {
     }
 
     @PostMapping("doLogin")
-    public RedirectView login(@RequestParam("memberId") String memberId, @RequestParam("memberPassword") String memberPassword, HttpSession session){
-        log.info("로그인 시도 : {}, {} ",memberId,memberPassword);
+    public RedirectView login(@RequestParam("memberId") String memberId,
+                              @RequestParam("memberPassword") String memberPassword,
+                              HttpSession session, RedirectAttributes redirectAttributes) {
+        log.info("로그인 시도 : {}, {} ", memberId, memberPassword);
 
         LoginDTO loginDTO = new LoginDTO();
         loginDTO.setMemberId(memberId);
         loginDTO.setMemberPassword(memberPassword);
-
-        LoginSessionDTO loginSession = loginService.loginCheck(loginDTO);
-
-        session.setAttribute("memberNum", loginSession.getMemberNum());
-
-        log.info("로그인 성공 : {}, {} ",memberId,memberPassword);
-        log.info("세션ID : {}",session.getId());
-        return new RedirectView("/main/main");
+        LoginSessionDTO loginSession;
+        try {
+            loginSession = loginService.loginCheck(loginDTO);
+            session.setAttribute("memberNum", loginSession.getMemberNum());
+            log.info("로그인 성공 : {}, {} ", memberId, memberPassword);
+            log.info("세션ID : {}", session.getId());
+            return new RedirectView("/main/main");
+        }catch(IllegalStateException e){
+            if (e.getMessage().equals("해당 아이디/비밀번호로 로그인할 수 없습니다.")) {
+                redirectAttributes.addFlashAttribute("invalidMsg", e.getMessage());
+                log.info(e.getMessage());
+            } else {
+                redirectAttributes.addFlashAttribute("invalidMsg", e.getMessage());
+            }
+            return new RedirectView("/login/login");
+        }
     }
+
     //로그아웃은 헤더에 있는 관계로 여기선 스킵
     @GetMapping("logout")
     public RedirectView logout(HttpSession session){
