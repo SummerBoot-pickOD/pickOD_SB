@@ -48,14 +48,14 @@ checkAll.addEventListener('click', function() {
 
 checkItem.forEach(function(e) {
   e.addEventListener('click', function() {
-      if (!e.checked) {
-        checkAll.checked = false;
-      } else {
-          const allChecked = Array.from(checkItem).every(function(checkItem) {
-              return checkItem.checked;
-          });
-          checkAll.checked = allChecked;
-      }
+    if (!e.checked) {
+      checkAll.checked = false;
+    } else {
+      const allChecked = Array.from(checkItem).every(function(checkItem) {
+        return checkItem.checked;
+      });
+      checkAll.checked = allChecked;
+    }
   });
 });
 
@@ -84,7 +84,6 @@ checkItem.forEach(function(e) {
 
 // 메일 항목을 동적으로 생성
 function renderMailList(data) {
-
   const mailboxContainer = document.getElementById('mailbox-container');
   mailboxContainer.innerHTML = '';
   // mailList 배열의 각 항목을 순회합니다.
@@ -153,10 +152,11 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 
-
+let msgRecipientNickname;
+let msgRecipientNum;
 
 // 쪽지띄우기
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   // 모든 mailbox-list 요소들을 가져오기
   let mailboxLists = document.querySelectorAll('.mailbox-list');
   // 각 mailbox-list 요소에 클릭 이벤트 추가
@@ -164,68 +164,95 @@ document.addEventListener('DOMContentLoaded', function() {
 
     mailbox.addEventListener('click', function (event) {
 
+
       const hiddenMsgId = mailbox.querySelector('.msg-id');
       data = {
-        msgId : Number(hiddenMsgId.innerText)
+        msgId: Number(hiddenMsgId.innerText)
       };
       console.log(data);
       //체크박스부분은제외
       if (event.target.tagName === 'INPUT' && event.target.type === 'checkbox') {
         return; // 체크박스를 클릭하면 함수 실행을 멈춤
       }
-
-      // 읽으면 편지 읽음표시기능
-      let readMail =this.querySelector('.mail-open img');
-      readMail.src = '../../img/message/받은편지.png';
-
-      fetch(`/message/getmailModal/${data.msgId}`,{
+      fetch(`/message/getmailModal/${data.msgId}`, {
         method: "GET",
         headers: {'Content-Type': 'application/json'},
-      }).then(response=>{
-        if(!response.ok) throw new Error("Failed to fetch message");
+      }).then(response => {
+        if (!response.ok) throw new Error("Failed to fetch message");
         return response.json();
-      }).then(view =>{
+      }).then(view => {
         document.querySelector('.ppl-from').innerText = view.memberNickname;
         document.querySelector('.nonmodal-textarea').innerText = view.msgContent;
         //  모달 보이기
         document.querySelector('.getmsg-container').style.display = 'block';
-      }).catch(error=>{
+        msgRecipientNickname = view.memberNickname;
+        msgRecipientNum = view.msgSender;
+      }).catch(error => {
         console.error("Error:", error);
       })
-      //삭제하기
-      const btnBin = document.querySelector('.delete-msg');
-      btnBin.addEventListener('click',function (){
 
-        fetch(`/message/mailBox`,{
+//삭제버튼
+      const btnBin = document.querySelector('.delete-msg');
+      btnBin.addEventListener('click', function () {
+
+        fetch(`/message/mailBox`, {
           method: 'POST',
           headers: {'Content-Type': 'application/json'},
-          body: JSON.stringify({ msgId: data.msgId })
+          body: JSON.stringify({msgId: data.msgId})
         })
             .then(response => {
-              if(!response.ok) throw new Error("Fail to fetch message.");
+              if (!response.ok) throw new Error("Fail to fetch message.");
               return response.text();
             })
-            .then(data=>{
+            .then(data => {
               console.log(data);
             })
             .catch(error => {
               console.log("Error:", error);
             });
+      })
+
+
+// 답장기능
+      let replyMsg = document.querySelector('.reply-msg');
+      replyMsg.addEventListener("click", function () {
+        let sendMsgContainer = document.querySelector('.replymsg-container');
+        sendMsgContainer.style.display = "block";
+        document.querySelector('.ppl-to').innerText = msgRecipientNickname;
+
+        console.log(data);
+        let sendMsg = document.querySelector('.send-msg');
+        sendMsg.addEventListener("click", function () {
+
+          let msgContent = '';
+          msgContent = document.querySelector('.nonmodal-textarea textarea').value;
+          data={
+            msgRecipient: msgRecipientNum,
+            msgContent: msgContent
+          }
+          console.log(data);
+          fetch(`/message/replymailModal`, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(data)
+          })
+              .then(response => {
+                if (!response.ok) throw new Error("Fail to fetch message.");
+                return response.text();
+              })
+              .then(data => {
+                console.log(data);
+                alert("메세지가 전송되었습니다")
+              })
+              .catch(error => {
+                console.log("Error:", error);
+                alert("메세지전송이 실패했습니다")
+              });
         })
-
-
-        // 답장기능
-          let replyMsg = document.querySelector('.reply-msg');
-          replyMsg.addEventListener("click", function(){
-          let sendMsgContainer = document.querySelector('.replymsg-container');
-          sendMsgContainer.style.display="block";
-
-          document.querySelector('.ppl-to').innerText = senderText;
-
-        });
       });
     });
-  })
+  });
+})
 
 
 

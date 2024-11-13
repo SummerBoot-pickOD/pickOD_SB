@@ -103,17 +103,7 @@ searchDate.addEventListener('click', ()=>{
   // db연결하면 검색기능 들어감
 });
 
-// 찜하기 해제하면 리스트삭제
 
-document.querySelectorAll('.checklist-check').forEach(function(checkElement) {
-  checkElement.addEventListener('click', function() {
-    // 클릭된 요소의 부모의 부모(.check-list)를 찾고 제거
-    const checkListElement = this.closest('.check-list');
-    if (checkListElement) {
-      checkListElement.remove();
-    }
-  });
-});
 
 
 //내 베스트게시물 리스트
@@ -169,7 +159,7 @@ function myBest (data){
   });
 }
 
-
+// let pickIdField;
 //내 체크리스트
 // 페이지 로드 시 checkedList 데이터를 사용해 렌더링
 document.addEventListener('DOMContentLoaded', () => {
@@ -192,8 +182,7 @@ function renderCheckList(data) {
     imgBoxDiv.classList.add('checklist-imgbox');
     const img = document.createElement('img');
     img.classList.add('checklist-img');
-    // img.src = item.thumbnailUrl ? item.thumbnailUrl : '../../img/mypage.png';
-    img.src = '../../img/mypage.png';
+    img.src = item.thumbnailUrl ? item.thumbnailUrl : '../../img/mypage.png';
     img.alt = '썸네일 이미지';
     imgBoxDiv.appendChild(img);
 
@@ -218,15 +207,82 @@ function renderCheckList(data) {
     nameDiv.classList.add('checklist-name');
     nameDiv.textContent = item.title || '제목';
 
+    //찜한 게시물 번호 추가
+    const checkId = document.createElement('div');
+
+
+    if (item.pickType === 'TEMPLATE') {
+      checkId.textContent = item.pickId;
+      checkId.classList.add('temp-id');
+
+    } else if (item.pickType === 'JOURNAL') {
+      checkId.textContent = item.pickId;
+      checkId.classList.add('jnl-id');
+
+    } else if (item.pickType === 'PLACE') {
+      checkId.textContent = item.pickId;
+      checkId.classList.add('place-id');
+
+    }
+    checkId.hidden = true;
+
+
+
     // 생성된 요소를 check-list div에 추가
     checkListDiv.appendChild(imgBoxDiv);
     checkListDiv.appendChild(boxDiv);
     checkListDiv.appendChild(nameDiv);
+    checkListDiv.appendChild(checkId);
 
     // check-list div를 checklist-container에 추가
     container.appendChild(checkListDiv);
   });
 }
+
+// 찜하기 해제하면 리스트삭제
+document.addEventListener('DOMContentLoaded', function () {
+  let checkBtnAll = document.querySelectorAll('.checklist-check')
+  console.log(checkBtnAll);
+  checkBtnAll.forEach(function (deleteBtn) {
+    deleteBtn.addEventListener('click', function () {
+      console.log(deleteBtn);
+      console.log(deleteBtn.parentElement.parentElement);
+
+      const tempIdElement = deleteBtn.parentElement.parentElement.querySelector('.temp-id')?.innerText;
+      console.log(tempIdElement);
+      const placeIdElement = deleteBtn.parentElement.parentElement.querySelector('.place-id')?.innerText;
+      console.log(placeIdElement);
+      const jnlNumElement = deleteBtn.parentElement.parentElement.querySelector('.jnl-id')?.innerText;
+      console.log(jnlNumElement);
+
+      data = {
+
+      };
+      console.log(data);
+      if (tempIdElement) data.tempId = Number(tempIdElement);
+      if (placeIdElement) data.placeId = Number(placeIdElement);
+      if (jnlNumElement) data.jnlNum = Number(jnlNumElement);
+
+
+      fetch('/mypage/deleteCheck', {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      }).then(response => {
+        if (!response.ok) throw new Error("Fail to fetch message.");
+        return response.text();
+      })
+          .then(data => {
+            console.log(data);
+          })
+          .catch(error => {
+            console.log("Error:", error);
+          });
+    });
+  });
+});
 
 
 // 페이지 로드 시 checkedJournalList 데이터를 사용해 렌더링
@@ -326,16 +382,6 @@ function renderMyPlanList(data){
     span.textContent = plan.planStartDate +"~"+ plan.planEndDate;
     detailDate.appendChild(span);
 
-    // 위치 정보 요소 생성
-    // const location = document.createElement("div");
-    // location.classList.add("myplan-location");
-    // location.textContent = plan.placeName;
-
-    // 장소 개수 요소 생성
-    // const locNum = document.createElement("div");
-    // locNum.classList.add("myplan-loc-num");
-    // locNum.textContent = `${plan.locNum} 장소`;
-
     // 컨텐츠에 모든 요소 추가
     content.appendChild(period);
     content.appendChild(title);
@@ -351,5 +397,7 @@ function renderMyPlanList(data){
     container.appendChild(myPlanList);
   });
 }
+
+
 
 

@@ -59,10 +59,21 @@
           AND MS.MEMBER_NUM = #{memberNum}
     </select>
 
+<!--    <insert id="insertMessage" parameterType="MsgWriteMailDTO">-->
+<!--        <selectKey keyProperty="msgId" resultType="Long" order="BEFORE">-->
+<!--            SELECT SEQ_MESSAGE.nextVal FROM DUAL-->
+<!--        </selectKey>-->
+<!--        INSERT INTO MESSAGE (MSG_ID, MSG_SENDER, MSG_RECIPIENT, MSG_CONTENT, MSG_SENT_TIME)-->
+<!--        VALUES (#{msgId}, #{msgSender}, #{msgRecipient}, #{msgContent}, SYSDATE)-->
+<!--    </insert>-->
+
+    <!-- msgId를 미리 생성하는 쿼리 -->
+    <select id="generateMsgId" resultType="Long">
+        SELECT SEQ_MESSAGE.nextVal FROM DUAL
+    </select>
+
+    <!-- MESSAGE 테이블에 메시지를 삽입 -->
     <insert id="insertMessage" parameterType="MsgWriteMailDTO">
-        <selectKey keyProperty="msgId" resultType="Long" order="BEFORE">
-            SELECT SEQ_MESSAGE.nextVal FROM DUAL
-        </selectKey>
         INSERT INTO MESSAGE (MSG_ID, MSG_SENDER, MSG_RECIPIENT, MSG_CONTENT, MSG_SENT_TIME)
         VALUES (#{msgId}, #{msgSender}, #{msgRecipient}, #{msgContent}, SYSDATE)
     </insert>

@@ -1,13 +1,17 @@
 package com.smbt.pickod.controller.mypage;
 
+import com.smbt.pickod.dto.mypage.MpgRemovePickDTO;
+import com.smbt.pickod.dto.place.PlaceDetailDTO;
+import com.smbt.pickod.mapper.mypage.MyPageMapper;
 import com.smbt.pickod.service.mypage.MyPageService;
+import com.smbt.pickod.service.place.PlaceService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @Slf4j
@@ -15,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/mypage")
 public class MyPageController {
     private final MyPageService myPageService;
+    private final PlaceService placeService;
+    private final MyPageMapper myPageMapper;
 
     @GetMapping("myPage")
     public String getMyPage(HttpSession session, Model model) {
@@ -79,6 +85,40 @@ public class MyPageController {
         return "mypage/userDetail";
     }
 
+    // 장소 상세조회
+//    @GetMapping("/{placeId}")
+//    public String getPlaceDetail(@PathVariable("placeId") Long placeId, Model model) {
+//        PlaceDetailDTO placeDetail = placeService.getPlaceDetail(placeId);
+//        model.addAttribute("placeDetail", placeDetail);
+//        return "place/placeDetail"; // 장소 상세 페이지 템플릿
+//    }
 
+    // 저널 상세조회
+//    @GetMapping("/{journal}")
+//    public String getPlaceDetail(@PathVariable("jnlNum") Long placeId, Model model) {
+//        PlaceDetailDTO placeDetail = myPageService.getPlaceDetail(placeId);
+//        model.addAttribute("placeDetail", placeDetail);
+//        return "place/placeDetail"; // 장소 상세 페이지 템플릿
+//    }
+//
+//    // 템플릿 상세조회
+//    @GetMapping("/{template}")
+//    public String getPlaceDetail(@PathVariable("temp_id") Long placeId, Model model) {
+//        PlaceDetailDTO placeDetail = myPageService.getPlaceDetail(placeId);
+//        model.addAttribute("placeDetail", placeDetail);
+//        return "place/placeDetail"; // 장소 상세 페이지 템플릿
+//    }
 
+    @DeleteMapping("deleteCheck")
+    public ResponseEntity<String> deleteMyCheckList(@RequestBody MpgRemovePickDTO mpgRemovePickDTO, HttpSession session) {
+        Long memberNum = (Long) session.getAttribute("memberNum");
+        mpgRemovePickDTO.setMemberNum(memberNum);
+
+        if (mpgRemovePickDTO.getJnlNum() != null || mpgRemovePickDTO.getPlaceId() != null || mpgRemovePickDTO.getTempId() != null) {
+            myPageService.deletePick(mpgRemovePickDTO);
+            return ResponseEntity.ok("찜하기 삭제완료");
+        } else {
+            return ResponseEntity.badRequest().body("ID가 하나도 입력되지 않았습니다.");
+        }
+    }
 }

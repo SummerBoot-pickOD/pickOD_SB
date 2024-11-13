@@ -26,24 +26,42 @@
     </select>
 
 <!--    내가찜한 전체 게시물 조회하기-->
-    <select id ="showMyCheckList" parameterType="Long" resultType="MpgMyCheckListDTO">
-        SELECT 'TEMPLATE' AS PICK_TYPE, t.TEMP_TITLE AS TITLE
+<!--    <select id ="showMyCheckList" parameterType="Long" resultType="MpgMyCheckListDTO">-->
+<!--        SELECT 'TEMPLATE' AS PICK_TYPE, t.TEMP_TITLE AS TITLE-->
+<!--        FROM TEMPLATE_PICK tp-->
+<!--        JOIN TEMPLATE t ON tp.TEMP_ID = t.TEMP_ID-->
+<!--        WHERE tp.MEMBER_NUM = #{memberNum}-->
+<!--        UNION ALL-->
+<!--        SELECT 'JOURNAL' AS PICK_TYPE, j.JNL_TITLE AS TITLE-->
+<!--        FROM JOURNAL_PICK jp-->
+<!--        JOIN JOURNAL j ON jp.JNL_NUM = j.JNL_NUM-->
+<!--        WHERE jp.MEMBER_NUM = #{memberNum}-->
+<!--        UNION ALL-->
+<!--        SELECT 'PLACE' AS PICK_TYPE, p.PLACE_NAME AS TITLE-->
+<!--        FROM PLACE_PICK pp-->
+<!--        JOIN PLACE p ON pp.PLACE_ID = p.PLACE_ID-->
+<!--        WHERE pp.MEMBER_NUM = #{memberNum}-->
+<!--    </select>-->
+
+    <select id="showMyCheckList" parameterType="Long" resultType="MpgMyCheckListDTO">
+        SELECT 'TEMPLATE' AS PICK_TYPE, t.TEMP_TITLE AS TITLE, t.TEMP_ID AS PICK_ID
         FROM TEMPLATE_PICK tp
-        JOIN TEMPLATE t ON tp.TEMP_ID = t.TEMP_ID
+                 JOIN TEMPLATE t ON tp.TEMP_ID = t.TEMP_ID
         WHERE tp.MEMBER_NUM = #{memberNum}
         UNION ALL
-        SELECT 'JOURNAL' AS PICK_TYPE, j.JNL_TITLE AS TITLE
+        SELECT 'JOURNAL' AS PICK_TYPE, j.JNL_TITLE AS TITLE, j.JNL_NUM AS PICK_ID
         FROM JOURNAL_PICK jp
-        JOIN JOURNAL j ON jp.JNL_NUM = j.JNL_NUM
+                 JOIN JOURNAL j ON jp.JNL_NUM = j.JNL_NUM
         WHERE jp.MEMBER_NUM = #{memberNum}
         UNION ALL
-        SELECT 'PLACE' AS PICK_TYPE, p.PLACE_NAME AS TITLE
+        SELECT 'PLACE' AS PICK_TYPE, p.PLACE_NAME AS TITLE, p.PLACE_ID AS PICK_ID
         FROM PLACE_PICK pp
-        JOIN PLACE p ON pp.PLACE_ID = p.PLACE_ID
+                 JOIN PLACE p ON pp.PLACE_ID = p.PLACE_ID
         WHERE pp.MEMBER_NUM = #{memberNum}
     </select>
 
-<!--    내가찜한 저널만 보여주기-->
+
+    <!--    내가찜한 저널만 보여주기-->
 
     <select id="showMyTemplateCheckList" parameterType="Long" resultType="MpgMyCheckListDTO">
         SELECT 'TEMPLATE' AS PICK_TYPE, T.TEMP_TITLE AS TITLE
@@ -108,13 +126,11 @@
 
     <delete id="removePick" parameterType="MpgRemovePickDTO">
         BEGIN
-
     IF #{tempId} IS NOT NULL THEN
         DELETE FROM TEMPLATE_PICK
         WHERE MEMBER_NUM = #{memberNum}
           AND TEMP_ID = #{tempId};
         END IF;
-
 
     IF #{jnlNum} IS NOT NULL THEN
         DELETE FROM JOURNAL_PICK
@@ -122,14 +138,11 @@
           AND JNL_NUM = #{jnlNum};
         END IF;
 
-
     IF #{placeId} IS NOT NULL THEN
         DELETE FROM PLACE_PICK
         WHERE MEMBER_NUM = #{memberNum}
           AND PLACE_ID = #{placeId};
         END IF;
-
         END;
-
     </delete>
 </mapper>

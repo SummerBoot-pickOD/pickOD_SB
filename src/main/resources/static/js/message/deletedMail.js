@@ -170,7 +170,7 @@ document.addEventListener('DOMContentLoaded', function() {
       readMail.src = '../../img/message/받은편지.png';
 
 
-      fetch(`/message/${data.msgId}`,{
+      fetch(`/message/binBox/${data.msgId}`,{
           method: "GET",
           headers: {'Content-Type': 'application/json'},
       }).then(response=>{
