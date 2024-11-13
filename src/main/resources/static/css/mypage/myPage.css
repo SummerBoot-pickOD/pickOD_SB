@@ -50,7 +50,7 @@ main {
   width: 340px;
   height: 468px;
   border-color: #00000033;
-  box-shadow: 0px 4px 4px #00000040;
+  box-shadow: 0 4px 4px #00000040;
   border-radius: 20px;
 }
 /*프로필 위쪽 공간*/
@@ -78,7 +78,7 @@ main {
   border-radius: 20px;
   display: flex;
   border-color: #00000033;
-  box-shadow: 0px 4px 4px #00000040;
+  box-shadow: 0 4px 4px #00000040;
   padding: 30px;
   margin: 0 10px;
 }
@@ -168,7 +168,7 @@ main {
 /*내베스트 리스트목록*/
 
 .mybest-list{
-  padding: 0px 30px 30px 30px;
+  padding: 0 30px 30px 30px;
 }
 
 
@@ -207,7 +207,7 @@ main {
 /*섹션2 userlist-container 시작*/
 
 .userlist-container{
-  margin: 50px 0px;
+  margin: 50px 0;
 }
 
 .list-nav{
@@ -215,7 +215,7 @@ main {
   height: 50px;
   display: flex;
   border-bottom: 2px solid #d9d9d9;
-  font-family: "Inter-Bold", Helvetica;
+  /*font-family: "Inter-Bold", Helvetica;*/
   font-size: 36px;
   color: #a1a1a1;
   justify-content: space-around;
@@ -240,7 +240,6 @@ main {
   color: black;
 }
 .result-detail2{
-  display: flex;
   margin: 20px 0;
   width: 1320px;
   height: 25px;
@@ -251,7 +250,6 @@ main {
 }
 
 .result-detail3{
-  display: flex;
   margin: 20px 0;
   width: 1320px;
   height: 25px;
@@ -296,15 +294,16 @@ main {
   display: grid;
   /* display: none; */
   grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: auto;
+  grid-template-rows: 1fr 1fr 1fr;
   place-items: center;
+
 }
 
 .check-list{
   height: 465px;
   width: 380px;
   background-color: #fef8ff;
-  box-shadow: 0px 4px 4px #00000040;
+  box-shadow: 0 4px 4px #00000040;
 }
 
 .checklist-imgbox{
@@ -362,7 +361,7 @@ main {
   /* display: grid; */
   display: none;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: auto;
+  grid-template-rows: 1fr 1fr 1fr;
   place-items: center;
 }
 
@@ -370,7 +369,7 @@ main {
   height: 465px;
   width: 380px;
   background-color: #fef8ff;
-  box-shadow: 0px 4px 4px #00000040;
+  box-shadow: 0 4px 4px #00000040;
 }
 
 .triplist-imgbox{
@@ -418,7 +417,7 @@ main {
   /* display: grid; */
   display: none;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: auto;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
   place-items: center;
 }
 
@@ -429,7 +428,7 @@ main {
   justify-content: space-around;
   align-items: center;
   background-color: #fef8ff;
-  box-shadow: 0px 4px 4px #00000040;
+  box-shadow: 0 4px 4px #00000040;
 }
 
 .myplan-imgbox{

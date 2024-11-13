@@ -28,7 +28,7 @@ public class PlaceController {
 
     // 조회순 또는 찜하기순으로 정렬된 장소 목록
     @GetMapping("/list")
-    public String getFilteredPlaces(@RequestParam(defaultValue = "orderByView") String sort, Model model) {
+    public String getFilteredPlaces(@RequestParam(value= "sort", defaultValue = "orderByView")  String sort, Model model) {
         List<PlaceDTO> placeList = placeService.getPlacesBySort(sort);
         model.addAttribute("placeList", placeList);
         model.addAttribute("sort", sort);

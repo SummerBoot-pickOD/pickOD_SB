@@ -30,7 +30,7 @@ public class JournalListController {
     }
 
     @GetMapping("/list")
-    public String getFilteredPlaces(@RequestParam(defaultValue = "orderByDate") String sort, Model model) {
+    public String getFilteredPlaces(@RequestParam(value= "sort", defaultValue = "orderByDate") String sort, Model model) {
         List<JournalDTO> journalList = journalService.getJournalBySort(sort);
         model.addAttribute("journalList", journalList);
         model.addAttribute("sort", sort);
