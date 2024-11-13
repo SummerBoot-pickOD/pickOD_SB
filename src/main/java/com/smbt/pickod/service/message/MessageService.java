@@ -43,10 +43,7 @@ public class MessageService {
         }
 
         return result;
-
     }
-
-
 
     // 보낸 메시지 상세 조회
     public Optional<MsgSentMailViewDTO> toMailView(Long msgId, Long memberNum) {

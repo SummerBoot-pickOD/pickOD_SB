@@ -86,12 +86,12 @@ public class MyPageController {
     }
 
     // 장소 상세조회
-    @GetMapping("/{placeId}")
-    public String getPlaceDetail(@PathVariable("placeId") Long placeId, Model model) {
-        PlaceDetailDTO placeDetail = placeService.getPlaceDetail(placeId);
-        model.addAttribute("placeDetail", placeDetail);
-        return "place/placeDetail"; // 장소 상세 페이지 템플릿
-    }
+//    @GetMapping("/{placeId}")
+//    public String getPlaceDetail(@PathVariable("placeId") Long placeId, Model model) {
+//        PlaceDetailDTO placeDetail = placeService.getPlaceDetail(placeId);
+//        model.addAttribute("placeDetail", placeDetail);
+//        return "place/placeDetail"; // 장소 상세 페이지 템플릿
+//    }
 
     // 저널 상세조회
 //    @GetMapping("/{journal}")
@@ -109,22 +109,16 @@ public class MyPageController {
 //        return "place/placeDetail"; // 장소 상세 페이지 템플릿
 //    }
 
-    @PostMapping("deleteCheck")
-    public ResponseEntity<String> deleteMyCheckList (@RequestBody MpgRemovePickDTO mpgRemovePickDTO , HttpSession session) {
-
+    @DeleteMapping("deleteCheck")
+    public ResponseEntity<String> deleteMyCheckList(@RequestBody MpgRemovePickDTO mpgRemovePickDTO, HttpSession session) {
         Long memberNum = (Long) session.getAttribute("memberNum");
         mpgRemovePickDTO.setMemberNum(memberNum);
 
-        if (mpgRemovePickDTO.getJnlNum() != null) {
+        if (mpgRemovePickDTO.getJnlNum() != null || mpgRemovePickDTO.getPlaceId() != null || mpgRemovePickDTO.getTempId() != null) {
             myPageService.deletePick(mpgRemovePickDTO);
-        } else if (mpgRemovePickDTO.getPlaceId() != null) {
-            myPageService.deletePick(mpgRemovePickDTO);
-        } else if (mpgRemovePickDTO.getTempId() != null) {
-            myPageService.deletePick(mpgRemovePickDTO);
+            return ResponseEntity.ok("찜하기 삭제완료");
         } else {
             return ResponseEntity.badRequest().body("ID가 하나도 입력되지 않았습니다.");
         }
-
-        return ResponseEntity.ok("찜하기 삭제완료");
     }
 }

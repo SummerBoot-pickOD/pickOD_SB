@@ -159,7 +159,7 @@ function myBest (data){
   });
 }
 
-
+// let pickIdField;
 //내 체크리스트
 // 페이지 로드 시 checkedList 데이터를 사용해 렌더링
 document.addEventListener('DOMContentLoaded', () => {
@@ -182,8 +182,7 @@ function renderCheckList(data) {
     imgBoxDiv.classList.add('checklist-imgbox');
     const img = document.createElement('img');
     img.classList.add('checklist-img');
-    // img.src = item.thumbnailUrl ? item.thumbnailUrl : '../../img/mypage.png';
-    img.src = '../../img/mypage.png';
+    img.src = item.thumbnailUrl ? item.thumbnailUrl : '../../img/mypage.png';
     img.alt = '썸네일 이미지';
     imgBoxDiv.appendChild(img);
 
@@ -211,17 +210,23 @@ function renderCheckList(data) {
     //찜한 게시물 번호 추가
     const checkId = document.createElement('div');
 
+
     if (item.pickType === 'TEMPLATE') {
       checkId.textContent = item.pickId;
       checkId.classList.add('temp-id');
+
     } else if (item.pickType === 'JOURNAL') {
       checkId.textContent = item.pickId;
       checkId.classList.add('jnl-id');
+
     } else if (item.pickType === 'PLACE') {
       checkId.textContent = item.pickId;
       checkId.classList.add('place-id');
+
     }
     checkId.hidden = true;
+
+
 
     // 생성된 요소를 check-list div에 추가
     checkListDiv.appendChild(imgBoxDiv);
@@ -235,21 +240,49 @@ function renderCheckList(data) {
 }
 
 // 찜하기 해제하면 리스트삭제
+document.addEventListener('DOMContentLoaded', function () {
+  let checkBtnAll = document.querySelectorAll('.checklist-check')
+  console.log(checkBtnAll);
+  checkBtnAll.forEach(function (deleteBtn) {
+    deleteBtn.addEventListener('click', function () {
+      console.log(deleteBtn);
+      console.log(deleteBtn.parentElement.parentElement);
 
-let checkListAll = document.querySelectorAll('.checklist-check')
-  checkListAll.forEach(function(checkElement) {
-  checkElement.addEventListener('click', function() {
-    const boardId = checkElement.querySelector('.temp-id');
+      const tempIdElement = deleteBtn.parentElement.parentElement.querySelector('.temp-id')?.innerText;
+      console.log(tempIdElement);
+      const placeIdElement = deleteBtn.parentElement.parentElement.querySelector('.place-id')?.innerText;
+      console.log(placeIdElement);
+      const jnlNumElement = deleteBtn.parentElement.parentElement.querySelector('.jnl-id')?.innerText;
+      console.log(jnlNumElement);
 
-    // 클릭된 요소의 부모의 부모(.check-list)를 찾고 제거
-    // const checkListElement = this.closest('.check-list');
-    // if (checkListElement) {
-    //   checkListElement.remove();
-    // }
-    fetch
+      data = {
+
+      };
+      console.log(data);
+      if (tempIdElement) data.tempId = Number(tempIdElement);
+      if (placeIdElement) data.placeId = Number(placeIdElement);
+      if (jnlNumElement) data.jnlNum = Number(jnlNumElement);
+
+
+      fetch('/mypage/deleteCheck', {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      }).then(response => {
+        if (!response.ok) throw new Error("Fail to fetch message.");
+        return response.text();
+      })
+          .then(data => {
+            console.log(data);
+          })
+          .catch(error => {
+            console.log("Error:", error);
+          });
+    });
   });
 });
-
 
 
 // 페이지 로드 시 checkedJournalList 데이터를 사용해 렌더링
