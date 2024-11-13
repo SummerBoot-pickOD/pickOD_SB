@@ -215,10 +215,10 @@ $("#show-write").click(function(){
   pId = $('#report-detail-modal #modal-postId').val();
   if(ptype === '쪽지'){
     console.log('모달에 값 넣어오고 보이기');
-    fetch(`/admin/admReport/getMessage?postId=${pId}`)
-        .then(res => res.text())
+    fetch(`/admin/admReport/getMsg?postId=${pId}`)
+        .then(res => res.json())
         .then(data => {
-          $('textarea#report-msg-text').text(data);
+          $('textarea#report-msg-text').text(data.msg);
         }).catch(e=>{
       console.log(e);
       alert("에러 발생.")
