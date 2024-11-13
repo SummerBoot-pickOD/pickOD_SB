@@ -17,12 +17,12 @@
 
 <body>
 <div id='header' th:replace="~{/main/header}"></div>
-<!--  <div id="report" th:replace="~{/repot/putreport}"></div>-->
+<div id="report" th:replace="~{/report/reportSend}"></div>
   <main>
     <div class="mainImg">
-      <button id="prevBtn"><img src="../../img/place/placeDetail/prevBtn.png" alt=""></button>
+      <button id="prevBtn"><img src="../../img/place/placeDetail/prevBtn.png" alt="행사이전버튼"></button>
       <img id='slider' src="../../img/place/placeDetail/samplePlace.jpg" alt="대표이미지">
-      <button id="nextBtn"><img src="../../img/place/placeDetail/nextBtn.png" alt=""></button>
+      <button id="nextBtn"><img src="../../img/place/placeDetail/nextBtn.png" alt="행사다음버튼"></button>
     </div>
     <h2 class="placeDetail" th:text="${placeDetail.placeName}"></h2>
     <span  th:text="${placeDetail.placeAddress}"></span>
@@ -34,11 +34,12 @@
         <p th:text="${placeDetail.placeViews}"></p>
       </div>
       <div>
-        <img class="reportimg" src="../../img/place/placeDetail/report.png" alt="">
-        <img class="saveimg" src="../../img/main/unsaved.png" alt="">
+          <img class="reportimg" src="../../img/place/placeDetail/report.png" alt="신고이미지">
+        <img class="saveimg" th:data-place-id="${placeDetail.placeId}"  src="../../img/main/unsaved.png" alt="찜이미지">
       </div>
     </div>
-
+<!--      status하기위함-->
+      <input type="hidden" id="placeId" th:value="${placeDetail.placeId}">
     <!-- 네브바 -->
     <div class="placeDetail-nav" id="placeDetailNav">
       <ul>

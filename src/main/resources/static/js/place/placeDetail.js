@@ -1,10 +1,28 @@
+$(document).ready(function () {
+  let placeId = $('#placeId').val(); // 현재 페이지의 placeId
+  $.ajax({
+    url: '/place/status',
+    type: 'GET',
+    data: { placeId: placeId },
+    success: function (response) {
+      if (response==="yes") {
+        $('.saveimg').attr('src', "../../img/main/saved.png");
+      } else {
+        $('.saveimg').attr('src', "../../img/main/unsaved.png");
+      }
+    },
+    error: function () {
+      console.error("찜 상태를 확인하는 중 오류 발생");
+    }
+  });
+});
 
 document.addEventListener('DOMContentLoaded',()=>{
   const slider = document.getElementById('slider');
   const prevBtn = document.getElementById('prevBtn');
   const nextBtn = document.getElementById('nextBtn');
 
-  const saveimg_btn=document.querySelector('.saveimg');
+  // const saveimg_btn=document.querySelector('.saveimg');
   
   
   const images = [
@@ -25,14 +43,43 @@ document.addEventListener('DOMContentLoaded',()=>{
     slider.setAttribute('src', images[currentIndex]);
   });
 
+
   // 찜하기
-  saveimg_btn.addEventListener('click',()=>{
-      if(saveimg_btn.getAttribute('src')==="../../img/main/unsaved.png"){
-        saveimg_btn.setAttribute('src',"../../img/main/saved.png");
-      }else{
-        saveimg_btn.setAttribute('src',"../../img/main/unsaved.png");
-      } 
+  $('.saveimg').click(function() {
+    let clickedElement = $(this);
+    let placeId = clickedElement.data('place-id');  // 클릭한 버튼의 placeId 가져오기
+
+
+
+    $.ajax({
+      url: '/place/toggle',  // 서버로 요청 보낼 URL
+      type: 'POST',
+      data: {
+        placeId: placeId
+
+      },
+      success: function(response) {
+        if(response==="찜이 추가되었습니다"){
+          clickedElement.attr('src', "../../img/main/saved.png");
+        }else if(response==="찜이 삭제되었습니다"){
+          clickedElement.attr('src', "../../img/main/unsaved.png");
+        }
+        alert(response);
+
+      },
+      error: function() {
+        alert('에러가 발생했습니다.');
+      }
+    });
   });
+
+
+
+
+
+
+
+
  
 
  //nav 버튼
@@ -50,19 +97,19 @@ document.addEventListener('DOMContentLoaded',()=>{
     });
   });
  
-  $(function () {
-    $("#header").load("../main/header.html");
-  });
-  
-  $(function () {
-    $("#footer").load("../main/footer.html");
-  });
 
-  $(function () {
-    $("#report").load("../report/reportSend.html");
-  });
-
+// 신고
   $(".reportimg").click(function(){
+    // const postType ='post'
+    // const postId = 12389
+    // const writerId ="df"
+    // const reportType = "df"
+    //
+    // // Set the hidden input values
+    // $("#reportPostType").val(postType);
+    // $("#reportPostId").val(postId);
+    // $("#writerId").val(writerId);
+    // $("#reportType").val(reportType);
     $(".modal-container").css("display","block");
   });
 

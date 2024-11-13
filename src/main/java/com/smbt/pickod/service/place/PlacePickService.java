@@ -6,26 +6,28 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
 import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class PlacePickService {
 
-    private PlacePickMapper placePickMapper;
+    private final PlacePickMapper placePickMapper;
 
-    public Optional<PlacePickDTO> findPlacePick(Long memberNum, Long placeId) {
-        return placePickMapper.findPlacePick(memberNum, placeId);
+    public PlacePickDTO findPlacePick(Long memberNum,Long placeId) {
+        return placePickMapper.findPlacePick(memberNum,placeId);
     }
 
-    public void insertPlacePick(PlacePickDTO placePick) {
-        placePick.setPickId(getNextPickId());
-        placePickMapper.insertPlacePick(placePick);
+    public void addPlacePick(PlacePickDTO placePickDTO) {
+        placePickDTO.setPickId(getNextPickId());
+        placePickDTO.setPickDate(new Date(System.currentTimeMillis()));
+        placePickMapper.insertPlacePick(placePickDTO);
     }
 
 
-    public void deletePlacePick(Long pickId) {
-        placePickMapper.deletePlacePick(pickId);
+    public void removePlacePick(PlacePickDTO placepickDTO) {
+        placePickMapper.deletePlacePick(placepickDTO);
     }
 
 

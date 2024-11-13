@@ -16,7 +16,8 @@
     </select>
 
     <delete id="deletePlacePick">
-        delete from place_pick where pick_id=#{pickId}
+        delete from place_pick
+        WHERE MEMBER_NUM = #{memberNum} AND PLACE_ID = #{placeId}
     </delete>
 
 

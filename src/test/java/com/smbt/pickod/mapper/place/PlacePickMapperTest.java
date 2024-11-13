@@ -24,23 +24,23 @@ class PlacePickMapperTest {
     public void placepick(){
 //        long memberNum = getCurrentUserMemberNum(); // 현재 로그인한 사용자 ID 가져오기
 //        long placeId = getCurrentPlaceId(); // 현재 선택된 장소 ID 가져오기
-        long membernum=2L;
-        long placeid=2L;
-        Optional<PlacePickDTO> pickExist =placePickMapper.findPlacePick(membernum,placeid);
-        if (pickExist.isEmpty()){
-            PlacePickDTO newPick = new PlacePickDTO();
-            newPick.setMemberNum(membernum);
-            newPick.setPlaceId(placeid);
-            newPick.setPickDate(new Date(System.currentTimeMillis())); // 현재 날짜 설정
-
-            Long nextPickId = placePickMapper.getNextPickId();
-            newPick.setPickId(nextPickId);
-            placePickMapper.insertPlacePick(newPick);
-
-        }
-        else{
-            placePickMapper.deletePlacePick(pickExist.get().getPickId());
-        }
+//        long membernum=2L;
+//        long placeid=2L;
+//        Optional<PlacePickDTO> pickExist =placePickMapper.findPlacePick(membernum,placeid);
+//        if (pickExist.isEmpty()){
+//            PlacePickDTO newPick = new PlacePickDTO();
+//            newPick.setMemberNum(membernum);
+//            newPick.setPlaceId(placeid);
+//            newPick.setPickDate(new Date(System.currentTimeMillis())); // 현재 날짜 설정
+//
+//            Long nextPickId = placePickMapper.getNextPickId();
+//            newPick.setPickId(nextPickId);
+//            placePickMapper.insertPlacePick(newPick);
+//
+//        }
+//        else{
+//            placePickMapper.deletePlacePick(pickExist.get().getPickId());
+//        }
     }
 
 }
