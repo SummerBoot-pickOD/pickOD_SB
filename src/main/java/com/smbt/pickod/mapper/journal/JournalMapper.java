@@ -18,7 +18,7 @@ public interface JournalMapper {
 
     int countTotalJournals(); //게시글 총 개수
 
-    List<JournalDTO> getJournalsByDateDesc(); // 최신순 정렬
+    List<JournalDetailDTO> getJournalsByDateDesc(); // 최신순 정렬
 
     JournalDTO getJournalByNum(long journalNum);  //특정 여행 일지를 ID로 조회
 
@@ -30,10 +30,10 @@ public interface JournalMapper {
 
     JnlMemberDTO getJournalProfilesByJournalNum(Long memberNum);
 
-    List<JournalDTO> searchJournalByKeyword(
+    List<JournalDetailDTO> searchJournalByKeyword(
             @Param("keyword") String keyword);//검색에 따라 JOURNAL 리스트를 조회
 
-    List<JournalDTO> searchJournalByArea(@Param("area") String area); // 지역 버튼 눌렀을 때 맞는 지역 조회
+    List<JournalDetailDTO> searchJournalByArea(@Param("area") String area); // 지역 버튼 눌렀을 때 맞는 지역 조회
 
     void insertJournal(JournalDTO journalDTO); //새로운 JOURNAL을 추가
 
@@ -43,7 +43,7 @@ public interface JournalMapper {
 
     void deleteJournal(@Param("jnlNum") Long jnlNum); //JOURNAL을 삭제
 
-    List<JournalDTO> getSelectedFootprints();
+    List<JournalDetailDTO> getSelectedFootprints();
 
     Optional<JournalDTO> selectById(Long boardId);
 
@@ -110,7 +110,7 @@ public interface JournalMapper {
 
     Optional<JournalPickDTO> getJournalPickById(@Param("pickId") Long pickId); //특정 여행 일지 픽(JournalPick)을 ID로 조회
 
-    List<JournalDTO> getJournalsByPickCountDesc();
+    List<JournalDetailDTO> getJournalsByPickCountDesc();
 
     List<JournalPickDTO> getJournalPicksByMemberId(@Param("memberNum") Long memberNum); //특정 회원의 JOURNAL PICKS를 조회
 

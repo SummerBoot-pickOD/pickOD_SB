@@ -60,7 +60,7 @@
         ORDER BY jd.JNL_DAY
     </select>
 
-    <select id="searchJournalByKeyword" resultType="JournalDTO">
+    <select id="searchJournalByKeyword" resultType="JournalDetailDTO">
         SELECT
             -- JOURNAL 테이블 컬럼들
             j.JNL_NUM,
@@ -111,7 +111,7 @@
         ORDER BY j.JNL_CREATE_DATE DESC
     </select>
 
-    <select id="searchJournalByArea" resultType="JournalDTO">
+    <select id="searchJournalByArea" resultType="JournalDetailDTO">
         SELECT
             -- JOURNAL 테이블 컬럼들
             j.JNL_NUM,
@@ -166,10 +166,48 @@
 
 
 
-    <select id="getJournalsByDateDesc" resultType="JournalDTO">
-        SELECT j.*, i.*
-        FROM JOURNAL j
-                 LEFT JOIN JNL_IMGS i ON j.JNL_NUM = i.JNL_NUM
+    <select id="getJournalsByDateDesc" resultType="JournalDetailDTO">
+        SELECT
+            -- JOURNAL 테이블 컬럼들
+            j.JNL_NUM,
+            j.JNL_TITLE,
+            j.MEMBER_NUM,
+            j.JNL_VIEWS,
+            j.JNL_MEMO,
+            j.JNL_CREATE_DATE,
+            j.JNL_UPDATE_DATE,
+            j.JNL_PERIOD,
+            j.JNL_TAG,
+            j.JNL_THEME,
+            j.JNL_AREA,
+
+            -- MEMBER 테이블의 정보
+            m.MEMBER_NICKNAME,
+
+            -- MEMBER_IMGS 테이블의 정보
+            mi.MEMBER_IMG_URL,
+            mi.MEMBER_IMGS_ID,
+            mi.MEMBER_IMGS_GUID,
+            mi.FILE_NAME AS MEMBER_IMG_FILE_NAME,
+            mi.UPLOADPATH AS MEMBER_IMG_UPLOADPATH,
+
+            -- JOURNAL_DAY 테이블 컬럼들
+            jd.JNL_DAY,
+            jd.JNL_PLACE_ORDER,
+            jd.JNL_CONTENTS,
+
+            -- JNL_IMGS 테이블 컬럼들
+            ji.FILE_NAME AS JNL_IMG_FILE_NAME,
+            ji.JNL_IMGS_GUID,
+            ji.UPLOADPATH AS JNL_IMG_UPLOADPATH,
+            ji.JNL_IMGS_ORDER
+
+        FROM
+            JOURNAL j
+                JOIN MEMBER m ON j.MEMBER_NUM = m.MEMBER_NUM
+                LEFT JOIN MEMBER_IMGS mi ON m.MEMBER_IMGS_ID = mi.MEMBER_IMGS_ID
+                LEFT JOIN JNL_DAY jd ON j.JNL_NUM = jd.JNL_NUM
+                LEFT JOIN JNL_IMGS ji ON jd.JNL_NUM = ji.JNL_NUM AND jd.JNL_DAY = ji.JNL_DAY
         ORDER BY j.JNL_CREATE_DATE DESC
     </select>
 
@@ -179,21 +217,109 @@
         ORDER BY JNL_VIEWS DESC
     </select>
 
-    <select id="getJournalsByPickCountDesc" resultType="JournalDTO">
-        SELECT j.*,
-               (SELECT COUNT(*)
-                FROM JOURNAL_PICK jp
-                WHERE jp.JNL_NUM = j.JNL_NUM) AS pick_count
-        FROM JOURNAL j
-        ORDER BY pick_count DESC
+    <select id="getJournalsByPickCountDesc" resultType="JournalDetailDTO">
+        SELECT
+            -- JOURNAL 테이블 컬럼들
+            j.JNL_NUM,
+            j.JNL_TITLE,
+            j.MEMBER_NUM,
+            j.JNL_VIEWS,
+            j.JNL_MEMO,
+            j.JNL_CREATE_DATE,
+            j.JNL_UPDATE_DATE,
+            j.JNL_PERIOD,
+            j.JNL_TAG,
+            j.JNL_THEME,
+            j.JNL_AREA,
+
+            -- MEMBER 테이블의 정보
+            m.MEMBER_NICKNAME,
+
+            -- MEMBER_IMGS 테이블의 정보
+            mi.MEMBER_IMG_URL,
+            mi.MEMBER_IMGS_ID,
+            mi.MEMBER_IMGS_GUID,
+            mi.FILE_NAME AS MEMBER_IMG_FILE_NAME,
+            mi.UPLOADPATH AS MEMBER_IMG_UPLOADPATH,
+
+            -- JOURNAL_DAY 테이블 컬럼들
+            jd.JNL_DAY,
+            jd.JNL_PLACE_ORDER,
+            jd.JNL_CONTENTS,
+
+            -- JNL_IMGS 테이블 컬럼들
+            ji.FILE_NAME AS JNL_IMG_FILE_NAME,
+            ji.JNL_IMGS_GUID,
+            ji.UPLOADPATH AS JNL_IMG_UPLOADPATH,
+            ji.JNL_IMGS_ORDER,
+
+            -- PICK COUNT
+            (SELECT COUNT(*)
+             FROM JOURNAL_PICK jp
+             WHERE jp.JNL_NUM = j.JNL_NUM) AS pick_count
+
+        FROM
+            JOURNAL j
+                JOIN MEMBER m ON j.MEMBER_NUM = m.MEMBER_NUM
+                LEFT JOIN MEMBER_IMGS mi ON m.MEMBER_IMGS_ID = mi.MEMBER_IMGS_ID
+                LEFT JOIN JNL_DAY jd ON j.JNL_NUM = jd.JNL_NUM
+                LEFT JOIN JNL_IMGS ji ON jd.JNL_NUM = ji.JNL_NUM AND jd.JNL_DAY = ji.JNL_DAY
+
+        ORDER BY
+            pick_count DESC;
     </select>
 
-    <select id="getSelectedFootprints" resultType="JournalDTO">
-        SELECT j.*, i.*
-        FROM JOURNAL j
-                 JOIN TEMPLATE t ON j.JNL_NUM = t.JNL_NUM
-                 LEFT JOIN JNL_IMGS i ON j.JNL_NUM = i.JNL_NUM
-        ORDER BY j.JNL_CREATE_DATE DESC
+    <select id="getSelectedFootprints" resultType="JournalDetailDTO">
+        SELECT
+            -- JOURNAL 테이블 컬럼들
+            j.JNL_NUM,
+            j.JNL_TITLE,
+            j.MEMBER_NUM,
+            j.JNL_VIEWS,
+            j.JNL_MEMO,
+            j.JNL_CREATE_DATE,
+            j.JNL_UPDATE_DATE,
+            j.JNL_PERIOD,
+            j.JNL_TAG,
+            j.JNL_THEME,
+            j.JNL_AREA,
+
+            -- MEMBER 테이블의 정보
+            m.MEMBER_NICKNAME,
+
+            -- MEMBER_IMGS 테이블의 정보
+            mi.MEMBER_IMG_URL,
+            mi.MEMBER_IMGS_ID,
+            mi.MEMBER_IMGS_GUID,
+            mi.FILE_NAME AS MEMBER_IMG_FILE_NAME,
+            mi.UPLOADPATH AS MEMBER_IMG_UPLOADPATH,
+
+            -- JOURNAL_DAY 테이블 컬럼들
+            jd.JNL_DAY,
+            jd.JNL_PLACE_ORDER,
+            jd.JNL_CONTENTS,
+
+            -- JNL_IMGS 테이블 컬럼들
+            ji.FILE_NAME AS JNL_IMG_FILE_NAME,
+            ji.JNL_IMGS_GUID,
+            ji.UPLOADPATH AS JNL_IMG_UPLOADPATH,
+            ji.JNL_IMGS_ORDER,
+
+            -- TEMPLATE 테이블 컬럼들 (필요한 컬럼들 추가)
+            t.TEMPLATE_NAME,
+            t.TEMPLATE_DESC
+
+        FROM
+            JOURNAL j
+                JOIN MEMBER m ON j.MEMBER_NUM = m.MEMBER_NUM
+                LEFT JOIN MEMBER_IMGS mi ON m.MEMBER_IMGS_ID = mi.MEMBER_IMGS_ID
+                LEFT JOIN JNL_DAY jd ON j.JNL_NUM = jd.JNL_NUM
+                LEFT JOIN JNL_IMGS ji ON jd.JNL_NUM = ji.JNL_NUM AND jd.JNL_DAY = ji.JNL_DAY
+                JOIN TEMPLATE t ON j.JNL_NUM = t.JNL_NUM
+                LEFT JOIN JNL_IMGS i ON j.JNL_NUM = i.JNL_NUM
+
+        ORDER BY
+            j.JNL_CREATE_DATE DESC;
     </select>
 
     <select id="getJournalByPermission" parameterType="long" resultType="JournalDTO">
