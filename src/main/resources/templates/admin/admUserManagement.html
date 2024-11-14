@@ -47,8 +47,8 @@
         </thead>
 
         <tbody>
-        <tr th:each="member : ${members}">
-          <td class="mem-num" th:text="${member.memberNum}"></td>
+        <tr th:each="member, iterStart:${members}">
+          <td class="num" th:text="${iterStart.index + 1}">1</td>
           <td class="id" th:text="${member.memberId}"></td>
           <td class="nickname" th:text="${member.memberNickName}"></td>
           <td class="tot-jnl" th:text="${member.totJournals}"></td>

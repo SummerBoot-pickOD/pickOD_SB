@@ -50,7 +50,7 @@
 
             <tbody>
             <tr th:each="reply, iterStart:${replies}">
-              <td class="num" th:text="${iterStart.index + 1}">1<</td>
+              <td class="num" th:text="${iterStart.index + 1}">1</td>
               <td class="member-nickname" th:text="${reply.memberNickName}"></td>
               <td class="cmt-contents" th:text="${reply.cmtContents}"></td>
               <td class="is-reported" th:text="${reply.isReported}"></td>

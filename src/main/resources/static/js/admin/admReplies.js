@@ -32,7 +32,6 @@ document.addEventListener('DOMContentLoaded', function () {
     //상세모달 열기
     openModal.forEach(btn => {
       btn.addEventListener("click", function () {
-      // console.log("clicked")
       const cmtId = this.getAttribute('data-cmt-id');
       console.log(cmtId);
       const postType = this.getAttribute('data-post-type')

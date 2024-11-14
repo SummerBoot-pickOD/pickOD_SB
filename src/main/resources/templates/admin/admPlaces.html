@@ -47,8 +47,8 @@
           </thead>
 
           <tbody>
-          <tr th:each="place:${places}">
-            <td class="place-id" th:text="${place.placeId}"></td>
+          <tr th:each="place, iterStart:${places}">
+            <td class="num" th:text="${iterStart.index + 1}">1</td>
             <td class="place-name" th:text="${place.placeName}"></td>
             <td class="address" th:text="${place.placeAddress}"></td>
             <td class="views" th:text="${place.placeViews}"></td>
