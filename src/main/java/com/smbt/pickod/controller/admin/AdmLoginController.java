@@ -33,15 +33,24 @@ public class AdmLoginController {
         admLoginDTO.setMemberId(memberId);
         admLoginDTO.setMemberPassword(memberPassword);
 
-        AdmSessionDTO admSession = admLoginService.login(admLoginDTO);
+        try {
+            AdmSessionDTO admSession = admLoginService.login(admLoginDTO);
+            session.setAttribute("memberNum", admSession.getMemberNum());
+            session.setAttribute("memberId", admSession.getMemberId());
 
-        session.setAttribute("memberNum", admSession.getMemberNum());
-        session.setAttribute("memberId", admSession.getMemberId());
+            log.info("로그인 성공 : {}, {} ",memberId,memberPassword);
+            log.info("세션ID : {}",session.getId());
+            return new RedirectView("/admin/admMemberMgmt/list");
+        } catch (Exception e) {
+            return new RedirectView("/admin/admLogin");
+        }
+    }
 
-        log.info("로그인 성공 : {}, {} ",memberId,memberPassword);
-        log.info("세션ID : {}",session.getId());
-        return new RedirectView("/admin/admMemberMgmt/list");
-        //redirect view 경로 맞는지 다시 확인
+    @GetMapping("/admLogout")
+    public RedirectView logout(HttpSession session){
+        session.removeAttribute("memberNum");
+        session.invalidate();
+        return new RedirectView("/admin/admLogin");
     }
 
     @GetMapping("/findPwd")

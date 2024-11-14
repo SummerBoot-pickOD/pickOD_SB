@@ -18,17 +18,19 @@
               <a th:href="@{/admin/admTemplateMgmt/write}" class="dropdwn">템플릿 작성</a>
             </div>
           </li>
-          <li class="nav-list">
-            <div class="link-menu">행사</div>
-            <div class="dropdown-container">
-              <a th:href="@{/admin/admFestival/list}" class="dropdwn">전체 행사</a>
-              <a href="./admFestivalBanner.html" class="dropdwn">행사 배너</a>
-            </div>
-          </li>
+<!--          <li class="nav-list">-->
+<!--            <div class="link-menu">행사</div>-->
+<!--            <div class="dropdown-container">-->
+<!--              <a th:href="@{/admin/admFestival/list}" class="dropdwn">전체 행사</a>-->
+<!--              <a href="./admFestivalBanner.html" class="dropdwn">행사 배너</a>-->
+<!--            </div>-->
+<!--          </li>-->
         </ul>
       </nav>
       <div class="header-icon">
-        <a th:href="@{/admin/admLogin}"><img th:src="@{/img/main/login.png}" alt="로그인" class="login"></a>
+        <a th:href="@{/admin/admLogout}">
+          <img id="adm-logout" th:src="@{/img/main/login.png}" alt="로그아웃" class="login">
+        </a>
       </div>
     </div>
   </header>
