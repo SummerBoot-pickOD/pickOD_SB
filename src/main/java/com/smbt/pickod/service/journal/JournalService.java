@@ -1,7 +1,6 @@
 package com.smbt.pickod.service.journal;
 
 import com.smbt.pickod.dto.journal.*;
-import com.smbt.pickod.dto.place.PlaceDTO;
 import com.smbt.pickod.mapper.journal.ImgMapper;
 import com.smbt.pickod.mapper.journal.JournalMapper;
 import lombok.RequiredArgsConstructor;
@@ -163,12 +162,12 @@ public class JournalService {
 
     //journalList 검색페이지
     //검색창 검색
-    public List<JournalDTO> getJournalBySearch(String keyword) {
+    public List<JournalDetailDTO> getJournalBySearch(String keyword) {
         return journalMapper.searchJournalByKeyword(keyword);  // 정확한 Mapper 메서드 호출
     }
 
     //지역버튼으로 조회
-    public List<JournalDTO> searchByArea(String area) {
+    public List<JournalDetailDTO> searchByArea(String area) {
         return journalMapper.searchJournalByArea(area);
     }
 
@@ -179,21 +178,21 @@ public class JournalService {
     }
 
     // 최신순으로 가져오기
-    public List<JournalDTO> getJournalsByDateDesc() {
+    public List<JournalDetailDTO> getJournalsByDateDesc() {
         return journalMapper.getJournalsByDateDesc();
     }
 
     // 좋아요(픽) 순으로 가져오기
-    public List<JournalDTO> getJournalsByPickCountDesc() {
+    public List<JournalDetailDTO> getJournalsByPickCountDesc() {
         return journalMapper.getJournalsByPickCountDesc();
     }
 
     // 선택된 발자취 가져오기
-    public List<JournalDTO> getSelectedFootprints() {
+    public List<JournalDetailDTO> getSelectedFootprints() {
         return journalMapper.getSelectedFootprints();
     }
 
-    public List<JournalDTO> getJournalBySort(String sort) {
+    public List<JournalDetailDTO> getJournalBySort(String sort) {
         if (sort.equals("orderByLikes")) {
             return getJournalsByPickCountDesc();  // 찜하기슌
         } else if (sort.equals("orderByDate")) {

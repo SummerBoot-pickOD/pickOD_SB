@@ -33,7 +33,7 @@ public class JournalListController {
 
     @GetMapping("/list")
     public String getFilteredPlaces(@RequestParam(value= "sort", defaultValue = "orderByDate") String sort, Model model) {
-        List<JournalDTO> journalList = journalService.getJournalBySort(sort);
+        List<JournalDetailDTO> journalList = journalService.getJournalBySort(sort);
         model.addAttribute("journalList", journalList);
         model.addAttribute("sort", sort);
         log.info(journalList + "확인=======");
@@ -42,7 +42,7 @@ public class JournalListController {
 
     @GetMapping("/list/area")
     public String searchJournalByArea(@RequestParam(defaultValue = "") String area, Model model) {
-        List<JournalDTO> journals = journalService.searchByArea(area);  // Service에서 지역별 필터링된 결과 가져오기
+        List<JournalDetailDTO> journals = journalService.searchByArea(area);  // Service에서 지역별 필터링된 결과 가져오기
         model.addAttribute("journalList", journals);  // 필터링된 결과를 모델에 추가
         model.addAttribute("area", area);  // 현재 선택된 지역을 모델에 추가
         return "journal/journalSearch";  // 결과를 보여줄 페이지로 리턴
@@ -53,7 +53,7 @@ public class JournalListController {
         if (keyword.isEmpty()) {
             return "redirect:/journal/list?sort=orderByDate";
         } else {
-            List<JournalDTO> journals = journalService.getJournalBySearch(keyword); // 검색 결과를 가져옴
+            List<JournalDetailDTO> journals = journalService.getJournalBySearch(keyword); // 검색 결과를 가져옴
             model.addAttribute("journalList", journals);
             model.addAttribute("keyword", keyword);
             return "journal/journalSearch";
