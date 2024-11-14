@@ -15,7 +15,7 @@ public class AdmMemberDetailsDTO {
     private String memberId;
     private String memberNickName;
     private String memberAddress;
-    private LocalDate memberBDate;
+    private LocalDate memberBdate;
     private String memberGender;
     private int totJournals;
     private int totPlans;

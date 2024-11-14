@@ -71,9 +71,21 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log(placeName);
     console.log(placeId);
     if (result){
-      window.location.href = '/admin/admPlaceMgmt/details/deletePlace?placeId=' + placeId;
+      fetch(`/admin/admPlaceMgmt/details/deletePlace/${placeId}`, {
+        method: 'POST'
+      })
+          .then(response => {
+            if(response.ok){
+              alert(`장소 ${placeName}가 삭제되었습니다.`);
+              window.location.href = '/admin/admPlaceMgmt/list';
+            } else {
+              alert(`장소 삭제에 실패하였습니다.`);
+            }
+          }).catch(error => {
+        console.error("에러: ", error)
+      });
     } else {
-      window.location.href='/admin/admPlaceMgmt/details/' + placeId;
+      window.location.href = `/admin/admPlaceMgmt/details/${placeId}`;
     }
   })
 });

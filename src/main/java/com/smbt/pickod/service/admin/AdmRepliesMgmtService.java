@@ -4,6 +4,8 @@ import com.smbt.pickod.dto.admin.journal.AdmJnlRepliesDTO;
 import com.smbt.pickod.dto.admin.journal.AdmJnlReplyDetailsDTO;
 import com.smbt.pickod.dto.admin.journal.AdmPlaceReplyDetailsDTO;
 import com.smbt.pickod.dto.admin.place.AdmPlaceRepliesDTO;
+import com.smbt.pickod.dto.admin.reply.AdmJnlReplyFilterDTO;
+import com.smbt.pickod.dto.admin.reply.AdmPlaceReplyFilterDTO;
 import com.smbt.pickod.mapper.admin.AdmRepliesMgmtMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -22,6 +24,11 @@ public class AdmRepliesMgmtService {
         return admRepliesMgmtMapper.getJnlReplies(jnlNum);
     }
 
+    // 검색된 여행 발자국 댓글 리스트
+    public List<AdmJnlRepliesDTO> filterJnlReplies(AdmJnlReplyFilterDTO admJnlReplyFilterDTO){
+        return admRepliesMgmtMapper.filterJnlReplies(admJnlReplyFilterDTO);
+    }
+
     // 여행 발자국 댓글 상세
     public AdmJnlReplyDetailsDTO jnlReplyDetails(Long cmtId){
         return admRepliesMgmtMapper.getJnlReplyDetail(cmtId);
@@ -35,6 +42,11 @@ public class AdmRepliesMgmtService {
     // 장소 댓글 리스트
     public List<AdmPlaceRepliesDTO> placeReplies(Long placeId){
         return admRepliesMgmtMapper.getPlaceReplies(placeId);
+    }
+
+    // 검색된 장소 댓글 리스트
+    public List<AdmPlaceRepliesDTO> filterPlaceReplies(AdmPlaceReplyFilterDTO admPlaceReplyFilterDTO){
+        return admRepliesMgmtMapper.filterPlaceReplies(admPlaceReplyFilterDTO);
     }
 
     // 장소 댓글 상세

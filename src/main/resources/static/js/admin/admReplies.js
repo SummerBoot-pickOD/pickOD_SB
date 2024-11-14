@@ -99,13 +99,26 @@ function toDetailPath(postId, postType) {
     window.location.href = '/admin/admMemberMgmt/toSanction?memNum=' + memNum;
   })
 
-  //회원 삭제
+  //댓글 삭제
   deleteBtn.addEventListener("click", function(){
     const nickname = this.getAttribute('data-commenter-nickname');
     const cmtId = this.getAttribute('data-cmt-id');
     let result=confirm(` "${nickname}" 님이 작성한 댓글을 삭제하시겠습니까?`);
+    const currentUrl = window.location.href;
     if(result){
-      window.location.href = '/admin/admReplies/deleteCmt?cmtId=' + cmtId;
+      fetch( `/admin/admReplies/deleteCmt/${cmtId}`, {
+        method: 'POST'
+      })
+          .then(response => {
+            if(response.ok){
+              alert(`${nickname}님의 댓글이 삭제되었습니다.`);
+              window.location.href = currentUrl;
+            } else {
+              alert(`댓글 삭제에 실패하였습니다.`);
+            }
+          }).catch(error => {
+        console.error("에러: ", error)
+      });
     }
   })
 

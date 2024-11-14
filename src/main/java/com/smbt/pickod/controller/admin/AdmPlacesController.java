@@ -7,12 +7,10 @@ import com.smbt.pickod.dto.place.PlaceDetailDTO;
 import com.smbt.pickod.service.admin.AdmPlaceMgmtService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLOutput;
 import java.util.List;
@@ -57,9 +55,13 @@ public class AdmPlacesController {
         return "admin/admReport";
     }
 
-    @GetMapping("/details/deletePlace")
-    public String deletePlace(@RequestParam Long placeId){
-        admPlaceMgmtService.deletePlace(placeId);
-        return "redirect:/admin/admPlaceMgmt/list";
+    @PostMapping("/details/deletePlace/{placeId}")
+    public ResponseEntity<String> deletePlace(@PathVariable Long placeId) {
+        try {
+            admPlaceMgmtService.deletePlace(placeId);
+            return ResponseEntity.ok("장소 삭제됨");
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("회원 삭제 실패");
+        }
     }
 }
