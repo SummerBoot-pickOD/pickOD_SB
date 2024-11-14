@@ -1,6 +1,7 @@
 package com.smbt.pickod.controller.journal;
 
 import com.smbt.pickod.dto.journal.JournalDTO;
+import com.smbt.pickod.dto.journal.JournalDetailDTO;
 import com.smbt.pickod.mapper.journal.JournalMapper;
 import com.smbt.pickod.service.journal.JournalService;
 import lombok.RequiredArgsConstructor;
@@ -62,11 +63,17 @@ public class JournalListController {
     @GetMapping("/detail/{jnlNum}")
     public String getJournalDetail(@PathVariable long jnlNum, Model model) {
         // journalNum을 이용해 상세 정보를 가져옴
-        JournalDTO journalDetail = journalService.getJournalByNum(jnlNum);
-
+        JournalDetailDTO journalDetail = journalService.getJournalByNum(jnlNum);
+        journalService.increaseViews(jnlNum);
+        // journalDetail 로그로 확인
+        if (journalDetail == null) {
+            System.out.println("Journal detail is null");
+        } else {
+            // journalDetail 객체의 데이터를 출력하여 확인
+            System.out.println("Journal detail: " + journalDetail.toString());
+        }
         // 모델에 데이터를 추가해서 뷰로 전달
         model.addAttribute("journalDetail", journalDetail);
-
         // 여행일지 상세 페이지로 이동
         return "journal/journalDetail";
     }

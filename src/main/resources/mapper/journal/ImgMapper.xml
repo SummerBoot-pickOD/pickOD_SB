@@ -5,8 +5,8 @@
         <selectKey keyProperty="jnlImgsId" resultType="Long" order="BEFORE">
             SELECT SEQ_FILE.NEXTVAL FROM DUAL
         </selectKey>
-        INSERT INTO JNL_IMGS(JNL_IMGS_ID, JNL_IMGS_GUID ,FILE_NAME, UPLOADPATH, JNL_IMGS_ORDER, JNL_NUM, JNL_DAY, PLACE_ID)
-        VALUES(#{jnlImgsId}, #{jnlImgsGuid}, #{fileName}, #{uploadpath}, #{jnlImgsOrder}, #{jnlNum}, #{jnlDay}, #{placeId})
+        INSERT INTO JNL_IMGS(JNL_IMGS_ID, JNL_IMGS_GUID ,FILE_NAME, UPLOADPATH, JNL_IMGS_ORDER, JNL_NUM, JNL_DAY)
+        VALUES(#{jnlImgsId}, #{jnlImgsGuid}, #{fileName}, #{uploadpath}, #{jnlImgsOrder}, #{jnlNum}, #{jnlDay})
     </insert>
 
     <delete id="deleteImg" parameterType="Long">
@@ -15,7 +15,7 @@
     </delete>
 
     <select id="selectList" parameterType="Long" resultType="JnlImgsDTO">
-        SELECT JNL_IMGS_ID, JNL_IMGS_GUID ,FILE_NAME, UPLOADPATH, JNL_IMGS_ORDER, JNL_NUM, JNL_DAY, PLACE_ID
+        SELECT JNL_IMGS_ID, JNL_IMGS_GUID ,FILE_NAME, UPLOADPATH, JNL_IMGS_ORDER, JNL_NUM, JNL_DAY
         FROM JNL_IMGS
         WHERE JUL_NUM = #{jnlNum}
     </select>

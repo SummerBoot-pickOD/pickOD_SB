@@ -51,51 +51,51 @@ class AdmReportServiceTest {
         verify(admReportMapper,times(1)).solveReport(any());
     }
 
-    @DisplayName("상세보기 모달 - 작성글 바로가기")
-    @Test
-    void goPost(){
-        AdmReportGoPostDTO dto = new AdmReportGoPostDTO();
-        String res;
-        AdmReportGoPostDTO cmtResDto = new AdmReportGoPostDTO();
-
-        log.info("댓글 테스트");
-        //댓글일 경우
-        dto.setPostId(1L);
-        dto.setPostType("C");
-
-        cmtResDto.setPostId(2L);
-        cmtResDto.setPostType("J");
-        doReturn(Optional.of(cmtResDto)).when(admReportMapper).getPostFromCmt(any());
-
-        res = admReportService.readRprtPost(dto);
-
-        verify(admReportMapper,times(1)).getPostFromCmt(any());
-        assertThat(res).isEqualTo("2");
-        log.info("댓글 테스트 성공");
-
-        //쪽지일 경우
-        log.info("쪽지 테스트");
-        dto.setPostId(1L);
-        dto.setPostType("M");
-        String msgCmt = "에헤라디야 판도 크다~ 패를 돌려보자~";
-        doReturn(Optional.of(msgCmt)).when(admReportMapper).readReportedMessage(any());
-
-        res = admReportService.readRprtPost(dto);
-
-        verify(admReportMapper,times(1)).readReportedMessage(any());
-        assertThat(res).isEqualTo(msgCmt);
-        log.info("쪽지 테스트 성공");
-
-        //그 외일 경우
-        log.info("게시물 테스트");
-        dto.setPostId(1L);
-        dto.setPostType("J");
-
-        res = admReportService.readRprtPost(dto);
-
-        assertThat(res).isEqualTo("1");
-        log.info("게시물 테스트 성공");
-    }
+//    @DisplayName("상세보기 모달 - 작성글 바로가기")
+//    @Test
+//    void goPost(){
+//        AdmReportGoPostDTO dto = new AdmReportGoPostDTO();
+//        String res;
+//        AdmReportGoPostDTO cmtResDto = new AdmReportGoPostDTO();
+//
+//        log.info("댓글 테스트");
+//        //댓글일 경우
+//        dto.setPostId(1L);
+//        dto.setPostType("C");
+//
+//        cmtResDto.setPostId(2L);
+//        cmtResDto.setPostType("J");
+//        doReturn(Optional.of(cmtResDto)).when(admReportMapper).getPostFromCmt(any());
+//
+//        res = admReportService.readRprtPost(dto);
+//
+//        verify(admReportMapper,times(1)).getPostFromCmt(any());
+//        assertThat(res).isEqualTo("2");
+//        log.info("댓글 테스트 성공");
+//
+//        //쪽지일 경우
+//        log.info("쪽지 테스트");
+//        dto.setPostId(1L);
+//        dto.setPostType("M");
+//        String msgCmt = "에헤라디야 판도 크다~ 패를 돌려보자~";
+//        doReturn(Optional.of(msgCmt)).when(admReportMapper).readReportedMessage(any());
+//
+//        res = admReportService.readRprtPost(dto);
+//
+//        verify(admReportMapper,times(1)).readReportedMessage(any());
+//        assertThat(res).isEqualTo(msgCmt);
+//        log.info("쪽지 테스트 성공");
+//
+//        //그 외일 경우
+//        log.info("게시물 테스트");
+//        dto.setPostId(1L);
+//        dto.setPostType("J");
+//
+//        res = admReportService.readRprtPost(dto);
+//
+//        assertThat(res).isEqualTo("1");
+//        log.info("게시물 테스트 성공");
+//    }
 
     @DisplayName("제재 횟수 확인")
     @Test

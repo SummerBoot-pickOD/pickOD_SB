@@ -15,6 +15,7 @@ public class JnlImgsDTO {
     private String jnlImgsGuid;
     private String fileName;
     private String uploadPath;
+    private Long jnlImgsOrder;
     private Long jnlNum;
     private Long jnlDay;
     private Long placeId;

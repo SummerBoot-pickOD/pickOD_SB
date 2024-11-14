@@ -18,4 +18,5 @@ public class JnlDayDTO {
     private Long placeId;
     private List<JournalDTO> journalList;
     private List<TempPlaceDTO> tempPlaceList;
+    private List<JnlImgsDTO> jnlImgsList;
 }

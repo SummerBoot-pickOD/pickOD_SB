@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.smbt.pickod.mapper.journal.JournalMapper">
 
-    <select id="getJournalWithDaysByNum" parameterType="long" resultType="JournalDTO">
+    <select id="getJournalWithDaysByNum" parameterType="long" resultType="JournalDetailDTO">
         SELECT
             -- JOURNAL 테이블 컬럼들
             j.JNL_NUM,
@@ -18,25 +18,31 @@
             j.JNL_AREA,
 
             -- MEMBER 및 MEMBER_IMGS 테이블의 정보
-            m.MEMBER_NICKNAME AS nickname,
-            mi.MEMBER_IMG_URL AS memberImgUrl,
-            mi.MEMBER_IMGS_ID AS memberImgsId,
-            mi.MEMBER_IMGS_GUID AS memberImgsGuid,
-            mi.FILE_NAME AS fileName,
-            mi.UPLOADPATH AS uploadPath,
+            m.MEMBER_NICKNAME,
+            mi.MEMBER_IMG_URL,
+            mi.MEMBER_IMGS_ID,
+            mi.MEMBER_IMGS_GUID,
+            mi.FILE_NAME AS MEMBER_IMG_FILE_NAME,
+            mi.UPLOADPATH AS MEMBER_IMG_UPLOADPATH,
 
             -- JOURNAL_DAY 테이블 컬럼들
             jd.JNL_NUM,
             jd.JNL_DAY,
             jd.JNL_PLACE_ORDER,
             jd.JNL_CONTENTS,
-            jd.PLACE_ID
+
+            -- JNL_IMGS 테이블 컬럼들
+            ji.FILE_NAME AS JNL_IMG_FILE_NAME,
+            ji.JNL_IMGS_GUID,
+            ji.UPLOADPATH AS JNL_IMG_UPLOADPATH,
+            ji.JNL_IMGS_ORDER
 
         FROM
             JOURNAL j
                 JOIN MEMBER m ON j.MEMBER_NUM = m.MEMBER_NUM
                 LEFT JOIN MEMBER_IMGS mi ON m.MEMBER_IMGS_ID = mi.MEMBER_IMGS_ID
                 LEFT JOIN JNL_DAY jd ON j.JNL_NUM = jd.JNL_NUM
+                LEFT JOIN JNL_IMGS ji ON jd.JNL_NUM = ji.JNL_NUM AND jd.JNL_DAY = ji.JNL_DAY
         WHERE
             j.JNL_NUM = #{jnlNum}
     </select>
@@ -47,7 +53,6 @@
             jd.JNL_DAY,
             jd.JNL_PLACE_ORDER,
             jd.JNL_CONTENTS,
-            jd.PLACE_ID
         FROM
             JOURNAL_DAY jd
         WHERE
@@ -56,19 +61,101 @@
     </select>
 
     <select id="searchJournalByKeyword" resultType="JournalDTO">
-        SELECT * FROM JOURNAL
+        SELECT
+            -- JOURNAL 테이블 컬럼들
+            j.JNL_NUM,
+            j.JNL_TITLE,
+            j.MEMBER_NUM,
+            j.JNL_VIEWS,
+            j.JNL_MEMO,
+            j.JNL_CREATE_DATE,
+            j.JNL_UPDATE_DATE,
+            j.JNL_PERIOD,
+            j.JNL_TAG,
+            j.JNL_THEME,
+            j.JNL_AREA,
+
+            -- MEMBER 테이블의 정보
+            m.MEMBER_NICKNAME,
+
+            -- MEMBER_IMGS 테이블의 정보
+            mi.MEMBER_IMG_URL,
+            mi.MEMBER_IMGS_ID,
+            mi.MEMBER_IMGS_GUID,
+            mi.FILE_NAME AS MEMBER_IMG_FILE_NAME,
+            mi.UPLOADPATH AS MEMBER_IMG_UPLOADPATH,
+
+            -- JOURNAL_DAY 테이블 컬럼들
+            jd.JNL_DAY,
+            jd.JNL_PLACE_ORDER,
+            jd.JNL_CONTENTS,
+
+            -- JNL_IMGS 테이블 컬럼들
+            ji.FILE_NAME AS JNL_IMG_FILE_NAME,
+            ji.JNL_IMGS_GUID,
+            ji.UPLOADPATH AS JNL_IMG_UPLOADPATH,
+            ji.JNL_IMGS_ORDER
+
+        FROM
+            JOURNAL j
+                JOIN MEMBER m ON j.MEMBER_NUM = m.MEMBER_NUM
+                LEFT JOIN MEMBER_IMGS mi ON m.MEMBER_IMGS_ID = mi.MEMBER_IMGS_ID
+                LEFT JOIN JNL_DAY jd ON j.JNL_NUM = jd.JNL_NUM
+                LEFT JOIN JNL_IMGS ji ON jd.JNL_NUM = ji.JNL_NUM AND jd.JNL_DAY = ji.JNL_DAY
         WHERE
-            JNL_TITLE LIKE '%' || #{keyword} || '%'
-           OR JNL_AREA LIKE '%' || #{keyword} || '%'
-           OR JNL_TAG LIKE '%' || #{keyword} || '%'
-           OR JNL_THEME LIKE '%' || #{keyword} || '%'
-           OR JNL_PERIOD LIKE '%' || #{keyword} || '%'
-        ORDER BY JNL_CREATE_DATE DESC
+            j.JNL_TITLE LIKE '%' || #{keyword} || '%'
+           OR j.JNL_AREA LIKE '%' || #{keyword} || '%'
+           OR j.JNL_TAG LIKE '%' || #{keyword} || '%'
+           OR j.JNL_THEME LIKE '%' || #{keyword} || '%'
+           OR j.JNL_PERIOD LIKE '%' || #{keyword} || '%'
+        ORDER BY j.JNL_CREATE_DATE DESC
     </select>
 
     <select id="searchJournalByArea" resultType="JournalDTO">
-        SELECT * FROM JOURNAL
-        WHERE JNL_AREA LIKE '%' || #{area} || '%'
+        SELECT
+            -- JOURNAL 테이블 컬럼들
+            j.JNL_NUM,
+            j.JNL_TITLE,
+            j.MEMBER_NUM,
+            j.JNL_VIEWS,
+            j.JNL_MEMO,
+            j.JNL_CREATE_DATE,
+            j.JNL_UPDATE_DATE,
+            j.JNL_PERIOD,
+            j.JNL_TAG,
+            j.JNL_THEME,
+            j.JNL_AREA,
+
+            -- MEMBER 테이블의 정보
+            m.MEMBER_NICKNAME,
+
+            -- MEMBER_IMGS 테이블의 정보
+            mi.MEMBER_IMG_URL,
+            mi.MEMBER_IMGS_ID,
+            mi.MEMBER_IMGS_GUID,
+            mi.FILE_NAME AS MEMBER_IMG_FILE_NAME,
+            mi.UPLOADPATH AS MEMBER_IMG_UPLOADPATH,
+
+            -- JOURNAL_DAY 테이블 컬럼들
+            jd.JNL_DAY,
+            jd.JNL_PLACE_ORDER,
+            jd.JNL_CONTENTS,
+
+            -- JNL_IMGS 테이블 컬럼들
+            ji.FILE_NAME AS JNL_IMG_FILE_NAME,
+            ji.JNL_IMGS_GUID,
+            ji.UPLOADPATH AS JNL_IMG_UPLOADPATH,
+            ji.JNL_IMGS_ORDER
+
+        FROM
+            JOURNAL j
+                JOIN MEMBER m ON j.MEMBER_NUM = m.MEMBER_NUM
+                LEFT JOIN MEMBER_IMGS mi ON m.MEMBER_IMGS_ID = mi.MEMBER_IMGS_ID
+                LEFT JOIN JNL_DAY jd ON j.JNL_NUM = jd.JNL_NUM
+                LEFT JOIN JNL_IMGS ji ON jd.JNL_NUM = ji.JNL_NUM AND jd.JNL_DAY = ji.JNL_DAY
+        WHERE
+            j.JNL_AREA LIKE '%' || #{area} || '%'
+        ORDER BY j.JNL_CREATE_DATE DESC
     </select>
 
     <select id="countTotalJournals" resultType="int">
@@ -199,6 +286,13 @@
         DELETE FROM JOURNAL
         WHERE JNL_NUM = #{jnlNum}
     </delete>
+
+    <update id="plusViews">
+        UPDATE JOURNAL
+        SET
+            JNL_VIEWS = JNL_VIEWS + 1
+        WHERE JNL_NUM = #{jnlNum}
+    </update>
 
 
 </mapper>

@@ -12,8 +12,9 @@ import java.util.Optional;
 public interface JournalMapper {
 
     // JOURNAL 관련 메서드들
+    void plusViews(@Param("jnlNum") Long jnlNum); // 조회수 증가
 
-    JournalDTO getJournalWithDaysByNum(@Param("jnlNum") long jnlNum); // journalDetail로 연결하기 위한 조회
+    JournalDetailDTO getJournalWithDaysByNum(@Param("jnlNum") long jnlNum); // journalDetail로 연결하기 위한 조회
 
     int countTotalJournals(); //게시글 총 개수
 
