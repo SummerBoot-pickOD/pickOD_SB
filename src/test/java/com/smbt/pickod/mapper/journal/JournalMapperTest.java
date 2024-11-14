@@ -41,7 +41,7 @@ public class JournalMapperTest {
 
     @Test
     public void testGetJournalsByDateDesc() { //날짜 최신순
-        List<JournalDTO> journals = journalMapper.getJournalsByDateDesc();
+        List<JournalDetailDTO> journals = journalMapper.getJournalsByDateDesc();
 
         Assertions.assertNotNull(journals, "결과는 null이 아니어야 합니다.");
         assertFalse(journals.isEmpty(), "결과는 비어있지 않아야 합니다.");
@@ -61,7 +61,7 @@ public class JournalMapperTest {
     @Test
     public void testGetJournalsByPickCountDesc() { //찜하기 순
 
-        List<JournalDTO> result = journalMapper.getJournalsByPickCountDesc();
+        List<JournalDetailDTO> result = journalMapper.getJournalsByPickCountDesc();
 
         Assertions.assertNotNull(result);
         assertFalse(result.isEmpty());
@@ -77,7 +77,7 @@ public class JournalMapperTest {
     @Test
     public void testGetSelectedFootprints() { //선정 발자국
 
-        List<JournalDTO> result = journalMapper.getSelectedFootprints();
+        List<JournalDetailDTO> result = journalMapper.getSelectedFootprints();
 
         Assertions.assertNotNull(result, "결과는 null이 아니어야 합니다.");
         assertFalse(result.isEmpty(), "결과 리스트는 비어 있으면 안됩니다.");
