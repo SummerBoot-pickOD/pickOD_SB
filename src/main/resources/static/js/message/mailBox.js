@@ -174,6 +174,10 @@ document.addEventListener('DOMContentLoaded', function () {
       if (event.target.tagName === 'INPUT' && event.target.type === 'checkbox') {
         return; // 체크박스를 클릭하면 함수 실행을 멈춤
       }
+      // 읽으면 편지 읽음표시기능
+      let readMail =this.querySelector('.mail-open img');
+      readMail.src = '../../img/message/받은편지.png';
+
       fetch(`/message/getmailModal/${data.msgId}`, {
         method: "GET",
         headers: {'Content-Type': 'application/json'},

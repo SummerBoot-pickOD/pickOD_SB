@@ -182,7 +182,7 @@ function renderCheckList(data) {
     imgBoxDiv.classList.add('checklist-imgbox');
     const img = document.createElement('img');
     img.classList.add('checklist-img');
-    img.src = item.thumbnailUrl ? item.thumbnailUrl : '../../img/mypage.png';
+    img.src = item.thumbnailUrl ? item.thumbnailUrl : '../../img/mypage/더미사진.png';
     img.alt = '썸네일 이미지';
     imgBoxDiv.appendChild(img);
 
@@ -306,8 +306,7 @@ function renderTripList(data) {
     imgBoxDiv.classList.add('triplist-imgbox');
     const img = document.createElement('img');
     img.classList.add('triplist-img');
-    // img.src = item.thumbnailUrl ? item.thumbnailUrl : '../../img/mypage.png';
-    img.src = '../../img/mypage.png';
+    img.src = item.thumbnailUrl ? item.thumbnailUrl : '../../img/mypage/더미사진.png';
     img.alt = '썸네일 이미지';
     imgBoxDiv.appendChild(img);
 
@@ -353,7 +352,7 @@ function renderMyPlanList(data){
     link.href = "../planner/myplanDetail.html";
     const img = document.createElement("img");
     // img.src = plan.imgSrc;
-    img.src = '../../img/mypage.png';
+    img.src = '../../img/mypage/나무사진.png';
     img.classList.add("myplan-img");
     img.alt = "내여행계획";
     link.appendChild(img);
