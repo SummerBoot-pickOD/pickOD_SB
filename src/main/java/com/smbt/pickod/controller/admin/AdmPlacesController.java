@@ -61,7 +61,7 @@ public class AdmPlacesController {
             admPlaceMgmtService.deletePlace(placeId);
             return ResponseEntity.ok("장소 삭제됨");
         } catch (Exception e) {
-            return ResponseEntity.status(500).body("회원 삭제 실패");
+            return ResponseEntity.status(500).body("장소 삭제 실패");
         }
     }
 }
