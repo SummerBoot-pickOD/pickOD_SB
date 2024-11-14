@@ -1,4 +1,7 @@
 /* 현식님 여행발자국 상세 배껴온 부분 시작 */
+*{
+  font-family: 'Arial', sans-serif;
+}
 main {
   /* 마진만 110px 로 수정 */
   margin: 110px 300px;

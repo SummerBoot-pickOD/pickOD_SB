@@ -65,12 +65,19 @@ public class AdmRepliesController {
         return ResponseEntity.ok(details);
     }
 
+    //댓글 검색
+
+
 
     // 댓글 삭제
-    @GetMapping("/deleteCmt")
-    public String deleteCmt(@RequestParam Long cmtId) {
-        admRepliesMgmtService.deleteCmt(cmtId);
-        return "redirect:/admin/admMemberMgmt/list";
+    @PostMapping("/deleteCmt/{cmtId}")
+    public ResponseEntity<String> deleteCmt(@PathVariable Long cmtId) {
+        try {
+            admRepliesMgmtService.deleteCmt(cmtId);
+            return ResponseEntity.ok("댓글 삭제됨");
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("댓글 삭제 실패");
+        }
     }
 
 }

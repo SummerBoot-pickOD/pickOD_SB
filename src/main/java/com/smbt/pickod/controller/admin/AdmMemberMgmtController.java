@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
+import java.util.Map;
 import java.util.NoSuchElementException;
 
 @Controller
@@ -60,8 +61,6 @@ public class AdmMemberMgmtController {
         return "/admin/admReport";
     }
 
-
-
 //    @GetMapping("/details/sendMsg")
 //    @ResponseBody
 //    public ResponseEntity<AdmToSendMsgDTO> admMemberDetails(@RequestParam Long memberNum, @RequestParam String msg) {
@@ -69,10 +68,13 @@ public class AdmMemberMgmtController {
 //
 //    }
 
-    @GetMapping("/deleteMember")
-    public String deleteMember(@RequestParam Long memNum) {
-            admMemberMgmtService.deleteMember(memNum);
-            return "redirect:/admin/admMemberMgmt/list";
-
+    @PostMapping("/deleteMember/{memNum}")
+    public ResponseEntity<String> deleteMember(@PathVariable Long memNum) {
+         try{
+             admMemberMgmtService.deleteMember(memNum);
+             return  ResponseEntity.ok("회원 삭제됨");
+         } catch (Exception e) {
+             return ResponseEntity.status(500).body("회원 삭제 실패");
+         }
     }
 }

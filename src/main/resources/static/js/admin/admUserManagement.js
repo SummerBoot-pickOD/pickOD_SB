@@ -1,12 +1,4 @@
 document.addEventListener('DOMContentLoaded', function () {
-  $(function () {
-    $("#header").load("../../html/admin/admHeader.html");
-  });
-
-  $(function () {
-    $("#footer").load("../../html/main/footer.html");
-  });
-
   //회원 상세보기 모달
   const openModal = document.querySelectorAll('.user-detail-btn');
   const usrDetailModal = document.querySelector('.nonmodal-container');
@@ -24,6 +16,15 @@ document.addEventListener('DOMContentLoaded', function () {
   //회원 탈퇴 버튼
   const deleteMemBtn = document.querySelector('.withdrawal');
 
+    function escapeHTML(str) {
+        var element = document.createElement('div');
+        if (str) {
+            element.innerText = str;
+            element.textContent = str;
+        }
+        return element.innerHTML;
+    }
+
   //회원 상세 보기
   openModal.forEach(btn => {
     btn.addEventListener("click", function () {
@@ -33,11 +34,13 @@ document.addEventListener('DOMContentLoaded', function () {
           .then(response => response.json())
           .then(data => {
             console.log(data);
-            document.getElementById('member-id').textContent = data.memberId;
-            document.getElementById('member-nickname').textContent = data.memberNickname;
-            document.getElementById('member-address').textContent = data.memberAddress;
-            document.getElementById('member-bdate').textContent = data.memberBdate;
-            document.getElementById('member-gender').textContent = data.memberGender;
+            document.getElementById('member-id').textContent = escapeHTML(data.memberId);
+            document.getElementById('member-nickname').textContent = escapeHTML(data.memberNickName);
+            document.getElementById('member-address').textContent = escapeHTML(data.memberAddress);
+            document.getElementById('member-bday').textContent = data.memberBdate;
+            document.getElementById('member-gender').textContent = escapeHTML(data.memberGender) || "선택안함";
+            document.getElementById('tot-journals').textContent = data.totJournals;
+            document.getElementById('tot-plans').textContent = data.totPlans;
             document.getElementById('sanction-cnt').textContent = data.sanctionCnt;
             document.getElementById('is-banned').textContent = data.isBanned;
               document.getElementById('sanction-end-date').textContent = data.sanctionEndDate;
@@ -99,7 +102,19 @@ document.addEventListener('DOMContentLoaded', function () {
       let result=confirm(`회원 "${nickname}" 을 삭제하시겠습니까?`);
       console.log(nickname);
       if (result) {
-          window.location.href = '/admin/admMemberMgmt/deleteMember?memNum=' + memNum;
+          fetch(`/admin/admMemberMgmt/deleteMember/${memNum}`, {
+              method: 'POST'
+          })
+              .then(response => {
+                  if(response.ok){
+                      alert(`${nickname}님이 삭제되었습니다.`);
+                      window.location.href = '/admin/admMemberMgmt/list';
+                  } else {
+                      alert(`${nickname}님 삭제에 실패하였습니다.`);
+                  }
+              }).catch(error => {
+                  console.error("에러: ", error)
+          });
       } else {
           window.location.href = '/admin/admMemberMgmt/list';
       }

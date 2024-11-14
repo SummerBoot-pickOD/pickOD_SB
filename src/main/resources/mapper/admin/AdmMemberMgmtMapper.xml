@@ -79,13 +79,13 @@
             m.member_id,
             m.member_nickname,
             m.member_address,
-            m.member_bdate,
+            TO_CHAR(m.member_bdate, 'YYYY-MM-DD') AS member_bdate,
             m.member_gender,
             COUNT(DISTINCT j.JNL_NUM) AS tot_journals,
             COUNT(DISTINCT p.plan_id) AS tot_plans,
             s.sanction_cnt,
             CASE WHEN s.sanction_start_date <= SYSDATE AND s.sanction_end_date >= SYSDATE THEN 'Y' ELSE 'N' END AS is_banned,
-            CASE WHEN s.sanction_end_date > SYSDATE THEN TO_CHAR(s.sanction_end_date, 'YYYY-MM-DD') ELSE '0' END AS sanction_end_date
+            CASE WHEN s.sanction_end_date > SYSDATE THEN TO_CHAR(s.sanction_end_date, 'YYYY-MM-DD') ELSE 'N' END AS sanction_end_date
         FROM
             MEMBER m
                 LEFT JOIN PLAN p ON m.member_num = p.member_num
@@ -98,11 +98,11 @@
             m.member_id,
             m.member_nickname,
             m.member_address,
-            m.member_bdate,
+            TO_CHAR(m.member_bdate, 'YYYY-MM-DD'),
             m.member_gender,
             s.sanction_cnt,
-            CASE WHEN s.sanction_start_date <= SYSDATE AND s.sanction_end_date >= SYSDATE THEN 'Y' ELSE 'N' END,
-            CASE WHEN s.sanction_end_date > SYSDATE THEN TO_CHAR(s.sanction_end_date, 'YYYY-MM-DD') ELSE '0' END
+            CASE WHEN s.sanction_start_date <= SYSDATE AND s.sanction_end_date >= SYSDATE THEN 'Y' ELSE 'N' END ,
+            CASE WHEN s.sanction_end_date > SYSDATE THEN TO_CHAR(s.sanction_end_date, 'YYYY-MM-DD') ELSE 'N' END
         ]]>
     </select>
 
