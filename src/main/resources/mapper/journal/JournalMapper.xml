@@ -266,7 +266,7 @@
                 LEFT JOIN JNL_IMGS ji ON jd.JNL_NUM = ji.JNL_NUM AND jd.JNL_DAY = ji.JNL_DAY
 
         ORDER BY
-            pick_count DESC;
+            pick_count DESC
     </select>
 
     <select id="getSelectedFootprints" resultType="JournalDetailDTO">
@@ -303,11 +303,7 @@
             ji.FILE_NAME AS JNL_IMG_FILE_NAME,
             ji.JNL_IMGS_GUID,
             ji.UPLOADPATH AS JNL_IMG_UPLOADPATH,
-            ji.JNL_IMGS_ORDER,
-
-            -- TEMPLATE 테이블 컬럼들 (필요한 컬럼들 추가)
-            t.TEMPLATE_NAME,
-            t.TEMPLATE_DESC
+            ji.JNL_IMGS_ORDER
 
         FROM
             JOURNAL j
@@ -316,10 +312,9 @@
                 LEFT JOIN JNL_DAY jd ON j.JNL_NUM = jd.JNL_NUM
                 LEFT JOIN JNL_IMGS ji ON jd.JNL_NUM = ji.JNL_NUM AND jd.JNL_DAY = ji.JNL_DAY
                 JOIN TEMPLATE t ON j.JNL_NUM = t.JNL_NUM
-                LEFT JOIN JNL_IMGS i ON j.JNL_NUM = i.JNL_NUM
 
         ORDER BY
-            j.JNL_CREATE_DATE DESC;
+            j.JNL_CREATE_DATE DESC
     </select>
 
     <select id="getJournalByPermission" parameterType="long" resultType="JournalDTO">
