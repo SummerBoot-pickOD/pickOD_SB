@@ -12,21 +12,27 @@
 </head>
 <body>
 <div id="header" th:replace="~{/main/header}"></div>
-    <div id="report"></div>
+    <div id="report" th:replace="~{/report/reportSend}"></div>
     <main>
         <div class="title-containerbox" th:text="${journalDetail.jnlTitle}"></div>
         <div class="placeIcon"> <!-- 신고, 찜 -->
+            <div class="views">
+                <img class="countimg" th:src="@{/img/journal/count.png}" alt="">
+                <div th:text="${journalDetail.jnlViews}"></div>
+            </div>
             <div>
                 <img class="reportimg" src="../../img/place/placeDetail/report.png" alt="">
-                <img class="saveimg" src="../../img/main/unsaved.png" alt="">
+<!--                <img class="saveimg" th:data-journal-jnlNum="${JournalDetail.jnlNum}" alt="">-->
             </div>
         </div>
         <div class="container-display">
-            <div class="profile-container">
+            <div class="profile-container" >
                 <div class="profile">
-                    <div class="photo"></div>
+                    <div class="photo" >
+                        <img th:src="@{/img/mypage/기본사람사진.png}" alt="Journal Image"/>
+                    </div>
                     <div class="user-name-container">
-                        <div class="user-name" th:text="${journalDetail.nickname}"></div>
+                        <div class="user-name" th:text="${journalDetail.memberNickname}"></div>
 <!--                        <button class="message-button">-->
 <!--                            <a href="#">-->
 <!--                              <img src="../../img/message/쪽지함.png" alt="이미지 버튼" />-->
@@ -43,8 +49,7 @@
                         <div class="schedule">
                             일정
                         </div>
-                        <div class="schedule-content">
-                            당일여행
+                        <div class="schedule-content" th:text="${journalDetail.jnlPeriod}">
                         </div>
                     </div>
                 </div>
@@ -54,8 +59,7 @@
                         <div class="schedule-tag">
                             태그
                         </div>
-                        <div class="schedule-tag-content">
-                            #친구와 함께
+                        <div class="schedule-tag-content" th:text="${journalDetail.jnlTag}">
                         </div>
                     </div>
                 </div>
@@ -65,8 +69,17 @@
                         <div class="schedule-thema">
                             테마
                         </div>
-                        <div class="schedule-thema-content">
-                            힐링
+                        <div class="schedule-thema-content" th:text="${journalDetail.jnlTheme}">
+                        </div>
+                    </div>
+                </div>
+                <div class="tag-container-schedule">
+                    <img class="footprint" th:src="@{/img/journal/footprint_pink.png}" alt="">
+                    <div class="area-container">
+                        <div class="schedule-area">
+                            지역
+                        </div>
+                        <div class="schedule-area-content" th:text="${journalDetail.jnlArea}">
                         </div>
                     </div>
                 </div>
@@ -74,9 +87,7 @@
         </div>
 
         <div class="Day-container">
-            <div class="Day">
-                DAY1
-            </div>
+            <div class="Day" th:text="'DAY' + ${journalDetail.jnlDay}"></div>
         </div>
         <div class="detail-container">
             <div class="detail-box">
@@ -88,24 +99,16 @@
                 </div>
                 <div class="detail-content-container">
                     <div class="detail-photo">
-                        <img class="arrow left-arrow" src="../../img/journal/왼쪽 화살표.png" alt="">
-                        <img class="main-photo" src="../../img/journal/하단 큰 이미지.png" alt="">
-                        <img class="arrow right-arrow" src="../../img/journal/오른쪽 화살표.png" alt="">
+                        <img class="arrow left-arrow" th:src="@{/img/journal/왼쪽 화살표.png}" alt="">
+                        <img class="main-photo" th:src="${journalDetail.jnlImgUploadpath + '/' + journalDetail.jnlImgFileName}" alt="Journal Image"/>
+                        <img class="arrow right-arrow" th:src="@{/img/journal/오른쪽 화살표.png}" alt="">
                     </div>
-                    <div class="detail-text">
-                        친구랑 같이 당일 수도권 여행 어쩌구 저쩌구 가려다가 미술관 가보기로 했어요. 
-        기타 등등 뭐 했는지에 대한 내용들이 주절주절 들어갈거에요. 기타 등등 뭐 했는지에 대한 내용들이 주절주절 들어갈거에요.
-        기타 등등 뭐 했는지에 대한 내용들이 주절주절 들어갈거에요.기타 등등 뭐 했는지에 대한 내용들이 주절주절 들어갈거에요.
-        기타 등등 뭐 했는지에 대한 내용들이 주절주절 들어갈거에요.기타 등등 뭐 했는지에 대한 내용들이 주절주절 들어갈거에요.
-        기타 등등 뭐 했는지에 대한 내용들이 주절주절 들어갈거에요.기타 등등 뭐 했는지에 대한 내용들이 주절주절 들어갈거에요.
-        기타 등등 뭐 했는지에 대한 내용들이 주절주절 들어갈거에요.
-        기타 등등 뭐 했는지에 대한 내용들이 주절주절 들어갈거에요.
+                    <div class="detail-text" th:text="${journalDetail.jnlContents}">
                     </div>
                 </div>
             </div>
         </div>
 
-        </div>
         <div id = "reply-container">
             <div class="name-box">
                 발자국 톡(댓글 이름 자리)

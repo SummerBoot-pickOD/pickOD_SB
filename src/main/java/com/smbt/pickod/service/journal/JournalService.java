@@ -207,9 +207,13 @@ public class JournalService {
 
     // journalDetail과 연결한 상세 페이지
 
+    public void increaseViews(Long jnlNum) {
+        journalMapper.plusViews(jnlNum); // 조회수 증가 쿼리 호출
+    }
+
 
     // 특정 여행일지의 상세 정보를 가져오는 서비스 메서드
-    public JournalDTO getJournalByNum(long jnlNum) {
+    public JournalDetailDTO getJournalByNum(long jnlNum) {
         log.info(jnlNum + "JournalService 확인 ==========");
         return journalMapper.getJournalWithDaysByNum(jnlNum);
     }

@@ -148,8 +148,24 @@ public class JournalMapperTest {
         }
     }
 
-
-
+//    @Test
+//    public void testGetJournalWithDaysByNum() {
+//        Long jnlNum = 2L;  // 테스트용 jnlNum 값
+//
+//        JournalDTO journal = journalMapper.getJournalWithDaysByNum(jnlNum);
+//
+//        // JournalDTO에 포함된 정보 검증
+//        assertNotNull(journal);
+//        assertNotNull(journal.getJnlNum());
+//        assertNotNull(journal.getJnlTitle());
+//
+//        // jnlDayList가 비어 있지 않은지 확인
+//        assertNotNull(journal.getJnlDayList());
+//        assertTrue(journal.getJnlDayList().size() > 0, "JnlDay 리스트가 비어있지 않아야 합니다.");
+//
+//        // JnlDayDTO의 개별 값도 확인
+//        assertNotNull(journal.getJnlDayList().get(0).getJnlDay());
+//    }
 
 
 

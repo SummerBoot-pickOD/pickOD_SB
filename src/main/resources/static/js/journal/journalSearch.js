@@ -111,7 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const img = document.createElement('img');
             img.className = 'post-image';
-            img.src = (post.uploadPath && post.fileName) ? `${post.uploadPath}/${post.fileName}` : '/img/journal/하단 큰 이미지.png';
+            img.src = (post.jnlImgUploadpath && post.jnlImgFileName) ? `${post.jnlImgUploadpath}/${post.jnlImgFileName}` : '/img/journal/하단 큰 이미지.png';
             img.alt = post.jnlTitle;
             postDiv.appendChild(img);
 
@@ -163,6 +163,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 currentPage = pageNum;
                 displayPosts();
                 setupPagination();
+                console.log("Journal List:", journalList);
             });
             return button;
         };

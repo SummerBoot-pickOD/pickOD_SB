@@ -20,7 +20,7 @@ public class JournalDTO {
     private String jnlTheme;
     private String jnlArea;
     private Integer pickCount;
-    private List<JnlMemberDTO> jnlMumberList;
+    private List<JnlMemberDTO> jnlMemberList;
     private JournalProfileDTO authorProfile;
     private List<JnlDayDTO> jnlDayList;
     private List<JnlImgsDTO> jnlImgsList;
