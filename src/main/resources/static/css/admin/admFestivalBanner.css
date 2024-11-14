@@ -3,6 +3,7 @@
   margin: 110px 200px;
   display: flex;
   flex-direction: column;
+  font-family: 'Arial', sans-serif;
 }
 
 .mainFestival-img img {
