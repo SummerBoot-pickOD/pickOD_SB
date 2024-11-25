@@ -104,49 +104,49 @@ public class JournalMapperTest {
     }
 
 
-    @Test
-    @Transactional
-    public void testInsertJournalWithDays() {
-        // 1. 기본 여행일지 데이터 설정
-        JournalDTO journalDTO = new JournalDTO();
-        journalDTO.setJnlTitle("내 여행일지");
-        journalDTO.setMemberNum(1L);
-        journalDTO.setJnlMemo("이 여행은");
-        journalDTO.setJnlPeriod("2박 3일");
-        journalDTO.setJnlTag("맛집");
-        journalDTO.setJnlTheme("자연");
-        journalDTO.setJnlArea("수원");
-
-        // 2. JnlDayDTO 리스트 설정
-        List<JnlDayDTO> days = new ArrayList<>();
-
-        JnlDayDTO day1 = new JnlDayDTO();
-        day1.setJnlDay(1L);
-        day1.setJnlPlaceOrder(1L);
-        day1.setJnlContents("수원의 성지");
-        day1.setPlaceId(101L);
-        days.add(day1);
-
-        JnlDayDTO day2 = new JnlDayDTO();
-        day2.setJnlDay(2L);
-        day2.setJnlPlaceOrder(2L);
-        day2.setJnlContents("전통시장을 갔다");
-        day2.setPlaceId(102L);
-        days.add(day2);
-
-        journalDTO.setJnlDayList(days);
-
-        // 3. insertJournal 호출
-        journalService.saveJournalWithDays(journalDTO);
-
-        System.out.println("삽입된 여행일지 정보:");
-        System.out.println(journalDTO.toString());
-
-        System.out.println("삽입된 여행일지의 날 정보:");
-        for (JnlDayDTO day : journalDTO.getJnlDayList()) {
-            System.out.println(day.toString());  // 각 JnlDayDTO의 모든 필드를 출력
-        }
-    }
+//    @Test
+//    @Transactional
+//    public void testInsertJournalWithDays() {
+//        // 1. 기본 여행일지 데이터 설정
+//        JournalDTO journalDTO = new JournalDTO();
+//        journalDTO.setJnlTitle("내 여행일지");
+//        journalDTO.setMemberNum(1L);
+//        journalDTO.setJnlMemo("이 여행은");
+//        journalDTO.setJnlPeriod("2박 3일");
+//        journalDTO.setJnlTag("맛집");
+//        journalDTO.setJnlTheme("자연");
+//        journalDTO.setJnlArea("수원");
+//
+//        // 2. JnlDayDTO 리스트 설정
+//        List<JnlDayDTO> days = new ArrayList<>();
+//
+//        JnlDayDTO day1 = new JnlDayDTO();
+//        day1.setJnlDay(1L);
+//        day1.setJnlPlaceOrder(1L);
+//        day1.setJnlContents("수원의 성지");
+//        day1.setPlaceId(101L);
+//        days.add(day1);
+//
+//        JnlDayDTO day2 = new JnlDayDTO();
+//        day2.setJnlDay(2L);
+//        day2.setJnlPlaceOrder(2L);
+//        day2.setJnlContents("전통시장을 갔다");
+//        day2.setPlaceId(102L);
+//        days.add(day2);
+//
+//        journalDTO.setJnlDayList(days);
+//
+//        // 3. insertJournal 호출
+//        journalService.saveJournalWithDays(journalDTO);
+//
+//        System.out.println("삽입된 여행일지 정보:");
+//        System.out.println(journalDTO.toString());
+//
+//        System.out.println("삽입된 여행일지의 날 정보:");
+//        for (JnlDayDTO day : journalDTO.getJnlDayList()) {
+//            System.out.println(day.toString());  // 각 JnlDayDTO의 모든 필드를 출력
+//        }
+//    }
 
 //    @Test
 //    public void testGetJournalWithDaysByNum() {

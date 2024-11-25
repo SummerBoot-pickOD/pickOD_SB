@@ -8,108 +8,107 @@
     <link rel="stylesheet" th:href="@{/css/main/header.css}">
     <link rel="stylesheet" th:href="@{/css/main/footer.css}">
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
-    crossorigin="anonymous"></script>
+            crossorigin="anonymous"></script>
 </head>
 <body>
 <div id="header" th:replace="~{/main/header}"></div>
-    <div id="report" th:replace="~{/report/reportSend}"></div>
-    <main>
-        <div class="title-containerbox" th:text="${journalDetail.jnlTitle}"></div>
-        <div class="placeIcon"> <!-- 신고, 찜 -->
-            <div class="views">
-                <img class="countimg" th:src="@{/img/journal/count.png}" alt="">
-                <div th:text="${journalDetail.jnlViews}"></div>
-            </div>
-            <div>
-                <img class="reportimg" src="../../img/place/placeDetail/report.png" alt="">
-<!--                <img class="saveimg" th:data-journal-jnlNum="${JournalDetail.jnlNum}" alt="">-->
-            </div>
+<div id="report" th:replace="~{/report/reportSend}"></div>
+<main>
+    <div class="title-containerbox" th:text="${journalDetail.jnlTitle}"></div>
+    <div class="placeIcon"> <!-- 신고, 찜 -->
+        <div class="views">
+            <img class="countimg" th:src="@{/img/journal/count.png}" alt="">
+            <div th:text="${journalDetail.jnlViews}"></div>
         </div>
-        <div class="container-display">
-            <div class="profile-container" >
-                <div class="profile">
-                    <div class="photo" >
-                        <img th:src="@{/img/mypage/기본사람사진.png}" alt="Journal Image"/>
-                    </div>
-                    <div class="user-name-container">
-                        <div class="user-name" th:text="${journalDetail.memberNickname}"></div>
-<!--                        <button class="message-button">-->
-<!--                            <a href="#">-->
-<!--                              <img src="../../img/message/쪽지함.png" alt="이미지 버튼" />-->
-<!--                            </a>-->
-<!--                          </button>-->
-                    </div>
+        <div>
+            <img class="reportimg" src="../../img/place/placeDetail/report.png" alt="">
+            <!--                <img class="saveimg" th:data-journal-jnlNum="${JournalDetail.jnlNum}" alt="">-->
+        </div>
+    </div>
+    <div class="container-display">
+        <div class="profile-container" >
+            <div class="profile">
+                <div class="photo" >
+                    <img th:src="@{/img/mypage/기본사람사진.png}" alt="Journal Image"/>
                 </div>
-                <div class="explain-container" th:text="${journalDetail.jnlMemo}"></div>
+                <div class="user-name-container">
+                    <div class="user-name" th:text="${journalDetail.memberNickname}"></div>
+                </div>
             </div>
-            <div class="tag-container">
-                <div class="tag-container-schedule">
-                    <img class="footprint" th:src="@{/img/journal/footprint_pink.png}" alt="">
-                    <div class="schedule-container">
-                        <div class="schedule">
-                            일정
-                        </div>
-                        <div class="schedule-content" th:text="${journalDetail.jnlPeriod}">
-                        </div>
+            <div class="explain-container" th:text="${journalDetail.jnlMemo}"></div>
+        </div>
+        <div class="tag-container">
+            <div class="tag-container-schedule">
+                <img class="footprint" th:src="@{/img/journal/footprint_pink.png}" alt="">
+                <div class="schedule-container">
+                    <div class="schedule">
+                        일정
+                    </div>
+                    <div class="schedule-content" th:text="${journalDetail.jnlPeriod}">
                     </div>
                 </div>
-                <div class="tag-container-schedule">
-                    <img class="footprint" th:src="@{/img/journal/footprint_pink.png}" alt="">
-                    <div class="tag-select-container">
-                        <div class="schedule-tag">
-                            태그
-                        </div>
-                        <div class="schedule-tag-content" th:text="${journalDetail.jnlTag}">
-                        </div>
+            </div>
+            <div class="tag-container-schedule">
+                <img class="footprint" th:src="@{/img/journal/footprint_pink.png}" alt="">
+                <div class="tag-select-container">
+                    <div class="schedule-tag">
+                        태그
+                    </div>
+                    <div class="schedule-tag-content" th:text="${journalDetail.jnlTag}">
                     </div>
                 </div>
-                <div class="tag-container-schedule">
-                    <img class="footprint" th:src="@{/img/journal/footprint_pink.png}" alt="">
-                    <div class="thema-container">
-                        <div class="schedule-thema">
-                            테마
-                        </div>
-                        <div class="schedule-thema-content" th:text="${journalDetail.jnlTheme}">
-                        </div>
+            </div>
+            <div class="tag-container-schedule">
+                <img class="footprint" th:src="@{/img/journal/footprint_pink.png}" alt="">
+                <div class="thema-container">
+                    <div class="schedule-thema">
+                        테마
+                    </div>
+                    <div class="schedule-thema-content" th:text="${journalDetail.jnlTheme}">
                     </div>
                 </div>
-                <div class="tag-container-schedule">
-                    <img class="footprint" th:src="@{/img/journal/footprint_pink.png}" alt="">
-                    <div class="area-container">
-                        <div class="schedule-area">
-                            지역
-                        </div>
-                        <div class="schedule-area-content" th:text="${journalDetail.jnlArea}">
-                        </div>
+            </div>
+            <div class="tag-container-schedule">
+                <img class="footprint" th:src="@{/img/journal/footprint_pink.png}" alt="">
+                <div class="area-container">
+                    <div class="schedule-area">
+                        지역
+                    </div>
+                    <div class="schedule-area-content" th:text="${journalDetail.jnlArea}">
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <div class="Day-container">
-            <div class="Day" th:text="'DAY' + ${journalDetail.jnlDay}"></div>
-        </div>
-        <div class="detail-container">
-            <div class="detail-box">
-                <div class="maps-API"><img th:src="@{/img/journal/지도입니당.png}" alt=""></div>
-                <div class="location">
-                    <div class="location-text">경기도미술관</div>
-                    <div class="location-text">노적봉공원</div>
-                    <div class="location-text">성호공원</div>    
+    <div class="Day-container">
+        <div class="Day-button" th:each="day : ${journalDetail.journalDayList}"
+             th:text="'DAY ' + ${day.jnlDay}" th:data-day="${day.jnlDay}"></div>
+    </div>
+    <div class="detail-container">
+        <div class="detail-box">
+            <div class="maps-API"><img th:src="@{/img/journal/지도입니당.png}" alt=""></div>
+            <div class="location">
+                <div class="location-text">경기도미술관</div>
+                <div class="location-text">노적봉공원</div>
+                <div class="location-text">성호공원</div>
+            </div>
+            <div class="detail-content-container">
+                <div class="detail-photo">
+                    <img class="arrow left-arrow" src="/img/journal/왼쪽 화살표.png" alt="Previous" id="prev-arrow">
+                    <img class="main-photo" id="main-photo" src="${journalDetail.journalDayList[0].jnlImgList[0].uploadPath + '/' + journalDetail.journalDayList[0].jnlImgList[0].fileName}" alt="Journal Image">
+                    <img class="arrow right-arrow" src="/img/journal/오른쪽 화살표.png" alt="Next" id="next-arrow">
                 </div>
-                <div class="detail-content-container">
-                    <div class="detail-photo">
-                        <img class="arrow left-arrow" th:src="@{/img/journal/왼쪽 화살표.png}" alt="">
-                        <img class="main-photo" th:src="${journalDetail.jnlImgUploadpath + '/' + journalDetail.jnlImgFileName}" alt="Journal Image"/>
-                        <img class="arrow right-arrow" th:src="@{/img/journal/오른쪽 화살표.png}" alt="">
-                    </div>
-                    <div class="detail-text" th:text="${journalDetail.jnlContents}">
-                    </div>
+                <div class="detail-text" id="content-text">
+                    <!-- 서버에서 전달된 내용이 없다면 이 부분은 빈 상태로 남기고, JavaScript에서 동적으로 내용 업데이트 -->
+                    <div class="content-placeholder">내용을 선택해주세요.</div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <div id = "reply-container">
+
+    <div id = "reply-container">
             <div class="name-box">
                 발자국 톡(댓글 이름 자리)
             </div>
@@ -182,9 +181,14 @@
                 </li>
             </ul>
             <button type="button" id = "reply-more">더 보기</button>
-            <script th:src="@{/js/journal/journalDetail.js}"></script>
+
     </main>
     <div id="reply"></div>
     <div id="footer" th:replace="~{/main/footer}"></div>
+<script th:inline="javascript">
+    var journalDetailList = /*[[${journalDetailList}]]*/ [];
+    console.log('journalDetailList:', journalDetailList);
+</script>
+<script th:src="@{/js/journal/journalDetail.js}"></script>
 </body>
 </html>

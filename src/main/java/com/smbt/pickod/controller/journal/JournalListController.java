@@ -1,6 +1,7 @@
 package com.smbt.pickod.controller.journal;
 
-import com.smbt.pickod.dto.journal.JournalDTO;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.smbt.pickod.dto.journal.JnlDayDTO;
 import com.smbt.pickod.dto.journal.JournalDetailDTO;
 import com.smbt.pickod.mapper.journal.JournalMapper;
 import com.smbt.pickod.service.journal.JournalService;
@@ -62,19 +63,26 @@ public class JournalListController {
 
     @GetMapping("/detail/{jnlNum}")
     public String getJournalDetail(@PathVariable long jnlNum, Model model) {
-        // journalNum을 이용해 상세 정보를 가져옴
+        // 매퍼 메서드 호출하여 JournalDetailDTO 반환
         JournalDetailDTO journalDetail = journalService.getJournalByNum(jnlNum);
-        journalService.increaseViews(jnlNum);
-        // journalDetail 로그로 확인
+
         if (journalDetail == null) {
-            System.out.println("Journal detail is null");
-        } else {
-            // journalDetail 객체의 데이터를 출력하여 확인
-            System.out.println("Journal detail: " + journalDetail.toString());
+            log.warn("No journal found for jnlNum: " + jnlNum);
+            return "redirect:/journal/list";
         }
-        // 모델에 데이터를 추가해서 뷰로 전달
+
+        // journalDetail을 모델에 추가
         model.addAttribute("journalDetail", journalDetail);
-        // 여행일지 상세 페이지로 이동
+
+        // journalDayList를 JSON 형식으로 변환하여 모델에 추가
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            String journalDayListJson = objectMapper.writeValueAsString(journalDetail.getJournalDayList());
+            model.addAttribute("journalDayListJson", journalDayListJson);
+        } catch (Exception e) {
+            log.error("Error converting journalDayList to JSON", e);
+        }
+
         return "journal/journalDetail";
     }
 

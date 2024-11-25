@@ -118,14 +118,17 @@
 
     <div class="container">
         <div class="posts" id="posts"></div>
+<!--        <div class="btnToCreate" type="button">-->
+<!--            <a href=""><img th:src="@{}"></a>-->
+<!--        </div>-->
         <div class="pagination" id="pagination"></div>
     </div>
 
 
 
+
 </main>
 <div id="footer" th:replace="~{/main/footer}"></div>
-<script th:src="@{/js/journal/journalSearch.js}"></script>
 <script th:inline="javascript" defer>
     /*<![CDATA[*/
     // 서버에서 전달된 journalList를 JavaScript 배열로 처리
@@ -141,5 +144,6 @@
     }
     /*]]>*/
 </script>
+<script th:src="@{/js/journal/journalSearch.js}"></script>
 </body>
 </html>

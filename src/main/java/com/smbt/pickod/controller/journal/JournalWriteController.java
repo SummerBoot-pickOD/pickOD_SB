@@ -1,8 +1,9 @@
 package com.smbt.pickod.controller.journal;
 
-import com.smbt.pickod.dto.journal.JnlListDTO;
-import com.smbt.pickod.dto.journal.JnlMemberDTO;
 import com.smbt.pickod.dto.journal.JournalDTO;
+import com.smbt.pickod.dto.journal.JournalDetailDTO;
+import com.smbt.pickod.dto.journal.JournalProfileDTO;
+import com.smbt.pickod.dto.journal.JournalWriteDTO;
 import com.smbt.pickod.service.journal.JournalService;
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
@@ -32,57 +33,54 @@ public class JournalWriteController {
         this.journalService = journalService;
     }
 
+    // 여행일지 작성 페이지 (세션에 따라 프로필 정보도 넘겨줌)
     @GetMapping("/write")
-    public String showJournalCreatePage(Model model) {
-        // 필요한 데이터를 모델에 추가하여 템플릿에 전달할 수 있습니다.
-        return "journal/journalCreate"; // 템플릿 파일명, 확장자는 생략
-    }
+    public String showJournalWritePage(HttpSession session, Model model) {
+        Long memberNum = (Long) session.getAttribute("memberNum");
+        log.info("Session MemberNum: {}", memberNum);
 
-    @PostMapping("/write")
-    public String createJournal(@ModelAttribute JournalDTO journalDTO) {
-        try {
-            journalService.saveJournalWithDays(journalDTO);
-            return "redirect:/journal/list";  // 성공 후 다른 페이지로 리다이렉트
-        } catch (Exception e) {
-            // 예외 로그 기록
-            // return "redirect:/journal/error";  // 오류 페이지로 리다이렉트
-            return "여행일지가 작성되었습니다.";  // 오류 발생 시 그냥 메시지로 리턴
+        if (memberNum != null) {
+            // DB에서 사용자 프로필 정보 가져오기
+            JournalProfileDTO journalProfile = journalService.getMemberProfile(memberNum);  // 사용자 프로필 정보 조회
+
+            // 모델에 프로필 정보 추가
+            model.addAttribute("journalProfile", journalProfile);  // 모델에 journalProfile 객체 추가
+
+            // 여행일지 작성 페이지로 이동
+            return "journal/journalCreate";
+        } else {
+            return "redirect:/login/login";  // 로그인되지 않은 경우 로그인 페이지로 리다이렉트
         }
     }
 
-    @GetMapping("/write/profile")
-    public String showJournalCreatePage(HttpSession session, Model model) {
-        // 세션에서 memberNum 가져오기
-        Long memberNum = (Long) session.getAttribute("memberNum");
-
-        if (memberNum != null) {
-            // memberNum을 사용하여 해당 사용자의 프로필 정보를 가져옵니다.
-            JnlMemberDTO jnlMemberDTO = journalService.getJournalByPermission(memberNum);
-
-            // jnlMemberDTO가 null인 경우 확인하기
-            log.info("jnlMemberDTO is null: {}", jnlMemberDTO == null);
-
-            // journalProfile이 null일 경우에 대한 처리
-            if (jnlMemberDTO == null) {
-                jnlMemberDTO = new JnlMemberDTO(); // 기본값 설정
-                jnlMemberDTO.setMemberImgUrl("/img/mypage/기본사람사진.png");
-                log.info("Using default image: {}", jnlMemberDTO.getMemberImgUrl());
-            } else if (jnlMemberDTO.getMemberImgUrl() == null || jnlMemberDTO.getMemberImgUrl().isEmpty()) {
-                // 프로필 이미지가 설정되지 않은 경우 기본 이미지 사용
-                jnlMemberDTO.setMemberImgUrl("/img/mypage/기본사람사진.png");
-                log.info("Using default image as memberImgUrl is null or empty: {}", jnlMemberDTO.getMemberImgUrl());
-            } else {
-                log.info("memberImgUrl: {}", jnlMemberDTO.getMemberImgUrl());
+    // 여행일지 생성
+    @PostMapping("/write")
+    public String createJournal(@ModelAttribute JournalWriteDTO journalWriteDTO, HttpSession session, Model model) {
+        try {
+            // 세션에서 memberNum 가져오기
+            Long memberNum = (Long) session.getAttribute("memberNum");
+            if (memberNum == null) {
+                return "redirect:/login/login"; // 로그인 정보가 없는 경우 로그인 페이지로 리다이렉트
             }
 
-            // 모델에 프로필 정보 추가
-            model.addAttribute("journalProfile", jnlMemberDTO);
+            // memberNum을 DTO에 설정
+            journalWriteDTO.setMemberNum(memberNum);
 
-            // 작성 페이지로 이동
-            return "journal/journalCreate";
-        } else {
-            // 로그인되지 않은 경우 로그인 페이지로 리다이렉트
-            return "redirect:/login";
+            // 1. jnlDayListJson이 null이 아니면 setJnlDayList를 호출하여 리스트를 설정
+            if (journalWriteDTO.getJnlDayListJson() != null && !journalWriteDTO.getJnlDayListJson().isEmpty()) {
+                journalWriteDTO.setJnlDayList(journalWriteDTO.getJnlDayListJson()); // JSON 파싱하여 jnlDayList 설정
+            }
+
+            // 2. journalService.writeJournal 호출 (이제 jnlDayList와 memberNum이 설정된 상태)
+            journalService.writeJournal(journalWriteDTO);
+
+            // 3. 성공 시 목록 페이지로 리디렉션
+            return "redirect:/journal/list";
+        } catch (Exception e) {
+            // 오류 발생 시 에러 메시지를 모델에 추가하고 작성 페이지로 돌아감
+            logger.error("Error creating journal", e);
+            model.addAttribute("errorMessage", "여행일지를 작성하는 도중 문제가 발생했습니다. 다시 시도해 주세요.");
+            return "journal/journalCreate"; // 작성 페이지로 다시 이동
         }
     }
 
@@ -103,17 +101,17 @@ public class JournalWriteController {
     }
 
     @PostMapping("/modify")
-    public String boardModify(JournalDTO journalDTO,
+    public String boardModify(JournalWriteDTO journalWriteDTO,
                               @RequestParam("boardFile") List<MultipartFile> files,
                               RedirectAttributes redirectAttributes){
         try {
-            journalService.modifyBoard(journalDTO, files);
+            journalService.modifyBoard(journalWriteDTO, files);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
         // JournalDTO 객체를 통해 getJnlNum()을 호출
-        redirectAttributes.addAttribute("jnlNum", journalDTO.getJnlNum());
+        redirectAttributes.addAttribute("jnlNum", journalWriteDTO.getJnlNum());
         return "redirect:/journal/view";  // 리다이렉트 경로로 jnlNum 전달
     }
 
