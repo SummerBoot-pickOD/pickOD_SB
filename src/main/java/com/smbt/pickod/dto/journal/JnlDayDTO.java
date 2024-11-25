@@ -1,12 +1,12 @@
 package com.smbt.pickod.dto.journal;
 
-import com.smbt.pickod.dto.template.TempPlaceDTO;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
 import java.util.List;
+
 
 @Getter @Setter @ToString
 @NoArgsConstructor
@@ -16,7 +16,16 @@ public class JnlDayDTO {
     private Long jnlPlaceOrder;
     private String jnlContents;
     private Long placeId;
-    private List<JournalDTO> journalList;
-    private List<TempPlaceDTO> tempPlaceList;
-    private List<JnlImgsDTO> jnlImgsList;
+
+    private List<JnlImgsDTO> jnlImgList;
+
+    // jnlImgList에 대한 getter 메서드 추가
+    public List<JnlImgsDTO> getJnlImgList() {
+        return jnlImgList;
+    }
+
+    public void setJnlImgList(List<JnlImgsDTO> jnlImgList) {
+        this.jnlImgList = jnlImgList;  // setter 메서드
+    }
+
 }

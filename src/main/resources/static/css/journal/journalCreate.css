@@ -45,13 +45,12 @@ main{
     width: 80px;
 }
 
-.photo{
-    margin: 25px 0 0 0;
+
+.Profile_image{
+    margin: 15px 0 0 0;
     width: 103px;
     height: 103px;
-    background-color: beige;
 }
-
 
 .user-name{
     font-size: 26px;
@@ -263,11 +262,17 @@ img{
     justify-content: center;
 }
 
-#place-info {
+/* Summernote 전체 영역 */
+.note-editor {
     width: 86%;
-    height: 300px;
-    resize: none;
     margin: 30px 10px;
+}
+
+/* Summernote 내부 텍스트 입력 영역 */
+.note-editable {
+    background-color: white;
+    height: 300px; /* 에디터 높이 */
+    resize: none;  /* 크기 조정 비활성화 */
 }
 
 .location-imgs {
@@ -411,7 +416,7 @@ img{
 .delete-button, .load-button, .upload-button{
     cursor: pointer;
     height: 35px;
-    margin: 0 10px 30px;
+    margin: 15px 10px 30px;
     width: 70px;
     justify-content: flex-start;
     background-color: #845AC6;

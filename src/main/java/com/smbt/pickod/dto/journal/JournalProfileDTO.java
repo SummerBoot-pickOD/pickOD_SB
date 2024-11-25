@@ -8,7 +8,6 @@ import lombok.ToString;
 @Getter @Setter @ToString
 @NoArgsConstructor
 public class JournalProfileDTO {
-    private Long jnlNum;
     private String nickname;
     private String memberImgUrl;
     private Long memberImgsId;

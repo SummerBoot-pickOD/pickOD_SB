@@ -1,5 +1,7 @@
 package com.smbt.pickod.dto.journal;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -12,7 +14,7 @@ import java.util.List;
 @Setter
 @ToString
 @NoArgsConstructor
-public class JournalDetailDTO {
+public class JournalWriteDTO {
     private Long jnlNum;
     private String jnlTitle;
     private Long memberNum;
@@ -35,20 +37,13 @@ public class JournalDetailDTO {
     private String memberImgUploadpath;
 
     // JournalDay 관련 정보
-    private List<JnlDayDTO> journalDayList;
+    private List<JnlDayDTO> jnlDayList;
+    private String jnlDayListJson;
 
-    // JournalImgs 관련 정보
-    private String jnlImgFileName;
-    private String jnlImgsGuid;
-    private String jnlImgUploadpath;
-    private Integer jnlImgsOrder;
-
-    // Getter, Setter 메서드
-    public List<JnlDayDTO> getJournalDayList() {
-        return journalDayList;
+    // Getter/Setter
+    public void setJnlDayList(String jnlDayListJson) throws Exception {
+        ObjectMapper mapper = new ObjectMapper();
+        this.jnlDayList = mapper.readValue(jnlDayListJson, new TypeReference<List<JnlDayDTO>>() {});
     }
 
-    public void setJournalDayList(List<JnlDayDTO> journalDayList) {
-        this.journalDayList = journalDayList;
-    }
 }
