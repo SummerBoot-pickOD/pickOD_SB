@@ -147,16 +147,16 @@
         WHERE MEMBER_NUM = #{memberNum}
     </update>
 
-<!--&lt;!&ndash;    테스트용 쿼리&ndash;&gt;-->
-<!--    <select id="getUserByMemberNum" parameterType="Long" resultType="MpgUpdateMemberDTO">-->
-<!--        SELECT-->
-<!--            MEMBER_NUM,-->
-<!--            MEMBER_PASSWORD,-->
-<!--            MEMBER_NICKNAME,-->
-<!--            MEMBER_ADDRESS,-->
-<!--            TO_CHAR(MEMBER_BDATE, 'YYYY-MM-DD') AS MEMBER_BDATE,-->
-<!--            MEMBER_GENDER-->
-<!--        FROM MEMBER-->
-<!--        WHERE MEMBER_NUM = #{memberNum}-->
-<!--    </select>-->
+<!--    테스트용 쿼리-->
+    <select id="getUserByMemberNum" parameterType="Long" resultType="MpgUpdateMemberDTO">
+        SELECT
+            MEMBER_NUM,
+            MEMBER_PASSWORD,
+            MEMBER_NICKNAME,
+            MEMBER_ADDRESS,
+            TO_CHAR(MEMBER_BDATE, 'YYYY-MM-DD') AS MEMBER_BDATE,
+            MEMBER_GENDER
+        FROM MEMBER
+        WHERE MEMBER_NUM = #{memberNum}
+    </select>
 </mapper>

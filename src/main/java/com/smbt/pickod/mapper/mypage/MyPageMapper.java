@@ -36,6 +36,6 @@ public interface MyPageMapper {
 
     void updateUser(MpgUpdateMemberDTO mpgUpdateMemberDTO);
 
-//    MpgUpdateMemberDTO getUserByMemberNum(Long memberNum);
+    MpgUpdateMemberDTO getUserByMemberNum(Long memberNum);
 
 }

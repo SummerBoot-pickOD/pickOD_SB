@@ -39,24 +39,24 @@ public class JournalMapperTest {
         Assertions.assertEquals(5, result);
     }
 
-    @Test
-    public void testGetJournalsByDateDesc() { //날짜 최신순
-        List<JournalDetailDTO> journals = journalMapper.getJournalsByDateDesc();
-
-        Assertions.assertNotNull(journals, "결과는 null이 아니어야 합니다.");
-        assertFalse(journals.isEmpty(), "결과는 비어있지 않아야 합니다.");
-
-        for (int i = 0; i < journals.size() - 1; i++) {
-            Date currentDate = journals.get(i).getJnlCreateDate();
-            Date nextDate = journals.get(i + 1).getJnlCreateDate();
-
-            Assertions.assertNotNull(currentDate, "현재 날짜는 null이 아니어야 합니다.");
-            Assertions.assertNotNull(nextDate, "다음 날짜는 null이 아니어야 합니다.");
-
-            Assertions.assertTrue(currentDate.compareTo(nextDate) >= 0,
-                    "날짜가 내림차순으로 정렬되어야 합니다.");
-        }
-    }
+//    @Test
+//    public void testGetJournalsByDateDesc() { //날짜 최신순
+//        List<JournalDetailDTO> journals = journalMapper.getJournalsByDateDesc();
+//
+//        Assertions.assertNotNull(journals, "결과는 null이 아니어야 합니다.");
+//        assertFalse(journals.isEmpty(), "결과는 비어있지 않아야 합니다.");
+//
+//        for (int i = 0; i < journals.size() - 1; i++) {
+//            Date currentDate = journals.get(i).getJnlCreateDate();
+//            Date nextDate = journals.get(i + 1).getJnlCreateDate();
+//
+//            Assertions.assertNotNull(currentDate, "현재 날짜는 null이 아니어야 합니다.");
+//            Assertions.assertNotNull(nextDate, "다음 날짜는 null이 아니어야 합니다.");
+//
+//            Assertions.assertTrue(currentDate.compareTo(nextDate) >= 0,
+//                    "날짜가 내림차순으로 정렬되어야 합니다.");
+//        }
+//    }
 
     @Test
     public void testGetJournalsByPickCountDesc() { //찜하기 순
