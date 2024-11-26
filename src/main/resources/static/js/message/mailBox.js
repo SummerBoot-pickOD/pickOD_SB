@@ -62,23 +62,23 @@ checkItem.forEach(function(e) {
 
 
 //휴지통 이동
-// const btnDelete = document.querySelector('.btn-delete');
-// const mailboxList = document.querySelectorAll('.mailbox-list');
-// btnDelete.addEventListener('click', function() {
-//
-//   // 받은 쪽지 중 체크된 항목을 찾아서 휴지통으로 이동
-//   const checkboxes = document.querySelectorAll('.item');
-//   checkboxes.forEach((checkbox) => {
-//       if (checkbox.checked) {
-//
-//           const messageItem = checkbox.closest('.mailbox-list');
-//           console.log(messageItem);
-//           messageItem.remove();
-//            // 받은 쪽지함에서 삭제
-//           checkbox.checked = false; // 체크 상태 초기화
-//       }
-//   });
-// });
+const btnDelete = document.querySelector('.btn-delete');
+const mailboxList = document.querySelectorAll('.mailbox-list');
+btnDelete.addEventListener('click', function() {
+
+  // 받은 쪽지 중 체크된 항목을 찾아서 휴지통으로 이동
+  const checkboxes = document.querySelectorAll('.item');
+  checkboxes.forEach((checkbox) => {
+      if (checkbox.checked) {
+
+          const messageItem = checkbox.closest('.mailbox-list');
+          console.log(messageItem);
+          messageItem.remove();
+           // 받은 쪽지함에서 삭제
+          checkbox.checked = false; // 체크 상태 초기화
+      }
+  });
+});
 
 
 

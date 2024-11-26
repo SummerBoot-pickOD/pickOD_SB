@@ -65,6 +65,7 @@ public class JournalListController {
     public String getJournalDetail(@PathVariable long jnlNum, Model model) {
         // 매퍼 메서드 호출하여 JournalDetailDTO 반환
         JournalDetailDTO journalDetail = journalService.getJournalByNum(jnlNum);
+        System.out.println("===========출력 ======" + journalDetail);
 
         if (journalDetail == null) {
             log.warn("No journal found for jnlNum: " + jnlNum);

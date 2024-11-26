@@ -3,6 +3,7 @@
 <mapper namespace="com.smbt.pickod.mapper.journal.JournalMapper">
 
     <resultMap id="JnlImgResultMap" type="JnlImgsDTO">
+        <result property="jnlNum" column="JNL_NUM"/>
         <result property="fileName" column="JNL_IMG_FILE_NAME"/>
         <result property="jnlImgsGuid" column="JNL_IMGS_GUID"/>
         <result property="uploadPath" column="JNL_IMG_UPLOADPATH"/>
@@ -11,6 +12,7 @@
 
     <resultMap id="JnlDayResultMap" type="JnlDayDTO">
         <id property="jnlDay" column="JNL_DAY"/>
+        <result property="jnlNum" column="JNL_NUM"/>
         <result property="jnlContents" column="JNL_CONTENTS"/>
         <result property="placeId" column="PLACE_ID"/>
         <result property="jnlPlaceOrder" column="JNL_PLACE_ORDER"/>
@@ -52,6 +54,7 @@
             mi.MEMBER_IMG_URL,
 
             -- JOURNAL_DAY 테이블 컬럼들
+            jd.JNL_NUM AS JD_JNL_NUM,
             jd.JNL_DAY,
             jd.JNL_PLACE_ORDER,
             jd.JNL_CONTENTS,
