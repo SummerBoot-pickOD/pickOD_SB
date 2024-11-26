@@ -13,7 +13,8 @@ $(function () {
 document.addEventListener("DOMContentLoaded", function () {
     const journalDetailList = /*[[${journalDetail.journalDayList}]]*/ []; // 서버에서 전달된 데이터 확인
 
-    console.log('journalDetailList:', journalDetailList);  // 데이터 확인
+    console.log('===== console 확인 ===== journalDetailList:', journalDetailList);  // 데이터 확인
+    console.log('[[${journalDetail.journalDayList}]]');
 
     const dayContainer = document.querySelector('.Day-container'); // Day-container 요소 찾기
     const contentText = document.getElementById('content-text');
@@ -51,6 +52,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 const firstImage = selectedDetail.jnlImgList[0];
                 if (firstImage) {
                     mainPhoto.src = `${firstImage.uploadPath}/${firstImage.fileName}`;
+                    console.log('이미지 데이터:', journalDetailList[0]?.jnlImgList);
                 }
             }
         });
