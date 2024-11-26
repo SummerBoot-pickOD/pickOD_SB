@@ -30,33 +30,33 @@ public class JournalService {
     private final JournalMapper journalMapper;
     private final ImgMapper imgMapper;
 
-    public JnlMemberDTO getMemberProfile(Long memberNum) {
-        return journalMapper.getMemberImagesAndNickName(memberNum);
+    public JournalProfileDTO getMemberProfile(Long memberNum) {
+        return journalMapper.getJournalProfilesByMemberNum(memberNum);
     }
 
     //application.properties에 저장해둔 file.dir 프로퍼티 값을 가져와서 아래 필드에 넣어준다
     @Value("${img.upload-journal-dir}")
     private String jnlImgDir;
 
-    public void registerJournal(JournalDTO journalDTO){ journalMapper.insertJournal(journalDTO);}
+//    public void registerJournal(JournalDTO journalDTO){ journalMapper.insertJournal(journalDTO);}
 
     //MultipartFile : 업로드된 파일을 처리할 때(파일업로드) 사용하는 인터페이스
-    public void registerJournalWithFile(JournalDTO journalDTO, List<MultipartFile> files) throws IOException {
-        journalMapper.insertJournal(journalDTO);
-        Long jnlNum = journalDTO.getJnlNum();
-
-        for(MultipartFile file : files){
-            if(file.isEmpty()){
-                break;
-            }
-
-            JnlImgsDTO jnlImgsDTO = saveFile(file);
-            jnlImgsDTO.setJnlNum(jnlNum);
-            imgMapper.insertImg(jnlImgsDTO);
-
-        }
-
-    }
+//    public void registerJournalWithFile(JournalDTO journalDTO, List<MultipartFile> files) throws IOException {
+//        journalMapper.insertJournal(journalDTO);
+//        Long jnlNum = journalDTO.getJnlNum();
+//
+//        for(MultipartFile file : files){
+//            if(file.isEmpty()){
+//                break;
+//            }
+//
+//            JnlImgsDTO jnlImgsDTO = saveFile(file);
+//            jnlImgsDTO.setJnlNum(jnlNum);
+//            imgMapper.insertImg(jnlImgsDTO);
+//
+//        }
+//
+//    }
 
     public JnlImgsDTO saveFile(MultipartFile files) throws IOException {
         //사용자가 올린 파일 이름(확장자를 포함한다)
@@ -125,9 +125,9 @@ public class JournalService {
         }
     }
 
-    public void modifyBoard(JournalDTO journalDTO, List<MultipartFile> files) throws IOException {
-        journalMapper.updateJournal(journalDTO);
-        Long jnlNum = journalDTO.getJnlNum();
+    public void modifyBoard(JournalWriteDTO journalWriteDTO, List<MultipartFile> files) throws IOException {
+        journalMapper.updateJournal(journalWriteDTO);
+        Long jnlNum = journalWriteDTO.getJnlNum();
 
         imgMapper.deleteImg(jnlNum);
 
@@ -171,11 +171,6 @@ public class JournalService {
         return journalMapper.searchJournalByArea(area);
     }
 
-
-    //총 게시물 갯수
-    public int findTotal(){
-        return journalMapper.selectTotal();
-    }
 
     // 최신순으로 가져오기
     public List<JournalDetailDTO> getJournalsByDateDesc() {
@@ -231,25 +226,46 @@ public class JournalService {
     }
 
     //작성 페이지
+//    @Transactional
+//    public void saveJournalWithDays(JournalDTO journalDTO) {
+//        // JOURNAL 테이블에 여행일지 기본 정보 삽입
+//        journalMapper.insertJournal(journalDTO);
+//
+//        // JOURNAL_DAY 테이블에 여러 날의 정보를 삽입 (있다면)
+//        if (journalDTO.getJnlDayList() != null && !journalDTO.getJnlDayList().isEmpty()) {
+//            // 각 JnlDayDTO에 jnlNum 설정
+//            for (JnlDayDTO day : journalDTO.getJnlDayList()) {
+//                day.setJnlNum(journalDTO.getJnlNum()); // 각 JnlDayDTO의 jnlNum을 설정
+//            }
+//            // JnlDayDTO 리스트 전체 삽입
+//            journalMapper.insertJournalDay(journalDTO.getJnlDayList());
+//        }
+//    }
+//
+//    public JnlMemberDTO getJournalByPermission(Long memberNum) {
+//        // memberNum을 사용하여 해당 사용자의 프로필 정보를 조회
+//        return journalMapper.getJournalProfilesByJournalNum(memberNum);
+//    }
+
+
+    // 여행일지 작성페이지
     @Transactional
-    public void saveJournalWithDays(JournalDTO journalDTO) {
-        // JOURNAL 테이블에 여행일지 기본 정보 삽입
-        journalMapper.insertJournal(journalDTO);
+    public void writeJournal(JournalWriteDTO journalWriteDTO) {
+        // JOURNAL 테이블 삽입
+        journalMapper.insertJournal(journalWriteDTO);
 
-        // JOURNAL_DAY 테이블에 여러 날의 정보를 삽입 (있다면)
-        if (journalDTO.getJnlDayList() != null && !journalDTO.getJnlDayList().isEmpty()) {
-            // 각 JnlDayDTO에 jnlNum 설정
-            for (JnlDayDTO day : journalDTO.getJnlDayList()) {
-                day.setJnlNum(journalDTO.getJnlNum()); // 각 JnlDayDTO의 jnlNum을 설정
+        // JOURNAL_DAY 테이블 삽입
+        if (journalWriteDTO.getJnlDayList() != null && !journalWriteDTO.getJnlDayList().isEmpty()) {
+            // 기본값 및 외래키 설정
+            for (JnlDayDTO day : journalWriteDTO.getJnlDayList()) {
+                day.setJnlNum(journalWriteDTO.getJnlNum());
+                if (day.getPlaceId() == null) {
+                    day.setPlaceId(1L);
+                }
             }
-            // JnlDayDTO 리스트 전체 삽입
-            journalMapper.insertJournalDay(journalDTO.getJnlDayList());
+            // 리스트 삽입
+            journalMapper.insertJournalDays(journalWriteDTO.getJnlDayList());
         }
-    }
-
-    public JnlMemberDTO getJournalByPermission(Long memberNum) {
-        // memberNum을 사용하여 해당 사용자의 프로필 정보를 조회
-        return journalMapper.getJournalProfilesByJournalNum(memberNum);
     }
 
 

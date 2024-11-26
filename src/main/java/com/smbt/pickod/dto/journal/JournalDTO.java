@@ -2,7 +2,7 @@ package com.smbt.pickod.dto.journal;
 
 import lombok.*;
 
-import java.sql.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter @Setter @ToString
@@ -13,8 +13,8 @@ public class JournalDTO {
     private Long memberNum;
     private Integer jnlViews;
     private String jnlMemo;
-    private Date jnlCreateDate;
-    private Date jnlUpdateDate;
+    private LocalDateTime jnlCreateDate;
+    private LocalDateTime jnlUpdateDate;
     private String jnlPeriod;
     private String jnlTag;
     private String jnlTheme;
