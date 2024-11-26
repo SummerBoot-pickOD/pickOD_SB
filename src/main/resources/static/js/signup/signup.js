@@ -91,7 +91,7 @@ function showTime(time){
 $("#send-nick-dup").click(function(){
   //입력값만 회원정보 테이블에 가서 중복 여부 확인
   nick = $("#nick-container input").val();
-
+  console.log(nick);
   data = {
     nickname : nick
   };

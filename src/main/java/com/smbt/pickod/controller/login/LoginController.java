@@ -41,6 +41,7 @@ public class LoginController {
         try {
             loginSession = loginService.loginCheck(loginDTO);
             session.setAttribute("memberNum", loginSession.getMemberNum());
+            session.setAttribute("memberId", loginSession.getMemberId());
             log.info("로그인 성공 : {}, {} ", memberId, memberPassword);
             log.info("세션ID : {}", session.getId());
             return new RedirectView("/main/main");

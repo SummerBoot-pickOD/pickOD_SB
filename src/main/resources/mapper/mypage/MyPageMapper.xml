@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.smbt.pickod.mapper.mypage.MyPageMapper">
+
+<!--    내가 작성한 여행일지 숫자-->
     <select id="journalCnt" parameterType="Long" resultType="Long">
         SELECT COUNT(MEMBER_NUM)
         FROM JOURNAL
         WHERE MEMBER_NUM = #{memberNum}
     </select>
 
+<!--    내가 받은 좋아요수-->
     <select id="likeCnt" parameterType="Long" resultType="Long">
         SELECT COUNT(L.CMT_ID)
         FROM LIKED L
@@ -25,24 +28,8 @@
         ORDER BY COUNT(DISTINCT JP.PICK_ID) DESC
     </select>
 
-<!--    내가찜한 전체 게시물 조회하기-->
-<!--    <select id ="showMyCheckList" parameterType="Long" resultType="MpgMyCheckListDTO">-->
-<!--        SELECT 'TEMPLATE' AS PICK_TYPE, t.TEMP_TITLE AS TITLE-->
-<!--        FROM TEMPLATE_PICK tp-->
-<!--        JOIN TEMPLATE t ON tp.TEMP_ID = t.TEMP_ID-->
-<!--        WHERE tp.MEMBER_NUM = #{memberNum}-->
-<!--        UNION ALL-->
-<!--        SELECT 'JOURNAL' AS PICK_TYPE, j.JNL_TITLE AS TITLE-->
-<!--        FROM JOURNAL_PICK jp-->
-<!--        JOIN JOURNAL j ON jp.JNL_NUM = j.JNL_NUM-->
-<!--        WHERE jp.MEMBER_NUM = #{memberNum}-->
-<!--        UNION ALL-->
-<!--        SELECT 'PLACE' AS PICK_TYPE, p.PLACE_NAME AS TITLE-->
-<!--        FROM PLACE_PICK pp-->
-<!--        JOIN PLACE p ON pp.PLACE_ID = p.PLACE_ID-->
-<!--        WHERE pp.MEMBER_NUM = #{memberNum}-->
-<!--    </select>-->
 
+<!--내가 찜한 리스트-->
     <select id="showMyCheckList" parameterType="Long" resultType="MpgMyCheckListDTO">
         SELECT 'TEMPLATE' AS PICK_TYPE, t.TEMP_TITLE AS TITLE, t.TEMP_ID AS PICK_ID
         FROM TEMPLATE_PICK tp
@@ -61,15 +48,14 @@
     </select>
 
 
-    <!--    내가찜한 저널만 보여주기-->
-
+<!-- 내가 체크한 템플릿 리스트-->
     <select id="showMyTemplateCheckList" parameterType="Long" resultType="MpgMyCheckListDTO">
         SELECT 'TEMPLATE' AS PICK_TYPE, T.TEMP_TITLE AS TITLE
         FROM TEMPLATE_PICK TP
                  JOIN TEMPLATE T ON TP.TEMP_ID = T.TEMP_ID
         WHERE TP.MEMBER_NUM = #{memberNum}
     </select>
-
+<!-- 내가 체크한 여행일지 리스트-->
     <select id="showMyJournalCheckList" parameterType="Long" resultType="MpgMyCheckListDTO">
         SELECT 'JOURNAL' AS PICK_TYPE, j.JNL_TITLE AS TITLE
         FROM JOURNAL_PICK jp
@@ -77,6 +63,7 @@
         WHERE jp.MEMBER_NUM = #{memberNum}
     </select>
 
+<!--    내가 체크한 장소 리스트-->
     <select id="showMyPlaceCheckList" parameterType="Long" resultType="MpgMyCheckListDTO">
         SELECT 'PLACE' AS PICK_TYPE, P.PLACE_NAME AS TITLE
         FROM PLACE_PICK pp
@@ -102,19 +89,20 @@
         JOIN PLACE p ON pp.PLACE_ID = p.PLACE_ID
         WHERE pp.MEMBER_NUM = #{memberNum})
     </select>
-
+<!-- 내 계획 숫자-->
     <select id="cntPlan" resultType="Long">
         SELECT COUNT(PLAN_ID)
         FROM PLAN
         WHERE MEMBER_NUM = #{memberNum}
     </select>
-
+<!--내 여행일지 리스트-->
     <select id="showMyJournalList" parameterType="Long" resultType="MpgMyJournalListDTO">
-        SELECT JNL_TITLE
+        SELECT JNL_TITLE, JNL_NUM
         FROM JOURNAL
         WHERE MEMBER_NUM = #{memberNum}
     </select>
 
+<!-- 내계획리스트-->
     <select id="showMyPlanList" parameterType="Long" resultType="MpgMyPlanListDTO">
         SELECT P.PLAN_TITLE, (P.PLAN_END_DATE-P.PLAN_START_DATE) as PERIOD, P.PLAN_START_DATE, P.PLAN_END_DATE,  COUNT(PP.PLACE_ID) as "PLACE_CNT"
         FROM PLAN P
@@ -124,6 +112,7 @@
         ORDER BY P.PLAN_START_DATE
     </select>
 
+<!--    찜하기제거-->
     <delete id="removePick" parameterType="MpgRemovePickDTO">
         BEGIN
     IF #{tempId} IS NOT NULL THEN
@@ -145,4 +134,29 @@
         END IF;
         END;
     </delete>
+
+<!--    회원정보 수정하기-->
+    <update id="updateUser" parameterType="MpgUpdateMemberDTO">
+        UPDATE MEMBER
+        SET
+            MEMBER_PASSWORD = #{memberPassword},
+            MEMBER_NICKNAME = #{memberNickname},
+            MEMBER_ADDRESS = #{memberAddress1},
+            MEMBER_BDATE = TO_DATE(#{memberByear}),
+            MEMBER_GENDER = #{memberGender}
+        WHERE MEMBER_NUM = #{memberNum}
+    </update>
+
+<!--&lt;!&ndash;    테스트용 쿼리&ndash;&gt;-->
+<!--    <select id="getUserByMemberNum" parameterType="Long" resultType="MpgUpdateMemberDTO">-->
+<!--        SELECT-->
+<!--            MEMBER_NUM,-->
+<!--            MEMBER_PASSWORD,-->
+<!--            MEMBER_NICKNAME,-->
+<!--            MEMBER_ADDRESS,-->
+<!--            TO_CHAR(MEMBER_BDATE, 'YYYY-MM-DD') AS MEMBER_BDATE,-->
+<!--            MEMBER_GENDER-->
+<!--        FROM MEMBER-->
+<!--        WHERE MEMBER_NUM = #{memberNum}-->
+<!--    </select>-->
 </mapper>

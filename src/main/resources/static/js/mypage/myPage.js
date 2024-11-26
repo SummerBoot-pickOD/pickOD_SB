@@ -282,7 +282,54 @@ document.addEventListener('DOMContentLoaded', function () {
           });
     });
   });
+
+  //클릭한게 저널이면 해당 저널 게시물 이동
+  let clickToBoard = document.querySelectorAll('.check-list');
+  clickToBoard.forEach(function (eachBoard){
+    eachBoard.addEventListener('click', function(){
+
+      if (event.target.className === 'checklist-check') {
+        return; // 체크박스를 클릭하면 함수 실행을 멈춤
+      }
+
+      const tempIdElement = eachBoard.querySelector('.temp-id')?.innerText;
+      console.log(tempIdElement);
+      const placeIdElement = eachBoard.querySelector('.place-id')?.innerText;
+      console.log(placeIdElement);
+      const jnlNumElement = eachBoard.querySelector('.jnl-id')?.innerText;
+      console.log(jnlNumElement);
+
+
+      if (jnlNumElement) {
+        console.log("jnlNum이 들어옴");
+        const data = {
+          jnlNum: Number(jnlNumElement),
+        };
+
+        window.location.href = `/journal/detail/${data.jnlNum}`;
+      }else if(placeIdElement){
+        console.log("placeId 들어옴");
+        const data = {
+          placeId: Number(placeIdElement),
+        };
+        window.location.href = `/place/${data.placeId}`;
+      }else if(tempIdElement){
+        console.log("tempId 들어옴");
+        const data = {
+          tempId: Number(tempIdElement),
+        };
+
+        window.location.href = `/template/detail/${data.tempId}`;
+      }
+
+
+
+    })
+  })
+
 });
+
+
 
 
 // 페이지 로드 시 checkedJournalList 데이터를 사용해 렌더링
@@ -319,15 +366,41 @@ function renderTripList(data) {
     nameDiv.classList.add('triplist-name');
     nameDiv.textContent = item.jnlTitle;
 
+    //내 저널 번호 추가
+    const jnlId = document.createElement('div');
+    jnlId.textContent = item.jnlNum;
+    jnlId.classList.add('jnl-num');
+    jnlId.hidden = true;
+
     // 생성된 요소를 trip-list div에 추가
     tripListDiv.appendChild(imgBoxDiv);
     tripListDiv.appendChild(boxDiv);
     tripListDiv.appendChild(nameDiv);
+    tripListDiv.appendChild(jnlId);
 
     // trip-list div를 mytrip-container에 추가
     container.appendChild(tripListDiv);
   });
+
+  //클릭한게 저널이면 해당 저널 게시물 이동
+  let clickToMyJournal = document.querySelectorAll('.mytrip-list');
+  clickToMyJournal.forEach(function (eachJournal){
+    eachJournal.addEventListener('click', function(){
+
+      const jnlNum = eachJournal.querySelector('.jnl-num').innerText;
+      console.log(jnlNum);
+
+      const data ={
+        jnlNum: Number(jnlNum),
+      }
+      window.location.href = `/journal/detail/${data.jnlNum}`;
+
+    })
+  })
 }
+
+
+
 
 //내 계획리스트
 // 페이지 로드 시 myPlanList 데이터를 사용해 렌더링

@@ -10,12 +10,16 @@ import java.time.LocalDate;
 @Getter @Setter @ToString
 @NoArgsConstructor
 public class MpgUpdateMemberDTO {
+    private Long memberNum;
+    private String memberId;
     private String memberPassword;
     private String memberNickname;
-    private String memberAddress;
-    private LocalDate memberBdate;
+    private String memberByear;
     private String memberGender;
-    private Long memberNum;
+    private String memberBmonth;
+    private String memberBdate;
+    private String memberAddress1;
+    private String memberAddress2;
 }
 
 
