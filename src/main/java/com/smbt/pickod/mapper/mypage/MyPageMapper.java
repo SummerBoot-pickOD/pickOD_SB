@@ -1,6 +1,7 @@
 package com.smbt.pickod.mapper.mypage;
 
 import com.smbt.pickod.dto.mypage.*;
+import com.smbt.pickod.dto.signup.SignUpMemberDTO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -32,5 +33,9 @@ public interface MyPageMapper {
     List<MpgMyPlanListDTO> showMyPlanList (Long memberNum);
 
     void removePick (MpgRemovePickDTO mpgRemovePickDTO);
+
+    void updateUser(MpgUpdateMemberDTO mpgUpdateMemberDTO);
+
+//    MpgUpdateMemberDTO getUserByMemberNum(Long memberNum);
 
 }

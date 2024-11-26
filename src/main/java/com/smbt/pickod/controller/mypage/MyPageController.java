@@ -1,10 +1,15 @@
 package com.smbt.pickod.controller.mypage;
 
+import com.smbt.pickod.dto.journal.JournalDetailDTO;
 import com.smbt.pickod.dto.mypage.MpgRemovePickDTO;
+import com.smbt.pickod.dto.mypage.MpgUpdateMemberDTO;
 import com.smbt.pickod.dto.place.PlaceDetailDTO;
+import com.smbt.pickod.dto.signup.SignUpMemberDTO;
 import com.smbt.pickod.mapper.mypage.MyPageMapper;
+import com.smbt.pickod.service.journal.JournalService;
 import com.smbt.pickod.service.mypage.MyPageService;
 import com.smbt.pickod.service.place.PlaceService;
+import com.smbt.pickod.service.signup.SignupService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -13,6 +18,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @Controller
 @Slf4j
 @RequiredArgsConstructor
@@ -20,7 +28,9 @@ import org.springframework.web.bind.annotation.*;
 public class MyPageController {
     private final MyPageService myPageService;
     private final PlaceService placeService;
-    private final MyPageMapper myPageMapper;
+    private final JournalService journalService;
+    private final SignupService signupService;
+
 
     @GetMapping("myPage")
     public String getMyPage(HttpSession session, Model model) {
@@ -54,7 +64,7 @@ public class MyPageController {
         //내가 만든 계획 리스트
         model.addAttribute("myPlanList", myPageService.getMyPlanList(memberNum));
 
-        return "mypage/myPage"; // myPage.html 뷰로 이동
+        return "mypage/myPage";
     }
 
     @GetMapping("myProfile")
@@ -82,32 +92,62 @@ public class MyPageController {
         if (memberNum == null) {
             return "redirect:/login/login";
         }
+        // 세션에 이메일이 저장되어 있다고 가정
+        String memberId = (String) session.getAttribute("memberId");
+        if (memberId == null) {
+            memberId = "default@example.com";
+        }
+        model.addAttribute("memberId", memberId); // 모델에 추가
+
         return "mypage/userDetail";
     }
 
-    // 장소 상세조회
-//    @GetMapping("/{placeId}")
-//    public String getPlaceDetail(@PathVariable("placeId") Long placeId, Model model) {
-//        PlaceDetailDTO placeDetail = placeService.getPlaceDetail(placeId);
-//        model.addAttribute("placeDetail", placeDetail);
-//        return "place/placeDetail"; // 장소 상세 페이지 템플릿
-//    }
+    @PostMapping("updateProfile")
+    public String changeMemberDetail(@ModelAttribute MpgUpdateMemberDTO mpgUpdateMemberDTO) {
+        myPageService.updateMember(mpgUpdateMemberDTO);
 
-    // 저널 상세조회
-//    @GetMapping("/{journal}")
-//    public String getPlaceDetail(@PathVariable("jnlNum") Long placeId, Model model) {
-//        PlaceDetailDTO placeDetail = myPageService.getPlaceDetail(placeId);
-//        model.addAttribute("placeDetail", placeDetail);
-//        return "place/placeDetail"; // 장소 상세 페이지 템플릿
-//    }
-//
-//    // 템플릿 상세조회
-//    @GetMapping("/{template}")
-//    public String getPlaceDetail(@PathVariable("temp_id") Long placeId, Model model) {
-//        PlaceDetailDTO placeDetail = myPageService.getPlaceDetail(placeId);
-//        model.addAttribute("placeDetail", placeDetail);
-//        return "place/placeDetail"; // 장소 상세 페이지 템플릿
-//    }
+        return "redirect:/mypage/myPage";
+    }
+
+    @PostMapping("isNickUnique")
+    @ResponseBody
+    public ResponseEntity<Map<String,Object>> isNickUsed(@RequestBody Map<String,String> nickname){
+        Map<String,Object> response = new HashMap<>();
+
+        boolean isUnique = signupService.isNicknameUnique(nickname.get("nickname"));
+        response.put("success", true);
+        response.put("isUnique", isUnique);
+        return ResponseEntity.ok(response);
+    }
+
+//장소 상세조회
+    @GetMapping("/place/{placeId}")
+    public String getPlaceDetail(@PathVariable("placeId") Long placeId, Model model) {
+        PlaceDetailDTO placeDetail = placeService.getPlaceDetail(placeId);
+        model.addAttribute("placeDetail", placeDetail);
+        return "place/placeDetail"; // 장소 상세 페이지 템플릿
+    }
+
+
+
+//여행일지 상세조회
+    @GetMapping("/journal/detail/{jnlNum}")
+    public String getJournalDetail(@PathVariable long jnlNum, Model model) {
+        // journalNum을 이용해 상세 정보를 가져옴
+        JournalDetailDTO journalDetail = journalService.getJournalByNum(jnlNum);
+        journalService.increaseViews(jnlNum);
+        // journalDetail 로그로 확인
+        if (journalDetail == null) {
+            System.out.println("Journal detail is null");
+        } else {
+            // journalDetail 객체의 데이터를 출력하여 확인
+            System.out.println("Journal detail: " + journalDetail.toString());
+        }
+        // 모델에 데이터를 추가해서 뷰로 전달
+        model.addAttribute("journalDetail", journalDetail);
+        return "journal/journalDetail";
+    }
+
 
     @DeleteMapping("deleteCheck")
     public ResponseEntity<String> deleteMyCheckList(@RequestBody MpgRemovePickDTO mpgRemovePickDTO, HttpSession session) {
@@ -121,4 +161,5 @@ public class MyPageController {
             return ResponseEntity.badRequest().body("ID가 하나도 입력되지 않았습니다.");
         }
     }
+
 }

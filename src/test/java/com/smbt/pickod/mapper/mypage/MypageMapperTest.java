@@ -15,6 +15,8 @@ import java.util.Objects;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @Slf4j
 @Transactional
@@ -32,6 +34,7 @@ class MyPageMapperTest {
     MpgMyPlanListDTO mpgMyPlanListDTO;
     MpgRemovePickDTO mpgRemovePickDTO;
     MpgCntMyListDTO mpgCntMyListDTO;
+    MpgUpdateMemberDTO mpgUpdateMemberDTO;
 
     @BeforeEach
     void setUp() {
@@ -43,6 +46,7 @@ class MyPageMapperTest {
         mpgMyPlanListDTO = new MpgMyPlanListDTO();
         mpgRemovePickDTO = new MpgRemovePickDTO();
         mpgCntMyListDTO = new MpgCntMyListDTO();
+        mpgUpdateMemberDTO = new MpgUpdateMemberDTO();
     }
 
     @Test
@@ -199,4 +203,27 @@ class MyPageMapperTest {
                 .extracting("title")
                 .isInstanceOf(ArrayList.class);
     }
+
+//    @Test
+//    void updateUser(){
+//        MpgUpdateMemberDTO result = myPageMapper.getUserByMemberNum(3L);
+//        mpgUpdateMemberDTO.setMemberPassword("QWER1234");
+//        mpgUpdateMemberDTO.setMemberNickname("왜안바뀜");
+//        mpgUpdateMemberDTO.setMemberGender("M");
+//        mpgUpdateMemberDTO.setMemberAddress1("서울시");
+//        mpgUpdateMemberDTO.setMemberAddress2("강남구");
+//        mpgUpdateMemberDTO.setMemberByear("1990");
+//        mpgUpdateMemberDTO.setMemberBmonth("01");
+//        mpgUpdateMemberDTO.setMemberBdate("01");
+//        mpgUpdateMemberDTO.setMemberNum(3L);
+//        myPageMapper.updateUser(mpgUpdateMemberDTO);
+//
+//        assertNotNull(result); // 결과가 null이 아니어야 함
+////        assertEquals("왜안바뀜", result.getMemberNickname()); // 닉네임 확인
+//        assertEquals("QWER1234", result.getMemberPassword()); // 비밀번호 확인
+//        assertEquals("M", result.getMemberGender()); // 성별 확인
+//
+//        System.out.println("회원 정보: " + result);
+//
+//    }
 }
