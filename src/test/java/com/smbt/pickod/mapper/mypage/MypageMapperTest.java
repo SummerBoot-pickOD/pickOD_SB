@@ -206,7 +206,7 @@ class MyPageMapperTest {
 
 //    @Test
 //    void updateUser(){
-//        MpgUpdateMemberDTO result = myPageMapper.getUserByMemberNum(3L);
+//
 //        mpgUpdateMemberDTO.setMemberPassword("QWER1234");
 //        mpgUpdateMemberDTO.setMemberNickname("왜안바뀜");
 //        mpgUpdateMemberDTO.setMemberGender("M");
@@ -216,14 +216,17 @@ class MyPageMapperTest {
 //        mpgUpdateMemberDTO.setMemberBmonth("01");
 //        mpgUpdateMemberDTO.setMemberBdate("01");
 //        mpgUpdateMemberDTO.setMemberNum(3L);
+//        log.info(mpgUpdateMemberDTO.toString());
 //        myPageMapper.updateUser(mpgUpdateMemberDTO);
+
+//        MpgUpdateMemberDTO result = myPageMapper.getUserByMemberNum(3L);
 //
 //        assertNotNull(result); // 결과가 null이 아니어야 함
-////        assertEquals("왜안바뀜", result.getMemberNickname()); // 닉네임 확인
+//        assertEquals("왜안바뀜", result.getMemberNickname()); // 닉네임 확인
 //        assertEquals("QWER1234", result.getMemberPassword()); // 비밀번호 확인
 //        assertEquals("M", result.getMemberGender()); // 성별 확인
 //
 //        System.out.println("회원 정보: " + result);
-//
-//    }
+
+    }
 }

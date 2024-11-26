@@ -36,28 +36,7 @@
 //   displayMails(); // 초기 메일 목록 10개만 표시
 // });
 
-// 전체클릭 기능
-let checkAll = document.querySelector('.all');
-let checkItem = document.querySelectorAll('.item');
 
-checkAll.addEventListener('click', function() {
-  checkItem.forEach(function(e) {
-    e.checked = checkAll.checked;
-  });
-});
-
-checkItem.forEach(function(e) {
-  e.addEventListener('click', function() {
-    if (!e.checked) {
-      checkAll.checked = false;
-    } else {
-      const allChecked = Array.from(checkItem).every(function(checkItem) {
-        return checkItem.checked;
-      });
-      checkAll.checked = allChecked;
-    }
-  });
-});
 
 
 
@@ -259,6 +238,48 @@ document.addEventListener('DOMContentLoaded', function () {
 })
 
 
+// 전체 체크 박스 선택
+const checkAll = document.querySelector('.all');
+const mailboxContainer = document.getElementById('mailbox-container');
+
+// "전체 선택" 체크박스 클릭 이벤트
+checkAll.addEventListener('click', function () {
+  const checkItems = mailboxContainer.querySelectorAll('.item');
+  checkItems.forEach(function (checkbox) {
+    checkbox.checked = checkAll.checked;
+  });
+});
+
+// 개별 체크박스 클릭 이벤트 위임
+mailboxContainer.addEventListener('click', function (event) {
+  if (event.target.classList.contains('item') && event.target.type === 'checkbox') {
+    const checkItems = mailboxContainer.querySelectorAll('.item');
+    const allChecked = Array.from(checkItems).every(function (checkbox) {
+      return checkbox.checked;
+    });
+    checkAll.checked = allChecked;
+  }
+});
+
+// function getCheckedMsgIds() {
+//   const checkedItems = document.querySelectorAll('.item:checked'); // 체크된 체크박스들 선택
+//   const msgIds = Array.from(checkedItems).map((checkbox) => {
+//     const mailbox = checkbox.closest('.mailbox-list'); // 체크박스의 부모 항목 찾기
+//     const msgIdElement = mailbox.querySelector('.msg-id'); // msg-id 요소 찾기
+//     return msgIdElement ? msgIdElement.textContent : null; // msgId 반환
+//   });
+//   return msgIds.filter(Boolean); // 유효한 msgId만 반환
+// }
+//
+// // 예시: 버튼 클릭 시 체크된 msgId를 가져와서 콘솔에 출력
+// const getCheckedButton = document.querySelector('.get-checked-msg'); // 체크된 메시지 ID 가져오는 버튼
+// getCheckedButton.addEventListener('click', function () {
+//   const checkedMsgIds = getCheckedMsgIds();
+//   console.log('Checked msgIds:', checkedMsgIds);
+// });
+
+
+
 
 // 게시물 및 페이지네이션 처리
 
@@ -279,8 +300,8 @@ document.addEventListener('DOMContentLoaded', function () {
 //     mailContainer.appendChild(mailboxLists[i]);
 //   }
 // }
-
-
+//
+//
 // function setupPagination() {
 //   const paginationContainer = document.getElementById('pagination');
 //   paginationContainer.innerHTML = ''; // 페이지네이션 초기화
