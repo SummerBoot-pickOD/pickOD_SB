@@ -89,59 +89,140 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 })
 
-// 전체 체크기능
-let checkAll = document.querySelector('.all');
-let checkItem = document.querySelectorAll('.item');
-console.log(checkAll);
-console.log(checkItem);
+// 전체 체크 박스 선택
+const checkAll = document.querySelector('.all');
+const mailboxContainer = document.getElementById('mailbox-container');
 
-checkAll.addEventListener('click', function() {
-  checkItem.forEach(function(e) {
-    e.checked = checkAll.checked;
-  });
+// "전체 선택" 체크박스 클릭 이벤트
+checkAll.addEventListener('click', function () {
+    const checkItems = mailboxContainer.querySelectorAll('.item');
+    checkItems.forEach(function (checkbox) {
+        checkbox.checked = checkAll.checked;
+    });
 });
 
-checkItem.forEach(function(e) {
-  e.addEventListener('click', function() {
-      if (!e.checked) {
-        checkAll.checked = false;
-      } else {
-          const allChecked = Array.from(checkItem).every(function(checkItem) {
-              return checkItem.checked;
-          });
-          checkAll.checked = allChecked;
-      }
-  });
+// 개별 체크박스 클릭 이벤트
+mailboxContainer.addEventListener('click', function (event) {
+    if (event.target.classList.contains('item') && event.target.type === 'checkbox') {
+        const checkItems = mailboxContainer.querySelectorAll('.item');
+        const allChecked = Array.from(checkItems).every(function (checkbox) {
+            return checkbox.checked;
+        });
+        checkAll.checked = allChecked;
+    }
 });
 
-//영구삭제
-const btnDelete = document.querySelector('.btn-delete-all');
-console.log(btnDelete);
-const mailboxList = document.querySelectorAll('.mailbox-list');
-console.log(mailboxList);
+// 체크된 msgId를 가져오는 함수
+function getCheckedMsgIds() {
+    const checkedItems = document.querySelectorAll('.item:checked');
+    console.log('Checked Items:', checkedItems);
 
-btnDelete.addEventListener('click', function() {
-  // const mailboxList = document.querySelector('mailbox-list');
-  // console.log(mailboxList);
-  // const trashList = document.getElementById('trashList');
-  if (confirm("영구삭제하시겠습니까?")) {
-     // 받은 쪽지 중 체크된 항목을 찾아서 휴지통으로 이동(삭제처리)
-  const checkboxes = document.querySelectorAll('.item');
-  // console.log(checkboxes);
-  checkboxes.forEach((checkbox) => {
-      if (checkbox.checked) {
-          const messageItem = checkbox.closest('.mailbox-list');
-          messageItem.remove(); // 받은 쪽지함에서 삭제
-          // trashList.appendChild(messageItem);   // 휴지통으로 이동
-          checkbox.checked = false; // 체크 상태 초기화
-      }
-  });
-} else {
-  alert("취소되었습니다")
+    const msgIds = Array.from(checkedItems).map((checkbox) => {
+        const mailbox = checkbox.closest('.mailbox-list');
+        console.log('Mailbox:', mailbox);
+
+        const msgIdElement = mailbox.querySelector('.msg-id');
+        console.log('msgIdElement:', msgIdElement);
+
+        return msgIdElement ? msgIdElement.textContent : null;
+
+    });
+    console.log('Extracted Msg IDs:', msgIds);
+    return msgIds.filter(Boolean);
 }
 
+getCheckedMsgIds();
+
+
+// 체크된 msgId를 컨트롤러로 보내는 함수
+function sendCheckedMsgIds() {
+    // 체크된 msgId 가져오기
+    const checkedMsgIds = getCheckedMsgIds();
+
+    if (checkedMsgIds.length === 0) {
+        console.warn('선택된 항목이 없습니다.');
+        return;
+    }
+
+    // data 생성
+    const data = {
+        msgIds: checkedMsgIds
+    };
+
+
+    fetch('/message/removeCheckedMsgs', {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+        .then(response => {
+            if (!response.ok) throw new Error("Fail to fetch message.");
+            return response.text();
+        })
+        .then(data => {
+            console.log('성공:', data);
+            alert('영구삭제 성공');
+            location.reload();
+        })
+        .catch(error => {
+            console.error('에러 발생:', error);
+            alert('영구삭제 실패');
+        });
+}
+
+//체크된거 복원컨트롤러로 보내기
+function sendCheckedMsgIdsForReturn() {
+    // 체크된 msgId 가져오기
+    const checkedMsgIds = getCheckedMsgIds();
+
+    if (checkedMsgIds.length === 0) {
+        console.warn('선택된 항목이 없습니다.');
+        return;
+    }
+
+    // data 생성
+    const data = {
+        msgIds: checkedMsgIds
+    };
+
+
+    // Fetch API로 POST 요청 보내기
+    fetch('/message/returnCheckedMsgs', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+        .then(response => {
+            if (!response.ok) throw new Error("Fail to fetch message.");
+            return response.text();
+        })
+        .then(data => {
+            console.log('성공:', data);
+            alert('쪽지가 복원되었습니다');
+            location.reload();
+        })
+        .catch(error => {
+            console.error('에러 발생:', error);
+            alert('쪽지 복원 실패');
+        });
+}
+
+// btn-delete 클래스의 버튼 클릭 이벤트 설정
+document.addEventListener('DOMContentLoaded', () => {
+    const deleteButton = document.querySelector('.btn-delete-all');
+    console.log(deleteButton);
+    deleteButton.addEventListener('click', sendCheckedMsgIds);
 });
 
+document.addEventListener('DOMContentLoaded', () => {
+    const deleteButton = document.querySelector('.btn-return');
+    console.log(deleteButton);
+    deleteButton.addEventListener('click', sendCheckedMsgIdsForReturn);
+});
 
 
 
@@ -202,6 +283,7 @@ document.addEventListener('DOMContentLoaded', function() {
             })
             .then(data=>{
                 console.log(data);
+                location.reload();
             })
             .catch(error => {
                 console.log("Error:", error);
@@ -230,6 +312,7 @@ document.addEventListener('DOMContentLoaded', function() {
                   })
                   .then(data=>{
                       console.log(data);
+                      location.reload();
                   })
                   .catch(error => {
                       console.log("Error:", error);

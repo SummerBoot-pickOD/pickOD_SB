@@ -74,17 +74,18 @@ public class MyPageService {
 
     //멤버 업데이트
     public void updateMember(MpgUpdateMemberDTO mpgUpdateMemberDTO) {
-        myPageMapper.updateUser(mpgUpdateMemberDTO);
-//        if(mpgUpdateMemberDTO.getMemberBmonth() != "N" && mpgUpdateMemberDTO.getMemberBdate() != "N"){
-//            mpgUpdateMemberDTO.setMemberByear(mpgUpdateMemberDTO.getMemberByear()+
-//                    mpgUpdateMemberDTO.getMemberBmonth()+
-//                    mpgUpdateMemberDTO.getMemberBdate());
-//        }
-//        if(mpgUpdateMemberDTO.getMemberAddress1() != "N" && mpgUpdateMemberDTO.getMemberAddress2() != "N"){
-//            mpgUpdateMemberDTO.setMemberAddress1(mpgUpdateMemberDTO.getMemberAddress1() + mpgUpdateMemberDTO.getMemberAddress2());
-//        }
-//
-//        myPageMapper.updateUser(mpgUpdateMemberDTO);
+        myPageMapper.updateUserRequired(mpgUpdateMemberDTO);
+
+        if(mpgUpdateMemberDTO.getMemberBmonth() != "N" && mpgUpdateMemberDTO.getMemberBdate() != "N"){
+            mpgUpdateMemberDTO.setMemberByear(mpgUpdateMemberDTO.getMemberByear()+
+                    mpgUpdateMemberDTO.getMemberBmonth()+
+                    mpgUpdateMemberDTO.getMemberBdate());
+        }
+        if(mpgUpdateMemberDTO.getMemberAddress1() != "N" && mpgUpdateMemberDTO.getMemberAddress2() != "N"){
+            mpgUpdateMemberDTO.setMemberAddress1(mpgUpdateMemberDTO.getMemberAddress1() + mpgUpdateMemberDTO.getMemberAddress2());
+        }
+
+        myPageMapper.updateUserOptional(mpgUpdateMemberDTO);
     }
 
 }

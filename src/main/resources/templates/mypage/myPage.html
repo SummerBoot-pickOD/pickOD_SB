@@ -20,6 +20,9 @@
       /*<![CDATA[*/
       // 서버에서 전달된 `checkedList`를 JSON으로 변환하여 JavaScript 변수에 할당
       const checkedList = /*[[${checkedList}]]*/ [];
+      const checkedJournalList = /*[[${checkedJournalList}]]*/ [];
+      const CheckedPlaceList = /*[[${CheckedPlaceList}]]*/ [];
+      const checkedTempList = /*[[${checkedTempList}]]*/ [];
       const myJournalList = /*[[${myJournalList}]]*/ [];
       const myPlanList = /*[[${myPlanList}]]*/ [];
       const myBestList = /*[[${myBestList}]]*/ [];
@@ -56,9 +59,9 @@
           <!-- 프로필/회원수정/쪽지함 바로가기공간 -->
 
           <div class="profile-under">
-            <div class="profilefix-btn">
-              <div class="btn-profilefix"><a th:href="@{../mypage/myProfile}"><img src="../../img/mypage/사진기.png" alt="프로필수정"></a></div>
-            </div>
+<!--            <div class="profilefix-btn">-->
+<!--              <div class="btn-profilefix"><a th:href="@{../mypage/myProfile}"><img src="../../img/mypage/사진기.png" alt="프로필수정"></a></div>-->
+<!--            </div>-->
             <div class="memberfix-btn">
               <div class="btn-memberfix"><a th:href="@{../mypage/userDetail}"><img src="../../img/mypage/연필.png" alt="정보수정"></a></div>
             </div>
@@ -75,7 +78,7 @@
           <div class="mybest-title">
             <div class="title-box">
               <div>나의베스트게시물</div>
-              <div><a th:href="@{/mypage/myBest}"><img src="../../img/mypage/바로가기.png" alt="바로가기버튼"></a></div>
+              <div style="display: none"> <a th:href="@{/mypage/myBest}"><img src="../../img/mypage/바로가기.png" alt="바로가기버튼"></a></div>
             </div>
           </div>
           <div class="mybest-index">
