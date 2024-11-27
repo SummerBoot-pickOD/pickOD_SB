@@ -81,10 +81,7 @@
         </div>
     </div>
 
-    <div class="Day-container">
-        <div class="Day-button" th:each="day : ${journalDetail.journalDayList}"
-             th:text="'DAY ' + ${day.jnlDay}" th:data-day="${day.jnlDay}"></div>
-    </div>
+    <div class="Day-container"></div>
     <div class="detail-container">
         <div class="detail-box">
             <div class="maps-API"><img th:src="@{/img/journal/지도입니당.png}" alt=""></div>
@@ -96,12 +93,21 @@
             <div class="detail-content-container">
                 <div class="detail-photo">
                     <img class="arrow left-arrow" src="/img/journal/왼쪽 화살표.png" alt="Previous" id="prev-arrow">
-                    <img class="main-photo" id="main-photo" src="${journalDetail.journalDayList[0].jnlImgList[0].uploadPath + '/' + journalDetail.journalDayList[0].jnlImgList[0].fileName}" alt="Journal Image">
+                    <img class="main-photo" id="main-photo"
+                         th:src="|${#lists.isEmpty(journalDetail.journalDayList) or #lists.isEmpty(journalDetail.journalDayList[0].jnlImgList)
+               ? '/img/journal/하단 큰 이미지.png'
+               : journalDetail.journalDayList[0].jnlImgList[0].uploadPath + '/' + journalDetail.journalDayList[0].jnlImgList[0].fileName}|"
+                         alt="Journal Image">
                     <img class="arrow right-arrow" src="/img/journal/오른쪽 화살표.png" alt="Next" id="next-arrow">
                 </div>
                 <div class="detail-text" id="content-text">
-                    <!-- 서버에서 전달된 내용이 없다면 이 부분은 빈 상태로 남기고, JavaScript에서 동적으로 내용 업데이트 -->
-                    <div class="content-placeholder">내용을 선택해주세요.</div>
+                    <!-- 기본적으로 DAY1의 모든 콘텐츠를 표시 -->
+                    <div class="content-display">
+                        <div th:each="day : ${journalDetail.journalDayList}"
+                             th:if="${day.jnlDay == 1}"
+                             th:text="${day.jnlContents}"
+                             style="margin-bottom: 20px;"></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -186,8 +192,8 @@
     <div id="reply"></div>
     <div id="footer" th:replace="~{/main/footer}"></div>
 <script th:inline="javascript">
-    var journalDetailList = /*[[${journalDetailList}]]*/ [];
-    console.log('journalDetailList:', journalDetailList);
+    var journalDetailList = /*[[${journalDayListJson}]]*/ [];
+    console.log("Loaded journalDetailList:", journalDetailList);
 </script>
 <script th:src="@{/js/journal/journalDetail.js}"></script>
 </body>

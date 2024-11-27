@@ -15,7 +15,14 @@ main{
     outline: none;
     font-size: 40px;
     margin: auto;
+    appearance: none;
 }
+
+.title:focus {
+    background-color: transparent; /* 포커스 시 배경색 제거 */
+    outline: none; /* 포커스 시 외곽선 제거 */
+}
+
 
 .container-display{
     margin: 50px 0 150px 0;
@@ -70,7 +77,11 @@ main{
     background-color: none;
     outline: none;
     text-align: center;
+}
 
+.explain:focus {
+    background-color: transparent; /* 포커스 시 배경색 제거 */
+    outline: none; /* 포커스 시 외곽선 제거 */
 }
 
 .tag-container{
@@ -157,7 +168,11 @@ img{
     border-radius: 4px;
     border: none;
     outline: 1px solid #ccc;
+}
 
+.area:focus {
+    background-color: transparent; /* 포커스 시 배경색 제거 */
+    outline: none; /* 포커스 시 외곽선 제거 */
 }
 
 /* 오른쪽에 화살표 추가 */

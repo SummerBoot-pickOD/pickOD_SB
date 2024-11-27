@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/journal")
@@ -63,19 +64,21 @@ public class JournalListController {
 
     @GetMapping("/detail/{jnlNum}")
     public String getJournalDetail(@PathVariable long jnlNum, Model model) {
-        // 매퍼 메서드 호출하여 JournalDetailDTO 반환
+        // 조회수 증가 호출
+        journalService.increaseViews(jnlNum);
+
+        // 중복 제거된 journalDetail 가져오기
         JournalDetailDTO journalDetail = journalService.getJournalByNum(jnlNum);
-        System.out.println("===========출력 ======" + journalDetail);
 
         if (journalDetail == null) {
             log.warn("No journal found for jnlNum: " + jnlNum);
             return "redirect:/journal/list";
         }
 
-        // journalDetail을 모델에 추가
+        // 모델에 journalDetail 추가 (모든 day 포함)
         model.addAttribute("journalDetail", journalDetail);
 
-        // journalDayList를 JSON 형식으로 변환하여 모델에 추가
+        // JSON 데이터로 변환 (클라이언트 측에서 처리할 필요가 있는 경우)
         try {
             ObjectMapper objectMapper = new ObjectMapper();
             String journalDayListJson = objectMapper.writeValueAsString(journalDetail.getJournalDayList());
@@ -86,6 +89,7 @@ public class JournalListController {
 
         return "journal/journalDetail";
     }
+
 
 //    @GetMapping("/search")
 //    public String searchJournal(@RequestParam("searchKeyword") String searchKeyword, Model model) {

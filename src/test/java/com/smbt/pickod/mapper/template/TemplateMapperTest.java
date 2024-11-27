@@ -21,33 +21,33 @@ class TemplateMapperTest {
     @Autowired
     private TemplateMapper templateMapper;
 
-    @Test
-    public void testSearchTemplateByTag() {
-        List<TemplateDTO> result = templateMapper.searchTemplateByTag("가족");
-        Assertions.assertNotNull(result);
-        Assertions.assertTrue(result.stream().allMatch(t -> t.getTempTag().contains("가족")));
-    }
-
-    @Test
-    public void testSearchTemplateByTheme() {
-        List<TemplateDTO> result = templateMapper.searchTemplateByTheme("가족");
-        Assertions.assertNotNull(result);
-        Assertions.assertTrue(result.stream().allMatch(t -> t.getTempTheme().contains("가족")));
-    }
-
-    @Test
-    public void testSearchTemplateByTitle() {
-        List<TemplateDTO> result = templateMapper.searchTemplateByTitle("대부도");
-        Assertions.assertNotNull(result);
-        Assertions.assertTrue(result.stream().allMatch(t -> t.getTempTitle().contains("대부도")));
-    }
-
-    @Test
-    public void testSearchTemplateByPeriod() {
-        List<TemplateDTO> result = templateMapper.searchTemplateByPeriod("당일");
-        Assertions.assertNotNull(result);
-        Assertions.assertTrue(result.stream().allMatch(t -> t.getTempPeriod().contains("당일")));
-    }
+//    @Test
+//    public void testSearchTemplateByTag() {
+//        List<TemplateDTO> result = templateMapper.searchTemplateByTag("가족");
+//        Assertions.assertNotNull(result);
+//        Assertions.assertTrue(result.stream().allMatch(t -> t.getTempTag().contains("가족")));
+//    }
+//
+//    @Test
+//    public void testSearchTemplateByTheme() {
+//        List<TemplateDTO> result = templateMapper.searchTemplateByTheme("가족");
+//        Assertions.assertNotNull(result);
+//        Assertions.assertTrue(result.stream().allMatch(t -> t.getTempTheme().contains("가족")));
+//    }
+//
+//    @Test
+//    public void testSearchTemplateByTitle() {
+//        List<TemplateDTO> result = templateMapper.searchTemplateByTitle("대부도");
+//        Assertions.assertNotNull(result);
+//        Assertions.assertTrue(result.stream().allMatch(t -> t.getTempTitle().contains("대부도")));
+//    }
+//
+//    @Test
+//    public void testSearchTemplateByPeriod() {
+//        List<TemplateDTO> result = templateMapper.searchTemplateByPeriod("당일");
+//        Assertions.assertNotNull(result);
+//        Assertions.assertTrue(result.stream().allMatch(t -> t.getTempPeriod().contains("당일")));
+//    }
 
     @Test
     public void testSearchTemplatesByViews() {

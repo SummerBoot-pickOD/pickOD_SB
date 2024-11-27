@@ -40,4 +40,178 @@
         FROM TEMPLATE
     </select>
 
+    <select id="getTemplateWithDaysByNum" parameterType="long" resultType="TemplateDTO">
+        SELECT
+            -- TEMPLATE 테이블의 컬럼들
+            t.TEMP_ID,
+            t.TEMP_TITLE,
+            t.TEMP_PERIOD,
+            t.TEMP_VIEWS,
+            t.TEMP_TAG,
+            t.TEMP_THEME,
+            t.JNL_NUM,
+            t.MEMBER_NUM,
+            t.PICK_COUNT,
+
+            -- TEMP_DAY 테이블의 정보
+            td.TEMP_ID AS TEMP_DAY_TEMP_ID,
+            td.TEMP_DAY_NUM,
+            td.PLACE_ORDER,
+            td.PLACE_ID,
+            td.TEMP_CONTENTS,
+            td.TEMP_REC1,
+            td.TEMP_REC2,
+            td.TEMP_REC3,
+
+            -- TEMP_IMGS 테이블의 정보
+            ti.TEMP_IMGS_ID,
+            ti.TEMP_IMGS_GUID,
+            ti.FILE_NAME,
+            ti.UPLOADPATH,
+            ti.TEMP_IMGS_ORDER,
+            ti.PLACE_ID AS TEMP_IMG_PLACE_ID,
+            ti.TEMP_ID AS TEMP_IMG_TEMP_ID,
+            ti.TEMP_DAY_ID,
+
+        FROM
+            TEMPLATE t
+                LEFT JOIN TEMP_DAY td ON t.TEMP_ID = td.TEMP_ID
+                LEFT JOIN TEMP_IMGS ti ON td.TEMP_ID = ti.TEMP_ID AND td.TEMP_DAY_NUM = ti.TEMP_DAY_ID
+        WHERE
+            t.TEMP_ID = #{tempId}
+    </select>
+
+    <select id="getTemplateByKeyword" parameterType="long" resultType="TemplateDTO">
+        SELECT
+            -- TEMPLATE 테이블의 컬럼들
+            t.TEMP_ID,
+            t.TEMP_TITLE,
+            t.TEMP_PERIOD,
+            t.TEMP_VIEWS,
+            t.TEMP_TAG,
+            t.TEMP_THEME,
+            t.TEMP_AREA,
+            t.JNL_NUM,
+            t.MEMBER_NUM,
+
+            -- TEMP_DAY 테이블의 정보
+            td.TEMP_ID AS TEMP_DAY_TEMP_ID,
+            td.TEMP_DAY_NUM,
+            td.PLACE_ORDER,
+            td.PLACE_ID,
+            td.TEMP_CONTENTS,
+            td.TEMP_REC1,
+            td.TEMP_REC2,
+            td.TEMP_REC3,
+
+            -- TEMP_IMGS 테이블의 정보
+            ti.TEMP_IMGS_ID,
+            ti.TEMP_IMGS_GUID,
+            ti.FILE_NAME,
+            ti.UPLOADPATH,
+            ti.TEMP_IMGS_ORDER,
+            ti.PLACE_ID AS TEMP_IMG_PLACE_ID,
+            ti.TEMP_ID AS TEMP_IMG_TEMP_ID,
+            ti.TEMP_DAY_ID,
+
+        FROM
+            TEMPLATE t
+                LEFT JOIN TEMP_DAY td ON t.TEMP_ID = td.TEMP_ID
+                LEFT JOIN TEMP_IMGS ti ON td.TEMP_ID = ti.TEMP_ID AND td.TEMP_DAY_NUM = ti.TEMP_DAY_ID
+        WHERE
+            t.TEMP_TITLE LIKE '%' || #{keyword} || '%'
+           OR t.TEMP_AREA LIKE '%' || #{keyword} || '%'
+           OR t.TEMP_TAG LIKE '%' || #{keyword} || '%'
+           OR t.TEMP_THEME LIKE '%' || #{keyword} || '%'
+           OR t.TEMP_PERIOD LIKE '%' || #{keyword} || '%'
+        ORDER BY t.TEMP_VIEWS DESC
+    </select>
+
+    <select id="getTemplateByPickCountDesc" parameterType="long" resultType="TemplateDTO">
+        SELECT
+            -- TEMPLATE 테이블의 컬럼들
+            t.TEMP_ID,
+            t.TEMP_TITLE,
+            t.TEMP_PERIOD,
+            t.TEMP_VIEWS,
+            t.TEMP_TAG,
+            t.TEMP_THEME,
+            t.TEMP_AREA,
+            t.JNL_NUM,
+            t.MEMBER_NUM,
+
+            -- TEMP_DAY 테이블의 정보
+            td.TEMP_ID AS TEMP_DAY_TEMP_ID,
+            td.TEMP_DAY_NUM,
+            td.PLACE_ORDER,
+            td.PLACE_ID,
+            td.TEMP_CONTENTS,
+            td.TEMP_REC1,
+            td.TEMP_REC2,
+            td.TEMP_REC3,
+
+            -- TEMP_IMGS 테이블의 정보
+            ti.TEMP_IMGS_ID,
+            ti.TEMP_IMGS_GUID,
+            ti.FILE_NAME,
+            ti.UPLOADPATH,
+            ti.TEMP_IMGS_ORDER,
+            ti.PLACE_ID AS TEMP_IMG_PLACE_ID,
+            ti.TEMP_ID AS TEMP_IMG_TEMP_ID,
+            ti.TEMP_DAY_ID,
+
+            -- PICK COUNT
+            (SELECT COUNT(*)
+             FROM TEMPLATE_PICK tp
+             WHERE tp.TEMP_ID = t.TEMP_ID) AS pick_count
+
+        FROM
+            TEMPLATE t
+                LEFT JOIN TEMP_DAY td ON t.TEMP_ID = td.TEMP_ID
+                LEFT JOIN TEMP_IMGS ti ON td.TEMP_ID = ti.TEMP_ID AND td.TEMP_DAY_NUM = ti.TEMP_DAY_ID
+        ORDER BY
+            pick_count DESC
+    </select>
+
+    <select id="getTemplatesByViews" parameterType="long" resultType="TemplateDTO">
+        SELECT
+            -- TEMPLATE 테이블의 컬럼들
+            t.TEMP_ID,
+            t.TEMP_TITLE,
+            t.TEMP_PERIOD,
+            t.TEMP_VIEWS,
+            t.TEMP_TAG,
+            t.TEMP_THEME,
+            t.TEMP_AREA,
+            t.JNL_NUM,
+            t.MEMBER_NUM,
+
+            -- TEMP_DAY 테이블의 정보
+            td.TEMP_ID AS TEMP_DAY_TEMP_ID,
+            td.TEMP_DAY_NUM,
+            td.PLACE_ORDER,
+            td.PLACE_ID,
+            td.TEMP_CONTENTS,
+            td.TEMP_REC1,
+            td.TEMP_REC2,
+            td.TEMP_REC3,
+
+            -- TEMP_IMGS 테이블의 정보
+            ti.TEMP_IMGS_ID,
+            ti.TEMP_IMGS_GUID,
+            ti.FILE_NAME,
+            ti.UPLOADPATH,
+            ti.TEMP_IMGS_ORDER,
+            ti.PLACE_ID AS TEMP_IMG_PLACE_ID,
+            ti.TEMP_ID AS TEMP_IMG_TEMP_ID,
+            ti.TEMP_DAY_ID,
+
+        FROM
+            TEMPLATE t
+                LEFT JOIN TEMP_DAY td ON t.TEMP_ID = td.TEMP_ID
+                LEFT JOIN TEMP_IMGS ti ON td.TEMP_ID = ti.TEMP_ID AND td.TEMP_DAY_NUM = ti.TEMP_DAY_ID
+
+        ORDER BY t.TEMP_VIEWS DESC
+    </select>
+
 </mapper>

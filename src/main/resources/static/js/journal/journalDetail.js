@@ -11,75 +11,61 @@ $(function () {
 });
 
 document.addEventListener("DOMContentLoaded", function () {
-    const journalDetailList = /*[[${journalDetail.journalDayList}]]*/ []; // 서버에서 전달된 데이터 확인
+    const dayContainer = document.querySelector(".Day-container");
+    const contentText = document.getElementById("content-text");
+    const mainPhoto = document.getElementById("main-photo");
 
-    console.log('===== console 확인 ===== journalDetailList:', journalDetailList);  // 데이터 확인
-    console.log('[[${journalDetail.journalDayList}]]');
+    // JSON 데이터 파싱
+    const journalDetailListParsed = JSON.parse(journalDetailList);
+    console.log("Parsed journalDetailList:", journalDetailListParsed);
 
-    const dayContainer = document.querySelector('.Day-container'); // Day-container 요소 찾기
-    const contentText = document.getElementById('content-text');
-    const mainPhoto = document.getElementById('main-photo');
-
-    if (!journalDetailList || journalDetailList.length === 0) {
-        console.error('데이터가 없습니다!');
+    if (!journalDetailListParsed || journalDetailListParsed.length === 0) {
+        console.error("데이터가 없습니다!");
         return;
     }
 
-    // DAY 버튼 동적으로 생성하기
-    journalDetailList.forEach((day, index) => {
-        const dayButton = document.createElement('div');
-        dayButton.classList.add('Day-button');
-        dayButton.textContent = `DAY ${day.jnlDay}`;  // 버튼에 DAY 번호 표시
-        dayButton.setAttribute('data-day', day.jnlDay);  // 각 DAY에 맞는 데이터를 찾기 위해 data-day 속성 추가
+    // jnlDay 기준으로 정렬 (오름차순)
+    journalDetailListParsed.sort((a, b) => a.jnlDay - b.jnlDay);
+
+    // DAY 버튼 동적으로 생성
+    journalDetailListParsed.forEach((day, index) => {
+        const dayButton = document.createElement("button"); // <button>으로 변경
+        dayButton.classList.add("Day-button");
+        dayButton.textContent = `DAY ${day.jnlDay}`;
+        dayButton.setAttribute("data-day", day.jnlDay);
         dayContainer.appendChild(dayButton);
 
-        // DAY 버튼 클릭 이벤트 설정
-        dayButton.addEventListener('click', function () {
-            const selectedDay = day.jnlDay;
+        // 클릭 이벤트 설정
+        dayButton.addEventListener("click", function () {
+            const selectedDay = parseInt(this.getAttribute("data-day"), 10);
 
-            // 해당 DAY에 맞는 데이터 찾기
-            const selectedDetail = journalDetailList.find(detail => detail.jnlDay === selectedDay);
+            const selectedDetail = journalDetailListParsed.find(
+                detail => detail.jnlDay === selectedDay
+            );
 
             if (selectedDetail) {
-                // jnlContents 업데이트 (두 줄 간격 추가)
                 contentText.innerHTML = "";
-                const contents = selectedDetail.jnlContents.split(';');
+                const contents = selectedDetail.jnlContents.split(";");
                 contents.forEach(content => {
                     contentText.innerHTML += `<div class="content-item">${content}<br><br></div>`;
                 });
 
-                // 사진 업데이트
-                const firstImage = selectedDetail.jnlImgList[0];
-                if (firstImage) {
+                // 이미지 업데이트
+                if (selectedDetail.jnlImgList && selectedDetail.jnlImgList.length > 0) {
+                    const firstImage = selectedDetail.jnlImgList[0];
                     mainPhoto.src = `${firstImage.uploadPath}/${firstImage.fileName}`;
-                    console.log('이미지 데이터:', journalDetailList[0]?.jnlImgList);
+                } else {
+                    mainPhoto.src = "/img/journal/하단 큰 이미지.png"; // 대체 이미지
                 }
             }
         });
     });
-
-    // 첫 번째 DAY에 맞는 내용 표시 (초기 화면에 첫 번째 DAY 내용 표시)
-    if (journalDetailList.length > 0) {
-        const firstDay = journalDetailList[0];
-
-        // 첫 번째 DAY의 내용과 사진 표시
-        contentText.innerHTML = "";
-        const contents = firstDay.jnlContents.split(';');
-        contents.forEach(content => {
-            contentText.innerHTML += `<div class="content-item">${content}<br><br></div>`;
-        });
-
-        const firstImage = firstDay.jnlImgList[0];
-        if (firstImage) {
-            mainPhoto.src = `${firstImage.uploadPath}/${firstImage.fileName}`;
-        }
-    }
 });
 
 // 이미지 클릭 시 모달 열기 이벤트
 document.addEventListener('DOMContentLoaded', function() {
     // saveimg 클래스를 가진 이미지를 선택
-    const saveImage = document.querySelector('.saveimg');
+    // const saveImage = document.querySelector('.saveimg');
 
     // 이미지 클릭 이벤트 추가
     if (saveImage) {
