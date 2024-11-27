@@ -222,11 +222,11 @@ function sendCheckedMsgIds() {
       })
       .then(data => {
         console.log('성공:', data);
-        alert('데이터 전송 성공');
+        alert('메세지 휴지통이동');
       })
       .catch(error => {
         console.error('에러 발생:', error);
-        alert('데이터 전송 실패');
+        alert('메세지 휴지통이동 실패');
       });
 }
 

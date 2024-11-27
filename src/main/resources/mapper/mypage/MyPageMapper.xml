@@ -136,16 +136,22 @@
     </delete>
 
 <!--    회원정보 수정하기-->
-    <update id="updateUser" parameterType="MpgUpdateMemberDTO">
+    <update id="updateUserRequired" parameterType="MpgUpdateMemberDTO">
         UPDATE MEMBER
         SET
             MEMBER_PASSWORD = #{memberPassword},
-            MEMBER_NICKNAME = #{memberNickname},
-            MEMBER_ADDRESS = #{memberAddress1},
-            MEMBER_BDATE = TO_DATE(#{memberByear}),
-            MEMBER_GENDER = #{memberGender}
+            MEMBER_NICKNAME = #{memberNickname}
         WHERE MEMBER_NUM = #{memberNum}
     </update>
+
+    <update id="updateUserOptional" parameterType="MpgUpdateMemberDTO">
+        UPDATE MEMBER SET
+          MEMBER_ADDRESS = #{memberAddress1},
+          MEMBER_BDATE = TO_DATE(#{memberByear}),
+          MEMBER_GENDER = #{memberGender}
+        WHERE MEMBER_NUM = #{memberNum}
+    </update>
+
 
 <!--    테스트용 쿼리-->
     <select id="getUserByMemberNum" parameterType="Long" resultType="MpgUpdateMemberDTO">
@@ -153,8 +159,8 @@
             MEMBER_NUM,
             MEMBER_PASSWORD,
             MEMBER_NICKNAME,
-            MEMBER_ADDRESS,
-            TO_CHAR(MEMBER_BDATE, 'YYYY-MM-DD') AS MEMBER_BDATE,
+            MEMBER_ADDRESS AS MEMBER_ADDRESS1,
+--             TO_CHAR(MEMBER_BDATE, 'YYYY-MM-DD') AS MEMBER_BDATE,
             MEMBER_GENDER
         FROM MEMBER
         WHERE MEMBER_NUM = #{memberNum}

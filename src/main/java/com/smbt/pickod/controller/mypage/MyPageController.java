@@ -102,8 +102,11 @@ public class MyPageController {
         return "mypage/userDetail";
     }
 
-    @PostMapping("updateProfile")
-    public String changeMemberDetail(@ModelAttribute MpgUpdateMemberDTO mpgUpdateMemberDTO) {
+
+    @PostMapping("updateUser")
+    public String changeMemberDetail(@ModelAttribute MpgUpdateMemberDTO mpgUpdateMemberDTO, HttpSession session) {
+        Long memberNum = (Long) session.getAttribute("memberNum");
+        mpgUpdateMemberDTO.setMemberNum(memberNum);
         myPageService.updateMember(mpgUpdateMemberDTO);
 
         return "redirect:/mypage/myPage";

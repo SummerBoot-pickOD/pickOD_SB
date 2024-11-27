@@ -34,8 +34,12 @@ public interface MyPageMapper {
 
     void removePick (MpgRemovePickDTO mpgRemovePickDTO);
 
-    void updateUser(MpgUpdateMemberDTO mpgUpdateMemberDTO);
+    void updateUserRequired(MpgUpdateMemberDTO mpgUpdateMemberDTO);
+
+    void updateUserOptional(MpgUpdateMemberDTO mpgUpdateMemberDTO);
 
     MpgUpdateMemberDTO getUserByMemberNum(Long memberNum);
+
+
 
 }
