@@ -11,7 +11,6 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class MpgUpdateMemberDTO {
     private Long memberNum;
-    private String memberId;
     private String memberPassword;
     private String memberNickname;
     private String memberByear;

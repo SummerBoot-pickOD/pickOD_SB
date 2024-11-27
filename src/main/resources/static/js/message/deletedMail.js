@@ -150,7 +150,6 @@ function sendCheckedMsgIds() {
     };
 
 
-    // Fetch API로 POST 요청 보내기
     fetch('/message/removeCheckedMsgs', {
         method: 'DELETE',
         headers: {
@@ -164,12 +163,12 @@ function sendCheckedMsgIds() {
         })
         .then(data => {
             console.log('성공:', data);
-            alert('데이터 전송 성공');
+            alert('영구삭제 성공');
             location.reload();
         })
         .catch(error => {
             console.error('에러 발생:', error);
-            alert('데이터 전송 실패');
+            alert('영구삭제 실패');
         });
 }
 
@@ -203,12 +202,12 @@ function sendCheckedMsgIdsForReturn() {
         })
         .then(data => {
             console.log('성공:', data);
-            alert('데이터 전송 성공');
+            alert('쪽지가 복원되었습니다');
             location.reload();
         })
         .catch(error => {
             console.error('에러 발생:', error);
-            alert('데이터 전송 실패');
+            alert('쪽지 복원 실패');
         });
 }
 

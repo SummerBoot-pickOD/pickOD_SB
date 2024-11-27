@@ -164,6 +164,31 @@ function myBest (data){
 // 페이지 로드 시 checkedList 데이터를 사용해 렌더링
 document.addEventListener('DOMContentLoaded', () => {
   renderCheckList(checkedList);
+  // search-fp 클래스의 버튼 클릭 이벤트 리스너 추가
+  const journalButton = document.querySelector('.search-fp');
+  journalButton.addEventListener('click', () => {
+    // checkedJournalList로 렌더링
+    renderCheckList(checkedJournalList);
+  });
+  // search-sp 클래스의 버튼 클릭 이벤트 리스너 추가
+  const placeButton = document.querySelector('.search-sp');
+  placeButton.addEventListener('click', () => {
+    // checkedPlaceList로 렌더링
+    renderCheckList(CheckedPlaceList);
+  });
+
+  const tempButton = document.querySelector('.search-tpl');
+  tempButton.addEventListener('click', () => {
+    // checkedTemplateList로 렌더링
+    renderCheckList(checkedTempList);
+  });
+
+  const defaultButton = document.querySelector('.btn-checklist');
+  defaultButton.addEventListener('click', () => {
+    // checkedList 렌더링
+    renderCheckList(checkedList);
+  });
+
 });
 
 function renderCheckList(data) {
@@ -276,13 +301,16 @@ document.addEventListener('DOMContentLoaded', function () {
       })
           .then(data => {
             console.log(data);
+            location.reload();
           })
           .catch(error => {
             console.log("Error:", error);
           });
     });
   });
+});
 
+document.addEventListener('DOMContentLoaded', function () {
   //클릭한게 저널이면 해당 저널 게시물 이동
   let clickToBoard = document.querySelectorAll('.check-list');
   clickToBoard.forEach(function (eachBoard){
@@ -321,12 +349,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
         window.location.href = `/template/detail/${data.tempId}`;
       }
-
-
-
     })
   })
-
 });
 
 
