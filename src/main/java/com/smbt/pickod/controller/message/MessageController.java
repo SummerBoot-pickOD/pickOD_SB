@@ -165,5 +165,86 @@ public class MessageController {
         return ResponseEntity.ok("메세지 삭제완료");
     }
 
+    // 체크된 받은 메세지들을 휴지통으로 이동
+    @PostMapping("/deleteCheckedGetMsgs")
+    public ResponseEntity<String> checkedGetMsgsToBin(@RequestBody Map<String, List<Long>> request, HttpSession session) {
+        // RequestBody에서 msgIds 가져오기
+
+        List<Long> msgIds = request.get("msgIds");
+        Long memberNum = (Long) session.getAttribute("memberNum");
+
+        // msgIds가 비어 있거나 null인지 확인
+        if (msgIds == null || msgIds.isEmpty()) {
+            return ResponseEntity.badRequest().body("msgIds are required");
+        }
+
+        // 각 msgId에 대해 서비스 호출
+        for (Long msgId : msgIds) {
+            messageService.moveReceivedMailToBin(msgId, memberNum);
+        }
+
+        return ResponseEntity.ok("메시지 휴지통이동 완료");
+    }
+    // 체크된 보낸 메세지들을 휴지통으로 이동
+    @PostMapping("/deleteCheckedSentMsgs")
+    public ResponseEntity<String> checkedSentMsgsToBin(@RequestBody Map<String, List<Long>> request, HttpSession session) {
+        // RequestBody에서 msgIds 가져오기
+
+        List<Long> msgIds = request.get("msgIds");
+        Long memberNum = (Long) session.getAttribute("memberNum");
+
+        // msgIds가 비어 있거나 null인지 확인
+        if (msgIds == null || msgIds.isEmpty()) {
+            return ResponseEntity.badRequest().body("msgIds are required");
+        }
+
+        // 각 msgId에 대해 서비스 호출
+        for (Long msgId : msgIds) {
+            messageService.moveSentMailToBin(msgId, memberNum);
+        }
+
+        return ResponseEntity.ok("메시지 휴지통이동 완료");
+    }
+
+    //체크된 메시지 영구삭제
+    @DeleteMapping("removeCheckedMsgs")
+    public ResponseEntity<String> checkedSentMsgsToBin(@RequestBody Map<String, List<Long>> request) {
+        // RequestBody에서 msgIds 가져오기
+        List<Long> msgIds = request.get("msgIds");
+
+        // msgIds가 비어 있거나 null인지 확인
+        if (msgIds == null || msgIds.isEmpty()) {
+            return ResponseEntity.badRequest().body("msgIds are required");
+        }
+
+        // 각 msgId에 대해 서비스 호출
+        for (Long msgId : msgIds) {
+            messageService.deleteMailPermanently(msgId);
+        }
+
+        return ResponseEntity.ok("메시지 영구삭제 완료");
+    }
+
+    //체크된 메세지 복원
+    @PostMapping("returnCheckedMsgs")
+    public ResponseEntity<String> returnCheckedMsgs(@RequestBody Map<String, List<Long>> request, HttpSession session) {
+        // RequestBody에서 msgIds 가져오기
+        List<Long> msgIds = request.get("msgIds");
+        Long memberNum = (Long) session.getAttribute("memberNum");
+
+        // msgIds가 비어 있거나 null인지 확인
+        if (msgIds == null || msgIds.isEmpty()) {
+            return ResponseEntity.badRequest().body("msgIds are required");
+        }
+
+        // 각 msgId에 대해 서비스 호출
+        for (Long msgId : msgIds) {
+            messageService.restoreMailFromBin(msgId, memberNum);
+        }
+
+        return ResponseEntity.ok("메시지 복구 완료");
+    }
+
+
 
 }

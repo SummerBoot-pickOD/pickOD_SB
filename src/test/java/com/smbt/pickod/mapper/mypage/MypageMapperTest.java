@@ -228,5 +228,5 @@ class MyPageMapperTest {
 //
 //        System.out.println("회원 정보: " + result);
 
-    }
+//    }
 }
