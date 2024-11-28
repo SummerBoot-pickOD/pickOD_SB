@@ -12,15 +12,16 @@ public interface TemplateMapper {
 
     // TEMPLATE 관련 메서드
 
-    List<TemplateDTO> searchTemplateByTag(@Param("tempTag") String tempTag); // 태그로 템플릿 검색
+    List<TemplateDTO> searchJournalByKeyword(@Param("keyword") String tempTag); //템플릿 검색
 
-    List<TemplateDTO> searchTemplateByTheme(@Param("tempTheme") String tempTheme);
+    List<TemplateDTO> getTemplateByPickCountDesc(); // 찜하기 정렬
 
-    List<TemplateDTO> searchTemplateByTitle(@Param("tempTitle") String tempTitle);
+    List<TemplateDTO> getTemplatesByViews(); // 조회순
 
-    List<TemplateDTO> searchTemplateByPeriod(@Param("tempPeriod") String tempPeriod);
 
     List<TemplateDTO> searchTemplatesByViews();
+
+    TemplateDTO getTemplateWithDaysByNum(@Param("tempId") long jnlNum);
 
     int countTotalTemplates();
 

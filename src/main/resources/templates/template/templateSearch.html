@@ -4,21 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>발자국이 무성한 곳</title>
-    <link rel="stylesheet" href="../../css/main/header.css">
-    <link rel="stylesheet" href="../../css/main/footer.css">
-    <link rel="stylesheet" href="../../css/template/templateSearch.css">
+    <link rel="stylesheet" th:href="@{/css/main/header.css}">
+    <link rel="stylesheet" th:href="@{/css/main/footer.css}">
+    <link rel="stylesheet" th:href="@{/css/template/templateSearch.css}">
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
     crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/abd96c8f9a.js" crossorigin="anonymous"></script>
     <script src="../../js/template/templateSearch.js"></script>
 </head>
 <body>
-    <div id="header"></div>
+    <div id="header" th:replace="~{/main/header}"></div>
     <main>
         <div class="page-name">발자국이 무성한 곳</div>
         <div class="search-box-container">
-            <form class="search-box" action="" method="get">
-                <input class="search-text" type="text" name="" placeholder="검색어를 입력하세요." onfocus="this.placeholder=''" onblur="this.placeholder='검색어를 입력하세요.'">
+            <form class="search-box" th:action="@{/template/search}" method="get">
+                <input class="search-text" type="text" name="keyword" placeholder="검색어를 입력하세요." onfocus="this.placeholder=''" onblur="this.placeholder='검색어를 입력하세요.'">
                 <button class="search-btn" type="submit">
                     <i class="fa-solid fa-magnifying-glass"></i>
                 </button>
@@ -27,31 +27,31 @@
         <div class="best-footprint-container">
             <div class="best-footprint">
                 <div class="best-month">이달의 발자국</div>
-                <img src="../../img/template/template_footprint.png" alt="">
+                <img th:src="@{/img/template/template_footprint.png}" alt="">
             </div>
             <div class="best-footprint-contents-container">
                 <div class="best-footprint-contents">
-                    <a href="http://127.0.0.1:5500/publishing/html/template/templateDetail.html">
-                        <img src="../../img/template/suwunhwasoung.png" alt="">
+                    <a th:href="@{/template/detail/{id}(id=${1})}">
+                        <img th:src="@{/img/journal/대부도.png}" alt="">
                     </a>
                     <div class="best-contents-title">
-                        게시물 제목
+                        아이들과 대부도에
                     </div>
                 </div>
                 <div class="best-footprint-contents">
-                    <a href="http://127.0.0.1:5500/publishing/html/template/templateDetail.html">
-                        <img src="../../img/template/suwunhwasoung.png" alt="">
+                    <a th:href="@{/template/detail/{id}(id=${2})}">
+                        <img th:src="@{/img/journal/공원.png}" alt="">
                     </a>
                     <div class="best-contents-title">
-                        게시물 제목
+                        주말 나들이, 이곳을 추천합니다
                     </div>
                 </div>
                 <div class="best-footprint-contents">
-                    <a href="http://127.0.0.1:5500/publishing/html/template/templateDetail.html">
-                        <img src="../../img/template/suwunhwasoung.png" alt="">
+                    <a th:href="@{/template/detail/{id}(id=${3})}">
+                        <img th:src="@{/img/journal/제부도.png}" alt="">
                     </a>
                     <div class="best-contents-title">
-                        게시물 제목
+                        제부도 바다에 놀러갔어요
                     </div>
                 </div>
                 
@@ -59,88 +59,37 @@
         </div>
         <div class="template-menu">
             <div class="content-total">총 <span id="total-posts">0</span>개</div>
-                <input class="content-reference" type="button" value="조회순"></input>
+                <a th:href="@{/template/list(sort='orderByview')}" class="content-reference" th:class="${sort == 'orderByDate' ? 'bold' : ''}">
+                    조회순
+                </a>
                 <div class="wall">|</div>
-                <input class="content-pick" type="button" value="찜하기순"></input>
-
+                <a th:href="@{/template/list(sort='orderByLikes')}" class="content-pick" th:class="${sort == 'orderByLikes' ? 'bold' : ''}">
+                    찜하기순
+                </a>
         </div>
-        
-        <div class="template-container">
-            <div class="template-contents">
-                <a href="">
-                    <img src="../../img/template/image.png" alt="">
-                </a>
-                <div>게시물 제목</div>
-            </div>
-            <div class="template-contents">
-                <a href="">
-                    <img src="../../img/template/image.png" alt="">
-                </a>
-                <div>게시물 제목</div>
-            </div>
-            <div class="template-contents">
-                <a href="">
-                    <img src="../../img/template/image.png" alt="">
-                </a>
-                <div>게시물 제목</div>
-            </div>
-            <div class="template-contents">
-                <a href="">
-                    <img src="../../img/template/image.png" alt="">
-                </a>
-                <div>게시물 제목</div>
-            </div>
-            <div class="template-contents">
-                <a href="">
-                    <img src="../../img/template/image.png" alt="">
-                </a>
-                <div>게시물 제목</div>
-            </div>
-            <div class="template-contents">
-                <a href="">
-                    <img src="../../img/template/image.png" alt="">
-                </a>
-                <div>게시물 제목</div>
-            </div>
-            <div class="template-contents">
-                <a href="">
-                    <img src="../../img/template/image.png" alt="">
-                </a>
-                <div>게시물 제목</div>
-            </div>
-            <div class="template-contents">
-                <a href="">
-                    <img src="../../img/template/image.png" alt="">
-                </a>
-                <div>게시물 제목</div>
-            </div>
-            <div class="template-contents">
-                <a href="">
-                    <img src="../../img/template/image.png" alt="">
-                </a>
-                <div>게시물 제목</div>
-            </div>
-            <div class="template-contents">
-                <a href="">
-                    <img src="../../img/template/image.png" alt="">
-                </a>
-                <div>게시물 제목</div>
-            </div>
-            <div class="template-contents">
-                <a href="">
-                    <img src="../../img/template/image.png" alt="">
-                </a>
-                <div>게시물 제목</div>
-            </div>
-            <div class="template-contents">
-                <a href="">
-                    <img src="../../img/template/image.png" alt="">
-                </a>
-                <div>게시물 제목</div>
-            </div>
 
+        <div class="container">
+            <div class="posts" id="posts"></div>
+            <div class="pagination" id="pagination"></div>
         </div>
+
     </main>
-    <div id="footer"></div>
+    <div id="footer" th:replace="~{/main/footer}"></div>
+    <script th:inline="javascript" defer>
+        /*<![CDATA[*/
+        // 서버에서 전달된 templateList를 JavaScript 배열로 처리
+        const templateList = /*[[${templateList}]]*/ [];
+        console.log("templateList:", templateList);  // 서버에서 전달된 journalList 확인
+
+        // journalList가 비어있지 않다면 displayPosts와 setupPagination 호출
+        if (templateList.length > 0) {
+            displayPosts();
+            setupPagination();
+        } else {
+            console.log("No posts available.");
+        }
+        /*]]>*/
+    </script>
+    <script th:src="@{/js/template/templateSearch.js}"></script>
 </body>
 </html>

@@ -16,9 +16,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -206,10 +205,19 @@ public class JournalService {
     }
 
 
-    // 특정 여행일지의 상세 정보를 가져오는 서비스 메서드
     public JournalDetailDTO getJournalByNum(long jnlNum) {
-        log.info(jnlNum + "JournalService 확인 ==========");
-        return journalMapper.getJournalWithDaysByNum(jnlNum);
+        log.info(jnlNum + " JournalService 확인 ==========");
+        JournalDetailDTO journalDetail = journalMapper.getJournalWithDaysByNum(jnlNum);
+
+        if (journalDetail != null && journalDetail.getJournalDayList() != null) {
+            // 중복 제거: Set을 이용해 중복된 항목 제거 후 다시 List로 변환
+            List<JnlDayDTO> uniqueDays = journalDetail.getJournalDayList().stream()
+                    .distinct()
+                    .collect(Collectors.toList());
+            journalDetail.setJournalDayList(uniqueDays);
+        }
+
+        return journalDetail;
     }
 
 
