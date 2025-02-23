@@ -36,6 +36,9 @@
 - 팀원 : 신현식 (여행 일지 페이지, 템플릿 페이지)  
 ---
 
+## ERD
+
+
 ## SummerBoot 포트폴리오(PDF)
 [SummerBoot포트폴리오.pdf](https://github.com/SummerBoot-pickOD/pickOD_SB/blob/main/SummerBoot%20%ED%8F%AC%ED%8A%B8%ED%8F%B4%EB%A6%AC%EC%98%A4.pdf)
 
