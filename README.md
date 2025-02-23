@@ -36,6 +36,12 @@
 - 팀원 : 신현식 (여행 일지 페이지, 템플릿 페이지)  
 ---
 
+## SummerBoot 포트폴리오(PDF)
+[PDF 보기](https://raw.githubusercontent.com/사용자명/저장소명/브랜치명/docs/report.pdf)
+
+## 페이지 기능
+### 메인 페이지 [WIKI](https://github.com/ahdtlfvhrtls/pickOD_SB/wiki/%EB%A9%94%EC%9D%B8-%ED%8E%98%EC%9D%B4%EC%A7%80)로 이동
+
 
 
 
