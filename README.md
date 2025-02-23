@@ -41,7 +41,16 @@
 
 ## 페이지 기능
 ### 메인 페이지 [WIKI](https://github.com/ahdtlfvhrtls/pickOD_SB/wiki/%EB%A9%94%EC%9D%B8-%ED%8E%98%EC%9D%B4%EC%A7%80)로 이동
-
+### 관리자 페이지 [WIKI](https://github.com/ahdtlfvhrtls/pickOD_SB/wiki/%EA%B4%80%EB%A6%AC%EC%9E%90-%ED%8E%98%EC%9D%B4%EC%A7%80)로 이동
+### 로그인 페이지 [WIKI](https://github.com/ahdtlfvhrtls/pickOD_SB/wiki/%EB%A1%9C%EA%B7%B8%EC%9D%B8)로 이동
+### 마이페이지 [WIKI](https://github.com/ahdtlfvhrtls/pickOD_SB/wiki/%EB%A7%88%EC%9D%B4%ED%8E%98%EC%9D%B4%EC%A7%80)로 이동
+### 템플릿 페이지 [WIKI](https://github.com/ahdtlfvhrtls/pickOD_SB/wiki/%ED%85%9C%ED%94%8C%EB%A6%BF-%ED%8E%98%EC%9D%B4%EC%A7%80)로 이동
+### 여행일지 페이지 [WIKI](https://github.com/ahdtlfvhrtls/pickOD_SB/wiki/%EC%97%AC%ED%96%89%EC%9D%BC%EC%A7%80-%ED%8E%98%EC%9D%B4%EC%A7%80)로 이동
+### 신고 [WIKI](https://github.com/ahdtlfvhrtls/pickOD_SB/wiki/%EC%8B%A0%EA%B3%A0)로 이동
+### 장소 페이지 [WIKI](https://github.com/ahdtlfvhrtls/pickOD_SB/wiki/%EC%9E%A5%EC%86%8C-%ED%8E%98%EC%9D%B4%EC%A7%80)로 이동
+### 쪽지함 [WIKI](https://github.com/ahdtlfvhrtls/pickOD_SB/wiki/%EC%AA%BD%EC%A7%80%ED%95%A8)로 이동
+### 행사·축제 페이지 [WIKI](https://github.com/ahdtlfvhrtls/pickOD_SB/wiki/%ED%96%89%EC%82%AC%C2%B7%EC%B6%95%EC%A0%9C-%ED%8E%98%EC%9D%B4%EC%A7%80)로 이동
+### 회원 가입 [WIKI](https://github.com/ahdtlfvhrtls/pickOD_SB/wiki/%ED%9A%8C%EC%9B%90%EA%B0%80%EC%9E%85)로 이동
 
 
 
